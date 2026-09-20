@@ -80,7 +80,7 @@ button{cursor:pointer}
   </header>
 
   <section class="privacy-strip" id="privacyStrip">
-    <strong>Privacy-safe demo:</strong> faculty names are anonymized and narrative feedback is redacted; observer names are included. Load the source CSV to analyse the full dataset locally in this browser; it is not uploaded by this site.
+    <strong>Sanitized public dataset:</strong> faculty and observer names are included. Narrative observation notes, written feedback, responses and email addresses are excluded from the public site. Load the source CSV to analyse the full dataset locally in this browser.
   </section>
 
   <main id="main" class="page-shell">
@@ -275,6 +275,11 @@ button{cursor:pointer}
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <script src="data/meta.js"></script>
+  <script src="data/rows-1.js"></script>
+  <script src="data/rows-2.js"></script>
+  <script src="data/rows-3.js"></script>
+  <script src="data/rows-4.js"></script>
   <script>
 (() => {
   'use strict';
@@ -300,7 +305,7 @@ button{cursor:pointer}
   const DB_KEY = 'private-observations';
 
   let allRows = [];
-  let dataMode = 'demo';
+  let dataMode = 'public';
   let charts = {};
   let explorerPage = 1;
   let state = {
@@ -331,8 +336,8 @@ button{cursor:pointer}
       allRows = cached.rows;
       dataMode = 'private';
     } else {
-      allRows = buildDemoRows();
-      dataMode = 'demo';
+      allRows = unpackPublicRows();
+      dataMode = 'public';
     }
     initializeFilters();
     updateDataModeUI();
@@ -725,9 +730,9 @@ button{cursor:pointer}
 
   async function clearPrivateDataset(){
     await idbDelete(DB_KEY).catch(()=>{});
-    allRows=buildDemoRows(); dataMode='demo'; state={...state,year:'',division:'All',observer:'All',time:'All',faculty:'',explorerSearch:'',explorerFacet:''};
+    allRows=unpackPublicRows(); dataMode='public'; state={...state,year:'',division:'All',observer:'All',time:'All',faculty:'',explorerSearch:'',explorerFacet:''};
     setSegmented('#divisionFilter','All'); el('facultySearch').value=''; el('observationSearch').value=''; el('timeFilter').value='All';
-    initializeFilters(); updateDataModeUI(); renderAll(); toast('Private browser data cleared. Showing sanitized demo data.');
+    initializeFilters(); updateDataModeUI(); renderAll(); toast('Private browser data cleared. Showing sanitized public data.');
   }
 
   function normalizeRawRows(rawRows){
@@ -745,6 +750,44 @@ button{cursor:pointer}
         wonderingText:String(r.Commendation3||'').trim(), response:String(r.Response||'').trim(), demo:false
       };
     }).filter(Boolean);
+  }
+
+  function unpackPublicRows(){
+    const meta=window.OBS_PUBLIC_META||{f:[],o:[],x:[]};
+    const packed=window.OBS_PUBLIC_ROWS||[];
+    const divisions=['Lower Elementary','Upper Elementary','Secondary','Lower Secondary'];
+    const times=['Beginning','Middle','End'];
+    return packed.map((r,i)=>{
+      const rawDate=String(r[0]);
+      const date=`${rawDate.slice(0,4)}-${rawDate.slice(4,6)}-${rawDate.slice(6,8)}`;
+      const divisionOriginal=divisions[r[1]]||'Other';
+      const c1=meta.x[r[5]]||'';
+      const c2=meta.x[r[6]]||'';
+      const w=meta.x[r[7]]||'';
+      return {
+        id:`public-${String(i+1).padStart(4,'0')}`,
+        date,
+        schoolYear:schoolYear(parseISODate(date)),
+        division:divisionGroup(divisionOriginal),
+        divisionOriginal,
+        observer:meta.o[r[2]]||'',
+        faculty:meta.f[r[3]]||'',
+        timeOfClass:times[r[4]]||'',
+        commendations:[c1,c2].filter(Boolean),
+        wonderingFacet:w,
+        guidingQuestions:[demoQuestion(c1),demoQuestion(c2),demoQuestion(w)],
+        hasResponse:Boolean(r[8]),
+        notes:'Narrative observation notes are intentionally excluded from the public dashboard.',
+        commendationText:[
+          'Written commendation feedback is intentionally excluded from the public dashboard.',
+          'Written commendation feedback is intentionally excluded from the public dashboard.'
+        ],
+        wonderingText:'Written wondering feedback is intentionally excluded from the public dashboard.',
+        response:r[8] ? 'A faculty response was recorded. Response text is intentionally excluded from the public dashboard.' : '',
+        demo:false,
+        publicSanitized:true
+      };
+    });
   }
 
   const DEMO_CONFIG = {
@@ -854,8 +897,8 @@ button{cursor:pointer}
       badge.textContent='Private local data'; badge.classList.add('private'); el('clearPrivateBtn').hidden=false;
       strip.classList.add('private'); strip.innerHTML='<strong>Private local mode:</strong> the full CSV has been parsed and saved in this browser only. The dashboard does not upload the dataset to GitHub or another server.';
     }else{
-      badge.textContent='Sanitized demo data'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
-      strip.classList.remove('private'); strip.innerHTML='<strong>Privacy-safe demo:</strong> faculty names are anonymized and narrative feedback is redacted; observer names are included. Load the source CSV to analyse the full dataset locally in this browser; it is not uploaded by this site.';
+      badge.textContent='Sanitized public data'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
+      strip.classList.remove('private'); strip.innerHTML='<strong>Sanitized public dataset:</strong> faculty and observer names are included. Narrative observation notes, written feedback, responses and email addresses are excluded from the public site. Load the source CSV to analyse the full dataset locally in this browser.';
     }
   }
 
