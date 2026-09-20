@@ -1,0 +1,3 @@
+*.csv
+private-data/
+.DS_Store
