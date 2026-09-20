@@ -19,7 +19,7 @@ The production data file is `data/observations-full.csv`. The dashboard loads th
 
 ## Data verification
 
-The published CSV was copied directly from the supplied source file and verified byte-for-byte at the text level after decoding. It contains the same source content used for the dashboard.
+The published CSV is a valid UTF-8 representation of the supplied source data. Three quote-sensitive records were explicitly repaired against the raw source after validation identified parsing breaks. The final published file validates to 732 observation rows and reconciles to the source totals below.
 
 Current totals:
 
