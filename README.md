@@ -26,12 +26,12 @@ The public structural dataset was generated directly from the supplied source CS
 Current source totals:
 
 - **732** observations overall
-- **2025–26:** 538 observations, 112 faculty, 487 responses
+- **2025–26:** 538 observations, 108 faculty after name normalization, 487 responses
 - **2026–27:** 194 observations, 106 faculty, 181 responses
 - **2026–27 division:** 89 Elementary, 105 Secondary
 - **2026–27 time of class:** 59 Beginning, 100 Middle, 35 End
 
-The packed public dataset and the source CSV match on row sequence and all encoded structural fields.
+The packed public dataset and the source CSV match on row sequence and all encoded structural fields. Five source-name aliases sharing the same faculty email are normalized to a single display name (Cat/Cathryn Mund, Eric/Eric R. Little, Gaby Montejano/Gaby Montejano Gauna, Jackie/Jacqueline Cloete, and Michael/Mike Morrison).
 
 ## Views
 
