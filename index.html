@@ -407,10 +407,9 @@ window.OBS_PUBLIC_DATA={"faculty":["Adam Abbas","Adrienne Johnson","Alex Bukenya
         dataMode = 'public-full';
         validatePublicData();
       }catch(err){
-        console.error('Complete published dataset failed to load; using structural fallback.',err);
-        allRows = unpackPublicData();
-        dataMode = 'public-fallback';
-        validatePublicData();
+        console.error('Complete published dataset failed to load.',err);
+        allRows = [];
+        dataMode = 'public-error';
       }
     }
     initializeFilters();
@@ -522,7 +521,7 @@ window.OBS_PUBLIC_DATA={"faculty":["Adam Abbas","Adrienne Johnson","Alex Bukenya
     const reached = roster ? roster.filter(x=>faculty.includes(x.name)).length : null;
     const coverageRate = roster && roster.length ? reached/roster.length*100 : null;
     const facultyCard = roster
-      ? ['Faculty reached', `${fmt.format(reached)} / ${fmt.format(roster.length)}`, `${coverageRate.toFixed(1)}% of working 2026–27 roster`]
+      ? ['Faculty reached', `${fmt.format(reached)} / ${fmt.format(roster.length)}`, `${coverageRate.toFixed(1)}% roster coverage`]
       : ['Faculty observed', fmt.format(faculty.length), 'Distinct faculty in the current view'];
     const cards = [
       ['Observations', fmt.format(rows.length), filterContext(rows)],
@@ -756,8 +755,8 @@ window.OBS_PUBLIC_DATA={"faculty":["Adam Abbas","Adrienne Johnson","Alex Bukenya
     const observed=new Set(rows.map(r=>r.faculty).filter(Boolean));
     const missing=roster.filter(x=>!observed.has(x.name));
     root.innerHTML=missing.length
-      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working roster: current 2026–27 observed faculty plus unmatched names from the latest accessible AISG teacher upload. Click a name to filter; confirm against the authoritative HR roster when available.</div>`
-      : `<div class="roster-gap-empty">Everyone in the working roster has been reached in this view.</div><div class="roster-source-note">Working roster: current 2026–27 observed faculty plus unmatched names from the latest accessible AISG teacher upload.</div>`;
+      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It combines all faculty observed this year with six additional unmatched faculty names from the latest accessible AISG teacher upload. Click a name to filter.</div>`
+      : `<div class="roster-gap-empty">Everyone in the working roster has been reached in this view.</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view.</div>`;
     qsa('[data-roster-faculty]',root).forEach(btn=>btn.addEventListener('click',()=>{
       state.faculty=btn.dataset.rosterFaculty;
       el('facultySearch').value=state.faculty;
@@ -971,11 +970,11 @@ window.OBS_PUBLIC_DATA={"faculty":["Adam Abbas","Adrienne Johnson","Alex Bukenya
       badge.textContent='Complete source data'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
       strip.classList.remove('private'); strip.innerHTML='<div><strong>Complete observation dataset.</strong> Faculty and observer names, notes, written commendations, wonderings, guiding questions, emails and faculty responses are included.</div><span class="data-notice-note">732 source observations · full narrative evidence available.</span>';
     }else{
-      badge.textContent='Structural fallback'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
-      strip.classList.remove('private'); strip.innerHTML='<div><strong>Fallback dataset loaded.</strong> The complete CSV could not be fetched, so only structural observation data is currently available.</div><span class="data-notice-note">Refresh to retry the complete dataset.</span>';
+      badge.textContent='Dataset unavailable'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
+      strip.classList.remove('private'); strip.innerHTML='<div><strong>Complete dataset could not be loaded.</strong> No reduced or redacted fallback is shown.</div><span class="data-notice-note">Refresh to retry the complete source dataset.</span>';
     }
     if(searchLabel)searchLabel.textContent='Search observation text';
-    if(search)search.placeholder='Search notes, feedback, faculty, email, observer or facet…';
+    if(search)search.placeholder='Search notes, commendations, wonderings, responses, faculty, email, observer or facet…';
   }
 
   function updateFreshness(){
