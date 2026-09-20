@@ -736,13 +736,22 @@ button{cursor:pointer}
   }
 
   function normalizeRawRows(rawRows){
+    const latestByEmail={};
+    rawRows.forEach(r=>{
+      const email=String(r.Email||'').trim().toLowerCase();
+      const name=String(r.Observing||'').trim();
+      const date=parseCsvDate(r.Date);
+      if(!email||!name||!date)return;
+      const current=latestByEmail[email];
+      if(!current||date>current.date) latestByEmail[email]={name,date};
+    });
     return rawRows.map((r,idx)=>{
       const date=parseCsvDate(r.Date); if(!date)return null;
       const dateIso=isoDate(date);
       return {
         id:String(r.ID||`${dateIso}-${idx}`), date:dateIso, schoolYear:schoolYear(date),
         division:divisionGroup(r.Division), divisionOriginal:String(r.Division||'').trim(),
-        observer:String(r.Observer||'').trim(), faculty:String(r.Observing||'').trim(), timeOfClass:String(r.TimeOfClass||'').trim(),
+        observer:String(r.Observer||'').trim(), faculty:(latestByEmail[String(r.Email||'').trim().toLowerCase()]?.name||canonicalFacultyName(String(r.Observing||'').trim())), timeOfClass:String(r.TimeOfClass||'').trim(),
         commendations:[parseFacet(r.Star1),parseFacet(r.Star2)].filter(Boolean), wonderingFacet:parseFacet(r.Wondering),
         guidingQuestions:[String(r['Guiding Question1']||'').trim(),String(r['Guiding Question2']||'').trim(),String(r['Guiding Question3']||'').trim()],
         hasResponse:Boolean(String(r.Response||'').trim()), notes:String(r.Notes||'').trim(),
@@ -750,6 +759,17 @@ button{cursor:pointer}
         wonderingText:String(r.Commendation3||'').trim(), response:String(r.Response||'').trim(), demo:false
       };
     }).filter(Boolean);
+  }
+
+  function canonicalFacultyName(name){
+    const aliases={
+      'Cathryn Mund':'Cat Mund',
+      'Eric R. Little':'Eric Little',
+      'Gaby Montejano':'Gaby Montejano Gauna',
+      'Jacqueline Cloete':'Jackie Cloete',
+      'Mike Morrison':'Michael Morrison'
+    };
+    return aliases[name]||name;
   }
 
   function unpackPublicRows(){
@@ -771,7 +791,7 @@ button{cursor:pointer}
         division:divisionGroup(divisionOriginal),
         divisionOriginal,
         observer:meta.o[r[2]]||'',
-        faculty:meta.f[r[3]]||'',
+        faculty:canonicalFacultyName(meta.f[r[3]]||''),
         timeOfClass:times[r[4]]||'',
         commendations:[c1,c2].filter(Boolean),
         wonderingFacet:w,
