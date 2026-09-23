@@ -324,6 +324,44 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 @media(max-width:820px){.plc-overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.plc-section-heading{align-items:stretch}.plc-selector{min-width:0}.plc-comment-signals{grid-template-columns:1fr}}
 @media(max-width:560px){.plc-overview-grid{grid-template-columns:1fr}.plc-detail-head{align-items:flex-start;flex-direction:column}}
 
+
+/* PLC redesign: comparison matrix + focused briefing */
+.plc-matrix-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fff;border:1px solid var(--line);border-radius:13px 13px 0 0;padding:11px 13px}
+.plc-matrix-toolbar>div:first-child{display:grid;gap:2px}.plc-matrix-toolbar strong{font-size:12px;color:var(--navy)}.plc-matrix-toolbar span{font-size:9px;color:var(--muted)}
+.plc-toolbar-controls{gap:7px}
+.plc-matrix-shell{background:#fff;border:1px solid var(--line);border-top:0;border-radius:0 0 13px 13px;overflow:auto;box-shadow:var(--shadow)}
+.plc-matrix{width:100%;border-collapse:collapse;min-width:850px}
+.plc-matrix th,.plc-matrix td{padding:8px 9px;border-bottom:1px solid #edf1f5;font-size:9.5px;vertical-align:middle}
+.plc-matrix thead th{position:sticky;top:0;z-index:2;background:#f7f9fb;color:var(--muted);font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.055em;text-align:center}
+.plc-matrix thead th:first-child,.plc-matrix thead th:nth-child(2){text-align:left}
+.plc-matrix .plc-group-row td{background:#eef3f8;color:var(--navy);font-size:8.5px;font-weight:900;text-transform:uppercase;letter-spacing:.09em;padding:6px 9px}
+.plc-matrix .plc-name-cell{min-width:205px}.plc-matrix .plc-name-button{border:0;background:transparent;padding:0;text-align:left;font-size:10.5px;font-weight:820;color:var(--navy)}.plc-matrix .plc-name-button:hover{text-decoration:underline}
+.plc-matrix .plc-evidence-cell{min-width:130px;color:#48586b}.plc-matrix .plc-evidence-cell strong{color:var(--navy)}.plc-matrix .plc-evidence-cell small{display:block;color:var(--muted);font-size:8px;margin-top:1px}
+.plc-facet-cell{text-align:center;font-weight:840;border-left:3px solid transparent}
+.plc-facet-cell.being{border-left-color:rgba(173,42,38,.55)}.plc-facet-cell.connecting{border-left-color:rgba(17,50,97,.55)}.plc-facet-cell.doing{border-left-color:rgba(89,99,109,.55)}
+.plc-matrix-legend{display:flex;gap:10px;flex-wrap:wrap;padding:8px 10px;font-size:8.5px;color:var(--muted)}
+.plc-matrix-legend span{display:flex;gap:5px;align-items:center}.plc-matrix-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}.plc-matrix-legend .being{background:var(--red)}.plc-matrix-legend .connecting{background:var(--navy)}.plc-matrix-legend .doing{background:var(--grey)}
+.plc-back-link{border:0;background:transparent;color:#d7e2ed;padding:0;font-size:9px;font-weight:760;margin-bottom:4px}.plc-back-link:hover{color:#fff;text-decoration:underline}
+.plc-brief-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:10px}
+.plc-brief-kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 12px;box-shadow:var(--shadow)}.plc-brief-kpi strong{display:block;font-size:23px;line-height:1;color:var(--navy)}.plc-brief-kpi span{display:block;font-size:9px;font-weight:820;color:#45566b;margin-top:5px}.plc-brief-kpi small{display:block;font-size:8.5px;color:var(--muted);margin-top:2px;line-height:1.35}
+.plc-paired-profile{display:grid;gap:2px}
+.plc-paired-head,.plc-paired-row{display:grid;grid-template-columns:135px 74px minmax(180px,1fr) minmax(180px,1fr);gap:10px;align-items:center}
+.plc-paired-head{font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900;padding-bottom:5px}
+.plc-paired-row{border-top:1px solid #edf1f5;padding:10px 0}.plc-paired-row:first-of-type{border-top:0}
+.plc-paired-label{font-size:10.5px;font-weight:820;color:#34475d}
+.plc-paired-meter{display:grid;grid-template-columns:1fr 50px;gap:7px;align-items:center}.plc-paired-track{height:8px;background:#edf1f5;border-radius:999px;overflow:hidden}.plc-paired-track i{display:block;height:100%;width:var(--v);background:var(--lens);border-radius:999px}.plc-paired-value{text-align:right;font-size:9.5px;font-weight:820;color:var(--ink)}
+.plc-discussion{display:grid;gap:8px}.plc-discussion-item{border-left:3px solid #c8d5e2;background:#f8fafc;border-radius:0 9px 9px 0;padding:9px 10px}.plc-discussion-item strong{display:block;font-size:10.5px;color:var(--navy);line-height:1.35}.plc-discussion-item p{font-size:9.5px;color:var(--muted);line-height:1.45;margin:3px 0 0}.plc-discussion-item.being{border-left-color:var(--red)}.plc-discussion-item.connecting{border-left-color:var(--navy)}.plc-discussion-item.doing{border-left-color:var(--grey)}
+.plc-movement{display:grid;gap:8px}.plc-movement-row{display:grid;grid-template-columns:110px minmax(220px,1fr) 150px;gap:10px;align-items:center}.plc-movement-label strong{display:block;font-size:10px;color:var(--navy)}.plc-movement-label span{font-size:8.5px;color:var(--muted)}
+.plc-slope{height:24px;position:relative;background:linear-gradient(to right,transparent 0,transparent 49.8%,#e9edf2 50%,transparent 50.2%,transparent 100%)}.plc-slope-line{position:absolute;height:2px;background:var(--lens);top:11px;left:var(--left);width:var(--width);min-width:2px}.plc-slope-dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--lens);background:#fff;transform:translateX(-50%)}.plc-slope-dot.current{background:var(--lens)}.plc-slope-axis{display:flex;justify-content:space-between;font-size:8px;color:var(--muted);margin-top:-2px}
+.plc-movement-values{font-size:9px;color:var(--muted);text-align:right}.plc-movement-values strong{color:var(--ink)}
+.plc-too-early{padding:15px;border:1px dashed #ccd5de;border-radius:10px;background:#fafbfd}.plc-too-early strong{display:block;color:var(--navy);font-size:11px}.plc-too-early p{margin:4px 0 0;color:var(--muted);font-size:9.5px;line-height:1.45}
+.plc-question-summary{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}.plc-question-summary span{border:1px solid #dfe5ec;background:#f8fafc;border-radius:999px;padding:4px 7px;font-size:8.5px;color:var(--muted)}.plc-question-summary b{color:var(--navy)}
+.plc-distribution-summary{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:10px}.plc-member-dot{width:13px;height:13px;border-radius:50%;background:#c9d6e3;display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px #c9d6e3}.plc-member-dot.repeat{background:var(--navy);box-shadow:0 0 0 1px var(--navy)}.plc-member-dot.deep{background:#203f67;box-shadow:0 0 0 1px #203f67}.plc-member-dot.none{background:#fff;box-shadow:0 0 0 1px #c7cfd8}
+.plc-distribution-bands{display:grid;gap:5px}.plc-distribution-band{display:grid;grid-template-columns:105px 1fr auto;gap:8px;align-items:center;font-size:9px}.plc-distribution-band span{color:var(--muted)}.plc-distribution-meter{height:7px;background:#edf1f5;border-radius:999px;overflow:hidden}.plc-distribution-meter i{display:block;height:100%;background:var(--navy);border-radius:999px}.plc-distribution-band b{color:var(--navy);font-size:9.5px}
+.plc-written-evidence{padding:0!important}.plc-written-evidence>summary{list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;cursor:pointer}.plc-written-evidence>summary::-webkit-details-marker{display:none}.plc-written-evidence>summary>span{font-size:9px;font-weight:820;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:5px 8px}.plc-written-evidence[open]>summary{border-bottom:1px solid var(--line)}.plc-written-evidence>.plc-comment-signals{padding:14px}
+@media(max-width:900px){.plc-matrix-toolbar{align-items:flex-start;flex-direction:column}.plc-brief-kpis{grid-template-columns:repeat(2,1fr)}.plc-paired-head{display:none}.plc-paired-row{grid-template-columns:120px 65px 1fr}.plc-paired-row .plc-paired-meter:last-child{grid-column:3}.plc-movement-row{grid-template-columns:90px 1fr}.plc-movement-values{grid-column:2;text-align:left}}
+@media(max-width:560px){.plc-brief-kpis{grid-template-columns:1fr 1fr}.plc-paired-row{grid-template-columns:1fr 65px}.plc-paired-row .plc-paired-meter{grid-column:1 / 3}.plc-movement-row{grid-template-columns:1fr}.plc-movement-values{grid-column:1}.plc-toolbar-controls{width:100%;flex-direction:column;align-items:stretch}}
+
 </style>
 </head>
 <body>
@@ -562,8 +600,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       <div class="section-heading plc-section-heading">
         <div>
           <p class="eyebrow">Professional Learning Communities</p>
-          <h2>Patterns within PLC evidence</h2>
-          <p>Use the 2026–27 staff Position data to group faculty into grade-level and subject-area PLCs, then examine frequency, breadth, trends, question focus and recurring language in observation comments.</p>
+          <h2>PLC evidence at a glance</h2>
+          <p id="plcIntroCopy">Compare where TLF evidence is appearing across PLCs, then open one PLC for a focused briefing.</p>
         </div>
         <div class="filter-field plc-selector">
           <label for="plcSelect">PLC / department</label>
@@ -572,99 +610,115 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       </div>
 
       <div id="plcYearNotice"></div>
-      <div id="plcOverviewGrid" class="plc-overview-grid"></div>
+
+      <div id="plcOverviewState">
+        <div class="plc-matrix-toolbar">
+          <div>
+            <strong>All PLCs</strong>
+            <span>Cell intensity shows the selected evidence measure. It is not a performance scale.</span>
+          </div>
+          <div class="toolbar plc-toolbar-controls">
+            <div class="segmented compact" id="plcMatrixType" role="group" aria-label="PLC evidence type">
+              <button type="button" class="active" data-value="commendation">Commendations</button>
+              <button type="button" data-value="wondering">Wonderings</button>
+            </div>
+            <div class="segmented compact" id="plcMatrixMetric" role="group" aria-label="PLC evidence measure">
+              <button type="button" class="active" data-value="frequency">Frequency</button>
+              <button type="button" data-value="breadth">Breadth</button>
+            </div>
+          </div>
+        </div>
+        <div id="plcMatrix" class="plc-matrix-shell"></div>
+      </div>
 
       <div id="plcDetail" class="plc-detail" hidden>
         <div class="plc-detail-head">
           <div>
-            <p class="eyebrow">Selected PLC</p>
+            <button id="plcBackToAll" class="plc-back-link" type="button">← All PLCs</button>
+            <p class="eyebrow">PLC evidence briefing</p>
             <h2 id="plcDetailTitle"></h2>
             <p id="plcDetailContext"></p>
           </div>
-          <button id="plcOpenEvidence" class="button button-secondary" type="button">Open PLC evidence</button>
+          <button id="plcOpenEvidence" class="button button-secondary" type="button">Open evidence</button>
         </div>
 
-        <div id="plcKpis" class="coverage-summary plc-kpis"></div>
+        <div id="plcKpis" class="plc-brief-kpis"></div>
 
-        <div class="grid grid-12">
-          <article class="card span-8">
+        <div class="grid grid-12 plc-brief-grid">
+          <article class="card span-8 plc-pattern-card">
             <div class="card-head">
               <div>
-                <p class="card-kicker">TLF pattern</p>
-                <h2>Frequency and breadth</h2>
-                <p class="card-copy">Frequency is the percentage of PLC observations containing a facet. Breadth is the percentage of the full PLC roster represented by evidence containing that facet.</p>
+                <p class="card-kicker">What are we seeing?</p>
+                <h2>TLF frequency × breadth</h2>
+                <p class="card-copy"><strong>Frequency</strong> asks how often the facet appears. <strong>Breadth</strong> asks how widely it appears across the PLC roster.</p>
+              </div>
+              <div class="segmented compact" id="plcDetailType" role="group" aria-label="PLC detail evidence type">
+                <button type="button" class="active" data-value="commendation">Commendations</button>
+                <button type="button" data-value="wondering">Wonderings</button>
               </div>
             </div>
             <div id="plcTlfProfile"></div>
           </article>
 
-          <article class="card span-4">
+          <article class="card span-4 plc-discussion-card">
             <div class="card-head">
               <div>
-                <p class="card-kicker">PLC roster</p>
-                <h2>Who is represented?</h2>
-                <p class="card-copy">Observation count by PLC member under the active dashboard filters.</p>
+                <p class="card-kicker">PLC conversation</p>
+                <h2>Worth discussing</h2>
+                <p class="card-copy">Rule-based prompts from the selected evidence. Open the observations before drawing conclusions.</p>
               </div>
             </div>
-            <div id="plcRosterPanel" class="plc-roster-panel"></div>
+            <div id="plcDiscussion" class="plc-discussion"></div>
           </article>
 
           <article class="card span-12">
             <div class="card-head">
               <div>
                 <p class="card-kicker">Movement</p>
-                <h2>How is the PLC evidence changing?</h2>
-                <p class="card-copy" id="plcTrendNote">28-day evidence windows · percentage of PLC observations containing at least one commendation facet from each TLF lens.</p>
+                <h2>Is the picture changing?</h2>
+                <p class="card-copy" id="plcMovementNote">Comparable evidence periods only. If the evidence is too thin, the dashboard will say so rather than force a trend.</p>
               </div>
             </div>
-            <div class="trend-grid">
-              <div class="trend-panel being">
-                <div class="trend-panel-head"><span>BEING</span><strong>Personalization · Agency</strong></div>
-                <div class="chart-box trend-chart"><div id="plcTrendBeing" aria-label="PLC Being trend chart"></div></div>
-              </div>
-              <div class="trend-panel connecting">
-                <div class="trend-panel-head"><span>CONNECTING</span><strong>Authenticity · Creativity</strong></div>
-                <div class="chart-box trend-chart"><div id="plcTrendConnecting" aria-label="PLC Connecting trend chart"></div></div>
-              </div>
-              <div class="trend-panel doing">
-                <div class="trend-panel-head"><span>DOING</span><strong>Collaboration · Taking Action</strong></div>
-                <div class="chart-box trend-chart"><div id="plcTrendDoing" aria-label="PLC Doing trend chart"></div></div>
-              </div>
-            </div>
+            <div id="plcMovement" class="plc-movement"></div>
           </article>
 
-          <article class="card span-6">
+          <article class="card span-7">
             <div class="card-head">
               <div>
-                <p class="card-kicker">Question focus</p>
-                <h2>Commendation questions</h2>
-                <p class="card-copy">Questions selected alongside commendations in this PLC's evidence.</p>
+                <p class="card-kicker">Observation focus</p>
+                <h2>What are we looking for?</h2>
+                <p class="card-copy">Guiding-question selection can shape the evidence collected.</p>
+              </div>
+              <div class="segmented compact" id="plcQuestionType" role="group" aria-label="PLC question type">
+                <button type="button" class="active" data-value="commendation">Commendations</button>
+                <button type="button" data-value="wondering">Wonderings</button>
               </div>
             </div>
-            <div id="plcCommQuestions"></div>
+            <div id="plcQuestionFocus"></div>
           </article>
 
-          <article class="card span-6">
+          <article class="card span-5">
             <div class="card-head">
               <div>
-                <p class="card-kicker">Question focus</p>
-                <h2>Wondering questions</h2>
-                <p class="card-copy">Questions selected alongside wonderings in this PLC's evidence.</p>
+                <p class="card-kicker">Evidence distribution</p>
+                <h2>How evenly is the PLC represented?</h2>
+                <p class="card-copy">Coverage by PLC member, without making the names the first thing you see.</p>
               </div>
             </div>
-            <div id="plcWonderQuestions"></div>
+            <div id="plcEvidenceDistribution"></div>
           </article>
 
-          <article class="card span-12">
-            <div class="card-head">
+          <details class="card span-12 plc-written-evidence">
+            <summary>
               <div>
-                <p class="card-kicker">Open comments</p>
-                <h2>Recurring language and representative evidence</h2>
-                <p class="card-copy">Deterministic text extraction only — recurring language is counted from comments and representative excerpts are shown verbatim. This is not an AI-generated summary.</p>
+                <p class="card-kicker">Written evidence</p>
+                <h2>Explore comments and recurring language</h2>
+                <p class="card-copy">Collapsed by default. Repeated language is counted deterministically; representative excerpts remain verbatim.</p>
               </div>
-            </div>
+              <span>Explore</span>
+            </summary>
             <div id="plcCommentSignals" class="plc-comment-signals"></div>
-          </article>
+          </details>
         </div>
       </div>
     </section>
@@ -2607,6 +2661,217 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   }
 
   function rowMatchesExplorerPlc(r){return !state.explorerPlc||rowMatchesPlc(r,state.explorerPlc);}
+
+
+  // PLC redesign: comparative matrix and focused PLC briefing.
+  Object.assign(state,{
+    plcMatrixType:state.plcMatrixType||'commendation',
+    plcMatrixMetric:state.plcMatrixMetric||'frequency',
+    plcDetailType:state.plcDetailType||'commendation',
+    plcQuestionType:state.plcQuestionType||'commendation'
+  });
+
+  function renderPlcs(){
+    const notice=el('plcYearNotice'),overviewState=el('plcOverviewState'),detail=el('plcDetail'),select=el('plcSelect');
+    if(!notice||!overviewState||!detail||!select)return;
+
+    if(state.year!=='2026-27'){
+      notice.innerHTML='<div class="plc-notice">PLC membership is sourced from the SY26–27 faculty/staff Position data, so this view is intentionally limited to 2026–27 rather than applying the current roster retrospectively to another school year.</div>';
+      overviewState.hidden=true;detail.hidden=true;
+      select.innerHTML='<option value="All">2026–27 PLC roster only</option>';select.disabled=true;
+      return;
+    }
+
+    notice.innerHTML='';select.disabled=false;
+    const plcs=availablePlcs();
+    if(state.plc!=='All'&&!plcs.includes(state.plc))state.plc='All';
+    select.innerHTML='<option value="All">All PLCs</option>'+plcs.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
+    select.value=state.plc;
+    select.onchange=()=>{state.plc=select.value;renderPlcs();updateUrlState();};
+
+    if(state.plc==='All'){
+      overviewState.hidden=false;detail.hidden=true;
+      if(el('plcIntroCopy'))el('plcIntroCopy').textContent='Compare where TLF evidence is appearing across PLCs, then open one PLC for a focused briefing.';
+      bindPlcMatrixControls();
+      renderPlcMatrix(plcs,selectedRows());
+      return;
+    }
+
+    overviewState.hidden=true;detail.hidden=false;
+    if(el('plcIntroCopy'))el('plcIntroCopy').textContent='A focused PLC briefing: evidence strength, instructional patterns, movement, question focus and source evidence.';
+    bindPlcDetailControls();
+    renderPlcDetail(state.plc,rowsForPlc(selectedRows(),state.plc));
+  }
+
+  function bindPlcMatrixControls(){
+    qsa('#plcMatrixType button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.plcMatrixType);
+      btn.onclick=()=>{state.plcMatrixType=btn.dataset.value;setSegmented('#plcMatrixType',state.plcMatrixType);renderPlcMatrix(availablePlcs(),selectedRows());};
+    });
+    qsa('#plcMatrixMetric button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.plcMatrixMetric);
+      btn.onclick=()=>{state.plcMatrixMetric=btn.dataset.value;setSegmented('#plcMatrixMetric',state.plcMatrixMetric);renderPlcMatrix(availablePlcs(),selectedRows());};
+    });
+  }
+
+  function bindPlcDetailControls(){
+    qsa('#plcDetailType button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.plcDetailType);
+      btn.onclick=()=>{state.plcDetailType=btn.dataset.value;setSegmented('#plcDetailType',state.plcDetailType);renderPlcDetail(state.plc,rowsForPlc(selectedRows(),state.plc));};
+    });
+    qsa('#plcQuestionType button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.plcQuestionType);
+      btn.onclick=()=>{state.plcQuestionType=btn.dataset.value;setSegmented('#plcQuestionType',state.plcQuestionType);renderPlcQuestionFocus(rowsForPlc(selectedRows(),state.plc),state.plc);};
+    });
+    const back=el('plcBackToAll');
+    if(back)back.onclick=()=>{state.plc='All';el('plcSelect').value='All';renderPlcs();updateUrlState();};
+  }
+
+  function plcMatrixCellStyle(value,lens){
+    const rgb=lens==='Being'?'173,42,38':lens==='Connecting'?'17,50,97':'89,99,109';
+    const alpha=Math.min(.68,.035+(value/100)*.55);
+    const text=value>=62?'#fff':'#2e4055';
+    return 'background:rgba('+rgb+','+alpha.toFixed(2)+');color:'+text;
+  }
+
+  function renderPlcMatrix(plcs,baseRows){
+    const host=el('plcMatrix');if(!host)return;
+    const type=state.plcMatrixType,metric=state.plcMatrixMetric;
+    const grouped=[
+      {label:'Elementary',items:plcs.filter(p=>plcDivision(p)==='Elementary')},
+      {label:'Secondary',items:plcs.filter(p=>plcDivision(p)==='Secondary')}
+    ];
+    let html='<table class="plc-matrix"><thead><tr><th>PLC</th><th>Evidence</th>'+FACETS.map(f=>'<th title="'+esc(f)+'">'+esc(f==='Personalization'?'P':f==='Agency'?'A':f==='Authenticity'?'Au':f==='Creativity'?'Cr':f==='Collaboration'?'Co':'TA')+'</th>').join('')+'</tr></thead><tbody>';
+    grouped.forEach(group=>{
+      if(!group.items.length)return;
+      html+='<tr class="plc-group-row"><td colspan="'+(FACETS.length+2)+'">'+esc(group.label)+'</td></tr>';
+      group.items.forEach(plc=>{
+        const rows=rowsForPlc(baseRows,plc),roster=plcMembers(plc);
+        const represented=unique(rows.map(r=>canonicalPlcName(r.faculty)).filter(n=>roster.includes(n))).length;
+        html+='<tr><td class="plc-name-cell"><button type="button" class="plc-name-button" data-plc-matrix-row="'+esc(plc)+'">'+esc(plc)+'</button></td><td class="plc-evidence-cell"><strong>'+rows.length+' obs</strong><small>'+represented+'/'+roster.length+' members represented</small></td>';
+        FACETS.forEach(f=>{
+          const ev=plcFacetEvidence(plc,rows,f,type),value=metric==='breadth'?ev.breadth:ev.frequency,lens=LENS[f];
+          html+='<td class="plc-facet-cell '+lens.toLowerCase()+'" style="'+plcMatrixCellStyle(value,lens)+'" title="'+esc(f)+' · '+(metric==='breadth'?'Breadth':'Frequency')+': '+value.toFixed(1)+'%">'+(rows.length?value.toFixed(0)+'%':'—')+'</td>';
+        });
+        html+='</tr>';
+      });
+    });
+    html+='</tbody></table><div class="plc-matrix-legend"><span><i class="being"></i>Being</span><span><i class="connecting"></i>Connecting</span><span><i class="doing"></i>Doing</span><span>'+esc(type==='commendation'?'Commendation':'Wondering')+' '+esc(metric)+' · percentages describe evidence prevalence, not quality.</span></div>';
+    host.innerHTML=html;
+    qsa('[data-plc-matrix-row]',host).forEach(btn=>btn.addEventListener('click',()=>{state.plc=btn.dataset.plcMatrixRow;el('plcSelect').value=state.plc;renderPlcs();updateUrlState();}));
+  }
+
+  function renderPlcDetail(plc,rows){
+    const roster=plcMembers(plc),counts=countBy(rows,r=>canonicalPlcName(r.faculty||'Unknown'));delete counts.Unknown;
+    const represented=roster.filter(n=>counts[n]).length,repeated=roster.filter(n=>(counts[n]||0)>=2).length;
+    const observers=unique(rows.map(r=>r.observer).filter(Boolean)).length;
+
+    el('plcDetailTitle').textContent=plc;
+    el('plcDetailContext').textContent=plcDivision(plc)+' · '+periodName()+' · '+rows.length+' observations · '+represented+' of '+roster.length+' PLC members represented';
+    el('plcKpis').innerHTML=[
+      [rows.length,'Observations','Selected evidence'],
+      [represented+' / '+roster.length,'Members reached',(roster.length?represented/roster.length*100:0).toFixed(1)+'% of PLC roster'],
+      [repeated,'2+ observations','Members with repeated evidence'],
+      [observers,'Observers','Leaders contributing evidence']
+    ].map(x=>'<div class="plc-brief-kpi"><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span><small>'+esc(x[2])+'</small></div>').join('');
+
+    renderPlcFacetProfile(plc,rows);
+    renderPlcDiscussion(plc,rows);
+    renderPlcMovement(rows);
+    renderPlcQuestionFocus(rows,plc);
+    renderPlcEvidenceDistribution(plc,rows);
+    renderPlcCommentSignals(rows,plc);
+
+    el('plcOpenEvidence').onclick=()=>{state.explorerPlc=plc;explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();};
+  }
+
+  function renderPlcFacetProfile(plc,rows){
+    const host=el('plcTlfProfile');if(!host)return;
+    const type=state.plcDetailType||'commendation';
+    let html='<div class="plc-paired-profile"><div class="plc-paired-head"><span>Facet</span><span>Lens</span><span>Frequency</span><span>Breadth</span></div>';
+    FACETS.forEach(f=>{
+      const ev=plcFacetEvidence(plc,rows,f,type),lens=LENS[f],color=lensColor(lens);
+      html+='<div class="plc-paired-row"><button type="button" class="plc-paired-label tlf-facet-button" data-plc-facet="'+esc(f)+'">'+esc(f)+'</button><span class="lens-chip '+lens.toLowerCase()+'">'+esc(lens)+'</span><div class="plc-paired-meter"><span class="plc-paired-track" style="--lens:'+color+'"><i style="--v:'+Math.min(100,ev.frequency)+'%"></i></span><span class="plc-paired-value">'+ev.frequency.toFixed(1)+'%</span></div><div class="plc-paired-meter"><span class="plc-paired-track" style="--lens:'+color+'"><i style="--v:'+Math.min(100,ev.breadth)+'%"></i></span><span class="plc-paired-value">'+ev.breadth.toFixed(1)+'%</span></div></div>';
+    });
+    host.innerHTML=html+'</div>';
+    qsa('[data-plc-facet]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerPlc=plc;state.explorerFacet=btn.dataset.plcFacet;state.explorerEvidenceType=type;explorerPage=1;switchTab('explorer');renderExplorer();renderActiveFilters();updateUrlState();}));
+  }
+
+  function renderPlcDiscussion(plc,rows){
+    const host=el('plcDiscussion');if(!host)return;
+    if(!rows.length){host.innerHTML='<div class="plc-empty">No PLC evidence matches the current filters.</div>';return;}
+    const roster=plcMembers(plc),represented=unique(rows.map(r=>canonicalPlcName(r.faculty)).filter(n=>roster.includes(n))).length;
+    const counts=countBy(rows,r=>canonicalPlcName(r.faculty||'Unknown')),repeated=roster.filter(n=>(counts[n]||0)>=2).length;
+    const comm=FACETS.map(f=>({facet:f,ev:plcFacetEvidence(plc,rows,f,'commendation')})).sort((a,b)=>b.ev.breadth-a.ev.breadth||b.ev.frequency-a.ev.frequency);
+    const wonder=FACETS.map(f=>({facet:f,ev:plcFacetEvidence(plc,rows,f,'wondering')})).sort((a,b)=>b.ev.frequency-a.ev.frequency);
+    const q=plcQuestionEntries(rows,'commendation'),topQ=q[0];
+    const items=[];
+    const top=comm[0];
+    if(top&&top.ev.observations){
+      items.push({lens:LENS[top.facet].toLowerCase(),title:top.facet+' is the broadest commendation signal.',text:'Visible in '+top.ev.frequency.toFixed(1)+'% of observations and across '+top.ev.breadth.toFixed(1)+'% of the PLC roster.'});
+    }
+    const w=wonder[0];
+    if(w&&w.ev.observations){
+      items.push({lens:LENS[w.facet].toLowerCase(),title:w.facet+' is the most frequent wondering signal.',text:'Appears as a wondering in '+w.ev.frequency.toFixed(1)+'% of the selected PLC observations. Use the source evidence to explore what sits behind it.'});
+    }else if(topQ&&topQ.pct>=60){
+      items.push({lens:'connecting',title:'Question focus is concentrated.',text:'The most-used commendation question appears in '+topQ.pct.toFixed(1)+'% of PLC observations, which may shape what enters the evidence set.'});
+    }
+    const reachPct=roster.length?represented/roster.length*100:0,repeatPct=roster.length?repeated/roster.length*100:0;
+    items.push({lens:'doing',title:reachPct>=80&&repeatPct>=50?'The evidence is reasonably distributed for discussion.':'The evidence base is still developing.',text:represented+' of '+roster.length+' members are represented; '+repeated+' have two or more observations in this view.'});
+    host.innerHTML=items.slice(0,3).map(x=>'<div class="plc-discussion-item '+x.lens+'"><strong>'+esc(x.title)+'</strong><p>'+esc(x.text)+'</p></div>').join('');
+  }
+
+  function plcComparablePeriods(rows){
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);
+    if(dates.length<2)return null;
+    const min=dates[0],end=dates.at(-1),span=Math.floor((end-min)/86400000)+1;
+    const days=Math.min(28,Math.floor(span/2));
+    if(days<14)return null;
+    const currentStart=addDays(end,-days+1),previousEnd=addDays(currentStart,-1),previousStart=addDays(previousEnd,-days+1);
+    const current=rows.filter(r=>{const d=parseISODate(r.date);return d>=currentStart&&d<=end;});
+    const previous=rows.filter(r=>{const d=parseISODate(r.date);return d>=previousStart&&d<=previousEnd;});
+    if(current.length<3||previous.length<3)return {days,current,previous,thin:true};
+    return {days,current,previous,thin:false};
+  }
+
+  function renderPlcMovement(rows){
+    const host=el('plcMovement'),note=el('plcMovementNote');if(!host)return;
+    const periods=plcComparablePeriods(rows);
+    if(!periods||periods.thin){
+      const curr=periods?periods.current.length:0,prev=periods?periods.previous.length:0;
+      if(note)note.textContent='Comparable periods only. The dashboard will not manufacture a trend from a thin evidence base.';
+      host.innerHTML='<div class="plc-too-early"><strong>Too early to interpret movement</strong><p>'+(periods?'Previous period: '+prev+' observations · Current period: '+curr+' observations.':'The selected evidence window does not yet contain two comparable periods of at least 14 days.')+' Keep building the evidence base before treating movement as a pattern.</p></div>';
+      return;
+    }
+    if(note)note.textContent='Two equal '+periods.days+'-day evidence periods · '+periods.previous.length+' previous observations and '+periods.current.length+' current observations.';
+    const rowsHtml=Object.keys(LENS_FACETS).map(lens=>{
+      const p=lensEvidence(periods.previous,lens,'commendation').frequency,c=lensEvidence(periods.current,lens,'commendation').frequency;
+      const left=Math.min(p,c),right=Math.max(p,c),delta=c-p,color=lensColor(lens);
+      return '<div class="plc-movement-row"><div class="plc-movement-label"><strong>'+lens+'</strong><span>'+LENS_FACETS[lens].join(' · ')+'</span></div><div><div class="plc-slope" style="--lens:'+color+'"><span class="plc-slope-line" style="--left:'+left+'%;--width:'+Math.max(1,right-left)+'%"></span><i class="plc-slope-dot" style="left:'+p+'%;--lens:'+color+'" title="Previous '+p.toFixed(1)+'%"></i><i class="plc-slope-dot current" style="left:'+c+'%;--lens:'+color+'" title="Current '+c.toFixed(1)+'%"></i></div><div class="plc-slope-axis"><span>0%</span><span>100%</span></div></div><div class="plc-movement-values"><strong>'+p.toFixed(0)+'% → '+c.toFixed(0)+'%</strong><br>'+(delta>=0?'+':'')+delta.toFixed(1)+' pp</div></div>';
+    }).join('');
+    host.innerHTML=rowsHtml;
+  }
+
+  function renderPlcQuestionFocus(rows,plc){
+    const host=el('plcQuestionFocus');if(!host)return;
+    const type=state.plcQuestionType||'commendation',entries=plcQuestionEntries(rows,type);
+    if(!entries.length){host.innerHTML='<div class="plc-empty">No '+esc(type)+' guiding questions are recorded in this PLC evidence.</div>';return;}
+    const top=entries[0],rare=entries.filter(x=>x.n<=2).length,max=Math.max(1,...entries.slice(0,5).map(x=>x.n));
+    let html='<div class="plc-question-summary"><span><b>'+entries.length+'</b> unique questions</span><span><b>'+top.pct.toFixed(0)+'%</b> top-question concentration</span><span><b>'+rare+'</b> used ≤2 times</span></div><div class="plc-question-list">';
+    html+=entries.slice(0,5).map(x=>'<div class="plc-question-item"><button type="button" class="plc-question-button" data-plc-question="'+esc(x.q)+'">'+esc(shorten(x.q,145))+'</button><div class="plc-question-count"><strong>'+x.n+'</strong><small>'+x.pct.toFixed(1)+'% of obs</small></div><div class="focus-meter" style="grid-column:1 / 3"><i style="width:'+(x.n/max*100).toFixed(1)+'%"></i></div></div>').join('');
+    host.innerHTML=html+'</div>';
+    qsa('[data-plc-question]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerPlc=plc;state.explorerSearch=btn.dataset.plcQuestion;state.explorerEvidenceType=type;el('observationSearch').value=state.explorerSearch;explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();}));
+  }
+
+  function renderPlcEvidenceDistribution(plc,rows){
+    const host=el('plcEvidenceDistribution');if(!host)return;
+    const roster=plcMembers(plc),counts=countBy(rows,r=>canonicalPlcName(r.faculty||'Unknown'));
+    const buckets={three:[],two:[],one:[],none:[]};
+    roster.forEach(name=>{const n=counts[name]||0;if(n>=3)buckets.three.push(name);else if(n===2)buckets.two.push(name);else if(n===1)buckets.one.push(name);else buckets.none.push(name);});
+    const dots=roster.map(name=>{const n=counts[name]||0,cls=n>=3?'deep':n===2?'repeat':n===1?'':'none';return '<i class="plc-member-dot '+cls+'" title="'+esc(name)+': '+n+' observation'+(n===1?'':'s')+'"></i>';}).join('');
+    const band=(label,n)=>'<div class="plc-distribution-band"><span>'+label+'</span><span class="plc-distribution-meter"><i style="width:'+(roster.length?n/roster.length*100:0).toFixed(1)+'%"></i></span><b>'+n+'</b></div>';
+    host.innerHTML='<div class="plc-distribution-summary">'+dots+'</div><div class="plc-distribution-bands">'+band('3+ observations',buckets.three.length)+band('2 observations',buckets.two.length)+band('1 observation',buckets.one.length)+band('No observation',buckets.none.length)+'</div><div class="focus-note" style="margin-top:9px">Hover a dot to see the PLC member and observation count. The distribution describes evidence coverage, not faculty performance.</div>';
+  }
 
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
