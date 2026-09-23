@@ -19,7 +19,7 @@ The production data file is `data/observations-full.csv`. The dashboard loads th
 
 ## Data verification
 
-The published CSV is the 23 September 2026 source supplied for this dashboard and validates to 741 observation rows. Dashboard totals reconcile to the source totals below.
+The published CSV is the 23 September 2026 source supplied for this dashboard and validates to 741 observation rows. Windows-1252 punctuation was normalized to UTF-8 for browser display, and three quote-sensitive historical records were checked against the prior canonical rows and repaired without changing their field values. Dashboard totals reconcile to the source totals below.
 
 Current totals:
 
