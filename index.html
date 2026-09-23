@@ -234,6 +234,49 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
   .evidence-profile-row>.evidence-metric,.evidence-context{grid-column:1 / 3}
 }
 
+
+/* P2: calibration, focus audit and meeting explorer */
+.explorer-meeting-bar{display:grid;grid-template-columns:auto 150px 175px 150px 150px auto auto;gap:10px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 13px;margin-bottom:8px;box-shadow:var(--shadow)}
+.explorer-meeting-title{align-self:center;padding-right:6px;min-width:125px}.explorer-meeting-title span{display:block;color:var(--navy);font-size:11px;font-weight:850}.explorer-meeting-title small{display:block;color:var(--muted);font-size:9px;line-height:1.35;margin-top:2px}
+.meeting-toggle{height:39px;display:flex;align-items:center;gap:7px;border:1px solid var(--line-strong);border-radius:9px;padding:5px 9px;background:#f8fafc;white-space:nowrap}.meeting-toggle input{accent-color:var(--navy)}.meeting-toggle span{display:grid}.meeting-toggle strong{font-size:10px;color:var(--navy)}.meeting-toggle small{font-size:8.5px;color:var(--muted)}
+.explorer-meeting-summary{display:flex;gap:6px;align-items:center;flex-wrap:wrap;min-height:28px;margin-bottom:8px}.meeting-chip{display:inline-flex;align-items:center;border:1px solid #dfe5ec;background:#fff;border-radius:999px;padding:4px 7px;font-size:9px;font-weight:730;color:#617083}.meeting-chip.primary{background:var(--navy-soft);color:var(--navy);border-color:#d4e0eb}
+.calibration-wrap{overflow:auto}
+.calibration-table{border-collapse:separate;border-spacing:4px;width:100%;min-width:700px}
+.calibration-table th,.calibration-table td{border:0;padding:7px 8px;font-size:9px;position:static;background:transparent;text-transform:none;letter-spacing:0}
+.calibration-table th{text-align:center;color:var(--muted);font-weight:800}
+.calibration-table th:first-child{text-align:left}
+.calibration-table .observer-cell{min-width:150px;text-align:left;background:#f8fafc;border-radius:8px}
+.calibration-table .observer-button{border:0;background:transparent;padding:0;text-align:left;color:var(--navy);font-weight:820;font-size:10px}
+.calibration-table .observer-button:hover{text-decoration:underline}
+.calibration-table .observer-cell small{display:block;color:var(--muted);font-size:8.5px;margin-top:2px}
+.calibration-cell{text-align:center;border-radius:8px!important;font-variant-numeric:tabular-nums;font-weight:820;min-width:64px}
+.calibration-row.low-sample .observer-cell{border-left:3px solid var(--amber)}
+.calibration-note{font-size:9.5px;color:var(--muted);margin-top:8px;line-height:1.45}
+.focus-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+.focus-stat{background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:8px}.focus-stat strong{display:block;color:var(--navy);font-size:17px;line-height:1}.focus-stat span{display:block;color:var(--muted);font-size:8.5px;margin-top:4px}
+.focus-list{display:grid;gap:7px}
+.focus-item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-top:1px solid #edf1f5;padding-top:7px}
+.focus-item:first-child{border-top:0;padding-top:0}
+.focus-question{border:0;background:transparent;text-align:left;padding:0;color:#344358;font-size:9.5px;line-height:1.35}.focus-question:hover{color:var(--navy);text-decoration:underline}
+.focus-count{text-align:right;white-space:nowrap}.focus-count strong{display:block;color:var(--navy);font-size:11px}.focus-count small{display:block;color:var(--muted);font-size:8px}
+.focus-meter{grid-column:1 / 3;height:4px;border-radius:99px;background:#edf1f5;overflow:hidden}.focus-meter i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.focus-note{font-size:9px;color:var(--muted);line-height:1.45;margin-top:9px}
+@media(max-width:1280px){
+  .explorer-meeting-bar{grid-template-columns:120px repeat(3,1fr);align-items:end}
+  .explorer-meeting-title{grid-row:span 2}.explorer-meeting-bar .meeting-toggle,.explorer-meeting-bar .button{align-self:end}
+}
+@media(max-width:820px){
+  .explorer-meeting-bar{grid-template-columns:1fr 1fr}
+  .explorer-meeting-title{grid-column:1 / -1;grid-row:auto}
+  .explorer-meeting-bar .meeting-toggle,.explorer-meeting-bar .button{width:100%}
+  .focus-summary{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:520px){
+  .explorer-meeting-bar{grid-template-columns:1fr}
+  .explorer-meeting-title{grid-column:auto}
+  .focus-summary{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -348,7 +391,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 
     <nav class="tabs leadership-tabs" aria-label="Dashboard sections">
       <button class="tab active" data-tab="overview" type="button">Snapshot</button>
-      <button class="tab" data-tab="facets" type="button">TLF &amp; Goals</button>
+      <button class="tab" data-tab="facets" type="button">TLF Patterns</button>
       <button class="tab" data-tab="coverage" type="button">Reach &amp; Evidence</button>
       <button class="tab" data-tab="explorer" type="button">Evidence Explorer</button>
       <button class="tab" data-tab="admin" type="button">Admin</button>
@@ -411,8 +454,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       <div class="section-heading">
         <div>
           <p class="eyebrow">Transformative Learning Framework</p>
-          <h2>TLF evidence → goal conversations</h2>
-          <p>Use observation patterns to test questions about divisional and schoolwide goals. The source observations do not yet contain explicit goal tags, so this view does not infer goal alignment.</p>
+          <h2>TLF patterns in the evidence</h2>
+          <p>Explore how often and how broadly the TLF facets appear, compare divisional evidence, and open the observations behind any pattern. Use the evidence to inform goal conversations without inferring goal alignment.</p>
         </div>
         <div class="toolbar">
           <div class="segmented compact" id="facetMetricToggle" role="group" aria-label="Facet metric">
@@ -531,10 +574,52 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           <input id="observationSearch" type="search" placeholder="Search notes, feedback, responses, faculty, observer or facet…" />
         </div>
       </div>
+
+      <div class="explorer-meeting-bar" aria-label="Evidence Explorer meeting filters">
+        <div class="explorer-meeting-title">
+          <span>Meeting filters</span>
+          <small>These sync with the main dashboard view.</small>
+        </div>
+        <div class="filter-field">
+          <label for="explorerEvidenceType">Evidence type</label>
+          <select id="explorerEvidenceType">
+            <option value="all">All evidence</option>
+            <option value="commendation">Commendations</option>
+            <option value="wondering">Wonderings</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="explorerFacetQuick">Facet</label>
+          <select id="explorerFacetQuick"></select>
+        </div>
+        <div class="filter-field">
+          <label for="explorerDivisionQuick">Division</label>
+          <select id="explorerDivisionQuick">
+            <option value="All">Whole school</option>
+            <option value="Elementary">Elementary</option>
+            <option value="Secondary">Secondary</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="explorerPeriodQuick">Period</label>
+          <select id="explorerPeriodQuick">
+            <option value="schoolyear">School year</option>
+            <option value="30">Last 30 days</option>
+            <option value="60">Last 60 days</option>
+            <option value="semester">Semester</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+        <label class="meeting-toggle"><input id="onePerFaculty" type="checkbox" /><span><strong>One per faculty</strong><small>Latest matching observation</small></span></label>
+        <button id="clearExplorerFilters" class="button button-ghost" type="button">Clear Explorer filters</button>
+      </div>
+
+      <div id="explorerMeetingSummary" class="explorer-meeting-summary"></div>
+
       <article class="card table-card">
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Date</th><th>Faculty</th><th>Division</th><th>Observer</th><th>Commendations</th><th>Wondering</th><th>Response</th><th></th></tr></thead>
+            <thead id="observationTableHead"></thead>
             <tbody id="observationTableBody"></tbody>
           </table>
         </div>
@@ -546,8 +631,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       <div class="section-heading">
         <div>
           <p class="eyebrow">Administration</p>
-          <h2>Workflow and data quality</h2>
-          <p>Operational checks live here so they do not compete with instructional leadership on the main views.</p>
+          <h2>Calibration, workflow and data quality</h2>
+          <p>Use these views to understand how the observation process is being applied. They support calibration and evidence quality; they are not observer performance measures.</p>
         </div>
       </div>
       <div class="grid grid-12">
@@ -559,6 +644,29 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           <div class="card-head"><div><p class="card-kicker">Data quality</p><h2>Source-system checks</h2><p class="card-copy">Signals that may warrant cleanup or follow-up.</p></div></div>
           <div id="dataHealth" class="health-grid"></div>
         </article>
+
+        <article class="card span-7">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Calibration</p>
+              <h2>Observer × TLF pattern</h2>
+              <p class="card-copy">Each cell is the percentage of that observer’s observations containing the commendation facet. Differences are prompts for calibration, not ratings.</p>
+            </div>
+          </div>
+          <div id="observerCalibration" class="calibration-wrap"></div>
+        </article>
+
+        <article class="card span-5">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Observation-focus audit</p>
+              <h2>What questions are we asking?</h2>
+              <p class="card-copy">Shows which guiding questions shape the selected evidence. Repeated use may reflect observation focus as much as classroom practice.</p>
+            </div>
+          </div>
+          <div id="focusAudit"></div>
+        </article>
+
         <article class="card span-12">
           <div class="card-head"><div><p class="card-kicker">Dataset context</p><h2>What is powering this view?</h2></div></div>
           <div id="adminSummary" class="admin-summary"></div>
@@ -1847,6 +1955,247 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     html+='<div class="sampling-legend">'+labels.map(x=>'<span><i class="sampling-swatch '+x.toLowerCase()+'"></i>'+x+'</span>').join('')+'</div>';
     if(state.time!=='All')html+='<div class="evidence-profile-note">The active Time of class filter is '+esc(state.time)+', so this view reflects only that selected lesson position.</div>';
     host.innerHTML=html;
+  }
+
+
+  // P2: calibration, focus audit and meeting-ready Evidence Explorer
+  Object.assign(state,{
+    explorerEvidenceType:state.explorerEvidenceType||'all',
+    explorerOnePerFaculty:Boolean(state.explorerOnePerFaculty)
+  });
+  let urlStateApplied=false;
+
+  document.addEventListener('DOMContentLoaded',()=>bindP2Events());
+
+  function bindP2Events(){
+    const type=el('explorerEvidenceType'),facet=el('explorerFacetQuick'),division=el('explorerDivisionQuick'),period=el('explorerPeriodQuick'),one=el('onePerFaculty'),clear=el('clearExplorerFilters');
+    if(type)type.addEventListener('change',()=>{state.explorerEvidenceType=type.value;explorerPage=1;renderExplorer();updateUrlState();});
+    if(facet)facet.addEventListener('change',()=>{state.explorerFacet=facet.value;explorerPage=1;renderExplorer();renderActiveFilters();updateUrlState();});
+    if(division)division.addEventListener('change',()=>{
+      state.division=division.value;setSegmented('#divisionFilter',state.division);explorerPage=1;renderAll();
+    });
+    if(period)period.addEventListener('change',()=>{
+      state.period=period.value;setSegmented('#periodFilter',state.period);toggleCustomDates();explorerPage=1;renderAll();
+    });
+    if(one)one.addEventListener('change',()=>{state.explorerOnePerFaculty=one.checked;explorerPage=1;renderExplorer();updateUrlState();});
+    if(clear)clear.addEventListener('click',()=>{
+      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerSearch='';
+      if(el('observationSearch'))el('observationSearch').value='';
+      explorerPage=1;renderExplorer();renderActiveFilters();updateUrlState();
+    });
+  }
+
+  function applyUrlStateOnce(){
+    if(urlStateApplied)return;
+    urlStateApplied=true;
+    const q=new URLSearchParams(location.search);
+    const years=unique(allRows.map(r=>r.schoolYear).filter(Boolean));
+    const year=q.get('year');if(year&&years.includes(year)){state.year=year;if(el('yearFilter'))el('yearFilter').value=year;}
+    const division=q.get('division');if(['All','Elementary','Secondary'].includes(division)){state.division=division;setSegmented('#divisionFilter',division);}
+    const scope=q.get('scope');if(['all','principals'].includes(scope)){state.observerScope=scope;setSegmented('#observerScopeFilter',scope);}
+    const period=q.get('period');if(['30','60','semester','schoolyear','custom'].includes(period)){state.period=period;setSegmented('#periodFilter',period);}
+    const time=q.get('time');if(['All','Beginning','Middle','End'].includes(time)){state.time=time;if(el('timeFilter'))el('timeFilter').value=time;}
+    const faculty=q.get('faculty');if(faculty){state.faculty=faculty;if(el('facultySearch'))el('facultySearch').value=faculty;}
+    const from=q.get('from'),to=q.get('to');if(from){state.customStart=from;if(el('customStart'))el('customStart').value=from;}if(to){state.customEnd=to;if(el('customEnd'))el('customEnd').value=to;}
+    refreshObserverOptions();
+    const observer=q.get('observer');if(observer&&[...el('observerFilter').options].some(o=>o.value===observer)){state.observer=observer;el('observerFilter').value=observer;}
+    const et=q.get('evidence');if(['all','commendation','wondering'].includes(et))state.explorerEvidenceType=et;
+    const facet=q.get('facet');if(facet)state.explorerFacet=facet;
+    state.explorerOnePerFaculty=q.get('one')==='1';
+    const search=q.get('search');if(search){state.explorerSearch=search;if(el('observationSearch'))el('observationSearch').value=search;}
+    const tab=q.get('tab');if(['overview','facets','coverage','explorer','admin'].includes(tab)){
+      qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+      qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===tab));
+    }
+    toggleCustomDates();
+  }
+
+  function updateUrlState(){
+    if(!urlStateApplied)return;
+    const q=new URLSearchParams();
+    const active=qs('.tab.active')?.dataset?.tab||'overview';
+    if(active!=='overview')q.set('tab',active);
+    if(state.year)q.set('year',state.year);
+    if(state.division!=='All')q.set('division',state.division);
+    if(state.observerScope!=='all')q.set('scope',state.observerScope);
+    if(state.observer!=='All')q.set('observer',state.observer);
+    if(state.period!=='schoolyear')q.set('period',state.period);
+    if(state.period==='custom'&&state.customStart)q.set('from',state.customStart);
+    if(state.period==='custom'&&state.customEnd)q.set('to',state.customEnd);
+    if(state.time!=='All')q.set('time',state.time);
+    if(state.faculty)q.set('faculty',state.faculty);
+    if(state.explorerEvidenceType!=='all')q.set('evidence',state.explorerEvidenceType);
+    if(state.explorerFacet)q.set('facet',state.explorerFacet);
+    if(state.explorerOnePerFaculty)q.set('one','1');
+    if(state.explorerSearch)q.set('search',state.explorerSearch);
+    const query=q.toString();
+    history.replaceState(null,'',location.pathname+(query?'?'+query:'')+location.hash);
+  }
+
+  function switchTab(name){
+    qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+    qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===name));
+    updateUrlState();
+  }
+
+  function renderAll(){
+    applyUrlStateOnce();
+    refreshObserverOptions();
+    refreshFacultyOptions();
+    renderActiveFilters();
+    renderOverview();
+    renderFacets();
+    renderCoverage();
+    renderExplorer();
+    renderAdminP2();
+    updateUrlState();
+  }
+
+  function renderAdminP2(){
+    const calibrationRows=selectedRows({ignoreObserver:true});
+    renderObserverCalibration(calibrationRows);
+    renderObservationFocusAudit(selectedRows());
+  }
+
+  function renderObserverCalibration(rows){
+    const host=el('observerCalibration');if(!host)return;
+    const observers=unique(rows.map(r=>r.observer).filter(Boolean)).sort((a,b)=>a.localeCompare(b));
+    if(!observers.length){host.innerHTML='<div class="empty-state">No observer evidence matches the current view.</div>';return;}
+    let html='<table class="calibration-table"><thead><tr><th>Observer</th>'+FACETS.map(f=>'<th>'+esc(shorten(f,14))+'</th>').join('')+'</tr></thead><tbody>';
+    observers.forEach(observer=>{
+      const rr=rows.filter(r=>r.observer===observer),low=rr.length<10;
+      html+='<tr class="calibration-row '+(low?'low-sample':'')+'"><td class="observer-cell"><button type="button" class="observer-button" data-cal-observer="'+esc(observer)+'">'+esc(observer)+'</button><small>'+rr.length+' observations'+(low?' · limited sample':'')+'</small></td>';
+      FACETS.forEach(f=>{
+        const ev=facetEvidence(rr,f,'commendation'),v=ev.frequency,alpha=Math.min(.72,.06+(v/100)*.58),dark=v>=58;
+        html+='<td class="calibration-cell" style="background:rgba(17,50,97,'+alpha.toFixed(2)+');color:'+(dark?'#fff':'#1f344d')+'" title="'+esc(f)+': '+v.toFixed(1)+'% · '+ev.observations+' of '+rr.length+' observations">'+v.toFixed(0)+'%</td>';
+      });
+      html+='</tr>';
+    });
+    html+='</tbody></table><div class="calibration-note">Neutral shading represents prevalence, not quality. Rows with fewer than 10 observations are flagged as limited sample. The matrix intentionally ignores the individual Observer filter so observers can be compared within the selected year, division, group, period and other filters.</div>';
+    host.innerHTML=html;
+    qsa('[data-cal-observer]',host).forEach(btn=>btn.addEventListener('click',()=>{
+      state.observer=btn.dataset.calObserver;refreshObserverOptions();if(el('observerFilter'))el('observerFilter').value=state.observer;explorerPage=1;renderAll();
+    }));
+  }
+
+  function normalizeQuestion(q){return String(q||'').replace(/\s+/g,' ').trim();}
+
+  function renderObservationFocusAudit(rows){
+    const host=el('focusAudit');if(!host)return;
+    if(!rows.length){host.innerHTML='<div class="empty-state">No guiding-question evidence matches the current view.</div>';return;}
+    const map=new Map();let totalSelections=0,withQuestion=0;
+    rows.forEach(r=>{
+      const seen=new Set();
+      (r.guidingQuestions||[]).forEach(raw=>{
+        const label=normalizeQuestion(raw);if(!label||label==='---')return;
+        totalSelections++;
+        const key=label.toLowerCase();
+        if(!map.has(key))map.set(key,{label,selections:0,observations:0});
+        map.get(key).selections++;
+        seen.add(key);
+      });
+      if(seen.size)withQuestion++;
+      seen.forEach(key=>map.get(key).observations++);
+    });
+    const entries=[...map.values()].sort((a,b)=>b.observations-a.observations||b.selections-a.selections);
+    if(!entries.length){host.innerHTML='<div class="empty-state">No guiding questions are recorded in this view.</div>';return;}
+    const top=entries[0],topPct=rows.length?top.observations/rows.length*100:0;
+    const rare=entries.filter(x=>x.observations<=2).length;
+    const max=Math.max(1,...entries.slice(0,6).map(x=>x.observations));
+    let html='<div class="focus-summary"><div class="focus-stat"><strong>'+entries.length+'</strong><span>unique questions</span></div><div class="focus-stat"><strong>'+topPct.toFixed(0)+'%</strong><span>observations using top question</span></div><div class="focus-stat"><strong>'+rare+'</strong><span>questions used ≤2 times</span></div></div>';
+    html+='<div class="focus-list">'+entries.slice(0,6).map(x=>{
+      const pct=rows.length?x.observations/rows.length*100:0;
+      return '<div class="focus-item"><button type="button" class="focus-question" data-focus-question="'+esc(x.label)+'" title="Open matching evidence">'+esc(shorten(x.label,118))+'</button><div class="focus-count"><strong>'+x.observations+'</strong><small>'+pct.toFixed(1)+'% of obs</small></div><div class="focus-meter"><i style="width:'+(x.observations/max*100).toFixed(1)+'%"></i></div></div>';
+    }).join('')+'</div>';
+    html+='<div class="focus-note">'+withQuestion+' of '+rows.length+' observations contain at least one guiding question · '+totalSelections+' total question selections. Counts use each question at most once per observation for prevalence.</div>';
+    host.innerHTML=html;
+    qsa('[data-focus-question]',host).forEach(btn=>btn.addEventListener('click',()=>{
+      state.explorerSearch=btn.dataset.focusQuestion;if(el('observationSearch'))el('observationSearch').value=state.explorerSearch;explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();
+    }));
+  }
+
+  function syncExplorerControls(){
+    const facet=el('explorerFacetQuick');
+    if(facet){
+      const options=[''].concat(FACETS).concat(['Other']);
+      facet.innerHTML=options.map(v=>'<option value="'+esc(v)+'">'+esc(v||'All facets')+'</option>').join('');
+      facet.value=options.includes(state.explorerFacet)?state.explorerFacet:'';
+    }
+    if(el('explorerEvidenceType'))el('explorerEvidenceType').value=state.explorerEvidenceType||'all';
+    if(el('explorerDivisionQuick'))el('explorerDivisionQuick').value=state.division;
+    if(el('explorerPeriodQuick'))el('explorerPeriodQuick').value=state.period;
+    if(el('onePerFaculty'))el('onePerFaculty').checked=Boolean(state.explorerOnePerFaculty);
+  }
+
+  function rowMatchesExplorerFacet(r){
+    const facet=state.explorerFacet;if(!facet)return true;
+    const standard=new Set(FACETS);
+    const commend=(r.commendations||[]);
+    const commendMatch=facet==='Other'?commend.some(f=>f&&!standard.has(f)):commend.includes(facet);
+    const wonderingMatch=facet==='Other'?Boolean(r.wonderingFacet&&!standard.has(r.wonderingFacet)):r.wonderingFacet===facet;
+    if(state.explorerEvidenceType==='commendation')return commendMatch;
+    if(state.explorerEvidenceType==='wondering')return wonderingMatch;
+    return commendMatch||wonderingMatch;
+  }
+
+  function renderExplorer(){
+    syncExplorerControls();
+    let rows=selectedRows().filter(rowMatchesExplorerFacet);
+    const needle=state.explorerSearch.toLowerCase();
+    if(needle)rows=rows.filter(r=>searchBlob(r).includes(needle));
+    rows=rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
+
+    const beforeDedupe=rows.length;
+    if(state.explorerOnePerFaculty){
+      const seen=new Set();
+      rows=rows.filter(r=>{const key=r.faculty||r.email||r.id;if(seen.has(key))return false;seen.add(key);return true;});
+    }
+
+    const pages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE));explorerPage=Math.min(explorerPage,pages);
+    const start=(explorerPage-1)*PAGE_SIZE,pageRows=rows.slice(start,start+PAGE_SIZE);
+    const type=state.explorerEvidenceType||'all';
+    const typeLabel=type==='commendation'?'Commendations':type==='wondering'?'Wonderings':'All evidence';
+
+    el('explorerCount').textContent=fmt.format(rows.length)+' matching observation'+(rows.length===1?'':'s')+(state.explorerOnePerFaculty?' · one latest match per faculty':'');
+    const summary=el('explorerMeetingSummary');
+    if(summary){
+      const chips=[
+        ['primary',state.division==='All'?'Whole school':state.division],
+        ['',periodName()],
+        ['',typeLabel],
+        ['',state.explorerFacet||'All facets']
+      ];
+      if(state.explorerOnePerFaculty)chips.push(['','One per faculty · '+beforeDedupe+' → '+rows.length]);
+      summary.innerHTML=chips.map(x=>'<span class="meeting-chip '+x[0]+'">'+esc(x[1])+'</span>').join('');
+    }
+
+    const head=el('observationTableHead');
+    if(type==='commendation')head.innerHTML='<tr><th>Date</th><th>Faculty</th><th>Division</th><th>Observer</th><th>Commendations</th><th>Response</th><th></th></tr>';
+    else if(type==='wondering')head.innerHTML='<tr><th>Date</th><th>Faculty</th><th>Division</th><th>Observer</th><th>Wondering</th><th>Response</th><th></th></tr>';
+    else head.innerHTML='<tr><th>Date</th><th>Faculty</th><th>Division</th><th>Observer</th><th>Commendations</th><th>Wondering</th><th>Response</th><th></th></tr>';
+
+    const cols=type==='all'?8:7;
+    el('observationTableBody').innerHTML=pageRows.length?pageRows.map(r=>{
+      const base='<td>'+esc(displayDate(r.date))+'</td><td><button type="button" class="table-link" data-faculty-link="'+esc(r.faculty||'')+'">'+esc(r.faculty||'')+'</button></td><td>'+esc(r.division||'')+'</td><td><button type="button" class="table-link" data-observer-link="'+esc(r.observer||'')+'">'+esc(r.observer||'')+'</button></td>';
+      const comm='<td>'+(r.commendations||[]).map(f=>facetPill(f)).join('')+'</td>';
+      const won='<td>'+facetPill(r.wonderingFacet)+'</td>';
+      const tail='<td><span class="response-dot '+(r.hasResponse?'yes':'')+'" title="'+(r.hasResponse?'Response received':'No response')+'"></span></td><td><button type="button" class="view-button" data-view-id="'+esc(String(r.id))+'">View</button></td>';
+      return '<tr>'+base+(type==='commendation'?comm:type==='wondering'?won:comm+won)+tail+'</tr>';
+    }).join(''):'<tr><td colspan="'+cols+'"><div class="empty-state">No observations match the current Explorer filters.</div></td></tr>';
+
+    qsa('[data-view-id]',el('observationTableBody')).forEach(btn=>btn.addEventListener('click',()=>openObservation(btn.dataset.viewId)));
+    qsa('[data-faculty-link]',el('observationTableBody')).forEach(btn=>btn.addEventListener('click',()=>{state.faculty=btn.dataset.facultyLink;el('facultySearch').value=state.faculty;explorerPage=1;renderAll();}));
+    qsa('[data-observer-link]',el('observationTableBody')).forEach(btn=>btn.addEventListener('click',()=>{state.observer=btn.dataset.observerLink;refreshObserverOptions();el('observerFilter').value=state.observer;explorerPage=1;renderAll();}));
+    el('pagination').innerHTML='<button type="button" id="prevPage" '+(explorerPage<=1?'disabled':'')+'>← Previous</button><span>Page '+explorerPage+' of '+pages+'</span><button type="button" id="nextPage" '+(explorerPage>=pages?'disabled':'')+'>Next →</button>';
+    el('prevPage').addEventListener('click',()=>{if(explorerPage>1){explorerPage--;renderExplorer();}});
+    el('nextPage').addEventListener('click',()=>{if(explorerPage<pages){explorerPage++;renderExplorer();}});
+  }
+
+  function resetFilters(){
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.period='schoolyear';state.customStart='';state.customEnd='';
+    setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
+    el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
+    toggleCustomDates();explorerPage=1;renderAll();
   }
 
   let toastTimer;
