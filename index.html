@@ -88,7 +88,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 
 /* Leadership insight redesign */
 .leadership-filter-shell{padding:13px 15px 11px}
-.primary-filter-bar{grid-template-columns:130px minmax(320px,auto) minmax(250px,auto) minmax(420px,1fr);align-items:end}
+.primary-filter-bar{grid-template-columns:120px minmax(310px,auto) minmax(245px,auto) minmax(170px,200px) minmax(390px,1fr);align-items:end}
 .period-segmented button{padding-left:9px;padding-right:9px}
 .more-filters{border-top:1px solid var(--line);margin-top:11px;padding-top:8px}
 .more-filters summary{list-style:none;cursor:pointer;color:var(--navy);font-size:11px;font-weight:820;display:flex;gap:8px;align-items:center;width:max-content}
@@ -96,7 +96,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 .more-filters summary:before{content:"＋";font-size:14px;line-height:1}
 .more-filters[open] summary:before{content:"−"}
 .more-filters summary span{font-weight:520;color:var(--muted)}
-.more-filter-grid{display:grid;grid-template-columns:180px 160px minmax(260px,1fr) auto;gap:10px;align-items:end;padding-top:10px}
+.more-filter-grid{display:grid;grid-template-columns:160px minmax(280px,1fr) auto;gap:10px;align-items:end;padding-top:10px}
 .custom-date-fields{display:grid;grid-template-columns:145px 145px;gap:10px}
 .custom-date-fields[hidden]{display:none}
 .context-ribbon{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:13px;padding:10px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
@@ -162,15 +162,15 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 .admin-stat strong{display:block;color:var(--navy);font-size:22px}.admin-stat span{display:block;color:var(--muted);font-size:10.5px;margin-top:4px}
 @media(max-width:1280px){
   .leadership-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .primary-filter-bar{grid-template-columns:130px 1fr 1fr}.period-field{grid-column:span 3}.period-segmented{width:100%}.period-segmented button{flex:1}
-  .more-filter-grid{grid-template-columns:1fr 1fr 2fr}.custom-date-fields{grid-column:span 3;justify-content:start}
+  .primary-filter-bar{grid-template-columns:120px minmax(280px,1.3fr) minmax(240px,1fr) minmax(165px,.75fr)}.period-field{grid-column:1 / -1}.period-segmented{width:100%}.period-segmented button{flex:1}
+  .more-filter-grid{grid-template-columns:160px minmax(260px,1fr) auto}.custom-date-fields{justify-content:start}
 }
 @media(max-width:820px){
   .leadership-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .leadership-tabs{display:flex;overflow:auto;border:1px solid var(--line);border-radius:11px;background:#fff}
   .leadership-tabs .tab{flex:0 0 auto;border:0!important;border-right:1px solid var(--line)!important;padding:10px 12px}
   .leadership-tabs .tab.active{box-shadow:inset 0 -3px 0 var(--red)}
-  .primary-filter-bar{grid-template-columns:1fr}.division-field,.observer-scope-field,.period-field{grid-column:auto}
+  .primary-filter-bar{grid-template-columns:1fr}.division-field,.observer-scope-field,.observer-field,.period-field{grid-column:auto}
   .more-filter-grid{grid-template-columns:1fr 1fr}.faculty-search,.custom-date-fields{grid-column:span 2}
   .context-ribbon{align-items:flex-start;flex-direction:column;gap:2px}
   .trend-grid{grid-template-columns:1fr}
@@ -297,6 +297,11 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           </div>
         </div>
 
+        <div class="filter-field observer-field">
+          <label for="observerFilter">Observer</label>
+          <select id="observerFilter"><option value="All">All observers</option></select>
+        </div>
+
         <div class="segmented-wrap period-field">
           <span class="filter-label">Evidence period</span>
           <div class="segmented period-segmented" id="periodFilter" role="group" aria-label="Evidence period">
@@ -310,12 +315,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       </div>
 
       <details class="more-filters" id="moreFilters">
-        <summary>More filters <span>Observer, class timing, faculty and custom dates</span></summary>
+        <summary>More filters <span>Class timing, faculty and custom dates</span></summary>
         <div class="more-filter-grid">
-          <div class="filter-field">
-            <label for="observerFilter">Observer</label>
-            <select id="observerFilter"><option value="All">All observers</option></select>
-          </div>
           <div class="filter-field">
             <label for="timeFilter">Time of class</label>
             <select id="timeFilter">
