@@ -15,19 +15,19 @@ The GitHub repository and GitHub Pages site now publish the **complete source ob
 - faculty response text
 - source observation IDs / PowerApps IDs where present
 
-The production data file is `data/observations-full.csv`. The dashboard loads that source by default. The compact structural dataset embedded in `index.html` is retained only as a fallback if the complete CSV cannot be fetched.
+The production data file is `data/observations-full.csv`. The dashboard loads that complete source by default. If the full CSV cannot be fetched, the dashboard now shows a data-loading error rather than substituting a reduced or redacted dataset.
 
 ## Data verification
 
-The published CSV is a valid UTF-8 representation of the supplied source data. Three quote-sensitive records were explicitly repaired against the raw source after validation identified parsing breaks. The final published file validates to 732 observation rows and reconciles to the source totals below.
+The published CSV is the 23 September 2026 source supplied for this dashboard and validates to 741 observation rows. Dashboard totals reconcile to the source totals below.
 
 Current totals:
 
-- **732** observations overall
+- **741** observations overall
 - **2025–26:** 538 observations, 108 faculty after name normalization, 487 responses
-- **2026–27:** 194 observations, 106 faculty observed, 181 responses
-- **2026–27 division:** 89 Elementary observations, 105 Secondary observations
-- **2026–27 time of class:** 59 Beginning, 100 Middle, 35 End
+- **2026–27:** 203 observations, 106 faculty observed, 188 responses
+- **2026–27 division:** 92 Elementary observations, 111 Secondary observations
+- **2026–27 time of class:** 61 Beginning, 107 Middle, 35 End
 
 Five source-name aliases sharing the same faculty email are normalized to a single display name in dashboard calculations: Cat/Cathryn Mund, Eric/Eric R. Little, Gaby Montejano/Gaby Montejano Gauna, Jackie/Jacqueline Cloete, and Michael/Mike Morrison.
 
@@ -36,6 +36,17 @@ Five source-name aliases sharing the same faculty email are normalized to a sing
 The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **112 faculty**, with **106 currently reached** in the observation data.
 
 The six roster names not yet matched to a 2026–27 observation are shown directly in the Coverage & Cadence view. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
+
+## Observer group filter
+
+A dashboard-wide **Observer group** control supports two views:
+
+- **All leaders** — includes all observers.
+- **Principals + APs** — excludes the four coordinator observers: Ralph Emmerink, Katriona Hoskins, Flavia Di Luccio and Samantha Rogers.
+
+The control filters every KPI, chart, coverage calculation, pattern view and Observation Explorer result. The individual Observer dropdown is also restricted to the selected observer group.
+
+With the 23 September 2026 data, the Principals + APs view contains **123 observations across 102 faculty**, compared with **203 observations across 106 faculty** for all leaders.
 
 ## Views
 
