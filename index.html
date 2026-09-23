@@ -246,6 +246,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 .calibration-table th{text-align:center;color:var(--muted);font-weight:800}
 .calibration-table th:first-child{text-align:left}
 .calibration-table .observer-cell{min-width:150px;text-align:left;background:#f8fafc;border-radius:8px}
+.calibration-group-row td{background:#eef3f8!important;color:var(--navy)!important;font-size:8.5px!important;font-weight:900!important;text-transform:uppercase!important;letter-spacing:.09em!important;padding:6px 8px!important;border-radius:7px!important}
 .calibration-table .observer-button{border:0;background:transparent;padding:0;text-align:left;color:var(--navy);font-weight:820;font-size:10px}
 .calibration-table .observer-button:hover{text-decoration:underline}
 .calibration-table .observer-cell small{display:block;color:var(--muted);font-size:8.5px;margin-top:2px}
@@ -2221,19 +2222,45 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
 
   function renderObserverCalibration(rows){
     const host=el('observerCalibration');if(!host)return;
-    const observers=unique(rows.map(r=>r.observer).filter(Boolean)).sort((a,b)=>a.localeCompare(b));
+    const groups=[
+      {label:'Principals',names:['Virginia Udall','Laura Earwood']},
+      {label:'Assistant Principals',names:['DJ MacPherson','Tania Mansfield','John Kennett','Andrew Hamilton']},
+      {label:'Coordinators',names:['Katriona Hoskins','Ralph Emmerink','Flavia Di Luccio','Samantha Rogers']}
+    ];
+    const visible=new Set(unique(rows.map(r=>r.observer).filter(Boolean)));
+    const ordered=groups.flatMap(g=>g.names).filter(n=>visible.has(n));
+    const known=new Set(groups.flatMap(g=>g.names));
+    const other=[...visible].filter(n=>!known.has(n)).sort((a,b)=>a.localeCompare(b));
+    const observers=ordered.concat(other);
     if(!observers.length){host.innerHTML='<div class="empty-state">No observer evidence matches the current view.</div>';return;}
     let html='<table class="calibration-table"><thead><tr><th>Observer</th>'+FACETS.map(f=>'<th>'+esc(shorten(f,14))+'</th>').join('')+'</tr></thead><tbody>';
-    observers.forEach(observer=>{
-      const rr=rows.filter(r=>r.observer===observer),low=rr.length<10;
-      html+='<tr class="calibration-row '+(low?'low-sample':'')+'"><td class="observer-cell"><button type="button" class="observer-button" data-cal-observer="'+esc(observer)+'">'+esc(observer)+'</button><small>'+rr.length+' observations'+(low?' · limited sample':'')+'</small></td>';
-      FACETS.forEach(f=>{
-        const ev=facetEvidence(rr,f,'commendation'),v=ev.frequency,alpha=Math.min(.72,.06+(v/100)*.58),dark=v>=58;
-        html+='<td class="calibration-cell" style="background:rgba(17,50,97,'+alpha.toFixed(2)+');color:'+(dark?'#fff':'#1f344d')+'" title="'+esc(f)+': '+v.toFixed(1)+'% · '+ev.observations+' of '+rr.length+' observations">'+v.toFixed(0)+'%</td>';
+    groups.forEach(group=>{
+      const members=group.names.filter(n=>visible.has(n));
+      if(!members.length)return;
+      html+='<tr class="calibration-group-row"><td colspan="'+(FACETS.length+1)+'">'+esc(group.label)+'</td></tr>';
+      members.forEach(observer=>{
+        const rr=rows.filter(r=>r.observer===observer),low=rr.length<10;
+        html+='<tr class="calibration-row '+(low?'low-sample':'')+'"><td class="observer-cell"><button type="button" class="observer-button" data-cal-observer="'+esc(observer)+'">'+esc(observer)+'</button><small>'+rr.length+' observations'+(low?' · limited sample':'')+'</small></td>';
+        FACETS.forEach(f=>{
+          const ev=facetEvidence(rr,f,'commendation'),v=ev.frequency,alpha=Math.min(.72,.06+(v/100)*.58),dark=v>=58;
+          html+='<td class="calibration-cell" style="background:rgba(17,50,97,'+alpha.toFixed(2)+');color:'+(dark?'#fff':'#1f344d')+'" title="'+esc(f)+': '+v.toFixed(1)+'% · '+ev.observations+' of '+rr.length+' observations">'+v.toFixed(0)+'%</td>';
+        });
+        html+='</tr>';
       });
-      html+='</tr>';
     });
-    html+='</tbody></table><div class="calibration-note">Neutral shading represents prevalence, not quality. Rows with fewer than 10 observations are flagged as limited sample. The matrix intentionally ignores the individual Observer filter so observers can be compared within the selected year, division, group, period and other filters.</div>';
+    if(other.length){
+      html+='<tr class="calibration-group-row"><td colspan="'+(FACETS.length+1)+'">Other observers</td></tr>';
+      other.forEach(observer=>{
+        const rr=rows.filter(r=>r.observer===observer),low=rr.length<10;
+        html+='<tr class="calibration-row '+(low?'low-sample':'')+'"><td class="observer-cell"><button type="button" class="observer-button" data-cal-observer="'+esc(observer)+'">'+esc(observer)+'</button><small>'+rr.length+' observations'+(low?' · limited sample':'')+'</small></td>';
+        FACETS.forEach(f=>{
+          const ev=facetEvidence(rr,f,'commendation'),v=ev.frequency,alpha=Math.min(.72,.06+(v/100)*.58),dark=v>=58;
+          html+='<td class="calibration-cell" style="background:rgba(17,50,97,'+alpha.toFixed(2)+');color:'+(dark?'#fff':'#1f344d')+'" title="'+esc(f)+': '+v.toFixed(1)+'% · '+ev.observations+' of '+rr.length+' observations">'+v.toFixed(0)+'%</td>';
+        });
+        html+='</tr>';
+      });
+    }
+    html+='</tbody></table><div class="calibration-note">Observers are ordered by leadership role: Principals, Assistant Principals, then Coordinators. Neutral shading represents prevalence, not quality. Rows with fewer than 10 observations are flagged as limited sample. The matrix intentionally ignores the individual Observer filter so observers can be compared within the selected year, division, group, period and other filters.</div>';
     host.innerHTML=html;
     qsa('[data-cal-observer]',host).forEach(btn=>btn.addEventListener('click',()=>{
       state.observer=btn.dataset.calObserver;refreshObserverOptions();if(el('observerFilter'))el('observerFilter').value=state.observer;explorerPage=1;renderAll();
