@@ -33,9 +33,9 @@ Five source-name aliases sharing the same faculty email are normalized to a sing
 
 ## 2026–27 coverage
 
-The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **107 faculty**, with **106 currently reached** in the observation data.
+The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **106 faculty**, all currently represented in the observation data.
 
-The one roster name not yet matched to a 2026–27 observation is shown directly in the Reach & Evidence view. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
+No additional unmatched faculty are currently included in the 2026–27 working roster. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
 
 ## Observer group filter
 
