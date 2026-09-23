@@ -52,6 +52,7 @@ With the 23 September 2026 data, the Principals + APs view contains **123 observ
 
 - **Snapshot** — evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
 - **TLF Patterns** — frequency/breadth profiles, lens summaries, division context, and drill-through into the evidence behind each pattern.
+- **PLCs** — grade-level and subject-area PLC evidence using the 2026–27 staff Position data, including roster reach, TLF frequency/breadth, 28-day lens trends, commendation/wondering question focus, recurring comment language, and representative excerpts.
 - **Reach & Evidence** — roster coverage, faculty reach, cadence, division sampling, and observation timing.
 - **Evidence Explorer** — searchable observation-level evidence with meeting filters for evidence type, facet, division and period, plus a latest-one-per-faculty option and bookmarkable URL state.
 - **Admin** — observer activity, observer × TLF calibration, observation-focus audit, data-health checks, and dataset context.
@@ -79,6 +80,23 @@ The dashboard includes two additional non-evaluative calibration views in **Admi
 - **Observation-focus audit** — groups guiding questions after whitespace normalization and reports question prevalence by observation, the number of unique questions, concentration in the most-used question, and questions used only once or twice. Clicking a question opens the matching evidence in the Explorer.
 
 The **Evidence Explorer** now supports meeting-oriented quick filters for evidence type, facet, division and period. Evidence type also controls whether the table foregrounds commendations, wonderings, or both. **One per faculty** retains only the latest matching observation for each faculty member after all other filters are applied. Key dashboard and Explorer filters are mirrored into the page URL so a leadership view can be bookmarked or shared without adding a backend service.
+
+
+## PLC / department mapping
+
+The **PLCs** view is grounded in the SY26–27 faculty/staff name list supplied for this project. PLC membership is derived from the Position(English) field rather than inferred from observation comments.
+
+The current grouping is:
+
+- Elementary grade-level PLCs: Pre-Kindergarten, Kindergarten, Grades 1–5.
+- Elementary specialist/support PLCs: EAL, Arts, PE, Mandarin, and Student Support.
+- Secondary PLCs: Arts & Design, Language Acquisition, Language & Literature, Individuals & Societies, Mathematics, Science, Health & PE, and Student Support.
+
+Cross-appointed positions can belong to more than one PLC, so PLC totals should not be summed across the school. The current observation-exclusion decisions are also respected in the PLC roster: **Santisha Sonilal** and **Silky Vyas** are not included in PLC coverage denominators. The permanent substitute role is not assigned to a PLC because the Position field does not identify one.
+
+The PLC roster is only applied to **2026–27**. The dashboard deliberately does not apply this roster retrospectively to 2025–26.
+
+Open-comment analysis in the PLC view is deterministic: it surfaces repeated words/phrases and representative verbatim excerpts. It does not use an AI API or generate an interpretive narrative summary.
 
 
 ## GitHub Pages
