@@ -58,6 +58,19 @@ With the 23 September 2026 data, the Principals + APs view contains **123 observ
 
 School years run from **August 1 through July 31**.
 
+## P1 evidence model
+
+The leadership views now separate **frequency** from **breadth** rather than treating raw facet mentions as the primary signal:
+
+- **Frequency** — the percentage of selected observations in which a facet appears at least once. Duplicate use of the same commendation facet inside one observation does not increase frequency.
+- **Breadth** — the percentage of represented faculty whose selected observation evidence contains that facet.
+- **Evidence context** — observation count, faculty count, and observer count are surfaced alongside leadership signals instead of being combined into a performance or confidence score.
+
+The **Celebrate · Explore · Act** prompts are deterministic and rule-based. Celebrate requires broad observation frequency, faculty breadth, and observer diversity. Explore prioritises adequately sampled divisional differences or comparable-period movement. Act prioritises evidence maturity such as faculty with only one observation.
+
+Cadence is shown as **weekly evidence pace**, and lesson-position sampling is shown by division so leaders can see whether their evidence over-represents the beginning, middle, or end of lessons. TLF colours are reserved for Being, Connecting, and Doing; division and sampling comparisons use neutral colours.
+
+
 ## GitHub Pages
 
 The included workflow deploys the site from `main` using GitHub Pages.
