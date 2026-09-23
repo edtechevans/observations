@@ -555,9 +555,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     lightNavy:'#8db8d8', lightRed:'#e798a8', lightGrey:'#aab1b8', grid:'#e8edf2'
   };
   const COORDINATORS = new Set(['Ralph Emmerink','Katriona Hoskins','Flavia Di Luccio','Samantha Rogers']);
-  const ROSTER_SEED_2026 = [
-    {name:'Santisha Sonilal',division:'Secondary'}
-  ];
+  const ROSTER_SEED_2026 = [];
   const PAGE_SIZE = 14;
   const DB_NAME = 'aisg-observations-dashboard';
   const DB_STORE = 'datasets';
@@ -965,7 +963,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     const observed=new Set(rows.map(r=>r.faculty).filter(Boolean));
     const missing=roster.filter(x=>!observed.has(x.name));
     root.innerHTML=missing.length
-      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It combines all faculty observed this year with one additional unmatched faculty name from the latest accessible AISG teacher upload. Click a name to filter.</div>`
+      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It currently reflects faculty represented in the 2026–27 observation population. Click a name to filter.</div>`
       : `<div class="roster-gap-empty">Everyone in the working roster has been reached in this view.</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view.</div>`;
     qsa('[data-roster-faculty]',root).forEach(btn=>btn.addEventListener('click',()=>{
       state.faculty=btn.dataset.rosterFaculty;
