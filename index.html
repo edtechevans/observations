@@ -185,6 +185,55 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
   .admin-summary{grid-template-columns:1fr}
 }
 
+
+/* P1 evidence maturity: frequency, breadth and sampling */
+.tlf-profile-key{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:-2px 0 12px;font-size:10px;color:var(--muted)}
+.tlf-profile-key strong{color:var(--ink)}
+.evidence-profile{display:grid;gap:0}
+.evidence-profile-head,.evidence-profile-row{display:grid;grid-template-columns:132px 72px minmax(170px,1fr) minmax(170px,1fr) 150px;gap:12px;align-items:center}
+.evidence-profile-head{padding:0 0 7px;color:var(--muted-2);font-size:9px;font-weight:820;text-transform:uppercase;letter-spacing:.06em}
+.evidence-profile-row{padding:10px 0;border-top:1px solid #edf1f5;min-height:64px}
+.evidence-profile-row:first-of-type{border-top:0}
+.evidence-metric{display:grid;gap:5px}
+.evidence-metric-line{display:grid;grid-template-columns:18px 1fr 54px;gap:6px;align-items:center;font-size:9.5px;color:var(--muted);min-width:0}
+.evidence-type{font-size:8px;font-weight:900;letter-spacing:.04em;color:var(--muted)}
+.evidence-meter{height:7px;background:#edf1f5;border-radius:999px;overflow:hidden;position:relative}
+.evidence-meter>i{display:block;height:100%;width:var(--value);max-width:100%;border-radius:999px;background:var(--lens)}
+.evidence-metric-line.wondering .evidence-meter>i{background:transparent;border:2px solid var(--lens);min-width:3px}
+.evidence-value{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:800;white-space:nowrap}
+.evidence-context{font-size:9.5px;color:var(--muted);line-height:1.45}
+.evidence-context b{color:var(--navy);font-size:10px}
+.evidence-profile-note{margin-top:9px;padding:8px 10px;border-radius:9px;background:#f7f9fb;border:1px solid var(--line);font-size:9.5px;color:var(--muted)}
+.facet-mini button{display:grid;gap:3px}
+.facet-mini .facet-frequency{font-size:20px;font-weight:830;color:var(--navy);line-height:1.05}
+.facet-mini .facet-name{font-size:10px;font-weight:790;color:#344358}
+.facet-mini .facet-breadth{font-size:9px;color:var(--muted);line-height:1.35}
+.signal-evidence{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.signal-evidence span{border:1px solid #dfe5ec;background:#fff;border-radius:999px;padding:3px 6px;font-size:8.5px;font-weight:730;color:#647287}
+.sampling-position{display:grid;gap:15px;padding:8px 2px 4px}
+.sampling-row{display:grid;gap:7px}
+.sampling-row-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.sampling-row-head strong{font-size:12px;color:var(--navy)}
+.sampling-row-head span{font-size:9.5px;color:var(--muted)}
+.sampling-stack{height:24px;border-radius:8px;overflow:hidden;display:flex;background:#edf1f5}
+.sampling-segment{height:100%;display:flex;align-items:center;justify-content:center;min-width:0;font-size:8.5px;font-weight:820;white-space:nowrap;overflow:hidden}
+.sampling-segment.beginning{background:#dbe5ef;color:#31465f}
+.sampling-segment.middle{background:#7896b4;color:#fff}
+.sampling-segment.end{background:#c8ced5;color:#35404b}
+.sampling-legend{display:flex;gap:12px;flex-wrap:wrap;font-size:9px;color:var(--muted)}
+.sampling-legend span{display:flex;align-items:center;gap:5px}
+.sampling-swatch{width:9px;height:9px;border-radius:3px;display:inline-block}
+.sampling-swatch.beginning{background:#dbe5ef}.sampling-swatch.middle{background:#7896b4}.sampling-swatch.end{background:#c8ced5}
+@media(max-width:900px){
+  .evidence-profile-head{display:none}
+  .evidence-profile-row{grid-template-columns:110px 60px 1fr 1fr;gap:8px}
+  .evidence-context{grid-column:3 / 5}
+}
+@media(max-width:560px){
+  .evidence-profile-row{grid-template-columns:1fr 62px}
+  .evidence-profile-row>.evidence-metric,.evidence-context{grid-column:1 / 3}
+}
+
 </style>
 </head>
 <body>
@@ -314,7 +363,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
             <div>
               <p class="card-kicker">Learning picture</p>
               <h2>What are we seeing and wondering about?</h2>
-              <p class="card-copy">Facet mentions per 100 observations. Solid dots are commendations; rings are wonderings. These are evidence signals, not scores.</p>
+              <p class="card-copy">Frequency shows how often a facet appears across observations. Breadth shows how widely it appears across faculty. Commendations and wonderings remain separate evidence signals, not scores.</p>
             </div>
           </div>
           <div id="tlfProfile"></div>
@@ -325,7 +374,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
             <div>
               <p class="card-kicker">Leadership inquiry</p>
               <h2>Celebrate · Explore · Act</h2>
-              <p class="card-copy">Rule-based prompts from the selected evidence. Open the underlying observations before drawing conclusions.</p>
+              <p class="card-copy">Rule-based prompts only surface when the evidence passes minimum volume, breadth and observer-diversity checks. Open the evidence before drawing conclusions.</p>
             </div>
           </div>
           <div id="leadershipSignals" class="leadership-signals"></div>
@@ -366,8 +415,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
         </div>
         <div class="toolbar">
           <div class="segmented compact" id="facetMetricToggle" role="group" aria-label="Facet metric">
-            <button type="button" class="active" data-value="rate">Rate / 100</button>
-            <button type="button" data-value="count">Count</button>
+            <button type="button" class="active" data-value="rate">Frequency %</button>
+            <button type="button" data-value="count">Observation count</button>
           </div>
           <div class="segmented compact" id="facetTypeToggle" role="group" aria-label="Facet type">
             <button type="button" class="active" data-value="both">Both</button>
@@ -409,7 +458,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
             <div>
               <p class="card-kicker">Division context</p>
               <h2>Compare the learning picture</h2>
-              <p class="card-copy" id="divisionFacetDescription">Commendation frequency per 100 observations.</p>
+              <p class="card-copy" id="divisionFacetDescription">Percentage of observations containing each commendation facet. Division colours are neutral; TLF colours are reserved for the three lenses.</p>
             </div>
           </div>
           <div class="chart-box chart-xl"><div id="divisionFacetChart" aria-label="Division facet comparison chart"></div></div>
@@ -433,7 +482,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           <div class="card-head">
             <div>
               <p class="card-kicker">Cadence</p>
-              <h2>Observations over time</h2>
+              <h2>Weekly evidence pace</h2>
               <p class="card-copy" id="monthlyDescription"></p>
             </div>
             <label class="toggle-control"><input id="comparePrevious" type="checkbox" /> <span>Compare equivalent period last year</span></label>
@@ -458,8 +507,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
         </article>
 
         <article class="card span-6">
-          <div class="card-head"><div><p class="card-kicker">Sampling</p><h2>When observations happen</h2><p class="card-copy">Check whether the evidence over-represents the beginning, middle or end of lessons.</p></div></div>
-          <div class="chart-box"><div id="timeChart" aria-label="Observation time of class chart"></div></div>
+          <div class="card-head"><div><p class="card-kicker">Sampling</p><h2>Where in lessons are we sampling?</h2><p class="card-copy">Lesson-position mix by division. This describes the evidence leaders collected; it is not a judgement about teaching.</p></div></div>
+          <div id="timeChart" class="sampling-position" aria-label="Observation position within lessons by division"></div>
         </article>
 
         <article class="card span-12" id="rosterGapCard">
@@ -1515,6 +1564,290 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     host.innerHTML=chips.map(([k,v])=>'<span class="filter-chip">'+esc(v)+'<button type="button" data-clear-filter="'+k+'" aria-label="Clear '+esc(k)+' filter">×</button></span>').join('');
     qsa('[data-clear-filter]',host).forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.clearFilter;if(k==='division'){state.division='All';setSegmented('#divisionFilter','All');}if(k==='scope'){state.observerScope='all';setSegmented('#observerScopeFilter','all');}if(k==='period'){state.period='schoolyear';state.customStart='';state.customEnd='';setSegmented('#periodFilter','schoolyear');el('customStart').value='';el('customEnd').value='';toggleCustomDates();}if(k==='observer'){state.observer='All';el('observerFilter').value='All';}if(k==='time'){state.time='All';el('timeFilter').value='All';}if(k==='faculty'){state.faculty='';el('facultySearch').value='';}if(k==='facet')state.explorerFacet='';explorerPage=1;renderAll();}));
   }
+
+  // P1 analytical model: frequency, breadth and evidence context
+  function facetEvidence(rows,facet,type='commendation'){
+    const representedFaculty=unique(rows.map(r=>r.faculty).filter(Boolean));
+    const matches=rows.filter(r=>type==='commendation'
+      ? [...new Set(r.commendations||[])].includes(facet)
+      : r.wonderingFacet===facet);
+    const faculty=unique(matches.map(r=>r.faculty).filter(Boolean));
+    const observers=unique(matches.map(r=>r.observer).filter(Boolean));
+    const divisions=unique(matches.map(r=>r.division).filter(d=>d==='Elementary'||d==='Secondary'));
+    return {
+      observations:matches.length,
+      frequency:rows.length?matches.length/rows.length*100:0,
+      faculty:faculty.length,
+      facultyTotal:representedFaculty.length,
+      breadth:representedFaculty.length?faculty.length/representedFaculty.length*100:0,
+      observers:observers.length,
+      divisions:divisions.length
+    };
+  }
+
+  function lensEvidence(rows,lens,type='commendation'){
+    const facets=LENS_FACETS[lens]||[];
+    const representedFaculty=unique(rows.map(r=>r.faculty).filter(Boolean));
+    const matches=rows.filter(r=>{
+      if(type==='commendation') return (r.commendations||[]).some(f=>facets.includes(f));
+      return facets.includes(r.wonderingFacet);
+    });
+    const faculty=unique(matches.map(r=>r.faculty).filter(Boolean));
+    return {
+      observations:matches.length,
+      frequency:rows.length?matches.length/rows.length*100:0,
+      faculty:faculty.length,
+      breadth:representedFaculty.length?faculty.length/representedFaculty.length*100:0
+    };
+  }
+
+  function evidenceChipHtml(ev){
+    return '<div class="signal-evidence"><span>'+fmt.format(ev.observations)+' observations</span><span>'+fmt.format(ev.faculty)+' faculty</span><span>'+fmt.format(ev.observers)+' observers</span></div>';
+  }
+
+  function renderLeadershipContext(rows){
+    const host=el('contextRibbon');if(!host)return;
+    const faculty=unique(rows.map(r=>r.faculty).filter(Boolean));
+    const observers=unique(rows.map(r=>r.observer).filter(Boolean));
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);
+    const division=state.division==='All'?'Whole school':state.division;
+    const scope=state.observerScope==='principals'?'Principals + APs':'All leaders';
+    const range=dates.length?shortDate(dates[0])+' – '+shortDate(dates[dates.length-1]):'No matching dates';
+    host.innerHTML='<div><strong>'+esc(division)+' · '+esc(scope)+' · '+esc(periodName())+'</strong><br><span>'+esc(range)+'</span></div><span>'+fmt.format(rows.length)+' observations · '+fmt.format(faculty.length)+' faculty · '+fmt.format(observers.length)+' observers</span>';
+  }
+
+  function renderTlfProfileInto(id,rows,opts={}){
+    const host=el(id);if(!host)return;
+    const metric=opts.metric||state.facetMetric||'rate';
+    const type=opts.type||state.facetType||'both';
+    const totalFaculty=unique(rows.map(r=>r.faculty).filter(Boolean)).length;
+    const fc=facetCounts(rows);
+    const fmtMetric=(ev,kind)=>{
+      if(metric==='count') return kind==='frequency'?fmt.format(ev.observations)+' obs':fmt.format(ev.faculty)+' faculty';
+      return (kind==='frequency'?ev.frequency:ev.breadth).toFixed(1)+'%';
+    };
+    const meter=(ev,kind,cssType,color)=>{
+      const value=kind==='frequency'?ev.frequency:ev.breadth;
+      return '<div class="evidence-metric-line '+cssType+'"><span class="evidence-type">'+(cssType==='wondering'?'W':'C')+'</span><span class="evidence-meter" style="--lens:'+color+'"><i style="--value:'+Math.min(100,value)+'%"></i></span><span class="evidence-value">'+esc(fmtMetric(ev,kind))+'</span></div>';
+    };
+    let html='<div class="tlf-profile-key"><span><strong>Frequency</strong> = % of observations containing the facet</span><span><strong>Breadth</strong> = % of represented faculty whose evidence contains the facet</span></div>';
+    html+='<div class="evidence-profile"><div class="evidence-profile-head"><span>Facet</span><span>Lens</span><span>Frequency</span><span>Breadth</span><span>Evidence context</span></div>';
+    FACETS.forEach(f=>{
+      const lens=LENS[f]||'Other',color=lensColor(lens);
+      const ce=facetEvidence(rows,f,'commendation'),we=facetEvidence(rows,f,'wondering');
+      let frequency='',breadth='',context=[];
+      if(type!=='wondering'){
+        frequency+=meter(ce,'frequency','commendation',color);
+        breadth+=meter(ce,'breadth','commendation',color);
+        context.push('<b>C</b> '+ce.observations+' obs · '+ce.faculty+'/'+Math.max(1,totalFaculty)+' faculty · '+ce.observers+' observers');
+      }
+      if(type!=='commendation'){
+        frequency+=meter(we,'frequency','wondering',color);
+        breadth+=meter(we,'breadth','wondering',color);
+        context.push('<b>W</b> '+we.observations+' obs · '+we.faculty+'/'+Math.max(1,totalFaculty)+' faculty · '+we.observers+' observers');
+      }
+      html+='<div class="evidence-profile-row"><button type="button" class="tlf-facet-button" data-profile-facet="'+esc(f)+'">'+esc(f)+'</button><span class="lens-chip '+lens.toLowerCase()+'">'+esc(lens)+'</span><div class="evidence-metric">'+frequency+'</div><div class="evidence-metric">'+breadth+'</div><div class="evidence-context">'+context.join('<br>')+'</div></div>';
+    });
+    html+='</div>';
+    if(fc.commendOther||fc.wonderOther){
+      html+='<div class="evidence-profile-note">Coding context: '+fmt.format(fc.commendOther)+' commendation tag'+(fc.commendOther===1?'':'s')+' and '+fmt.format(fc.wonderOther)+' wondering tag'+(fc.wonderOther===1?'':'s')+' in this view are recorded as Other and are not assigned to one of the six TLF facet rows.</div>';
+    }
+    host.innerHTML=html;
+    qsa('[data-profile-facet]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerFacet=btn.dataset.profileFacet;explorerPage=1;switchTab('explorer');renderExplorer();renderActiveFilters();}));
+  }
+
+  function renderLensGrid(rows){
+    const host=el('lensGrid');if(!host)return;
+    host.innerHTML=Object.entries(LENS_FACETS).map(([lens,facets])=>{
+      const items=facets.map(f=>{
+        const ev=facetEvidence(rows,f,'commendation');
+        const primary=state.facetMetric==='count'?fmt.format(ev.observations)+' obs':ev.frequency.toFixed(1)+'%';
+        const breadth=state.facetMetric==='count'
+          ? fmt.format(ev.faculty)+' faculty'
+          : ev.breadth.toFixed(1)+'% breadth · '+fmt.format(ev.faculty)+' faculty';
+        return '<button type="button" data-facet="'+esc(f)+'" title="Open '+esc(f)+' in Evidence Explorer"><span class="facet-frequency">'+esc(primary)+'</span><span class="facet-name">'+esc(f)+'</span><span class="facet-breadth">'+esc(breadth)+'</span></button>';
+      }).join('');
+      return '<article class="lens-card '+lens.toLowerCase()+'"><div class="lens-head"><p>Commendation evidence</p><h3>'+lens+'</h3></div><div class="facet-mini">'+items+'</div></article>';
+    }).join('');
+    qsa('#lensGrid [data-facet]').forEach(btn=>btn.addEventListener('click',()=>{state.explorerFacet=btn.dataset.facet;explorerPage=1;switchTab('explorer');renderExplorer();renderActiveFilters();}));
+  }
+
+  function equalPeriodShift(rows,facet){
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);
+    if(dates.length<2)return null;
+    const end=dates.at(-1),min=dates[0];
+    const span=Math.floor((end-min)/86400000)+1;
+    const days=Math.min(30,Math.floor(span/2));
+    if(days<14)return null;
+    const currStart=addDays(end,-days+1),prevEnd=addDays(currStart,-1),prevStart=addDays(prevEnd,-days+1);
+    const curr=rows.filter(r=>{const d=parseISODate(r.date);return d>=currStart&&d<=end;});
+    const prev=rows.filter(r=>{const d=parseISODate(r.date);return d>=prevStart&&d<=prevEnd;});
+    const currFaculty=unique(curr.map(r=>r.faculty).filter(Boolean)).length,prevFaculty=unique(prev.map(r=>r.faculty).filter(Boolean)).length;
+    if(curr.length<25||prev.length<25||currFaculty<15||prevFaculty<15)return null;
+    const ce=facetEvidence(curr,facet,'commendation'),pe=facetEvidence(prev,facet,'commendation');
+    return {delta:ce.frequency-pe.frequency,current:ce.frequency,previous:pe.frequency,currN:curr.length,prevN:prev.length,currFaculty,prevFaculty,days};
+  }
+
+  function renderLeadershipSignals(rows){
+    const host=el('leadershipSignals');if(!host)return;
+    if(!rows.length){host.innerHTML='<div class="empty-state">No evidence matches the current view.</div>';return;}
+    const representedFaculty=unique(rows.map(r=>r.faculty).filter(Boolean)).length;
+    const representedObservers=unique(rows.map(r=>r.observer).filter(Boolean)).length;
+
+    const candidates=FACETS.map(f=>({facet:f,ev:facetEvidence(rows,f,'commendation')}));
+
+    // Celebrate requires volume + breadth + observer diversity; whole-school signals must span both divisions.
+    const celebratePool=candidates.filter(x=>
+      x.ev.frequency>=40 &&
+      x.ev.breadth>=40 &&
+      x.ev.observers>=3 &&
+      (state.division!=='All'||x.ev.divisions>=2)
+    ).sort((a,b)=>b.ev.breadth-a.ev.breadth||b.ev.frequency-a.ev.frequency);
+    const celebratePick=celebratePool[0]||candidates.sort((a,b)=>b.ev.breadth-a.ev.breadth)[0];
+    const celebrateQualified=celebratePool.length>0;
+    const celebrate='<div class="leadership-signal celebrate"><div class="signal-label">Celebrate</div><strong>'+
+      (celebrateQualified
+        ? esc(celebratePick.facet)+' is both frequent and broad in this evidence.'
+        : 'The evidence is still developing toward a broad Celebrate signal.')+
+      '</strong><p>'+
+      (celebrateQualified
+        ? esc(celebratePick.facet)+' appears in '+celebratePick.ev.frequency.toFixed(1)+'% of observations and across '+celebratePick.ev.breadth.toFixed(1)+'% of represented faculty.'
+        : 'No facet currently meets all three Celebrate gates: ≥40% observation frequency, ≥40% faculty breadth and at least 3 observers.')+
+      '</p>'+evidenceChipHtml(celebratePick.ev)+'</div>';
+
+    // Explore prioritises a meaningful Elementary/Secondary difference under adequate samples.
+    let exploreHtml='';
+    if(state.division==='All'){
+      const er=rows.filter(r=>r.division==='Elementary'),sr=rows.filter(r=>r.division==='Secondary');
+      if(er.length>=25&&sr.length>=25){
+        const diffs=FACETS.map(f=>{
+          const ee=facetEvidence(er,f,'commendation'),se=facetEvidence(sr,f,'commendation');
+          return {facet:f,e:ee,s:se,delta:se.frequency-ee.frequency};
+        }).filter(x=>Math.abs(x.delta)>=15 && x.facet!==celebratePick.facet)
+          .sort((a,b)=>Math.abs(b.delta)-Math.abs(a.delta));
+        if(diffs.length){
+          const x=diffs[0],higher=x.delta>0?'Secondary':'Elementary',high=x.delta>0?x.s.frequency:x.e.frequency,low=x.delta>0?x.e.frequency:x.s.frequency;
+          exploreHtml='<div class="leadership-signal explore"><div class="signal-label">Explore</div><strong>'+esc(x.facet)+' looks different across the two divisional evidence sets.</strong><p>'+esc(higher)+' observation evidence contains '+esc(x.facet)+' '+Math.abs(x.delta).toFixed(1)+' percentage points more often ('+high.toFixed(1)+'% vs '+low.toFixed(1)+'%). Explore the underlying observations and sampling context before interpreting the difference.</p><div class="signal-evidence"><span>'+er.length+' Elementary observations</span><span>'+sr.length+' Secondary observations</span></div></div>';
+        }
+      }
+    }
+    if(!exploreHtml){
+      const shifts=FACETS.map(f=>({facet:f,shift:equalPeriodShift(rows,f)})).filter(x=>x.shift&&Math.abs(x.shift.delta)>=10&&x.facet!==celebratePick.facet).sort((a,b)=>Math.abs(b.shift.delta)-Math.abs(a.shift.delta));
+      if(shifts.length){
+        const x=shifts[0],dir=x.shift.delta>0?'more':'less';
+        exploreHtml='<div class="leadership-signal explore"><div class="signal-label">Explore</div><strong>'+esc(x.facet)+' is appearing '+dir+' often in the latest comparable period.</strong><p>'+Math.abs(x.shift.delta).toFixed(1)+' percentage-point difference across two '+x.shift.days+'-day windows. This is a prompt for inquiry, not an improvement/decline judgement.</p><div class="signal-evidence"><span>'+x.shift.prevN+' previous observations</span><span>'+x.shift.currN+' current observations</span><span>'+x.shift.prevFaculty+' / '+x.shift.currFaculty+' faculty</span></div></div>';
+      }else{
+        exploreHtml='<div class="leadership-signal explore"><div class="signal-label">Explore</div><strong>No additional pattern yet passes the Explore threshold.</strong><p>Explore signals require either a ≥15-point division difference with at least 25 observations in each division, or a ≥10-point shift across two adequate comparable periods.</p><div class="signal-evidence"><span>'+rows.length+' observations</span><span>'+representedFaculty+' faculty</span><span>'+representedObservers+' observers</span></div></div>';
+      }
+    }
+
+    // Act prioritises repeated evidence maturity, then sampling balance.
+    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');delete byFaculty.Unknown;
+    const vals=Object.values(byFaculty),oneOnly=vals.filter(v=>v===1).length;
+    const onePct=representedFaculty?oneOnly/representedFaculty*100:0;
+    let actTitle='Continue building repeated evidence.';
+    let actText=oneOnly+' of '+representedFaculty+' represented faculty ('+onePct.toFixed(1)+'%) have only one observation in this evidence window.';
+    if(rows.length<25){
+      actTitle='Broaden the evidence window before interpreting patterns.';
+      actText='Only '+rows.length+' observations match the current view; the evidence base is below the dashboard’s 25-observation inquiry threshold.';
+    }
+    const act='<div class="leadership-signal act"><div class="signal-label">Act</div><strong>'+esc(actTitle)+'</strong><p>'+esc(actText)+'</p><div class="signal-evidence"><span>'+rows.length+' observations</span><span>'+representedFaculty+' faculty</span><span>'+representedObservers+' observers</span></div></div>';
+    host.innerHTML=celebrate+exploreHtml+act;
+  }
+
+  function renderTlfTrends(rows){
+    const windows=build28DayWindows(rows);
+    const note=el('tlfTrendNote');
+    if(note)note.textContent=windows.length
+      ? 'Latest '+windows.length+' evidence window'+(windows.length===1?'':'s')+' of up to 28 days. Each line shows the percentage of observations containing at least one commendation facet from that lens.'
+      : 'No matching evidence windows.';
+    const labels=windows.map(w=>w.end.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}));
+    Object.keys(LENS_FACETS).forEach(lens=>{
+      const data=windows.map(w=>+lensEvidence(w.rows,lens,'commendation').frequency.toFixed(1));
+      makeChart('trend'+lens,'line',{labels,datasets:[{label:lens+' prevalence',data,borderColor:lensColor(lens),borderWidth:3}]},{maintainAspectRatio:false,plugins:{legend:{display:false}}});
+    });
+  }
+
+  function renderDivisionFacet(rows){
+    const base=selectedRows({ignoreDivision:true});
+    const er=base.filter(r=>r.division==='Elementary'),sr=base.filter(r=>r.division==='Secondary');
+    const ef=FACETS.map(f=>+facetEvidence(er,f,'commendation').frequency.toFixed(1));
+    const sf=FACETS.map(f=>+facetEvidence(sr,f,'commendation').frequency.toFixed(1));
+    const selected=state.division;
+    let datasets;
+    if(selected==='Secondary'){
+      datasets=[
+        {label:'Secondary',data:sf,backgroundColor:COLOR.navy},
+        {label:'Elementary',data:ef,backgroundColor:COLOR.lightNavy}
+      ];
+    }else{
+      datasets=[
+        {label:'Elementary',data:ef,backgroundColor:COLOR.navy},
+        {label:'Secondary',data:sf,backgroundColor:COLOR.lightNavy}
+      ];
+    }
+    const desc=el('divisionFacetDescription');
+    if(desc)desc.textContent=(selected==='All'
+      ? 'Elementary and Secondary comparison under the same active period and observer filters.'
+      : selected+' is highlighted; the other division remains visible as a comparator under the same period and observer filters.')+' Values are % of observations containing the facet.';
+    makeChart('divisionFacetChart','bar',{labels:FACETS,datasets},{indexAxis:'y',maintainAspectRatio:false,scales:{x:{beginAtZero:true},y:{grid:{display:false}}},plugins:{legend:{display:true}}});
+  }
+
+  function startOfWeekUTC(d){
+    const x=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()));
+    const day=(x.getUTCDay()+6)%7;
+    x.setUTCDate(x.getUTCDate()-day);
+    return x;
+  }
+
+  function weeklyBuckets(rows){
+    const map=new Map();
+    rows.forEach(r=>{
+      const d=parseISODate(r.date);if(!d)return;
+      const wk=startOfWeekUTC(d),key=isoDate(wk);
+      if(!map.has(key))map.set(key,{date:wk,count:0});
+      map.get(key).count++;
+    });
+    return [...map.values()].sort((a,b)=>a.date-b.date);
+  }
+
+  function renderMonthly(rows){
+    const currentWeeks=weeklyBuckets(rows);
+    const labels=currentWeeks.map((w,i)=>{
+      const every=currentWeeks.length>20?4:currentWeeks.length>12?2:1;
+      return i%every===0?w.date.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}):'';
+    });
+    let datasets=[{label:state.year,data:currentWeeks.map(w=>w.count),backgroundColor:COLOR.navy}];
+    let desc=periodName()+' · weekly observation count';
+    if(state.comparePrevious){
+      const prev=previousSchoolYear(state.year),prevRows=equivalentPreviousPeriodRows(prev,rows),prevWeeks=weeklyBuckets(prevRows);
+      const data=currentWeeks.map((_,i)=>prevWeeks[i]?.count||0);
+      datasets.push({label:prev+' equivalent dates',data,backgroundColor:COLOR.lightNavy});
+      desc+=' · compared with the equivalent elapsed period in '+prev;
+    }
+    if(el('monthlyDescription'))el('monthlyDescription').textContent=desc+'.';
+    makeChart('monthlyChart','bar',{labels,datasets},{maintainAspectRatio:false,plugins:{legend:{display:state.comparePrevious}}});
+  }
+
+  function renderTimeChart(rows){
+    const host=el('timeChart');if(!host)return;
+    const divisions=state.division==='All'?['Elementary','Secondary']:[state.division];
+    const labels=['Beginning','Middle','End'];
+    let html='';
+    divisions.forEach(d=>{
+      const rs=rows.filter(r=>r.division===d),counts=countBy(rs,r=>r.timeOfClass||'Unknown'),total=rs.length;
+      html+='<div class="sampling-row"><div class="sampling-row-head"><strong>'+esc(d)+'</strong><span>'+fmt.format(total)+' observations</span></div><div class="sampling-stack">';
+      labels.forEach(label=>{
+        const n=counts[label]||0,pct=total?n/total*100:0;
+        html+='<div class="sampling-segment '+label.toLowerCase()+'" style="width:'+pct.toFixed(2)+'%" title="'+esc(label)+': '+n+' ('+pct.toFixed(1)+'%)">'+(pct>=13?pct.toFixed(0)+'%':'')+'</div>';
+      });
+      html+='</div></div>';
+    });
+    html+='<div class="sampling-legend">'+labels.map(x=>'<span><i class="sampling-swatch '+x.toLowerCase()+'"></i>'+x+'</span>').join('')+'</div>';
+    if(state.time!=='All')html+='<div class="evidence-profile-note">The active Time of class filter is '+esc(state.time)+', so this view reflects only that selected lesson position.</div>';
+    host.innerHTML=html;
+  }
+
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
 
