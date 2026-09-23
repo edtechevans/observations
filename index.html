@@ -990,6 +990,47 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   .primary-filter-bar .segmented button{flex:1 1 120px}
 }
 
+
+/* TLF detail is intentionally full-width: five analytical columns need room. */
+#facets .tlf-detail-card,
+#facets .tlf-division-card{
+  grid-column:1 / -1!important;
+  width:100%;
+  max-width:100%;
+}
+#facets #tlfDetailProfile{
+  width:100%;
+  min-width:0;
+  overflow:visible;
+}
+#facets .evidence-profile-head,
+#facets .evidence-profile-row{
+  grid-template-columns:
+    minmax(150px,1.05fr)
+    minmax(95px,.65fr)
+    minmax(210px,1.4fr)
+    minmax(210px,1.4fr)
+    minmax(230px,1.45fr);
+}
+#facets .evidence-context{
+  min-width:0;
+  white-space:normal;
+  overflow:visible;
+}
+@media(max-width:1050px){
+  #facets .evidence-profile-head{display:none}
+  #facets .evidence-profile-row{
+    grid-template-columns:minmax(150px,1fr) 90px minmax(220px,1.6fr);
+  }
+  #facets .evidence-profile-row>.evidence-metric{grid-column:3}
+  #facets .evidence-context{grid-column:3}
+}
+@media(max-width:720px){
+  #facets .evidence-profile-row{grid-template-columns:1fr 84px}
+  #facets .evidence-profile-row>.evidence-metric,
+  #facets .evidence-context{grid-column:1 / 3}
+}
+
 </style>
 </head>
 <body>
@@ -1201,7 +1242,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
       </article>
 
       <div class="grid grid-12">
-        <article class="card span-7">
+        <article class="card span-12 tlf-detail-card">
           <div class="card-head">
             <div>
               <p class="card-kicker">Selected evidence</p>
@@ -1212,7 +1253,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div id="tlfDetailProfile"></div>
         </article>
 
-        <article class="card span-5">
+        <article class="card span-12 tlf-division-card">
           <div class="card-head">
             <div>
               <p class="card-kicker">Division context</p>
