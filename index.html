@@ -552,12 +552,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   };
   const COORDINATORS = new Set(['Ralph Emmerink','Katriona Hoskins','Flavia Di Luccio','Samantha Rogers']);
   const ROSTER_SEED_2026 = [
-    {name:'Jake Wines',division:'Elementary'},
-    {name:'Karina Chua',division:'Elementary'},
-    {name:'Levina Mai',division:'Elementary'},
-    {name:'Nick Sutherland',division:'Elementary'},
-    {name:'Santisha Sonilal',division:'Secondary'},
-    {name:'Silky Vyas',division:'Secondary'}
+    {name:'Santisha Sonilal',division:'Secondary'}
   ];
   const PAGE_SIZE = 14;
   const DB_NAME = 'aisg-observations-dashboard';
@@ -966,7 +961,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     const observed=new Set(rows.map(r=>r.faculty).filter(Boolean));
     const missing=roster.filter(x=>!observed.has(x.name));
     root.innerHTML=missing.length
-      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It combines all faculty observed this year with six additional unmatched faculty names from the latest accessible AISG teacher upload. Click a name to filter.</div>`
+      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It combines all faculty observed this year with one additional unmatched faculty name from the latest accessible AISG teacher upload. Click a name to filter.</div>`
       : `<div class="roster-gap-empty">Everyone in the working roster has been reached in this view.</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view.</div>`;
     qsa('[data-roster-faculty]',root).forEach(btn=>btn.addEventListener('click',()=>{
       state.faculty=btn.dataset.rosterFaculty;
