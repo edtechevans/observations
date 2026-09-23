@@ -82,6 +82,102 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
   .kpi-grid{grid-template-columns:1fr 1fr;gap:8px}.kpi-card{padding:12px;min-height:104px}.kpi-value{font-size:29px}.kpi-sub{font-size:9px}.card-head{flex-direction:column;gap:7px}.toggle-control{white-space:normal}.time-summary{grid-template-columns:repeat(3,1fr)}.chart-box{height:280px}.chart-tall{height:292px}.chart-xl{height:320px}.coverage-summary{grid-template-columns:1fr 1fr}.health-grid{grid-template-columns:1fr}.site-footer{flex-direction:column;gap:3px}
 }
 
+
+/* Leadership insight redesign */
+.leadership-filter-shell{padding:13px 15px 11px}
+.primary-filter-bar{grid-template-columns:130px minmax(320px,auto) minmax(250px,auto) minmax(420px,1fr);align-items:end}
+.period-segmented button{padding-left:9px;padding-right:9px}
+.more-filters{border-top:1px solid var(--line);margin-top:11px;padding-top:8px}
+.more-filters summary{list-style:none;cursor:pointer;color:var(--navy);font-size:11px;font-weight:820;display:flex;gap:8px;align-items:center;width:max-content}
+.more-filters summary::-webkit-details-marker{display:none}
+.more-filters summary:before{content:"＋";font-size:14px;line-height:1}
+.more-filters[open] summary:before{content:"−"}
+.more-filters summary span{font-weight:520;color:var(--muted)}
+.more-filter-grid{display:grid;grid-template-columns:180px 160px minmax(260px,1fr) auto;gap:10px;align-items:end;padding-top:10px}
+.custom-date-fields{display:grid;grid-template-columns:145px 145px;gap:10px}
+.custom-date-fields[hidden]{display:none}
+.context-ribbon{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:13px;padding:10px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.context-ribbon strong{font-size:12.5px}
+.context-ribbon span{font-size:11px;opacity:.82}
+.leadership-kpis .kpi-card{min-height:116px}
+.kpi-card .card-kicker{font-size:10.5px}
+.kpi-sub{font-size:11.5px;line-height:1.4}
+.card-copy{font-size:12px;line-height:1.5}
+.section-heading p:not(.eyebrow){font-size:12.5px;line-height:1.5}
+.filter-field label,.filter-label,.explorer-search-wrap label{font-size:10px}
+.tlf-profile{display:grid;gap:8px}
+.tlf-profile-legend{display:flex;justify-content:flex-end;gap:15px;font-size:10.5px;color:var(--muted);margin:-4px 0 10px}
+.tlf-profile-legend span{display:flex;gap:6px;align-items:center}
+.legend-marker{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--navy)}
+.legend-marker.ring{background:#fff;border:2px solid var(--navy)}
+.tlf-scale{display:grid;grid-template-columns:128px 72px 1fr 104px;gap:10px;align-items:end;color:var(--muted-2);font-size:9px;margin-bottom:2px}
+.tlf-scale-axis{display:flex;justify-content:space-between}
+.tlf-row{display:grid;grid-template-columns:128px 72px 1fr 104px;gap:10px;align-items:center;min-height:42px;border-top:1px solid #eef1f5}
+.tlf-row:first-of-type{border-top:0}
+.tlf-facet-button{border:0;background:transparent;text-align:left;padding:0;color:var(--ink);font-weight:790;font-size:11.5px}
+.tlf-facet-button:hover{color:var(--navy);text-decoration:underline}
+.lens-chip{font-size:9px;font-weight:840;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:4px 7px;text-align:center}
+.lens-chip.being{color:#90231f;background:#faeeee}.lens-chip.connecting{color:var(--navy);background:var(--navy-soft)}.lens-chip.doing{color:#525e69;background:#f0f2f4}
+.tlf-track{height:24px;position:relative}
+.tlf-track:before{content:"";position:absolute;left:0;right:0;top:11px;height:2px;background:#e5eaf0;border-radius:99px}
+.tlf-track:after{content:"";position:absolute;left:50%;top:7px;height:10px;border-left:1px solid #d9e0e8}
+.tlf-dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);z-index:2}
+.tlf-dot.commend{background:var(--lens);box-shadow:0 0 0 2px #fff}
+.tlf-dot.wondering{background:#fff;border:2px solid var(--lens)}
+.tlf-values{display:flex;justify-content:flex-end;gap:9px;font-size:10.5px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tlf-values b{color:var(--ink);font-size:9px}
+.leadership-signals{display:grid;gap:9px}
+.leadership-signal{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fafbfd}
+.leadership-signal .signal-label{font-size:9px;text-transform:uppercase;letter-spacing:.1em;font-weight:880;margin-bottom:5px}
+.leadership-signal strong{display:block;color:var(--navy);font-size:13px;line-height:1.35;margin-bottom:4px}
+.leadership-signal p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.45}
+.leadership-signal.celebrate{border-left:3px solid var(--green)}.leadership-signal.celebrate .signal-label{color:var(--green)}
+.leadership-signal.explore{border-left:3px solid var(--navy)}.leadership-signal.explore .signal-label{color:var(--navy)}
+.leadership-signal.act{border-left:3px solid var(--amber)}.leadership-signal.act .signal-label{color:var(--amber)}
+.trend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.trend-panel{border:1px solid var(--line);border-radius:13px;padding:12px;background:#fbfcfd;min-width:0}
+.trend-panel-head{display:flex;flex-direction:column;gap:2px}
+.trend-panel-head span{font-size:9px;letter-spacing:.11em;font-weight:900}
+.trend-panel-head strong{font-size:11px;color:#344358}
+.trend-panel.being .trend-panel-head span{color:var(--being)}.trend-panel.connecting .trend-panel-head span{color:var(--connecting)}.trend-panel.doing .trend-panel-head span{color:var(--doing)}
+.trend-chart{height:210px}
+.goal-bridge{display:flex;justify-content:space-between;align-items:center;gap:20px;background:linear-gradient(110deg,#f8fafc,#eef3f8);border:1px solid #dce4ed;border-radius:14px;padding:15px 17px;margin-bottom:10px}
+.goal-bridge h3{margin:2px 0 3px;color:var(--navy);font-size:16px}.goal-bridge p:not(.card-kicker){margin:0;color:var(--muted);font-size:11.5px;max-width:780px}
+.goal-steps{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.goal-steps span{display:flex;align-items:center;gap:6px;border:1px solid #d7e0ea;background:#fff;border-radius:999px;padding:6px 9px;color:#435369;font-size:10px;font-weight:760;white-space:nowrap}
+.goal-steps b{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--navy);color:#fff;font-size:9px}
+.evidence-division-summary{gap:9px}
+.evidence-division-row{border:1px solid var(--line);border-radius:11px;padding:11px 12px;background:#fafbfd}
+.evidence-division-row .division-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.evidence-division-row strong{color:var(--navy);font-size:13px}.evidence-division-row span{color:var(--muted);font-size:10.5px}
+.evidence-division-row .division-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
+.evidence-division-row .division-metrics div{background:#fff;border:1px solid #e6ebf0;border-radius:8px;padding:7px;text-align:center}
+.evidence-division-row .division-metrics b{display:block;color:var(--navy);font-size:17px}.evidence-division-row .division-metrics small{font-size:8.5px;color:var(--muted)}
+.admin-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.admin-stat{border:1px solid var(--line);border-radius:11px;background:#fafbfd;padding:12px}
+.admin-stat strong{display:block;color:var(--navy);font-size:22px}.admin-stat span{display:block;color:var(--muted);font-size:10.5px;margin-top:4px}
+@media(max-width:1280px){
+  .primary-filter-bar{grid-template-columns:130px 1fr 1fr}.period-field{grid-column:span 3}.period-segmented{width:100%}.period-segmented button{flex:1}
+  .more-filter-grid{grid-template-columns:1fr 1fr 2fr}.custom-date-fields{grid-column:span 3;justify-content:start}
+}
+@media(max-width:820px){
+  .leadership-tabs{display:flex;overflow:auto;border:1px solid var(--line);border-radius:11px;background:#fff}
+  .leadership-tabs .tab{flex:0 0 auto;border:0!important;border-right:1px solid var(--line)!important;padding:10px 12px}
+  .leadership-tabs .tab.active{box-shadow:inset 0 -3px 0 var(--red)}
+  .primary-filter-bar{grid-template-columns:1fr}.division-field,.observer-scope-field,.period-field{grid-column:auto}
+  .more-filter-grid{grid-template-columns:1fr 1fr}.faculty-search,.custom-date-fields{grid-column:span 2}
+  .context-ribbon{align-items:flex-start;flex-direction:column;gap:2px}
+  .trend-grid{grid-template-columns:1fr}
+  .goal-bridge{align-items:flex-start;flex-direction:column}.goal-steps{justify-content:flex-start}
+  .admin-summary{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  .more-filter-grid{grid-template-columns:1fr}.faculty-search,.custom-date-fields{grid-column:auto}.custom-date-fields{grid-template-columns:1fr}
+  .period-segmented{display:grid;grid-template-columns:repeat(2,1fr)}.period-segmented button:last-child{grid-column:span 2}
+  .tlf-scale,.tlf-row{grid-template-columns:104px 58px 1fr}.tlf-values{grid-column:2 / 4;justify-content:flex-start;padding-bottom:5px}.tlf-row{padding-top:6px}
+  .admin-summary{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -94,8 +190,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       <div class="title-divider" aria-hidden="true"></div>
       <div class="dashboard-title">
         <p class="eyebrow">Teacher Growth &amp; Reflection</p>
-        <h1>Observation Dashboard</h1>
-        <p class="subtitle">Engagement for All · Transformative Learning Framework</p>
+        <h1>Observation Insights</h1>
+        <p class="subtitle">Leadership evidence for Engagement for All · Transformative Learning Framework</p>
       </div>
     </div>
     <div class="header-actions">
@@ -111,123 +207,145 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
   </header>
 
   <main id="main" class="page-shell">
-    <section class="data-notice" id="privacyStrip">
-      <div>
-        <strong>Complete observation dataset.</strong>
-        Faculty and observer names, notes, written commendations, wonderings, guiding questions, emails and faculty responses are included.
-      </div>
-      <span class="data-notice-note">741 source observations · full narrative evidence available.</span>
-    </section>
+    <section id="privacyStrip" hidden></section>
 
-    <section class="filter-shell" aria-label="Dashboard filters">
+    <section class="filter-shell leadership-filter-shell" aria-label="Dashboard filters">
       <div class="filter-heading">
         <div>
-          <span class="filter-heading-title">Explore the evidence</span>
-          <span class="filter-heading-copy">Every chart updates with the filters below.</span>
+          <span class="filter-heading-title">Leadership view</span>
+          <span class="filter-heading-copy">Start broad. Refine only when you need to test a question.</span>
         </div>
-        <button id="resetFilters" class="button button-quiet" type="button">Clear filters</button>
+        <button id="resetFilters" class="button button-quiet" type="button">Reset view</button>
       </div>
-      <div class="filter-bar">
+
+      <div class="filter-bar primary-filter-bar">
         <div class="filter-field year-field">
           <label for="yearFilter">School year</label>
           <select id="yearFilter"></select>
         </div>
+
         <div class="segmented-wrap division-field">
           <span class="filter-label">Division</span>
           <div class="segmented" id="divisionFilter" role="group" aria-label="Division filter">
-            <button type="button" class="active" data-value="All">All school</button>
+            <button type="button" class="active" data-value="All">Whole school</button>
             <button type="button" data-value="Elementary">Elementary</button>
             <button type="button" data-value="Secondary">Secondary</button>
           </div>
         </div>
+
         <div class="segmented-wrap observer-scope-field">
           <span class="filter-label">Observer group</span>
           <div class="segmented" id="observerScopeFilter" role="group" aria-label="Observer group filter">
             <button type="button" class="active" data-value="all">All leaders</button>
-            <button type="button" data-value="principals" title="Excludes Ralph Emmerink, Katriona Hoskins, Flavia Di Luccio and Samantha Rogers">Principals + APs</button>
+            <button type="button" data-value="principals" title="Excludes coordinator observers">Principals + APs</button>
           </div>
         </div>
-        <div class="filter-field">
-          <label for="observerFilter">Observer</label>
-          <select id="observerFilter"><option value="All">All observers</option></select>
-        </div>
-        <div class="filter-field">
-          <label for="timeFilter">Time of class</label>
-          <select id="timeFilter">
-            <option value="All">All times</option>
-            <option value="Beginning">Beginning</option>
-            <option value="Middle">Middle</option>
-            <option value="End">End</option>
-          </select>
-        </div>
-        <div class="filter-field faculty-search">
-          <label for="facultySearch">Faculty</label>
-          <input id="facultySearch" type="search" list="facultyOptions" placeholder="Search or choose faculty…" autocomplete="off" />
-          <datalist id="facultyOptions"></datalist>
+
+        <div class="segmented-wrap period-field">
+          <span class="filter-label">Evidence period</span>
+          <div class="segmented period-segmented" id="periodFilter" role="group" aria-label="Evidence period">
+            <button type="button" data-value="30">30 days</button>
+            <button type="button" data-value="60">60 days</button>
+            <button type="button" data-value="semester">Semester</button>
+            <button type="button" class="active" data-value="schoolyear">School year</button>
+            <button type="button" data-value="custom">Custom</button>
+          </div>
         </div>
       </div>
+
+      <details class="more-filters" id="moreFilters">
+        <summary>More filters <span>Observer, class timing, faculty and custom dates</span></summary>
+        <div class="more-filter-grid">
+          <div class="filter-field">
+            <label for="observerFilter">Observer</label>
+            <select id="observerFilter"><option value="All">All observers</option></select>
+          </div>
+          <div class="filter-field">
+            <label for="timeFilter">Time of class</label>
+            <select id="timeFilter">
+              <option value="All">All times</option>
+              <option value="Beginning">Beginning</option>
+              <option value="Middle">Middle</option>
+              <option value="End">End</option>
+            </select>
+          </div>
+          <div class="filter-field faculty-search">
+            <label for="facultySearch">Faculty</label>
+            <input id="facultySearch" type="search" list="facultyOptions" placeholder="Search or choose faculty…" autocomplete="off" />
+            <datalist id="facultyOptions"></datalist>
+          </div>
+          <div class="custom-date-fields" id="customDateFields" hidden>
+            <div class="filter-field">
+              <label for="customStart">From</label>
+              <input id="customStart" type="date" />
+            </div>
+            <div class="filter-field">
+              <label for="customEnd">To</label>
+              <input id="customEnd" type="date" />
+            </div>
+          </div>
+        </div>
+      </details>
       <div id="activeFilters" class="active-filters" aria-live="polite"></div>
     </section>
 
-    <nav class="tabs" aria-label="Dashboard sections">
-      <button class="tab active" data-tab="overview" type="button">Overview</button>
-      <button class="tab" data-tab="facets" type="button">TLF facets</button>
-      <button class="tab" data-tab="coverage" type="button">Coverage &amp; cadence</button>
-      <button class="tab" data-tab="explorer" type="button">Observation explorer</button>
+    <nav class="tabs leadership-tabs" aria-label="Dashboard sections">
+      <button class="tab active" data-tab="overview" type="button">Snapshot</button>
+      <button class="tab" data-tab="facets" type="button">TLF &amp; Goals</button>
+      <button class="tab" data-tab="coverage" type="button">Reach &amp; Evidence</button>
+      <button class="tab" data-tab="explorer" type="button">Evidence Explorer</button>
+      <button class="tab" data-tab="admin" type="button">Admin</button>
     </nav>
 
     <section id="overview" class="tab-panel active">
-      <div class="kpi-grid" id="kpiGrid"></div>
+      <div id="contextRibbon" class="context-ribbon"></div>
+      <div class="kpi-grid leadership-kpis" id="kpiGrid"></div>
 
       <div class="grid grid-12">
-        <article class="card span-8">
+        <article class="card span-8 tlf-profile-card">
           <div class="card-head">
             <div>
-              <p class="card-kicker">Cadence</p>
-              <h2>Observations over time</h2>
-              <p class="card-copy" id="monthlyDescription"></p>
+              <p class="card-kicker">Learning picture</p>
+              <h2>What are we seeing and wondering about?</h2>
+              <p class="card-copy">Facet mentions per 100 observations. Solid dots are commendations; rings are wonderings. These are evidence signals, not scores.</p>
             </div>
-            <label class="toggle-control"><input id="comparePrevious" type="checkbox" /> <span>Compare with last year</span></label>
           </div>
-          <div class="chart-box chart-tall"><div id="monthlyChart" aria-label="Monthly observations chart"></div></div>
+          <div id="tlfProfile"></div>
         </article>
 
-        <article class="card span-4 distribution-card">
+        <article class="card span-4 signal-card-shell">
           <div class="card-head">
             <div>
-              <p class="card-kicker">Distribution</p>
-              <h2>Where observations are happening</h2>
+              <p class="card-kicker">Leadership inquiry</p>
+              <h2>Celebrate · Explore · Act</h2>
+              <p class="card-copy">Rule-based prompts from the selected evidence. Open the underlying observations before drawing conclusions.</p>
             </div>
           </div>
-          <div id="divisionSummary" class="division-summary"></div>
-          <div class="mini-divider"></div>
-          <h3 class="mini-title">Time of class</h3>
-          <div id="timeSummary" class="time-summary"></div>
+          <div id="leadershipSignals" class="leadership-signals"></div>
         </article>
 
-        <article class="card span-8">
+        <article class="card span-12">
           <div class="card-head">
             <div>
-              <p class="card-kicker">TLF profile</p>
-              <h2>What we are seeing and wondering about</h2>
-              <p class="card-copy">Rates are shown per 100 observations. Commendations and wonderings are separate signals, not scores.</p>
+              <p class="card-kicker">Movement</p>
+              <h2>How is the TLF picture changing?</h2>
+              <p class="card-copy" id="tlfTrendNote">Latest 28-day evidence windows. Each lens combines its two facets.</p>
             </div>
           </div>
-          <div class="facet-key" aria-hidden="true">
-            <span><i class="key-dot commend"></i>Commendations</span>
-            <span><i class="key-dot wondering"></i>Wonderings</span>
-          </div>
-          <div class="chart-box chart-xl"><div id="facetOverviewChart" aria-label="TLF facet profile chart"></div></div>
-        </article>
-
-        <article class="card span-4">
-          <div class="card-head">
-            <div>
-              <p class="card-kicker">Patterns</p>
-              <h2>Signals worth exploring</h2>
+          <div class="trend-grid">
+            <div class="trend-panel being">
+              <div class="trend-panel-head"><span>BEING</span><strong>Personalization · Agency</strong></div>
+              <div class="chart-box trend-chart"><div id="trendBeing" aria-label="Being trend chart"></div></div>
+            </div>
+            <div class="trend-panel connecting">
+              <div class="trend-panel-head"><span>CONNECTING</span><strong>Authenticity · Creativity</strong></div>
+              <div class="chart-box trend-chart"><div id="trendConnecting" aria-label="Connecting trend chart"></div></div>
+            </div>
+            <div class="trend-panel doing">
+              <div class="trend-panel-head"><span>DOING</span><strong>Collaboration · Taking Action</strong></div>
+              <div class="chart-box trend-chart"><div id="trendDoing" aria-label="Doing trend chart"></div></div>
             </div>
           </div>
-          <div id="patternsPanel" class="patterns-panel"></div>
         </article>
       </div>
     </section>
@@ -236,8 +354,8 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
       <div class="section-heading">
         <div>
           <p class="eyebrow">Transformative Learning Framework</p>
-          <h2>Facet profile</h2>
-          <p>Explore what is being commended and wondered about across Being, Connecting and Doing.</p>
+          <h2>TLF evidence → goal conversations</h2>
+          <p>Use observation patterns to test questions about divisional and schoolwide goals. The source observations do not yet contain explicit goal tags, so this view does not infer goal alignment.</p>
         </div>
         <div class="toolbar">
           <div class="segmented compact" id="facetMetricToggle" role="group" aria-label="Facet metric">
@@ -254,14 +372,40 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 
       <div class="lens-grid" id="lensGrid"></div>
 
+      <article class="goal-bridge">
+        <div>
+          <p class="card-kicker">From evidence to strategy</p>
+          <h3>Use the TLF as the evidence spine</h3>
+          <p id="goalBridgeContext">Notice a pattern, open the evidence behind it, then connect that evidence to the current divisional or schoolwide goal.</p>
+        </div>
+        <div class="goal-steps">
+          <span><b>1</b> Notice</span>
+          <span><b>2</b> Explore evidence</span>
+          <span><b>3</b> Connect to goals</span>
+        </div>
+      </article>
+
       <div class="grid grid-12">
         <article class="card span-7">
-          <div class="card-head"><div><p class="card-kicker">Selected observations</p><h2>Facet mix</h2><p class="card-copy">Facet frequency within the current filters.</p></div></div>
-          <div class="chart-box chart-xl"><div id="facetDetailChart" aria-label="Facet mix chart"></div></div>
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Selected evidence</p>
+              <h2>Detailed facet profile</h2>
+              <p class="card-copy">Click any facet to open the observations behind the pattern.</p>
+            </div>
+          </div>
+          <div id="tlfDetailProfile"></div>
         </article>
+
         <article class="card span-5">
-          <div class="card-head"><div><p class="card-kicker">Division comparison</p><h2>Elementary ↔ Secondary</h2><p class="card-copy">Commendation rate per 100 observations within each division.</p></div></div>
-          <div class="chart-box chart-xl"><div id="divisionFacetChart" aria-label="Elementary and Secondary facet comparison chart"></div></div>
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Division context</p>
+              <h2>Compare the learning picture</h2>
+              <p class="card-copy" id="divisionFacetDescription">Commendation frequency per 100 observations.</p>
+            </div>
+          </div>
+          <div class="chart-box chart-xl"><div id="divisionFacetChart" aria-label="Division facet comparison chart"></div></div>
         </article>
       </div>
     </section>
@@ -269,31 +413,50 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
     <section id="coverage" class="tab-panel">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Coverage &amp; cadence</p>
-          <h2>Observation reach and consistency</h2>
-          <p>Understand how often observed faculty are being reached and how activity is distributed. This is operational context, not an observer performance ranking.</p>
+          <p class="eyebrow">Reach &amp; Evidence</p>
+          <h2>Do we have enough evidence?</h2>
+          <p>Understand reach, cadence and sampling before interpreting instructional patterns. Coverage is evidence quality, not observer performance.</p>
         </div>
       </div>
+
       <div id="coverageSummary" class="coverage-summary"></div>
+
       <div class="grid grid-12">
+        <article class="card span-7">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Cadence</p>
+              <h2>Observations over time</h2>
+              <p class="card-copy" id="monthlyDescription"></p>
+            </div>
+            <label class="toggle-control"><input id="comparePrevious" type="checkbox" /> <span>Compare equivalent period last year</span></label>
+          </div>
+          <div class="chart-box chart-tall"><div id="monthlyChart" aria-label="Monthly observations chart"></div></div>
+        </article>
+
+        <article class="card span-5 distribution-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Sampling</p>
+              <h2>Evidence by division</h2>
+              <p class="card-copy">Observation volume alongside the number of faculty represented.</p>
+            </div>
+          </div>
+          <div id="divisionSummary" class="division-summary evidence-division-summary"></div>
+        </article>
+
         <article class="card span-6">
-          <div class="card-head"><div><p class="card-kicker">Faculty reach</p><h2>Observations per faculty</h2></div></div>
+          <div class="card-head"><div><p class="card-kicker">Faculty reach</p><h2>Observations per faculty</h2><p class="card-copy">A stronger evidence base comes from repeated reach, not a healthy-looking average.</p></div></div>
           <div class="chart-box"><div id="coverageChart" aria-label="Observations per faculty chart"></div></div>
         </article>
+
         <article class="card span-6">
-          <div class="card-head"><div><p class="card-kicker">Activity</p><h2>Observations by observer</h2><p class="card-copy">Volume only; use the observer filter to explore context.</p></div></div>
-          <div class="chart-box"><div id="observerChart" aria-label="Observations by observer chart"></div></div>
-        </article>
-        <article class="card span-6">
-          <div class="card-head"><div><p class="card-kicker">Timing</p><h2>Beginning, middle and end</h2></div></div>
+          <div class="card-head"><div><p class="card-kicker">Sampling</p><h2>When observations happen</h2><p class="card-copy">Check whether the evidence over-represents the beginning, middle or end of lessons.</p></div></div>
           <div class="chart-box"><div id="timeChart" aria-label="Observation time of class chart"></div></div>
         </article>
-        <article class="card span-6">
-          <div class="card-head"><div><p class="card-kicker">Admin check</p><h2>Data health</h2><p class="card-copy">Source-system signals that may warrant cleanup or follow-up.</p></div></div>
-          <div id="dataHealth" class="health-grid"></div>
-        </article>
+
         <article class="card span-12" id="rosterGapCard">
-          <div class="card-head"><div><p class="card-kicker">Roster coverage</p><h2>Faculty not yet observed</h2><p class="card-copy">Names in the working 2026–27 faculty roster that do not appear in the current filtered observation view.</p></div></div>
+          <div class="card-head"><div><p class="card-kicker">Working roster coverage</p><h2>Faculty not represented in this evidence window</h2><p class="card-copy">Use this as a sampling prompt. The current roster remains a working source until an authoritative faculty roster is connected.</p></div></div>
           <div id="unobservedFaculty"></div>
         </article>
       </div>
@@ -302,13 +465,13 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
     <section id="explorer" class="tab-panel">
       <div class="section-heading explorer-heading">
         <div>
-          <p class="eyebrow">Evidence explorer</p>
-          <h2>Find an observation</h2>
+          <p class="eyebrow">Evidence Explorer</p>
+          <h2>Open the evidence behind the pattern</h2>
           <p id="explorerCount"></p>
         </div>
         <div class="explorer-search-wrap">
-          <label for="observationSearch" id="observationSearchLabel">Search observations</label>
-          <input id="observationSearch" type="search" placeholder="Search faculty, observer, facet or guiding question…" />
+          <label for="observationSearch" id="observationSearchLabel">Search observation text</label>
+          <input id="observationSearch" type="search" placeholder="Search notes, feedback, responses, faculty, observer or facet…" />
         </div>
       </div>
       <article class="card table-card">
@@ -320,6 +483,30 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
         </div>
         <div class="pagination" id="pagination"></div>
       </article>
+    </section>
+
+    <section id="admin" class="tab-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Administration</p>
+          <h2>Workflow and data quality</h2>
+          <p>Operational checks live here so they do not compete with instructional leadership on the main views.</p>
+        </div>
+      </div>
+      <div class="grid grid-12">
+        <article class="card span-6">
+          <div class="card-head"><div><p class="card-kicker">Observer activity</p><h2>Observations by observer</h2><p class="card-copy">Volume only. This is not an observer performance ranking.</p></div></div>
+          <div class="chart-box"><div id="observerChart" aria-label="Observations by observer chart"></div></div>
+        </article>
+        <article class="card span-6">
+          <div class="card-head"><div><p class="card-kicker">Data quality</p><h2>Source-system checks</h2><p class="card-copy">Signals that may warrant cleanup or follow-up.</p></div></div>
+          <div id="dataHealth" class="health-grid"></div>
+        </article>
+        <article class="card span-12">
+          <div class="card-head"><div><p class="card-kicker">Dataset context</p><h2>What is powering this view?</h2></div></div>
+          <div id="adminSummary" class="admin-summary"></div>
+        </article>
+      </div>
     </section>
   </main>
 
@@ -1154,6 +1341,179 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   function facetPill(f){ if(!f)return'<span class="kpi-sub">—</span>'; const lens=LENS[f]; const cls=lens?lens.toLowerCase():'other'; return `<span class="facet-pill ${cls}">${esc(f)}</span>`; }
   function esc(value){ return String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 
+
+  // Leadership insight layer
+  Object.assign(state,{period:state.period||'schoolyear',customStart:state.customStart||'',customEnd:state.customEnd||''});
+
+  function bindEvents(){
+    el('yearFilter').addEventListener('change', e => { state.year=e.target.value; explorerPage=1; refreshObserverOptions(); renderAll(); });
+    qsa('#divisionFilter button').forEach(btn=>btn.addEventListener('click',()=>{setSegmented('#divisionFilter',btn.dataset.value);state.division=btn.dataset.value;explorerPage=1;renderAll();}));
+    qsa('#observerScopeFilter button').forEach(btn=>btn.addEventListener('click',()=>{setSegmented('#observerScopeFilter',btn.dataset.value);state.observerScope=btn.dataset.value;if(state.observerScope==='principals'&&COORDINATORS.has(state.observer))state.observer='All';explorerPage=1;renderAll();}));
+    qsa('#periodFilter button').forEach(btn=>btn.addEventListener('click',()=>{setSegmented('#periodFilter',btn.dataset.value);state.period=btn.dataset.value;explorerPage=1;toggleCustomDates();renderAll();}));
+    el('customStart').addEventListener('change',e=>{state.customStart=e.target.value;explorerPage=1;renderAll();});
+    el('customEnd').addEventListener('change',e=>{state.customEnd=e.target.value;explorerPage=1;renderAll();});
+    el('observerFilter').addEventListener('change',e=>{state.observer=e.target.value;explorerPage=1;renderAll();});
+    el('timeFilter').addEventListener('change',e=>{state.time=e.target.value;explorerPage=1;renderAll();});
+    el('facultySearch').addEventListener('input',e=>{state.faculty=e.target.value.trim();explorerPage=1;renderAll();});
+    el('comparePrevious').addEventListener('change',e=>{state.comparePrevious=e.target.checked;renderCoverage();});
+    el('resetFilters').addEventListener('click',resetFilters);
+    qsa('.tab').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));
+    qsa('#facetMetricToggle button').forEach(btn=>btn.addEventListener('click',()=>{setSegmented('#facetMetricToggle',btn.dataset.value);state.facetMetric=btn.dataset.value;renderFacets();}));
+    qsa('#facetTypeToggle button').forEach(btn=>btn.addEventListener('click',()=>{setSegmented('#facetTypeToggle',btn.dataset.value);state.facetType=btn.dataset.value;renderFacets();}));
+    el('observationSearch').addEventListener('input',e=>{state.explorerSearch=e.target.value.trim();explorerPage=1;renderExplorer();});
+    el('loadCsvBtn').addEventListener('click',()=>el('csvFileInput').click());
+    el('csvFileInput').addEventListener('change',handleCsvUpload);
+    el('clearPrivateBtn').addEventListener('click',clearPrivateDataset);
+    qsa('[data-close-drawer]').forEach(x=>x.addEventListener('click',closeDrawer));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer();});
+    let resizeTimer;window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>renderAll(),120);});
+    toggleCustomDates();
+  }
+
+  function toggleCustomDates(){const host=el('customDateFields');if(host)host.hidden=state.period!=='custom';}
+
+  function resetFilters(){
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.period='schoolyear';state.customStart='';state.customEnd='';
+    setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
+    el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
+    toggleCustomDates();explorerPage=1;renderAll();
+  }
+
+  function baseSelectedRows({ignoreYear=false,ignoreDivision=false,ignoreObserver=false}={}){
+    const needle=state.faculty.toLowerCase();
+    return allRows.filter(r=>{
+      if(!ignoreYear&&state.year&&r.schoolYear!==state.year)return false;
+      if(!ignoreDivision&&state.division!=='All'&&r.division!==state.division)return false;
+      if(state.observerScope==='principals'&&COORDINATORS.has(r.observer))return false;
+      if(!ignoreObserver&&state.observer!=='All'&&r.observer!==state.observer)return false;
+      if(state.time!=='All'&&r.timeOfClass!==state.time)return false;
+      if(needle&&!String(r.faculty||'').toLowerCase().includes(needle))return false;
+      return true;
+    });
+  }
+
+  function addDays(d,n){const x=new Date(d.getTime());x.setUTCDate(x.getUTCDate()+n);return x;}
+  function periodBounds(base){
+    const dates=base.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);if(!dates.length)return null;
+    const min=dates[0],max=dates[dates.length-1];let start=min,end=max;
+    if(state.period==='30')start=addDays(max,-29);
+    else if(state.period==='60')start=addDays(max,-59);
+    else if(state.period==='semester')start=max.getUTCMonth()>=7?new Date(Date.UTC(max.getUTCFullYear(),7,1)):new Date(Date.UTC(max.getUTCFullYear(),0,1));
+    else if(state.period==='custom'){if(state.customStart)start=parseISODate(state.customStart)||min;if(state.customEnd)end=parseISODate(state.customEnd)||max;}
+    return {start,end,min,max};
+  }
+
+  function selectedRows({ignoreYear=false,ignoreDivision=false,ignoreObserver=false,ignorePeriod=false}={}){
+    const base=baseSelectedRows({ignoreYear,ignoreDivision,ignoreObserver});
+    if(ignorePeriod||ignoreYear)return base;
+    const b=periodBounds(base);if(!b)return [];
+    return base.filter(r=>{const d=parseISODate(r.date);return d&&d>=b.start&&d<=b.end;});
+  }
+
+  function periodName(){
+    if(state.period==='30')return'Last 30 days';if(state.period==='60')return'Last 60 days';if(state.period==='semester')return'Current semester';if(state.period==='custom')return'Custom period';return'School year';
+  }
+
+  function renderAll(){refreshObserverOptions();refreshFacultyOptions();renderActiveFilters();renderOverview();renderFacets();renderCoverage();renderExplorer();}
+
+  function renderOverview(){
+    const rows=selectedRows();renderLeadershipContext(rows);renderKpis(rows);renderTlfProfileInto('tlfProfile',rows,{metric:'rate',type:'both'});renderLeadershipSignals(rows);renderTlfTrends(rows);
+  }
+
+  function renderLeadershipContext(rows){
+    const host=el('contextRibbon');if(!host)return;
+    const faculty=unique(rows.map(r=>r.faculty).filter(Boolean));const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);
+    const division=state.division==='All'?'Whole school':state.division;const scope=state.observerScope==='principals'?'Principals + APs':'All leaders';
+    const range=dates.length?shortDate(dates[0])+' – '+shortDate(dates[dates.length-1]):'No matching dates';
+    host.innerHTML='<div><strong>'+esc(division)+' · '+esc(scope)+' · '+esc(periodName())+'</strong><br><span>'+esc(range)+'</span></div><span>'+fmt.format(rows.length)+' observations · '+fmt.format(faculty.length)+' faculty represented</span>';
+  }
+
+  function renderKpis(rows){
+    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');delete byFaculty.Unknown;const vals=Object.values(byFaculty);const faculty=Object.keys(byFaculty);
+    const roster=rosterForView();const reached=roster?roster.filter(x=>faculty.includes(x.name)).length:faculty.length;const reachValue=roster?fmt.format(reached)+' / '+fmt.format(roster.length):fmt.format(reached);
+    const reachSub=roster?(roster.length?(reached/roster.length*100).toFixed(1)+'% of working roster':'Working roster'):'Distinct faculty represented';
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);const end=dates.at(-1);const recentStart=end?addDays(end,-29):null;const recent=end?rows.filter(r=>{const d=parseISODate(r.date);return d>=recentStart&&d<=end;}).length:0;
+    const cards=[['Faculty reached',reachValue,reachSub],['2+ observations',fmt.format(vals.filter(v=>v>=2).length),'Faculty with repeated evidence'],['3+ observations',fmt.format(vals.filter(v=>v>=3).length),'Faculty with three or more observations'],['Recent observations',fmt.format(recent),end?'Latest 30 days ending '+shortDate(end):'No matching observations']];
+    el('kpiGrid').innerHTML=cards.map((c,i)=>'<article class="kpi-card '+(i===0?'accent-red':'')+'"><p class="card-kicker">'+esc(c[0])+'</p><div class="kpi-value">'+esc(c[1])+'</div><div class="kpi-sub">'+esc(c[2])+'</div></article>').join('');
+  }
+
+  function lensColor(lens){return lens==='Being'?COLOR.red:lens==='Connecting'?COLOR.navy:COLOR.grey;}
+
+  function renderTlfProfileInto(id,rows,opts={}){
+    const host=el(id);if(!host)return;const metric=opts.metric||state.facetMetric||'rate';const type=opts.type||state.facetType||'both';const fc=facetCounts(rows);const denom=Math.max(1,rows.length);
+    const values=FACETS.flatMap(f=>{const a=metric==='count'?fc.commend[f]:fc.commend[f]/denom*100;const b=metric==='count'?fc.wonder[f]:fc.wonder[f]/denom*100;return[a,b];});
+    const maxRaw=Math.max(1,...values);const max=Math.max(metric==='rate'?25:5,Math.ceil(maxRaw/10)*10);
+    const axisLabel=metric==='rate'?'mentions / 100 observations':'mentions';
+    let html='<div class="tlf-profile"><div class="tlf-profile-legend"><span><i class="legend-marker"></i> Commendation</span><span><i class="legend-marker ring"></i> Wondering</span></div><div class="tlf-scale"><span>Facet</span><span>Lens</span><span class="tlf-scale-axis"><i>0</i><i>'+esc((max/2).toFixed(metric==='rate'?0:0))+'</i><i>'+esc(max)+'</i></span><span>'+esc(axisLabel)+'</span></div>';
+    FACETS.forEach(f=>{const lens=LENS[f]||'Other';const c=lensColor(lens);const cv=metric==='count'?fc.commend[f]:fc.commend[f]/denom*100;const wv=metric==='count'?fc.wonder[f]:fc.wonder[f]/denom*100;const cp=Math.min(100,cv/max*100);const wp=Math.min(100,wv/max*100);const fmtv=v=>metric==='rate'?v.toFixed(1):String(v);let dots='';if(type!=='wondering')dots+='<span class="tlf-dot commend" style="left:'+cp+'%;--lens:'+c+'" title="Commendation '+fmtv(cv)+'"></span>';if(type!=='commendation')dots+='<span class="tlf-dot wondering" style="left:'+wp+'%;--lens:'+c+'" title="Wondering '+fmtv(wv)+'"></span>';let vals='';if(type!=='wondering')vals+='<span><b>C</b> '+fmtv(cv)+'</span>';if(type!=='commendation')vals+='<span><b>W</b> '+fmtv(wv)+'</span>';html+='<div class="tlf-row"><button type="button" class="tlf-facet-button" data-profile-facet="'+esc(f)+'">'+esc(f)+'</button><span class="lens-chip '+lens.toLowerCase()+'">'+esc(lens)+'</span><div class="tlf-track">'+dots+'</div><div class="tlf-values">'+vals+'</div></div>';});
+    host.innerHTML=html+'</div>';qsa('[data-profile-facet]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerFacet=btn.dataset.profileFacet;explorerPage=1;switchTab('explorer');renderExplorer();renderActiveFilters();}));
+  }
+
+  function recentFacetShift(rows){
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);if(!dates.length)return null;const end=dates.at(-1);const currStart=addDays(end,-27),prevEnd=addDays(currStart,-1),prevStart=addDays(prevEnd,-27);
+    const curr=rows.filter(r=>{const d=parseISODate(r.date);return d>=currStart&&d<=end;});const prev=rows.filter(r=>{const d=parseISODate(r.date);return d>=prevStart&&d<=prevEnd;});if(curr.length<10||prev.length<10)return null;
+    const cf=facetCounts(curr).commend,pf=facetCounts(prev).commend;const shifts=FACETS.map(f=>({facet:f,delta:cf[f]/curr.length*100-pf[f]/prev.length*100})).sort((a,b)=>Math.abs(b.delta)-Math.abs(a.delta));return {...shifts[0],currN:curr.length,prevN:prev.length};
+  }
+
+  function renderLeadershipSignals(rows){
+    const host=el('leadershipSignals');if(!host)return;if(!rows.length){host.innerHTML='<div class="empty-state">No evidence matches the current view.</div>';return;}
+    const fc=facetCounts(rows),denom=rows.length;const topComm=FACETS.map(f=>({f,n:fc.commend[f]})).sort((a,b)=>b.n-a.n)[0];const topWonder=FACETS.map(f=>({f,n:fc.wonder[f]})).sort((a,b)=>b.n-a.n)[0];
+    const commFaculty=unique(rows.filter(r=>(r.commendations||[]).includes(topComm.f)).map(r=>r.faculty).filter(Boolean)).length;const shift=recentFacetShift(rows);
+    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');delete byFaculty.Unknown;const oneOnly=Object.values(byFaculty).filter(v=>v===1).length;const roster=rosterForView();const observed=new Set(Object.keys(byFaculty));const missing=roster?roster.filter(x=>!observed.has(x.name)).length:null;
+    const celebrate='<div class="leadership-signal celebrate"><div class="signal-label">Celebrate</div><strong>'+esc(topComm.f)+' is the most visible commendation signal.</strong><p>'+((topComm.n/denom)*100).toFixed(1)+' mentions per 100 observations across '+commFaculty+' faculty. Open the evidence to understand what this looks like in practice.</p></div>';
+    let explore;if(shift){const dir=shift.delta>=0?'more':'less';explore='<div class="leadership-signal explore"><div class="signal-label">Explore</div><strong>'+esc(shift.facet)+' is appearing '+dir+' often in the latest 28-day window.</strong><p>'+Math.abs(shift.delta).toFixed(1)+' percentage-point shift with '+shift.prevN+' previous and '+shift.currN+' current observations. Treat this as an inquiry prompt, not a performance judgement.</p></div>';}else{explore='<div class="leadership-signal explore"><div class="signal-label">Explore</div><strong>'+esc(topWonder.f)+' is the most frequent wondering.</strong><p>'+((topWonder.n/denom)*100).toFixed(1)+' mentions per 100 observations. Sample size is not yet strong enough for a two-window movement comparison.</p></div>';}
+    let actText=missing!==null?(missing+' faculty in the working roster are not represented in this evidence window; '+oneOnly+' represented faculty have one observation.'):(oneOnly+' of '+Object.keys(byFaculty).length+' represented faculty have only one observation in this window.');
+    if(rows.length<20)actText='Only '+rows.length+' observations match this view. Broaden the evidence window before interpreting patterns.';
+    const act='<div class="leadership-signal act"><div class="signal-label">Act</div><strong>Strengthen the evidence base where needed.</strong><p>'+esc(actText)+'</p></div>';host.innerHTML=celebrate+explore+act;
+  }
+
+  function build28DayWindows(rows){
+    const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);if(!dates.length)return[];const min=dates[0],max=dates.at(-1);let windows=[];let end=max;
+    while(end>=min&&windows.length<6){const start=addDays(end,-27);const wr=rows.filter(r=>{const d=parseISODate(r.date);return d>=start&&d<=end;});windows.push({start,end,rows:wr});end=addDays(start,-1);}return windows.reverse();
+  }
+
+  function renderTlfTrends(rows){
+    const windows=build28DayWindows(rows);const note=el('tlfTrendNote');if(note)note.textContent=windows.length?'Latest '+windows.length+' evidence window'+(windows.length===1?'':'s')+' of up to 28 days. Lens lines combine their two facets and show commendation mentions per 100 observations.':'No matching evidence windows.';
+    const labels=windows.map(w=>w.end.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}));
+    Object.entries(LENS_FACETS).forEach(([lens,facets])=>{const data=windows.map(w=>{if(!w.rows.length)return 0;const fc=facetCounts(w.rows).commend;return +((facets.reduce((s,f)=>s+(fc[f]||0),0)/w.rows.length)*100).toFixed(1);});makeChart('trend'+lens,'line',{labels,datasets:[{label:lens+' commendations',data,borderColor:lensColor(lens),borderWidth:3}]},{maintainAspectRatio:false,plugins:{legend:{display:false}}});});
+  }
+
+  function renderFacets(){const rows=selectedRows();renderLensGrid(rows);renderTlfProfileInto('tlfDetailProfile',rows,{metric:state.facetMetric,type:state.facetType});renderDivisionFacet(rows);const g=el('goalBridgeContext');if(g)g.textContent=(state.division==='All'?'Whole school':state.division)+' · '+periodName()+' · '+rows.length+' observations. Notice a pattern, open its evidence, then connect it to the current goal conversation.';}
+
+  function renderDivisionFacet(rows){
+    const base=selectedRows({ignoreDivision:true});let labels=[],datasets=[];
+    if(state.division==='All'){const er=base.filter(r=>r.division==='Elementary'),sr=base.filter(r=>r.division==='Secondary');const ef=facetCounts(er).commend,sf=facetCounts(sr).commend;datasets=[{label:'Elementary',data:FACETS.map(f=>+(ef[f]/Math.max(1,er.length)*100).toFixed(1)),backgroundColor:COLOR.navy},{label:'Secondary',data:FACETS.map(f=>+(sf[f]/Math.max(1,sr.length)*100).toFixed(1)),backgroundColor:COLOR.red}];if(el('divisionFacetDescription'))el('divisionFacetDescription').textContent='Elementary and Secondary commendation frequency per 100 observations.';}else{const selected=rows,whole=base;const sf=facetCounts(selected).commend,wf=facetCounts(whole).commend;datasets=[{label:state.division,data:FACETS.map(f=>+(sf[f]/Math.max(1,selected.length)*100).toFixed(1)),backgroundColor:state.division==='Elementary'?COLOR.navy:COLOR.red},{label:'Whole school',data:FACETS.map(f=>+(wf[f]/Math.max(1,whole.length)*100).toFixed(1)),backgroundColor:COLOR.lightGrey}];if(el('divisionFacetDescription'))el('divisionFacetDescription').textContent=state.division+' compared with the whole-school evidence picture for the same period.';}
+    makeChart('divisionFacetChart','bar',{labels:FACETS,datasets},{indexAxis:'y',maintainAspectRatio:false,scales:{x:{beginAtZero:true},y:{grid:{display:false}}},plugins:{legend:{display:true}}});
+  }
+
+  function equivalentPreviousPeriodRows(prevYear,currentRows){
+    if(!prevYear||!currentRows.length)return[];const dates=currentRows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);const start=dates[0],end=dates.at(-1);const ps=new Date(Date.UTC(start.getUTCFullYear()-1,start.getUTCMonth(),start.getUTCDate()));const pe=new Date(Date.UTC(end.getUTCFullYear()-1,end.getUTCMonth(),end.getUTCDate()));
+    return selectedRows({ignoreYear:true,ignorePeriod:true}).filter(r=>{const d=parseISODate(r.date);return r.schoolYear===prevYear&&d>=ps&&d<=pe;});
+  }
+
+  function renderMonthly(rows){
+    const fullLabels=['Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul'];const currentFull=monthCounts(rows);let last=currentFull.reduce((m,v,i)=>v!==null&&v!==undefined?i:m,-1);if(last<0)last=0;const labels=fullLabels.slice(0,last+1),current=currentFull.slice(0,last+1).map(v=>v??0);let datasets=[{label:state.year,data:current,backgroundColor:COLOR.navy}];let desc=periodName()+' · '+filterContext(rows)+'.';
+    if(state.comparePrevious){const prev=previousSchoolYear(state.year);const prevRows=equivalentPreviousPeriodRows(prev,rows);datasets.push({label:prev+' equivalent dates',data:monthCounts(prevRows).slice(0,last+1).map(v=>v??0),backgroundColor:COLOR.lightNavy});desc+=' Compared with the equivalent date range in '+prev+'.';}
+    if(el('monthlyDescription'))el('monthlyDescription').textContent=desc;makeChart('monthlyChart','bar',{labels,datasets},{maintainAspectRatio:false,plugins:{legend:{display:state.comparePrevious}}});
+  }
+
+  function renderDivisionSummary(rows){
+    const host=el('divisionSummary');if(!host)return;const source=state.division==='All'?rows:rows.filter(r=>r.division===state.division);const divisions=state.division==='All'?['Elementary','Secondary']:[state.division];
+    host.innerHTML=divisions.map(d=>{const rs=source.filter(r=>r.division===d);const faculty=unique(rs.map(r=>r.faculty).filter(Boolean)).length;const per=faculty?rs.length/faculty:0;return '<div class="evidence-division-row"><div class="division-top"><strong>'+esc(d)+'</strong><span>'+fmt.format(rs.length)+' observations</span></div><div class="division-metrics"><div><b>'+fmt.format(rs.length)+'</b><small>observations</small></div><div><b>'+fmt.format(faculty)+'</b><small>faculty represented</small></div><div><b>'+per.toFixed(2)+'</b><small>obs / reached faculty</small></div></div></div>';}).join('');
+  }
+
+  function renderCoverage(){const rows=selectedRows();renderCoverageSummary(rows);renderMonthly(rows);renderDivisionSummary(rows);renderCoverageChart(rows);renderTimeChart(rows);renderUnobservedFaculty(rows);renderObserverChart(rows);renderDataHealth(rows);renderAdminSummary(rows);}
+
+  function renderAdminSummary(rows){
+    const host=el('adminSummary');if(!host)return;const responses=rows.filter(r=>r.hasResponse).length;const rate=rows.length?responses/rows.length*100:0;const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);const latest=dates.at(-1);const faculty=unique(rows.map(r=>r.faculty).filter(Boolean)).length;
+    const stats=[['Selected observations',fmt.format(rows.length)],['Faculty represented',fmt.format(faculty)],['Faculty response rate',rate.toFixed(1)+'%'],['Latest selected record',latest?shortDate(latest):'—']];host.innerHTML=stats.map(x=>'<div class="admin-stat"><strong>'+esc(x[1])+'</strong><span>'+esc(x[0])+'</span></div>').join('');
+  }
+
+  function renderActiveFilters(){
+    const host=el('activeFilters');if(!host)return;const chips=[];if(state.division!=='All')chips.push(['division',state.division]);if(state.observerScope==='principals')chips.push(['scope','Principals + APs']);if(state.period!=='schoolyear')chips.push(['period',periodName()]);if(state.observer!=='All')chips.push(['observer',state.observer]);if(state.time!=='All')chips.push(['time',state.time]);if(state.faculty)chips.push(['faculty',state.faculty]);if(state.explorerFacet)chips.push(['facet',state.explorerFacet]);
+    host.innerHTML=chips.map(([k,v])=>'<span class="filter-chip">'+esc(v)+'<button type="button" data-clear-filter="'+k+'" aria-label="Clear '+esc(k)+' filter">×</button></span>').join('');
+    qsa('[data-clear-filter]',host).forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.clearFilter;if(k==='division'){state.division='All';setSegmented('#divisionFilter','All');}if(k==='scope'){state.observerScope='all';setSegmented('#observerScopeFilter','all');}if(k==='period'){state.period='schoolyear';state.customStart='';state.customEnd='';setSegmented('#periodFilter','schoolyear');el('customStart').value='';el('customEnd').value='';toggleCustomDates();}if(k==='observer'){state.observer='All';el('observerFilter').value='All';}if(k==='time'){state.time='All';el('timeFilter').value='All';}if(k==='faculty'){state.faculty='';el('facultySearch').value='';}if(k==='facet')state.explorerFacet='';explorerPage=1;renderAll();}));
+  }
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
 
