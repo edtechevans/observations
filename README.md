@@ -51,10 +51,10 @@ With the 23 September 2026 data, the Principals + APs view contains **123 observ
 ## Views
 
 - **Snapshot** — evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
-- **TLF & Goals** — commendation/wondering profiles, lens summaries, division context, and a bridge from observational evidence to goal conversations.
+- **TLF Patterns** — frequency/breadth profiles, lens summaries, division context, and drill-through into the evidence behind each pattern.
 - **Reach & Evidence** — roster coverage, faculty reach, cadence, division sampling, and observation timing.
-- **Evidence Explorer** — searchable observation-level evidence with complete notes, feedback and faculty responses in the detail drawer.
-- **Admin** — observer activity, data-health checks, and dataset context.
+- **Evidence Explorer** — searchable observation-level evidence with meeting filters for evidence type, facet, division and period, plus a latest-one-per-faculty option and bookmarkable URL state.
+- **Admin** — observer activity, observer × TLF calibration, observation-focus audit, data-health checks, and dataset context.
 
 School years run from **August 1 through July 31**.
 
@@ -69,6 +69,16 @@ The leadership views now separate **frequency** from **breadth** rather than tre
 The **Celebrate · Explore · Act** prompts are deterministic and rule-based. Celebrate requires broad observation frequency, faculty breadth, and observer diversity. Explore prioritises adequately sampled divisional differences or comparable-period movement. Act prioritises evidence maturity such as faculty with only one observation.
 
 Cadence is shown as **weekly evidence pace**, and lesson-position sampling is shown by division so leaders can see whether their evidence over-represents the beginning, middle, or end of lessons. TLF colours are reserved for Being, Connecting, and Doing; division and sampling comparisons use neutral colours.
+
+
+## P2 calibration and meeting tools
+
+The dashboard includes two additional non-evaluative calibration views in **Admin**:
+
+- **Observer × TLF pattern** — a neutral heatmap showing the percentage of each observer's observations containing each commendation facet. Rows with fewer than 10 observations are marked as limited sample. The matrix ignores the individual Observer filter so observers remain comparable within the selected year, division, observer group, period, time and faculty context.
+- **Observation-focus audit** — groups guiding questions after whitespace normalization and reports question prevalence by observation, the number of unique questions, concentration in the most-used question, and questions used only once or twice. Clicking a question opens the matching evidence in the Explorer.
+
+The **Evidence Explorer** now supports meeting-oriented quick filters for evidence type, facet, division and period. Evidence type also controls whether the table foregrounds commendations, wonderings, or both. **One per faculty** retains only the latest matching observation for each faculty member after all other filters are applied. Key dashboard and Explorer filters are mirrored into the page URL so a leadership view can be bookmarked or shared without adding a backend service.
 
 
 ## GitHub Pages
