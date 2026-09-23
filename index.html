@@ -362,6 +362,28 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
 @media(max-width:900px){.plc-matrix-toolbar{align-items:flex-start;flex-direction:column}.plc-brief-kpis{grid-template-columns:repeat(2,1fr)}.plc-paired-head{display:none}.plc-paired-row{grid-template-columns:120px 65px 1fr}.plc-paired-row .plc-paired-meter:last-child{grid-column:3}.plc-movement-row{grid-template-columns:90px 1fr}.plc-movement-values{grid-column:2;text-align:left}}
 @media(max-width:560px){.plc-brief-kpis{grid-template-columns:1fr 1fr}.plc-paired-row{grid-template-columns:1fr 65px}.plc-paired-row .plc-paired-meter{grid-column:1 / 3}.plc-movement-row{grid-template-columns:1fr}.plc-movement-values{grid-column:1}.plc-toolbar-controls{width:100%;flex-direction:column;align-items:stretch}}
 
+
+/* MTSS in Practice */
+.mtss-section-heading{align-items:end}
+.mtss-context{display:flex;justify-content:space-between;gap:14px;align-items:center;background:var(--navy);color:#fff;border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.mtss-context strong{font-size:11.5px}.mtss-context span{font-size:9.5px;opacity:.8;line-height:1.4}.mtss-context .mtss-guardrail{max-width:540px;text-align:right}
+.mtss-grid{align-items:start}
+.mtss-profile{display:grid;gap:0}.mtss-profile-head,.mtss-profile-row{display:grid;grid-template-columns:150px minmax(170px,1fr) minmax(170px,1fr) 120px;gap:10px;align-items:center}
+.mtss-profile-head{font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:900;padding:0 0 5px}
+.mtss-profile-row{border-top:1px solid #edf1f5;padding:10px 0}.mtss-profile-row:first-of-type{border-top:0}
+.mtss-signal-button{border:0;background:transparent;padding:0;text-align:left;color:#34475d;font-size:10.5px;font-weight:820}.mtss-signal-button:hover{color:var(--navy);text-decoration:underline}
+.mtss-meter{display:grid;grid-template-columns:1fr 49px;gap:7px;align-items:center}.mtss-meter-track{height:8px;border-radius:999px;background:#edf1f5;overflow:hidden}.mtss-meter-track i{display:block;height:100%;width:var(--v);background:var(--navy);border-radius:999px}.mtss-meter.breadth .mtss-meter-track i{background:#7088a3}.mtss-meter-value{text-align:right;font-size:9.5px;font-weight:820;color:var(--ink)}
+.mtss-context-count{font-size:9px;color:var(--muted);line-height:1.35}
+.mtss-discussion{display:grid;gap:8px}.mtss-discussion-item{border-left:3px solid #9eb0c2;background:#f8fafc;border-radius:0 9px 9px 0;padding:9px 10px}.mtss-discussion-item strong{display:block;color:var(--navy);font-size:10.5px;line-height:1.35}.mtss-discussion-item p{margin:3px 0 0;font-size:9.5px;line-height:1.45;color:var(--muted)}.mtss-discussion-item button{border:0;background:transparent;padding:0;margin-top:5px;font-size:8.5px;font-weight:800;color:var(--navy)}.mtss-discussion-item button:hover{text-decoration:underline}
+.mtss-practice-list{display:grid;gap:8px}.mtss-practice{display:grid;grid-template-columns:1fr auto;gap:7px;align-items:center}.mtss-practice button{border:0;background:transparent;padding:0;text-align:left;color:#405268;font-size:9.5px;font-weight:760}.mtss-practice button:hover{color:var(--navy);text-decoration:underline}.mtss-practice small{font-size:8px;color:var(--muted)}.mtss-practice-meter{grid-column:1 / 3;height:6px;background:#edf1f5;border-radius:999px;overflow:hidden}.mtss-practice-meter i{display:block;height:100%;background:var(--navy);border-radius:999px}
+.mtss-feedback-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.mtss-feedback-step{position:relative;border:1px solid var(--line);background:#fafbfd;border-radius:11px;padding:10px}.mtss-feedback-step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);z-index:2;color:#9aa9b9;font-weight:900}.mtss-feedback-step span{display:block;font-size:8.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:900;color:var(--muted)}.mtss-feedback-step strong{display:block;font-size:21px;color:var(--navy);margin-top:4px}.mtss-feedback-step p{font-size:8.5px;color:var(--muted);line-height:1.4;margin:4px 0 0}.mtss-feedback-step .mini-meter{height:5px;background:#e9eef3;border-radius:999px;overflow:hidden;margin-top:7px}.mtss-feedback-step .mini-meter i{display:block;height:100%;background:var(--navy);border-radius:999px}
+.mtss-inquiry-spine{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.mtss-inquiry-step{position:relative;border:1px solid var(--line);background:#fafbfd;border-radius:11px;padding:11px;min-height:130px}.mtss-inquiry-step:not(:last-child)::after{content:'›';position:absolute;right:-7px;top:46%;z-index:3;width:14px;height:22px;display:flex;align-items:center;justify-content:center;color:#8a9bad;font-size:22px;font-weight:500;background:#fff}.mtss-inquiry-step b{display:block;color:var(--navy);font-size:10px;text-transform:uppercase;letter-spacing:.06em}.mtss-inquiry-step>span{display:block;color:#405268;font-size:9.5px;line-height:1.4;margin-top:5px}.mtss-inquiry-step em{display:block;font-style:normal;color:var(--muted);font-size:8.5px;line-height:1.4;margin-top:7px;border-top:1px solid #e8edf2;padding-top:7px}
+.mtss-movement{display:grid;gap:8px}.mtss-movement-row{display:grid;grid-template-columns:150px minmax(220px,1fr) 160px;gap:10px;align-items:center}.mtss-movement-label strong{display:block;color:var(--navy);font-size:10px}.mtss-movement-label span{display:block;color:var(--muted);font-size:8px;margin-top:1px}.mtss-movement-values{text-align:right;color:var(--muted);font-size:8.8px}.mtss-movement-values strong{color:var(--ink);font-size:9.5px}
+.mtss-slope{height:24px;position:relative;background:linear-gradient(to right,transparent 0,transparent 49.8%,#e9edf2 50%,transparent 50.2%,transparent 100%)}.mtss-slope-line{position:absolute;top:11px;height:2px;background:var(--navy);left:var(--left);width:var(--width);min-width:2px}.mtss-slope-dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--navy);background:#fff;transform:translateX(-50%)}.mtss-slope-dot.current{background:var(--navy)}
+.mtss-method{padding:0!important}.mtss-method>summary{list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 16px;cursor:pointer}.mtss-method>summary::-webkit-details-marker{display:none}.mtss-method>summary>span{font-size:9px;font-weight:820;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:5px 8px}.mtss-method[open]>summary{border-bottom:1px solid var(--line)}.mtss-method-body{padding:13px 16px;color:var(--muted);font-size:9.5px;line-height:1.55}.mtss-method-body p{margin:0 0 7px}.mtss-method-body p:last-child{margin-bottom:0}
+@media(max-width:900px){.mtss-context{align-items:flex-start;flex-direction:column}.mtss-context .mtss-guardrail{text-align:left}.mtss-profile-head{display:none}.mtss-profile-row{grid-template-columns:130px 1fr}.mtss-profile-row .mtss-meter{grid-column:2}.mtss-context-count{grid-column:2}.mtss-feedback-flow{grid-template-columns:repeat(2,1fr)}.mtss-feedback-step:nth-child(2)::after{display:none}.mtss-inquiry-spine{grid-template-columns:1fr}.mtss-inquiry-step:not(:last-child)::after{display:none}.mtss-movement-row{grid-template-columns:115px 1fr}.mtss-movement-values{grid-column:2;text-align:left}}
+@media(max-width:560px){.mtss-profile-row{grid-template-columns:1fr}.mtss-profile-row .mtss-meter,.mtss-context-count{grid-column:1}.mtss-feedback-flow{grid-template-columns:1fr}.mtss-feedback-step::after{display:none!important}.mtss-movement-row{grid-template-columns:1fr}.mtss-movement-values{grid-column:1}}
+
 </style>
 </head>
 <body>
@@ -477,6 +499,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
     <nav class="tabs leadership-tabs" aria-label="Dashboard sections">
       <button class="tab active" data-tab="overview" type="button">Snapshot</button>
       <button class="tab" data-tab="facets" type="button">TLF Patterns</button>
+      <button class="tab" data-tab="mtss" type="button">MTSS in Practice</button>
       <button class="tab" data-tab="plcs" type="button">PLCs</button>
       <button class="tab" data-tab="coverage" type="button">Reach &amp; Evidence</button>
       <button class="tab" data-tab="explorer" type="button">Evidence Explorer</button>
@@ -593,6 +616,120 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           </div>
           <div class="chart-box chart-xl"><div id="divisionFacetChart" aria-label="Division facet comparison chart"></div></div>
         </article>
+      </div>
+    </section>
+
+    <section id="mtss" class="tab-panel">
+      <div class="section-heading mtss-section-heading">
+        <div>
+          <p class="eyebrow">Multi-Tiered Systems of Support</p>
+          <h2>MTSS in Practice</h2>
+          <p>What is classroom observation evidence telling us about the strength and responsiveness of universal Tier 1?</p>
+        </div>
+        <div class="segmented compact" id="mtssEvidenceType" role="group" aria-label="MTSS evidence type">
+          <button type="button" class="active" data-value="commendation">Commendations</button>
+          <button type="button" data-value="wondering">Wonderings</button>
+        </div>
+      </div>
+
+      <div id="mtssContext" class="mtss-context"></div>
+
+      <div class="grid grid-12 mtss-grid">
+        <article class="card span-8">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Student experience</p>
+              <h2>What are students experiencing?</h2>
+              <p class="card-copy">Rule-based signals from written observation evidence across Access, Participation, Thinking, Engagement and Learning. Frequency and breadth describe the evidence collected, not a performance score.</p>
+            </div>
+          </div>
+          <div id="mtssStudentExperience"></div>
+        </article>
+
+        <article class="card span-4">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Leadership inquiry</p>
+              <h2>Worth discussing</h2>
+              <p class="card-copy">Up to three prompts generated from the selected evidence using transparent rules.</p>
+            </div>
+          </div>
+          <div id="mtssDiscussion" class="mtss-discussion"></div>
+        </article>
+
+        <article class="card span-7">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Tier 1 interpretation</p>
+              <h2>What instructional conditions are visible?</h2>
+              <p class="card-copy">Accessibility · Responsiveness · Differentiation · Clarity · Cognitive Demand.</p>
+            </div>
+          </div>
+          <div id="mtssConditions"></div>
+        </article>
+
+        <article class="card span-5">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Tier 1 practices</p>
+              <h2 id="mtssPracticesTitle">Practices visible in the evidence</h2>
+              <p class="card-copy" id="mtssPracticesCopy">Common Tier 1 practices referenced in commendation evidence.</p>
+            </div>
+          </div>
+          <div id="mtssPractices"></div>
+        </article>
+
+        <article class="card span-12 mtss-feedback-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Schoolwide goal connection</p>
+              <h2>Feedback → Action</h2>
+              <p class="card-copy">A classroom-level view of whether feedback is being given, understood, acted upon and revisited. These are text signals, not a claim that every stage occurred in sequence.</p>
+            </div>
+          </div>
+          <div id="mtssFeedbackAction"></div>
+        </article>
+
+        <article class="card span-12 mtss-inquiry-card">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Tier 1 inquiry cycle</p>
+              <h2>Notice → Identify → Connect → Respond → Monitor</h2>
+              <p class="card-copy">Use observation evidence to strengthen Tier 1 before interpreting difficulty as a need for additional intervention.</p>
+            </div>
+          </div>
+          <div id="mtssInquirySpine" class="mtss-inquiry-spine"></div>
+        </article>
+
+        <article class="card span-12">
+          <div class="card-head">
+            <div>
+              <p class="card-kicker">Movement</p>
+              <h2>Is the Tier 1 picture changing?</h2>
+              <p class="card-copy" id="mtssMovementNote">Equal evidence periods only. Thin samples are labelled rather than interpreted as trends.</p>
+            </div>
+            <div class="segmented compact" id="mtssMovementView" role="group" aria-label="MTSS movement view">
+              <button type="button" class="active" data-value="student">Student Experience</button>
+              <button type="button" data-value="conditions">Tier 1 Conditions</button>
+            </div>
+          </div>
+          <div id="mtssMovement" class="mtss-movement"></div>
+        </article>
+
+        <details class="card span-12 mtss-method">
+          <summary>
+            <div>
+              <p class="card-kicker">Method</p>
+              <h2>How these MTSS signals are generated</h2>
+              <p class="card-copy">Transparent rule-based matching of written observation evidence; no AI API and no Tier 2/3 classification.</p>
+            </div>
+            <span>View method</span>
+          </summary>
+          <div class="mtss-method-body">
+            <p>The dashboard searches written commendations and wonderings for a curated vocabulary aligned to the AISG Tier 1 interpretation framework. An observation can match more than one signal. Frequency is the percentage of selected observations containing a signal; breadth is the percentage of represented faculty with at least one matching observation.</p>
+            <p><strong>Boundary:</strong> classroom walkthrough evidence is treated primarily as Tier 1 evidence. This tab does not infer that an individual student needs Tier 2 or Tier 3 support.</p>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -2192,7 +2329,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     });
     if(one)one.addEventListener('change',()=>{state.explorerOnePerFaculty=one.checked;explorerPage=1;renderExplorer();updateUrlState();});
     if(clear)clear.addEventListener('click',()=>{
-      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerSearch='';
+      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.explorerSearch='';
       if(el('observationSearch'))el('observationSearch').value='';
       explorerPage=1;renderExplorer();renderActiveFilters();updateUrlState();
     });
@@ -2218,7 +2355,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     const eplc=q.get('eplc');if(eplc&&PLC_ORDER.includes(eplc))state.explorerPlc=eplc;
     state.explorerOnePerFaculty=q.get('one')==='1';
     const search=q.get('search');if(search){state.explorerSearch=search;if(el('observationSearch'))el('observationSearch').value=search;}
-    const tab=q.get('tab');if(['overview','facets','plcs','coverage','explorer','admin'].includes(tab)){
+    const tab=q.get('tab');if(['overview','facets','mtss','plcs','coverage','explorer','admin'].includes(tab)){
       qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
       qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===tab));
     }
@@ -2383,7 +2520,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
 
   function renderExplorer(){
     syncExplorerControls();
-    let rows=selectedRows().filter(rowMatchesExplorerFacet).filter(rowMatchesExplorerPlc);
+    let rows=selectedRows().filter(rowMatchesExplorerFacet).filter(rowMatchesExplorerPlc).filter(rowMatchesExplorerMtss);
     const needle=state.explorerSearch.toLowerCase();
     if(needle)rows=rows.filter(r=>searchBlob(r).includes(needle));
     rows=rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
@@ -2409,6 +2546,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
         ['',state.explorerFacet||'All facets']
       ];
       if(state.explorerPlc)chips.push(['primary','PLC: '+state.explorerPlc]);
+      if(state.explorerMtss)chips.push(['primary','MTSS: '+state.explorerMtss.label]);
       if(state.explorerOnePerFaculty)chips.push(['','One per faculty · '+beforeDedupe+' → '+rows.length]);
       summary.innerHTML=chips.map(x=>'<span class="meeting-chip '+x[0]+'">'+esc(x[1])+'</span>').join('');
     }
@@ -2440,7 +2578,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   }
 
   function resetFilters(){
-    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.explorerPlc='';state.plc='All';state.period='schoolyear';state.customStart='';state.customEnd='';
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.plc='All';state.period='schoolyear';state.customStart='';state.customEnd='';
     setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
     el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
     toggleCustomDates();explorerPage=1;renderAll();
@@ -2871,6 +3009,264 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     const dots=roster.map(name=>{const n=counts[name]||0,cls=n>=3?'deep':n===2?'repeat':n===1?'':'none';return '<i class="plc-member-dot '+cls+'" title="'+esc(name)+': '+n+' observation'+(n===1?'':'s')+'"></i>';}).join('');
     const band=(label,n)=>'<div class="plc-distribution-band"><span>'+label+'</span><span class="plc-distribution-meter"><i style="width:'+(roster.length?n/roster.length*100:0).toFixed(1)+'%"></i></span><b>'+n+'</b></div>';
     host.innerHTML='<div class="plc-distribution-summary">'+dots+'</div><div class="plc-distribution-bands">'+band('3+ observations',buckets.three.length)+band('2 observations',buckets.two.length)+band('1 observation',buckets.one.length)+band('No observation',buckets.none.length)+'</div><div class="focus-note" style="margin-top:9px">Hover a dot to see the PLC member and observation count. The distribution describes evidence coverage, not faculty performance.</div>';
+  }
+
+
+  // MTSS in Practice — transparent rule-based Tier 1 evidence signals.
+  Object.assign(state,{
+    mtssEvidenceType:state.mtssEvidenceType||'commendation',
+    mtssMovementView:state.mtssMovementView||'student',
+    explorerMtss:state.explorerMtss||null
+  });
+
+  const MTSS_STUDENT=[
+    {id:'access',label:'Access',terms:['access','multiple ways','multiple way','multiple pathways','visual','representation','representations','scaffold','scaffolding','support','supports','choice','choices','options','entry point','worked example','examples']},
+    {id:'participation',label:'Participation',terms:['participat','respond','response routine','partner','peer','group','discussion','discuss','share','collaborat','thumbs up','thumbs down','every student','all students']},
+    {id:'thinking',label:'Thinking',terms:['thinking','think','reason','reasoning','justify','explain','analyse','analyze','interpret','evaluate','connect','problem solve','problem-solving','inquiry','questioning']},
+    {id:'engagement',label:'Engagement',terms:['engag','actively','active learning','on task','focused','ownership','choice','participat','independent practice','student-led','student led']},
+    {id:'learning',label:'Learning',terms:['learning','understanding','progress','improv','revise','revision','transfer','feedback','formative','success criteria','learning goal','next step']}
+  ];
+
+  const MTSS_CONDITIONS=[
+    {id:'accessibility',label:'Accessibility',terms:['access','accessible','multiple ways','multiple pathways','visual','representation','scaffold','support','choice','options','entry point','worked example']},
+    {id:'responsiveness',label:'Responsiveness',terms:['responsive','adjust','adjusted','reteach','re-teach','feedback','formative','exit ticket','check for understanding','checks for understanding','circulat','misconception','real-time','real time','next step']},
+    {id:'differentiation',label:'Differentiation',terms:['differentiat','flexible group','small group','individual feedback','varied support','vary support','multiple pathways','scaffold','choice','own work','different levels']},
+    {id:'clarity',label:'Clarity',terms:['clarity','success criteria','learning intention','learning target','model','modelling','modeling','example','exemplar','step by step','explicit','visible timer','expectations']},
+    {id:'cognitive-demand',label:'Cognitive Demand',terms:['cognitive','reason','reasoning','justify','explain','analyse','analyze','evaluate','interpret','construct','problem solve','problem-solving','transfer','revise','create']}
+  ];
+
+  const MTSS_PRACTICES=[
+    {id:'checks',label:'Checks for understanding',terms:['check for understanding','checks for understanding','checking for understanding','thumbs up','thumbs down','hinge question','exit ticket','circulat','do we all agree','what do you see']},
+    {id:'formative',label:'Formative evidence during instruction',terms:['formative','exit ticket','student work','evidence of learning','previous work','misconception','assessment evidence']},
+    {id:'modelling',label:'Explicit modelling / think-alouds',terms:['model','modelling','modeling','think aloud','think-aloud','worked example','demonstrat','step by step']},
+    {id:'pathways',label:'Multiple representations / pathways',terms:['multiple ways','multiple pathways','visual','representation','oral explanation','partner interaction','choice','options']},
+    {id:'feedback-action',label:'Feedback → action',terms:['feedback','revise','revision','act on','acting on','next step','improve','try again','respond to feedback','apply feedback']},
+    {id:'self-monitoring',label:'Student self-checking / reflection',terms:['self-check','self check','self-assess','self assess','reflect','reflection','monitor','own errors','identify their own','independently identify']},
+    {id:'peer',label:'Peer explanation / support',terms:['peer explanation','peer feedback','partner','explain to a peer','explain to another','discuss with','collaborat']},
+    {id:'grouping',label:'Flexible grouping / reteaching',terms:['flexible group','small group','reteach','re-teach','targeted group','temporary group']},
+    {id:'criteria',label:'Success criteria / exemplars',terms:['success criteria','criteria','exemplar','worked example','different levels','expectations visible']},
+    {id:'goals',label:'Student goal-setting / self-monitoring',terms:['learning goal','specific goal','individual goal','goal-setting','goal setting','monitor progress','next piece i will']},
+    {id:'adjustment',label:'Responsive adjustment',terms:['adjust instruction','adjusted instruction','responsive adjustment','stopped the class','paused instruction','in the moment','real-time','real time','reteach','misconception']}
+  ];
+
+  const MTSS_FEEDBACK=[
+    {id:'given',label:'Given',terms:['feedback','prompt','conference','confer','teacher comment','descriptive feedback','check student work']},
+    {id:'understood',label:'Understood',terms:['understand the feedback','explain the feedback','identify areas','identify an area','success criteria','criteria','next step','learning goal']},
+    {id:'acted',label:'Acted upon',terms:['act on','acting on','revise','revision','apply feedback','use feedback','improve','try again','another attempt','self-check']},
+    {id:'revisited',label:'Revisited',terms:['revisit','previous work','previous feedback','monitor progress','transfer','next piece','new example','follow-up','follow up','evidence of improvement']}
+  ];
+
+  function mtssNormalizeText(text){
+    return String(text||'').toLowerCase().replace(/[’‘]/g,"'").replace(/\s+/g,' ').trim();
+  }
+
+  function mtssTextForRow(row,type){
+    if(row.publicSanitized)return '';
+    if(type==='wondering')return mtssNormalizeText(row.wonderingText||'');
+    return mtssNormalizeText((row.commendationText||[]).join(' '));
+  }
+
+  function mtssAllNarrative(row){
+    if(row.publicSanitized)return '';
+    return mtssNormalizeText([row.notes,...(row.commendationText||[]),row.wonderingText].join(' '));
+  }
+
+  function mtssMatchesTerms(text,terms){
+    if(!text)return false;
+    return terms.some(term=>text.includes(term));
+  }
+
+  function mtssRuleSet(setName){
+    if(setName==='student')return MTSS_STUDENT;
+    if(setName==='conditions')return MTSS_CONDITIONS;
+    if(setName==='practices')return MTSS_PRACTICES;
+    if(setName==='feedback')return MTSS_FEEDBACK;
+    return [];
+  }
+
+  function mtssRule(setName,id){
+    return mtssRuleSet(setName).find(x=>x.id===id);
+  }
+
+  function mtssSignalEvidence(rows,setName,id,type=state.mtssEvidenceType){
+    const rule=mtssRule(setName,id);
+    if(!rule)return {observations:0,frequency:0,faculty:0,breadth:0};
+    const represented=unique(rows.map(r=>r.faculty).filter(Boolean));
+    const matches=rows.filter(r=>{
+      const text=setName==='feedback'?mtssAllNarrative(r):mtssTextForRow(r,type);
+      return mtssMatchesTerms(text,rule.terms);
+    });
+    const faculty=unique(matches.map(r=>r.faculty).filter(Boolean));
+    return {
+      observations:matches.length,
+      frequency:rows.length?matches.length/rows.length*100:0,
+      faculty:faculty.length,
+      breadth:represented.length?faculty.length/represented.length*100:0
+    };
+  }
+
+  function rowMatchesExplorerMtss(r){
+    const x=state.explorerMtss;
+    if(!x)return true;
+    const rule=mtssRule(x.set,x.id);if(!rule)return true;
+    const text=x.set==='feedback'?mtssAllNarrative(r):mtssTextForRow(r,x.type||'commendation');
+    return mtssMatchesTerms(text,rule.terms);
+  }
+
+  function openMtssEvidence(setName,id,type,label){
+    state.explorerMtss={set:setName,id,type:type||state.mtssEvidenceType,label:label||mtssRule(setName,id)?.label||id};
+    state.explorerSearch='';
+    if(el('observationSearch'))el('observationSearch').value='';
+    explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();
+  }
+
+  function renderAll(){
+    applyUrlStateOnce();
+    refreshObserverOptions();
+    refreshFacultyOptions();
+    renderActiveFilters();
+    renderOverview();
+    renderFacets();
+    renderMtss();
+    renderPlcs();
+    renderCoverage();
+    renderExplorer();
+    renderAdminP2();
+    updateUrlState();
+  }
+
+  function bindMtssControls(){
+    qsa('#mtssEvidenceType button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.mtssEvidenceType);
+      btn.onclick=()=>{state.mtssEvidenceType=btn.dataset.value;setSegmented('#mtssEvidenceType',state.mtssEvidenceType);renderMtss();};
+    });
+    qsa('#mtssMovementView button').forEach(btn=>{
+      btn.classList.toggle('active',btn.dataset.value===state.mtssMovementView);
+      btn.onclick=()=>{state.mtssMovementView=btn.dataset.value;setSegmented('#mtssMovementView',state.mtssMovementView);renderMtssMovement();};
+    });
+  }
+
+  function renderMtss(){
+    const rows=selectedRows();
+    bindMtssControls();
+    renderMtssContext(rows);
+    renderMtssProfile('mtssStudentExperience',rows,'student');
+    renderMtssDiscussion(rows);
+    renderMtssProfile('mtssConditions',rows,'conditions');
+    renderMtssPractices(rows);
+    renderMtssFeedback(rows);
+    renderMtssInquiry();
+    renderMtssMovement();
+  }
+
+  function renderMtssContext(rows){
+    const host=el('mtssContext');if(!host)return;
+    const faculty=unique(rows.map(r=>r.faculty).filter(Boolean)).length,observers=unique(rows.map(r=>r.observer).filter(Boolean)).length;
+    host.innerHTML='<div><strong>'+fmt.format(rows.length)+' observations · '+fmt.format(faculty)+' faculty · '+fmt.format(observers)+' observers</strong><br><span>'+esc(state.division==='All'?'Whole school':state.division)+' · '+esc(periodName())+' · '+esc(state.mtssEvidenceType==='commendation'?'Commendation evidence':'Wondering evidence')+'</span></div><div class="mtss-guardrail"><strong>Tier 1 first.</strong><br><span>This view surfaces classroom evidence about universal core instruction. It does not infer Tier 2 or Tier 3 need.</span></div>';
+  }
+
+  function renderMtssProfile(id,rows,setName){
+    const host=el(id);if(!host)return;
+    const rules=mtssRuleSet(setName);
+    let html='<div class="mtss-profile"><div class="mtss-profile-head"><span>Signal</span><span>Frequency</span><span>Breadth</span><span>Evidence</span></div>';
+    rules.forEach(rule=>{
+      const ev=mtssSignalEvidence(rows,setName,rule.id,state.mtssEvidenceType);
+      html+='<div class="mtss-profile-row"><button type="button" class="mtss-signal-button" data-mtss-set="'+setName+'" data-mtss-id="'+rule.id+'">'+esc(rule.label)+'</button><div class="mtss-meter"><span class="mtss-meter-track"><i style="--v:'+Math.min(100,ev.frequency)+'%"></i></span><span class="mtss-meter-value">'+ev.frequency.toFixed(1)+'%</span></div><div class="mtss-meter breadth"><span class="mtss-meter-track"><i style="--v:'+Math.min(100,ev.breadth)+'%"></i></span><span class="mtss-meter-value">'+ev.breadth.toFixed(1)+'%</span></div><div class="mtss-context-count">'+ev.observations+' obs<br>'+ev.faculty+' faculty</div></div>';
+    });
+    host.innerHTML=html+'</div>';
+    qsa('[data-mtss-set]',host).forEach(btn=>btn.addEventListener('click',()=>openMtssEvidence(btn.dataset.mtssSet,btn.dataset.mtssId,state.mtssEvidenceType,btn.textContent.trim())));
+  }
+
+  function renderMtssDiscussion(rows){
+    const host=el('mtssDiscussion');if(!host)return;
+    if(!rows.length){host.innerHTML='<div class="empty-state">No evidence matches the current view.</div>';return;}
+    const student=MTSS_STUDENT.map(r=>({rule:r,ev:mtssSignalEvidence(rows,'student',r.id,state.mtssEvidenceType)})).sort((a,b)=>b.ev.breadth-a.ev.breadth||b.ev.frequency-a.ev.frequency);
+    const conditions=MTSS_CONDITIONS.map(r=>({rule:r,ev:mtssSignalEvidence(rows,'conditions',r.id,state.mtssEvidenceType)})).sort((a,b)=>b.ev.frequency-a.ev.frequency);
+    const items=[];
+    const broad=student.find(x=>x.ev.frequency>=30&&x.ev.breadth>=35)||student[0];
+    if(broad&&broad.ev.observations){
+      items.push({set:'student',id:broad.rule.id,label:broad.rule.label,title:broad.rule.label+' is a broad signal in this evidence.',text:'Appears in '+broad.ev.frequency.toFixed(1)+'% of observations and across '+broad.ev.breadth.toFixed(1)+'% of represented faculty.'});
+    }
+    const cond=conditions.find(x=>x.ev.observations&&x.rule.id!==(broad?.rule?.id));
+    if(cond){
+      items.push({set:'conditions',id:cond.rule.id,label:cond.rule.label,title:cond.rule.label+' is worth exploring.',text:'Referenced in '+cond.ev.frequency.toFixed(1)+'% of selected '+(state.mtssEvidenceType==='wondering'?'wondering':'commendation')+' evidence. Open the observations before interpreting why.'});
+    }
+    const narrow=student.slice().filter(x=>x.ev.observations>0).sort((a,b)=>a.ev.breadth-b.ev.breadth||a.ev.frequency-b.ev.frequency)[0];
+    if(narrow&&(!broad||narrow.rule.id!==broad.rule.id)){
+      items.push({set:'student',id:narrow.rule.id,label:narrow.rule.label,title:'Evidence for '+narrow.rule.label+' is relatively narrow.',text:'Currently spans '+narrow.ev.faculty+' faculty ('+narrow.ev.breadth.toFixed(1)+'% breadth). Consider intentionally gathering more evidence before treating this as a schoolwide pattern.'});
+    }
+    host.innerHTML=items.slice(0,3).map(x=>'<div class="mtss-discussion-item"><strong>'+esc(x.title)+'</strong><p>'+esc(x.text)+'</p><button type="button" data-mtss-discuss-set="'+x.set+'" data-mtss-discuss-id="'+x.id+'" data-mtss-discuss-label="'+esc(x.label)+'">Open evidence →</button></div>').join('');
+    qsa('[data-mtss-discuss-set]',host).forEach(btn=>btn.addEventListener('click',()=>openMtssEvidence(btn.dataset.mtssDiscussSet,btn.dataset.mtssDiscussId,state.mtssEvidenceType,btn.dataset.mtssDiscussLabel)));
+  }
+
+  function renderMtssPractices(rows){
+    const host=el('mtssPractices');if(!host)return;
+    const type=state.mtssEvidenceType;
+    if(el('mtssPracticesTitle'))el('mtssPracticesTitle').textContent=type==='commendation'?'Practices visible in the evidence':'Practices raised in wondering feedback';
+    if(el('mtssPracticesCopy'))el('mtssPracticesCopy').textContent=type==='commendation'?'Common Tier 1 practices referenced in commendation evidence.':'Tier 1 practices referenced or proposed within wondering feedback.';
+    const items=MTSS_PRACTICES.map(rule=>({rule,ev:mtssSignalEvidence(rows,'practices',rule.id,type)})).filter(x=>x.ev.observations>0).sort((a,b)=>b.ev.frequency-a.ev.frequency||b.ev.breadth-a.ev.breadth).slice(0,7);
+    if(!items.length){host.innerHTML='<div class="empty-state">No Tier 1 practice signals match the selected evidence.</div>';return;}
+    const max=Math.max(...items.map(x=>x.ev.frequency),1);
+    host.innerHTML='<div class="mtss-practice-list">'+items.map(x=>'<div class="mtss-practice"><button type="button" data-mtss-practice="'+x.rule.id+'">'+esc(x.rule.label)+'</button><small>'+x.ev.frequency.toFixed(1)+'% freq · '+x.ev.breadth.toFixed(1)+'% breadth</small><span class="mtss-practice-meter"><i style="width:'+(x.ev.frequency/max*100).toFixed(1)+'%"></i></span></div>').join('')+'</div>';
+    qsa('[data-mtss-practice]',host).forEach(btn=>btn.addEventListener('click',()=>openMtssEvidence('practices',btn.dataset.mtssPractice,type,btn.textContent.trim())));
+  }
+
+  function renderMtssFeedback(rows){
+    const host=el('mtssFeedbackAction');if(!host)return;
+    const vals=MTSS_FEEDBACK.map(rule=>({rule,ev:mtssSignalEvidence(rows,'feedback',rule.id,'commendation')}));
+    host.innerHTML='<div class="mtss-feedback-flow">'+vals.map(x=>'<button type="button" class="mtss-feedback-step" data-mtss-feedback="'+x.rule.id+'"><span>'+esc(x.rule.label)+'</span><strong>'+x.ev.frequency.toFixed(0)+'%</strong><p>'+x.ev.observations+' observations · '+x.ev.faculty+' faculty</p><div class="mini-meter"><i style="width:'+Math.min(100,x.ev.frequency)+'%"></i></div></button>').join('')+'</div>';
+    qsa('[data-mtss-feedback]',host).forEach(btn=>btn.addEventListener('click',()=>openMtssEvidence('feedback',btn.dataset.mtssFeedback,'all',btn.querySelector('span').textContent)));
+  }
+
+  function renderMtssInquiry(){
+    const host=el('mtssInquirySpine');if(!host)return;
+    const steps=[
+      ['Notice','Specific, observable evidence: what students and teacher actually said or did.','Tier 1 lens: access, participation, thinking, engagement and learning.'],
+      ['Identify','A strength, challenge or tension suggested by the evidence.','Ask whether the evidence appears individual, shared by a group, or potentially broader.'],
+      ['Connect','The instructional practice(s) that may be contributing to the student experience.','Consider accessibility, responsiveness, differentiation, clarity and cognitive demand.'],
+      ['Respond','A reflective, actionable coaching response or question.','Ask what Tier 1 adjustment could be tried before interpreting the evidence as a need for additional intervention.'],
+      ['Monitor','Concrete evidence to collect during a future observation.','Look for change in student behaviour, participation, thinking, work or understanding.']
+    ];
+    host.innerHTML=steps.map(x=>'<div class="mtss-inquiry-step"><b>'+x[0]+'</b><span>'+x[1]+'</span><em>'+x[2]+'</em></div>').join('');
+  }
+
+  function mtssMovementPeriods(){
+    const base=baseSelectedRows().slice().sort((a,b)=>a.date.localeCompare(b.date));
+    if(!base.length)return null;
+    const end=parseISODate(base.at(-1).date);
+    let days=28,currentStart,previousStart,previousEnd;
+    if(state.period==='30')days=30;
+    else if(state.period==='60')days=30;
+    else if(state.period==='custom'&&state.customStart&&state.customEnd){
+      const a=parseISODate(state.customStart),b=parseISODate(state.customEnd),span=Math.floor((b-a)/86400000)+1;
+      days=Math.max(7,Math.floor(span/2));
+      currentStart=addDays(b,-days+1);previousEnd=addDays(currentStart,-1);previousStart=addDays(previousEnd,-days+1);
+      const current=base.filter(r=>{const d=parseISODate(r.date);return d>=currentStart&&d<=b;});
+      const previous=base.filter(r=>{const d=parseISODate(r.date);return d>=previousStart&&d<=previousEnd;});
+      return {days,current,previous};
+    }
+    currentStart=addDays(end,-days+1);previousEnd=addDays(currentStart,-1);previousStart=addDays(previousEnd,-days+1);
+    return {
+      days,
+      current:base.filter(r=>{const d=parseISODate(r.date);return d>=currentStart&&d<=end;}),
+      previous:base.filter(r=>{const d=parseISODate(r.date);return d>=previousStart&&d<=previousEnd;})
+    };
+  }
+
+  function renderMtssMovement(){
+    const host=el('mtssMovement'),note=el('mtssMovementNote');if(!host)return;
+    const periods=mtssMovementPeriods(),setName=state.mtssMovementView==='conditions'?'conditions':'student',rules=mtssRuleSet(setName);
+    if(!periods||periods.current.length<15||periods.previous.length<15){
+      if(note)note.textContent='Comparable periods only. At least 15 observations are required in each period before movement is displayed.';
+      host.innerHTML='<div class="plc-too-early"><strong>Too early to interpret movement</strong><p>Previous period: '+(periods?periods.previous.length:0)+' observations · Current period: '+(periods?periods.current.length:0)+' observations. Keep building the evidence base before treating movement as a pattern.</p></div>';
+      return;
+    }
+    if(note)note.textContent='Two equal '+periods.days+'-day periods · '+periods.previous.length+' previous observations and '+periods.current.length+' current observations · '+(state.mtssEvidenceType==='commendation'?'commendation':'wondering')+' evidence.';
+    host.innerHTML=rules.map(rule=>{
+      const p=mtssSignalEvidence(periods.previous,setName,rule.id,state.mtssEvidenceType).frequency,c=mtssSignalEvidence(periods.current,setName,rule.id,state.mtssEvidenceType).frequency;
+      const left=Math.min(p,c),right=Math.max(p,c),delta=c-p;
+      return '<div class="mtss-movement-row"><div class="mtss-movement-label"><strong>'+esc(rule.label)+'</strong><span>'+setName==='student'?'Student experience':'Tier 1 condition'+'</span></div><div><div class="mtss-slope"><span class="mtss-slope-line" style="--left:'+left+'%;--width:'+Math.max(1,right-left)+'%"></span><i class="mtss-slope-dot" style="left:'+p+'%" title="Previous '+p.toFixed(1)+'%"></i><i class="mtss-slope-dot current" style="left:'+c+'%" title="Current '+c.toFixed(1)+'%"></i></div></div><div class="mtss-movement-values"><strong>'+p.toFixed(0)+'% → '+c.toFixed(0)+'%</strong><br>'+(delta>=0?'+':'')+delta.toFixed(1)+' pp</div></div>';
+    }).join('');
   }
 
   let toastTimer;
