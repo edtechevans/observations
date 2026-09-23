@@ -2191,6 +2191,10 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     el('nextPage').addEventListener('click',()=>{if(explorerPage<pages){explorerPage++;renderExplorer();}});
   }
 
+  function searchBlob(r){
+    return [r.faculty,r.email,r.observer,r.division,r.notes,r.wonderingText,r.response,...(r.commendationText||[]),...(r.guidingQuestions||[]),...(r.commendations||[]),r.wonderingFacet].join(' ').replace(/\s+/g,' ').toLowerCase();
+  }
+
   function resetFilters(){
     state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.period='schoolyear';state.customStart='';state.customEnd='';
     setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
