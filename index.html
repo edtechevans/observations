@@ -3265,7 +3265,8 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     host.innerHTML=rules.map(rule=>{
       const p=mtssSignalEvidence(periods.previous,setName,rule.id,state.mtssEvidenceType).frequency,c=mtssSignalEvidence(periods.current,setName,rule.id,state.mtssEvidenceType).frequency;
       const left=Math.min(p,c),right=Math.max(p,c),delta=c-p;
-      return '<div class="mtss-movement-row"><div class="mtss-movement-label"><strong>'+esc(rule.label)+'</strong><span>'+setName==='student'?'Student experience':'Tier 1 condition'+'</span></div><div><div class="mtss-slope"><span class="mtss-slope-line" style="--left:'+left+'%;--width:'+Math.max(1,right-left)+'%"></span><i class="mtss-slope-dot" style="left:'+p+'%" title="Previous '+p.toFixed(1)+'%"></i><i class="mtss-slope-dot current" style="left:'+c+'%" title="Current '+c.toFixed(1)+'%"></i></div></div><div class="mtss-movement-values"><strong>'+p.toFixed(0)+'% → '+c.toFixed(0)+'%</strong><br>'+(delta>=0?'+':'')+delta.toFixed(1)+' pp</div></div>';
+      const categoryLabel=setName==='student'?'Student experience':'Tier 1 condition';
+      return '<div class="mtss-movement-row"><div class="mtss-movement-label"><strong>'+esc(rule.label)+'</strong><span>'+esc(categoryLabel)+'</span></div><div><div class="mtss-slope"><span class="mtss-slope-line" style="--left:'+left+'%;--width:'+Math.max(1,right-left)+'%"></span><i class="mtss-slope-dot" style="left:'+p+'%" title="Previous '+p.toFixed(1)+'%"></i><i class="mtss-slope-dot current" style="left:'+c+'%" title="Current '+c.toFixed(1)+'%"></i></div></div><div class="mtss-movement-values"><strong>'+p.toFixed(0)+'% → '+c.toFixed(0)+'%</strong><br>'+(delta>=0?'+':'')+delta.toFixed(1)+' pp</div></div>';
     }).join('');
   }
 
