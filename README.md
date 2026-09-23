@@ -33,9 +33,9 @@ Five source-name aliases sharing the same faculty email are normalized to a sing
 
 ## 2026–27 coverage
 
-The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **112 faculty**, with **106 currently reached** in the observation data.
+The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **107 faculty**, with **106 currently reached** in the observation data.
 
-The six roster names not yet matched to a 2026–27 observation are shown directly in the Coverage & Cadence view. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
+The one roster name not yet matched to a 2026–27 observation is shown directly in the Reach & Evidence view. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
 
 ## Observer group filter
 
@@ -50,10 +50,11 @@ With the 23 September 2026 data, the Principals + APs view contains **123 observ
 
 ## Views
 
-- **Overview** — KPIs, roster reach, monthly cadence, division and time-of-class distribution, TLF facet profile, and evidence patterns.
-- **TLF facets** — commendation/wondering profiles, lens summaries, and Elementary vs Secondary comparison.
-- **Coverage & cadence** — roster coverage, faculty not yet observed, observations per faculty, observer activity, timing, and data-health checks.
-- **Observation explorer** — searchable observation-level evidence with complete notes, feedback and faculty responses in the detail drawer.
+- **Snapshot** — evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
+- **TLF & Goals** — commendation/wondering profiles, lens summaries, division context, and a bridge from observational evidence to goal conversations.
+- **Reach & Evidence** — roster coverage, faculty reach, cadence, division sampling, and observation timing.
+- **Evidence Explorer** — searchable observation-level evidence with complete notes, feedback and faculty responses in the detail drawer.
+- **Admin** — observer activity, data-health checks, and dataset context.
 
 School years run from **August 1 through July 31**.
 
