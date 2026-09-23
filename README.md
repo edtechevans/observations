@@ -52,6 +52,7 @@ With the 23 September 2026 data, the Principals + APs view contains **123 observ
 
 - **Snapshot** — evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
 - **TLF Patterns** — frequency/breadth profiles, lens summaries, division context, and drill-through into the evidence behind each pattern.
+- **MTSS in Practice** — Tier 1 evidence signals for student experience, instructional conditions, common practices, Feedback → Action, the Notice → Identify → Connect → Respond → Monitor inquiry cycle, and comparable-period movement.
 - **PLCs** — grade-level and subject-area PLC evidence using the 2026–27 staff Position data, including roster reach, TLF frequency/breadth, 28-day lens trends, commendation/wondering question focus, recurring comment language, and representative excerpts.
 - **Reach & Evidence** — roster coverage, faculty reach, cadence, division sampling, and observation timing.
 - **Evidence Explorer** — searchable observation-level evidence with meeting filters for evidence type, facet, division and period, plus a latest-one-per-faculty option and bookmarkable URL state.
@@ -80,6 +81,26 @@ The dashboard includes two additional non-evaluative calibration views in **Admi
 - **Observation-focus audit** — groups guiding questions after whitespace normalization and reports question prevalence by observation, the number of unique questions, concentration in the most-used question, and questions used only once or twice. Clicking a question opens the matching evidence in the Explorer.
 
 The **Evidence Explorer** now supports meeting-oriented quick filters for evidence type, facet, division and period. Evidence type also controls whether the table foregrounds commendations, wonderings, or both. **One per faculty** retains only the latest matching observation for each faculty member after all other filters are applied. Key dashboard and Explorer filters are mirrored into the page URL so a leadership view can be bookmarked or shared without adding a backend service.
+
+
+## MTSS in Practice
+
+The MTSS view is designed as a **Tier 1 inquiry tool**, not a Tier 2 / Tier 3 classification system. It uses the current dashboard filters and written classroom-observation evidence to help leaders ask what the evidence suggests about universal core instruction before interpreting difficulty as a need for additional intervention.
+
+The view follows the AISG inquiry structure:
+
+**Notice → Identify → Connect → Respond → Monitor**
+
+It separates two related lenses:
+
+- **Student experience:** Access, Participation, Thinking, Engagement, Learning.
+- **Tier 1 conditions:** Accessibility, Responsiveness, Differentiation, Clarity, Cognitive Demand.
+
+Signals are generated through transparent keyword/phrase matching against written commendations or wonderings. An observation may match more than one signal. **Frequency** is the percentage of selected observations containing the signal; **breadth** is the percentage of represented faculty with at least one matching observation. The rule vocabulary is intentionally curated and conservative rather than using an AI API.
+
+The view also surfaces selected Tier 1 practices (for example checks for understanding, modelling, multiple pathways, feedback-to-action, self-monitoring, peer explanation, flexible reteaching, success criteria, goal-setting and responsive adjustment), plus a classroom-level **Feedback → Action** sequence: Given → Understood → Acted upon → Revisited.
+
+Movement uses equal evidence periods and suppresses interpretation when either comparison period contains fewer than 15 observations. Every MTSS signal can be opened in the Evidence Explorer to inspect the source observations behind it.
 
 
 ## PLC / department mapping
