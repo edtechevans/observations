@@ -779,21 +779,23 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
 
 /* Responsive reflow — browser zoom reduces effective CSS viewport,
    so these breakpoints also function as zoom-resilience states. */
-@media(max-width:1450px){
-  .leadership-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:1400px){
   .primary-filter-bar{
     grid-template-columns:minmax(130px,.75fr) minmax(270px,1.55fr) minmax(250px,1.4fr) minmax(190px,1fr)!important
   }
   .period-field{grid-column:1 / -1}
-  .leadership-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
   .explorer-meeting-bar{grid-template-columns:repeat(4,minmax(160px,1fr))}
   .explorer-meeting-title{grid-column:span 1}
   .mtss-inquiry-spine{grid-template-columns:repeat(3,minmax(0,1fr))}
   .mtss-inquiry-step{min-height:0}
   .mtss-inquiry-step:not(:last-child)::after{display:none}
 }
+@media(max-width:1260px){
+  .leadership-kpis{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
 @media(max-width:1200px){
   .app-header{position:relative}
+  .leadership-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
   .page-shell{padding-inline:18px}
   .grid-12>.span-8,.grid-12>.span-7,.grid-12>.span-5,.grid-12>.span-4{grid-column:span 12!important}
   .grid-12>.span-6{grid-column:span 6!important}
@@ -908,6 +910,20 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   .plc-brief-kpis{grid-template-columns:1fr}
   .kpi-value{font-size:2rem!important}
 }
+
+
+/* Final microtype cleanup: no leader-facing information below 12px. */
+.mini-title,.time-item span,.pattern-title,.pattern-note,.facet-key,.shift-chip,
+.tlf-scale,.tlf-values,.tlf-values b,.tlf-profile-legend,
+.admin-stat span,.toggle-control,.toast,.pattern-item,
+.plc-card-metrics small,.plc-card-division,.plc-card-signal,
+.plc-member span,.plc-member-count,.plc-slope-axis,
+.plc-movement-label span,.plc-movement-values{
+  font-size:var(--text-2xs)!important;
+  line-height:1.45
+}
+.plc-member strong,.plc-movement-label strong{font-size:var(--text-xs)!important}
+.button-secondary{font-size:var(--text-xs)!important}
 
 </style>
 </head>
