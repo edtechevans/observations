@@ -277,6 +277,52 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
   .focus-summary{grid-template-columns:1fr}
 }
 
+
+/* PLC evidence views */
+.plc-section-heading{align-items:end}
+.plc-selector{min-width:260px}
+.plc-notice{border:1px solid #e6d7ad;background:#fffaf0;color:#6f5a23;border-radius:11px;padding:11px 13px;font-size:10.5px;line-height:1.45;margin-bottom:10px}
+.plc-overview-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-bottom:11px}
+.plc-card{border:1px solid var(--line);background:#fff;border-radius:13px;padding:12px;text-align:left;box-shadow:var(--shadow);cursor:pointer;min-width:0;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease}
+.plc-card:hover{transform:translateY(-1px);border-color:#b9c8d7;box-shadow:0 7px 18px rgba(13,40,69,.08)}
+.plc-card.active{border-color:var(--navy);box-shadow:0 0 0 2px rgba(17,50,97,.08)}
+.plc-card-division{font-size:8.5px;text-transform:uppercase;letter-spacing:.09em;font-weight:900;color:var(--muted)}
+.plc-card h3{font-size:13px;color:var(--navy);margin:3px 0 8px}
+.plc-card-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:5px}
+.plc-card-metrics div{background:#f8fafc;border-radius:8px;padding:7px}
+.plc-card-metrics b{display:block;color:var(--navy);font-size:16px}
+.plc-card-metrics small{display:block;color:var(--muted);font-size:8px;margin-top:2px}
+.plc-card-signal{font-size:9px;color:var(--muted);line-height:1.4;margin-top:8px}
+.plc-card-signal b{color:#394b61}
+.plc-detail{margin-top:8px}
+.plc-detail-head{display:flex;justify-content:space-between;gap:14px;align-items:center;background:var(--navy);color:#fff;border-radius:14px;padding:13px 15px;margin-bottom:10px}
+.plc-detail-head h2{margin:2px 0;font-size:18px}.plc-detail-head p:not(.eyebrow){margin:0;opacity:.82;font-size:10.5px}.plc-detail-head .eyebrow{color:#cbd8e6}
+.plc-detail-head .button{background:#fff;color:var(--navy);border-color:#fff}
+.plc-kpis{margin-bottom:10px}
+.plc-roster-panel{display:grid;gap:6px}
+.plc-member{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);background:#fafbfd;border-radius:9px;padding:7px 8px}
+.plc-member strong{font-size:10px;color:#33455b}.plc-member span{font-size:9px;color:var(--muted)}
+.plc-member.unobserved{opacity:.58}
+.plc-member-count{min-width:26px;text-align:center;background:#fff;border:1px solid #e2e8ee;border-radius:999px;padding:3px 6px;font-size:9px;font-weight:820;color:var(--navy)}
+.plc-question-list{display:grid;gap:8px}
+.plc-question-item{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start;border-top:1px solid #edf1f5;padding-top:8px}
+.plc-question-item:first-child{border-top:0;padding-top:0}
+.plc-question-button{border:0;background:transparent;padding:0;text-align:left;color:#35475d;font-size:10px;line-height:1.4}.plc-question-button:hover{color:var(--navy);text-decoration:underline}
+.plc-question-count{white-space:nowrap;text-align:right}.plc-question-count strong{display:block;color:var(--navy);font-size:12px}.plc-question-count small{display:block;color:var(--muted);font-size:8px}
+.plc-comment-signals{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.plc-comment-column{border:1px solid var(--line);border-radius:12px;background:#fafbfd;padding:12px;min-width:0}
+.plc-comment-column h3{margin:0 0 7px;color:var(--navy);font-size:13px}
+.language-chips{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.language-chip{border:1px solid #dfe5ec;background:#fff;border-radius:999px;padding:4px 7px;font-size:8.5px;color:#5d6c80}
+.language-chip b{color:var(--navy)}
+.plc-excerpt{background:#fff;border:1px solid #e4e9ef;border-radius:10px;padding:9px}
+.plc-excerpt p{font-size:10px;line-height:1.48;color:#46566a;margin:0 0 7px}
+.plc-excerpt .view-button{font-size:8.5px}
+.plc-empty{padding:16px;border:1px dashed #ccd5de;border-radius:11px;color:var(--muted);font-size:10px;text-align:center}
+@media(max-width:1180px){.plc-overview-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.plc-overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.plc-section-heading{align-items:stretch}.plc-selector{min-width:0}.plc-comment-signals{grid-template-columns:1fr}}
+@media(max-width:560px){.plc-overview-grid{grid-template-columns:1fr}.plc-detail-head{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -392,6 +438,7 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
     <nav class="tabs leadership-tabs" aria-label="Dashboard sections">
       <button class="tab active" data-tab="overview" type="button">Snapshot</button>
       <button class="tab" data-tab="facets" type="button">TLF Patterns</button>
+      <button class="tab" data-tab="plcs" type="button">PLCs</button>
       <button class="tab" data-tab="coverage" type="button">Reach &amp; Evidence</button>
       <button class="tab" data-tab="explorer" type="button">Evidence Explorer</button>
       <button class="tab" data-tab="admin" type="button">Admin</button>
@@ -507,6 +554,117 @@ button,input,select{font:inherit} button{cursor:pointer} img{display:block;max-w
           </div>
           <div class="chart-box chart-xl"><div id="divisionFacetChart" aria-label="Division facet comparison chart"></div></div>
         </article>
+      </div>
+    </section>
+
+    <section id="plcs" class="tab-panel">
+      <div class="section-heading plc-section-heading">
+        <div>
+          <p class="eyebrow">Professional Learning Communities</p>
+          <h2>Patterns within PLC evidence</h2>
+          <p>Use the 2026–27 staff Position data to group faculty into grade-level and subject-area PLCs, then examine frequency, breadth, trends, question focus and recurring language in observation comments.</p>
+        </div>
+        <div class="filter-field plc-selector">
+          <label for="plcSelect">PLC / department</label>
+          <select id="plcSelect"><option value="All">All PLCs</option></select>
+        </div>
+      </div>
+
+      <div id="plcYearNotice"></div>
+      <div id="plcOverviewGrid" class="plc-overview-grid"></div>
+
+      <div id="plcDetail" class="plc-detail" hidden>
+        <div class="plc-detail-head">
+          <div>
+            <p class="eyebrow">Selected PLC</p>
+            <h2 id="plcDetailTitle"></h2>
+            <p id="plcDetailContext"></p>
+          </div>
+          <button id="plcOpenEvidence" class="button button-secondary" type="button">Open PLC evidence</button>
+        </div>
+
+        <div id="plcKpis" class="coverage-summary plc-kpis"></div>
+
+        <div class="grid grid-12">
+          <article class="card span-8">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">TLF pattern</p>
+                <h2>Frequency and breadth</h2>
+                <p class="card-copy">Frequency is the percentage of PLC observations containing a facet. Breadth is the percentage of the full PLC roster represented by evidence containing that facet.</p>
+              </div>
+            </div>
+            <div id="plcTlfProfile"></div>
+          </article>
+
+          <article class="card span-4">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">PLC roster</p>
+                <h2>Who is represented?</h2>
+                <p class="card-copy">Observation count by PLC member under the active dashboard filters.</p>
+              </div>
+            </div>
+            <div id="plcRosterPanel" class="plc-roster-panel"></div>
+          </article>
+
+          <article class="card span-12">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">Movement</p>
+                <h2>How is the PLC evidence changing?</h2>
+                <p class="card-copy" id="plcTrendNote">28-day evidence windows · percentage of PLC observations containing at least one commendation facet from each TLF lens.</p>
+              </div>
+            </div>
+            <div class="trend-grid">
+              <div class="trend-panel being">
+                <div class="trend-panel-head"><span>BEING</span><strong>Personalization · Agency</strong></div>
+                <div class="chart-box trend-chart"><div id="plcTrendBeing" aria-label="PLC Being trend chart"></div></div>
+              </div>
+              <div class="trend-panel connecting">
+                <div class="trend-panel-head"><span>CONNECTING</span><strong>Authenticity · Creativity</strong></div>
+                <div class="chart-box trend-chart"><div id="plcTrendConnecting" aria-label="PLC Connecting trend chart"></div></div>
+              </div>
+              <div class="trend-panel doing">
+                <div class="trend-panel-head"><span>DOING</span><strong>Collaboration · Taking Action</strong></div>
+                <div class="chart-box trend-chart"><div id="plcTrendDoing" aria-label="PLC Doing trend chart"></div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card span-6">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">Question focus</p>
+                <h2>Commendation questions</h2>
+                <p class="card-copy">Questions selected alongside commendations in this PLC's evidence.</p>
+              </div>
+            </div>
+            <div id="plcCommQuestions"></div>
+          </article>
+
+          <article class="card span-6">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">Question focus</p>
+                <h2>Wondering questions</h2>
+                <p class="card-copy">Questions selected alongside wonderings in this PLC's evidence.</p>
+              </div>
+            </div>
+            <div id="plcWonderQuestions"></div>
+          </article>
+
+          <article class="card span-12">
+            <div class="card-head">
+              <div>
+                <p class="card-kicker">Open comments</p>
+                <h2>Recurring language and representative evidence</h2>
+                <p class="card-copy">Deterministic text extraction only — recurring language is counted from comments and representative excerpts are shown verbatim. This is not an AI-generated summary.</p>
+              </div>
+            </div>
+            <div id="plcCommentSignals" class="plc-comment-signals"></div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1979,7 +2137,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     });
     if(one)one.addEventListener('change',()=>{state.explorerOnePerFaculty=one.checked;explorerPage=1;renderExplorer();updateUrlState();});
     if(clear)clear.addEventListener('click',()=>{
-      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerSearch='';
+      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerSearch='';
       if(el('observationSearch'))el('observationSearch').value='';
       explorerPage=1;renderExplorer();renderActiveFilters();updateUrlState();
     });
@@ -2001,9 +2159,11 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     const observer=q.get('observer');if(observer&&[...el('observerFilter').options].some(o=>o.value===observer)){state.observer=observer;el('observerFilter').value=observer;}
     const et=q.get('evidence');if(['all','commendation','wondering'].includes(et))state.explorerEvidenceType=et;
     const facet=q.get('facet');if(facet)state.explorerFacet=facet;
+    const plc=q.get('plc');if(plc&&PLC_ORDER.includes(plc))state.plc=plc;
+    const eplc=q.get('eplc');if(eplc&&PLC_ORDER.includes(eplc))state.explorerPlc=eplc;
     state.explorerOnePerFaculty=q.get('one')==='1';
     const search=q.get('search');if(search){state.explorerSearch=search;if(el('observationSearch'))el('observationSearch').value=search;}
-    const tab=q.get('tab');if(['overview','facets','coverage','explorer','admin'].includes(tab)){
+    const tab=q.get('tab');if(['overview','facets','plcs','coverage','explorer','admin'].includes(tab)){
       qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
       qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===tab));
     }
@@ -2026,6 +2186,8 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     if(state.faculty)q.set('faculty',state.faculty);
     if(state.explorerEvidenceType!=='all')q.set('evidence',state.explorerEvidenceType);
     if(state.explorerFacet)q.set('facet',state.explorerFacet);
+    if(state.plc&&state.plc!=='All')q.set('plc',state.plc);
+    if(state.explorerPlc)q.set('eplc',state.explorerPlc);
     if(state.explorerOnePerFaculty)q.set('one','1');
     if(state.explorerSearch)q.set('search',state.explorerSearch);
     const query=q.toString();
@@ -2140,7 +2302,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
 
   function renderExplorer(){
     syncExplorerControls();
-    let rows=selectedRows().filter(rowMatchesExplorerFacet);
+    let rows=selectedRows().filter(rowMatchesExplorerFacet).filter(rowMatchesExplorerPlc);
     const needle=state.explorerSearch.toLowerCase();
     if(needle)rows=rows.filter(r=>searchBlob(r).includes(needle));
     rows=rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
@@ -2165,6 +2327,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
         ['',typeLabel],
         ['',state.explorerFacet||'All facets']
       ];
+      if(state.explorerPlc)chips.push(['primary','PLC: '+state.explorerPlc]);
       if(state.explorerOnePerFaculty)chips.push(['','One per faculty · '+beforeDedupe+' → '+rows.length]);
       summary.innerHTML=chips.map(x=>'<span class="meeting-chip '+x[0]+'">'+esc(x[1])+'</span>').join('');
     }
@@ -2196,11 +2359,227 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   }
 
   function resetFilters(){
-    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.period='schoolyear';state.customStart='';state.customEnd='';
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.explorerPlc='';state.plc='All';state.period='schoolyear';state.customStart='';state.customEnd='';
     setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
     el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
     toggleCustomDates();explorerPage=1;renderAll();
   }
+
+
+  // PLC / department analysis derived from the SY26-27 faculty Position column.
+  const PLC_ROSTER={"Pre-Kindergarten":["Karen Robb","Jackie Cloete","Maria Evans","Ryan Carter","Ruan Cloete"],"Kindergarten":["Kenya Colebrooke","Naomi Ngai","Tammy Wilson","Angela McCloskey"],"Grade 1":["Lovina Pinto","Sonia Endara","Cathryn Mund","Joshua Neufeld"],"Grade 2":["Kylie M Munce","Leighanna Stewart","Mike Morrison"],"Grade 3":["Steph Watkins","Will Henry","Haley Osbourne","Meagan Elderkin"],"Grade 4":["Brittany O'Neal","Patricia Inayaty","Narelle Yakas","Kent Watkins"],"Grade 5":["Audrey Lawler","Laurie MacNaughton","Taralyn Lefebvre","Mitch Madigan"],"Elementary EAL":["Ashley Faulkenberry","Jonathan Tragash","Jake Charles","Kyle Chamberlain","Jessica Davis","Renea Thompson"],"Elementary Arts":["Vicki Chen","Amanda Deibert","Phillip Hommes","Tchafikah Buissereth"],"Elementary PE":["Charles Rhodes","Joe Dzogazovic","James Ryan"],"Elementary Mandarin":["Jean Li","Jenny Bai","Kitty Tang","Jessie Lyu","Lotus Zhou","Lisa Xiong","Angelina Liu"],"Elementary Student Support":["Adrienne Johnson","Elliot Fijman","Amelie Sun","Brittany Zhuang","Delissa Job","James Ryan","Rana Cheatwood"],"Secondary Arts & Design":["Jason Boyd","Siddhartha Bose","Peter Pagett","Cyril Udall","Lisamary Guiliany Zambrano","Jonetta Loo","Duncan Brain","Maria Plaza Stuve","Nneka Okwuosa","Santisha Sonilal","Sebastian Paredes"],"Secondary Language Acquisition":["Lisamary Guiliany Zambrano","Gaby Montejano Gauna","Steven Schwab","Sylvie Thimonier","Eric Little","Fuad Hasanagic","Leila El-Murr","Amy Fuang","Bei Lei","Ping Wang"],"Secondary Language & Literature":["Audrey Boettcher","Erica Trobridge","Jesse Ridolfo","Jane McGennisken","NamHee Parl","Burke Reed","Cassandra Eagan","Pearl Chen","Joyce Zhang","Juliana Zhu"],"Secondary Individuals & Societies":["Alexis Partee","Marlee Charlton","John Munce","Timothy Ackers","James Earwood","Roneil Omadat"],"Secondary Mathematics":["Zach Navarro","Esteban Isasi Catala","Irene Peter","Vincent Huang","Mario Fuang","Kennedi Crosby"],"Secondary Science":["Michael Hartmann","Shryl Francisco","Alexis Cupp","Briana Clarke","Joseph Boettcher","Adam Abbas","Bruce Steinburg"],"Secondary Health & PE":["Erik Schmidt","Diego Buchheim Lopez","Alex Bukenya","Sharon Kemirembe","Emma Ryan"],"Secondary Student Support":["Addie Parker","Aaron Beetz","Brittney Young","Yizhou Liu","Nedra Brown","Kade Johnson","Silky Vyas","Nikki Bunnell","Anh, Nguyen"]};
+  const PLC_ALIASES={"Angela Mc Closkey":"Angela McCloskey","Cat Mund":"Cathryn Mund","Cathryn Mund":"Cathryn Mund","Joe Boettcher":"Joseph Boettcher","Kylie Munce":"Kylie M Munce","Lovina Hommes-Pinto":"Lovina Pinto","Michael Morrison":"Mike Morrison","Nam Hee Park":"NamHee Parl","Phillip Hommes-Pinto":"Phillip Hommes","Tim Ackers":"Timothy Ackers","Zachary Navarro":"Zach Navarro","Cameron Munce":"John Munce","Anh Nguyen":"Anh, Nguyen","Gaby Montejano":"Gaby Montejano Gauna","Eric R. Little":"Eric Little","Jacqueline Cloete":"Jackie Cloete"};
+  const PLC_ORDER=Object.keys(PLC_ROSTER);
+  const PLC_COMMENT_STOP=new Set(('a an and are as at be been being but by can could did do does doing for from had has have having he her hers him his how i if in into is it its may might more most much my of on or our ours she should so some such than that the their theirs them then there these they this those through to too under up very was we were what when where which while who why will with would you your yours observed observation class classroom lesson activity task work working learning learn learners teacher teachers student students').split(' '));
+  Object.assign(state,{plc:state.plc||'All',explorerPlc:state.explorerPlc||''});
+
+  function plcDivision(plc){return plc&&plc.startsWith('Secondary')?'Secondary':'Elementary';}
+  function canonicalPlcName(name){return PLC_ALIASES[name]||name;}
+  function plcMembers(plc){
+    let members=(PLC_ROSTER[plc]||[]).slice();
+    const needle=String(state.faculty||'').toLowerCase();
+    if(needle)members=members.filter(n=>n.toLowerCase().includes(needle)||Object.entries(PLC_ALIASES).some(([a,c])=>c===n&&a.toLowerCase().includes(needle)));
+    return members;
+  }
+  function plcsForFaculty(name){
+    const canon=canonicalPlcName(name);
+    return PLC_ORDER.filter(plc=>(PLC_ROSTER[plc]||[]).includes(canon));
+  }
+  function rowMatchesPlc(r,plc){return !plc||plc==='All'||plcsForFaculty(r.faculty).includes(plc);}
+  function rowsForPlc(rows,plc){return rows.filter(r=>rowMatchesPlc(r,plc));}
+  function availablePlcs(){
+    if(state.division==='Elementary')return PLC_ORDER.filter(p=>plcDivision(p)==='Elementary');
+    if(state.division==='Secondary')return PLC_ORDER.filter(p=>plcDivision(p)==='Secondary');
+    return PLC_ORDER.slice();
+  }
+
+  function renderAll(){
+    applyUrlStateOnce();
+    refreshObserverOptions();
+    refreshFacultyOptions();
+    renderActiveFilters();
+    renderOverview();
+    renderFacets();
+    renderPlcs();
+    renderCoverage();
+    renderExplorer();
+    renderAdminP2();
+    updateUrlState();
+  }
+
+  function renderPlcs(){
+    const yearNotice=el('plcYearNotice'),overview=el('plcOverviewGrid'),detail=el('plcDetail'),select=el('plcSelect');
+    if(!overview||!detail||!select)return;
+    if(state.year!=='2026-27'){
+      yearNotice.innerHTML='<div class="plc-notice">PLC membership is sourced from the SY26–27 faculty/staff Position data, so this view is intentionally limited to 2026–27 rather than applying the current roster retrospectively to another school year.</div>';
+      overview.innerHTML='';
+      detail.hidden=true;
+      select.innerHTML='<option value="All">2026–27 PLC roster only</option>';
+      select.disabled=true;
+      return;
+    }
+    yearNotice.innerHTML='';
+    select.disabled=false;
+    const plcs=availablePlcs();
+    if(state.plc!=='All'&&!plcs.includes(state.plc))state.plc='All';
+    select.innerHTML='<option value="All">All PLCs</option>'+plcs.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
+    select.value=state.plc;
+    select.onchange=()=>{state.plc=select.value;renderPlcs();updateUrlState();};
+
+    const base=selectedRows();
+    overview.innerHTML=plcs.map(plc=>{
+      const rows=rowsForPlc(base,plc),members=plcMembers(plc),canonObserved=unique(rows.map(r=>canonicalPlcName(r.faculty)).filter(n=>members.includes(n)));
+      const ce=FACETS.map(f=>({f,ev:facetEvidence(rows,f,'commendation')})).sort((a,b)=>b.ev.frequency-a.ev.frequency)[0];
+      const we=FACETS.map(f=>({f,ev:facetEvidence(rows,f,'wondering')})).sort((a,b)=>b.ev.frequency-a.ev.frequency)[0];
+      return '<button type="button" class="plc-card '+(state.plc===plc?'active':'')+'" data-plc-card="'+esc(plc)+'"><span class="plc-card-division">'+esc(plcDivision(plc))+'</span><h3>'+esc(plc)+'</h3><div class="plc-card-metrics"><div><b>'+rows.length+'</b><small>observations</small></div><div><b>'+canonObserved.length+'/'+members.length+'</b><small>members represented</small></div></div><div class="plc-card-signal"><b>C</b> '+esc(ce&&ce.ev.observations?ce.f:'—')+' · <b>W</b> '+esc(we&&we.ev.observations?we.f:'—')+'</div></button>';
+    }).join('');
+    qsa('[data-plc-card]',overview).forEach(btn=>btn.addEventListener('click',()=>{state.plc=btn.dataset.plcCard;select.value=state.plc;renderPlcs();updateUrlState();}));
+
+    if(state.plc==='All'){
+      detail.hidden=true;
+      return;
+    }
+    detail.hidden=false;
+    renderPlcDetail(state.plc,rowsForPlc(base,state.plc));
+  }
+
+  function renderPlcDetail(plc,rows){
+    const roster=plcMembers(plc),byFaculty=countBy(rows,r=>canonicalPlcName(r.faculty||'Unknown'));delete byFaculty.Unknown;
+    const represented=roster.filter(n=>byFaculty[n]).length;
+    const observers=unique(rows.map(r=>r.observer).filter(Boolean)).length;
+    const responses=rows.filter(r=>r.hasResponse).length;
+    const repeated=roster.filter(n=>(byFaculty[n]||0)>=2).length;
+    el('plcDetailTitle').textContent=plc;
+    el('plcDetailContext').textContent=plcDivision(plc)+' · '+periodName()+' · '+rows.length+' observations · '+represented+' of '+roster.length+' PLC members represented';
+    el('plcKpis').innerHTML=[
+      ['Observations',rows.length,'Selected evidence'],
+      ['Members represented',represented+' / '+roster.length,(roster.length?represented/roster.length*100:0).toFixed(1)+'% of PLC roster'],
+      ['2+ observations',repeated,'PLC members with repeated evidence'],
+      ['Observers',observers,'Leaders contributing evidence'],
+      ['Response rate',(rows.length?responses/rows.length*100:0).toFixed(1)+'%',responses+' of '+rows.length+' observations']
+    ].map(x=>'<div class="coverage-stat"><strong>'+esc(x[1])+'</strong><span>'+esc(x[0])+'</span><small>'+esc(x[2])+'</small></div>').join('');
+
+    renderPlcFacetProfile(plc,rows);
+    renderPlcRoster(plc,rows);
+    renderPlcTrends(rows);
+    renderPlcQuestions('plcCommQuestions',rows,'commendation',plc);
+    renderPlcQuestions('plcWonderQuestions',rows,'wondering',plc);
+    renderPlcCommentSignals(rows,plc);
+
+    const open=el('plcOpenEvidence');
+    open.onclick=()=>{state.explorerPlc=plc;explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();};
+  }
+
+  function plcFacetEvidence(plc,rows,facet,type){
+    const roster=plcMembers(plc);
+    const matches=rows.filter(r=>type==='commendation'?[...new Set(r.commendations||[])].includes(facet):r.wonderingFacet===facet);
+    const faculty=unique(matches.map(r=>canonicalPlcName(r.faculty)).filter(n=>roster.includes(n)));
+    return {observations:matches.length,frequency:rows.length?matches.length/rows.length*100:0,faculty:faculty.length,breadth:roster.length?faculty.length/roster.length*100:0};
+  }
+
+  function renderPlcFacetProfile(plc,rows){
+    const host=el('plcTlfProfile');if(!host)return;
+    let html='<div class="tlf-profile-key"><span><strong>Frequency</strong> = % of PLC observations containing the facet</span><span><strong>Breadth</strong> = % of the full PLC roster represented by that facet evidence</span></div><div class="evidence-profile"><div class="evidence-profile-head"><span>Facet</span><span>Lens</span><span>Frequency</span><span>Breadth</span><span>Evidence context</span></div>';
+    FACETS.forEach(f=>{
+      const lens=LENS[f],color=lensColor(lens),ce=plcFacetEvidence(plc,rows,f,'commendation'),we=plcFacetEvidence(plc,rows,f,'wondering');
+      const meter=(ev,kind,type)=>'<div class="evidence-metric-line '+type+'"><span class="evidence-type">'+(type==='wondering'?'W':'C')+'</span><span class="evidence-meter" style="--lens:'+color+'"><i style="--value:'+Math.min(100,kind==='frequency'?ev.frequency:ev.breadth)+'%"></i></span><span class="evidence-value">'+(kind==='frequency'?ev.frequency:ev.breadth).toFixed(1)+'%</span></div>';
+      html+='<div class="evidence-profile-row"><button type="button" class="tlf-facet-button" data-plc-facet="'+esc(f)+'">'+esc(f)+'</button><span class="lens-chip '+lens.toLowerCase()+'">'+esc(lens)+'</span><div class="evidence-metric">'+meter(ce,'frequency','commendation')+meter(we,'frequency','wondering')+'</div><div class="evidence-metric">'+meter(ce,'breadth','commendation')+meter(we,'breadth','wondering')+'</div><div class="evidence-context"><b>C</b> '+ce.observations+' obs · '+ce.faculty+' members<br><b>W</b> '+we.observations+' obs · '+we.faculty+' members</div></div>';
+    });
+    host.innerHTML=html+'</div>';
+    qsa('[data-plc-facet]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerPlc=plc;state.explorerFacet=btn.dataset.plcFacet;explorerPage=1;switchTab('explorer');renderExplorer();renderActiveFilters();updateUrlState();}));
+  }
+
+  function renderPlcRoster(plc,rows){
+    const host=el('plcRosterPanel');if(!host)return;
+    const roster=plcMembers(plc),counts=countBy(rows,r=>canonicalPlcName(r.faculty||'Unknown'));
+    host.innerHTML=roster.map(name=>'<div class="plc-member '+((counts[name]||0)?'':'unobserved')+'"><div><strong>'+esc(name)+'</strong><span>'+(counts[name]||0?' represented':' no matching observation in this view')+'</span></div><span class="plc-member-count">'+(counts[name]||0)+'</span></div>').join('');
+  }
+
+  function renderPlcTrends(rows){
+    const windows=build28DayWindows(rows),note=el('plcTrendNote');
+    if(note)note.textContent=windows.length<2?'Not enough PLC history yet for a stable trend; showing the available 28-day evidence window.':'28-day evidence windows · percentage of PLC observations containing at least one commendation facet from each TLF lens. Window sizes vary, so use the lines as inquiry prompts.';
+    const labels=windows.map(w=>w.end.toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}));
+    Object.keys(LENS_FACETS).forEach(lens=>{
+      const data=windows.map(w=>+lensEvidence(w.rows,lens,'commendation').frequency.toFixed(1));
+      makeChart('plcTrend'+lens,'line',{labels,datasets:[{label:lens+' prevalence',data,borderColor:lensColor(lens),borderWidth:3}]},{maintainAspectRatio:false,plugins:{legend:{display:false}}});
+    });
+  }
+
+  function plcQuestionEntries(rows,type){
+    const map=new Map();
+    rows.forEach(r=>{
+      const qs=type==='commendation'?(r.guidingQuestions||[]).slice(0,2):[(r.guidingQuestions||[])[2]];
+      const seen=new Set();
+      qs.forEach(raw=>{const q=normalizeQuestion(raw);if(q&&q!=='---')seen.add(q);});
+      seen.forEach(q=>map.set(q,(map.get(q)||0)+1));
+    });
+    return [...map.entries()].map(([q,n])=>({q,n,pct:rows.length?n/rows.length*100:0})).sort((a,b)=>b.n-a.n||a.q.localeCompare(b.q));
+  }
+
+  function renderPlcQuestions(id,rows,type,plc){
+    const host=el(id);if(!host)return;
+    const entries=plcQuestionEntries(rows,type);
+    if(!entries.length){host.innerHTML='<div class="plc-empty">No '+esc(type)+' guiding questions are recorded in this PLC evidence.</div>';return;}
+    host.innerHTML='<div class="plc-question-list">'+entries.slice(0,7).map(x=>'<div class="plc-question-item"><button type="button" class="plc-question-button" data-plc-question="'+esc(x.q)+'">'+esc(shorten(x.q,150))+'</button><div class="plc-question-count"><strong>'+x.n+'</strong><small>'+x.pct.toFixed(1)+'% of obs</small></div></div>').join('')+'</div>';
+    qsa('[data-plc-question]',host).forEach(btn=>btn.addEventListener('click',()=>{state.explorerPlc=plc;state.explorerSearch=btn.dataset.plcQuestion;el('observationSearch').value=state.explorerSearch;explorerPage=1;switchTab('explorer');renderExplorer();updateUrlState();}));
+  }
+
+  function plcCommentItems(rows,type){
+    const items=[];
+    rows.forEach(r=>{
+      if(type==='commendation'){
+        (r.commendationText||[]).forEach(text=>{const t=String(text||'').replace(/\s+/g,' ').trim();if(t)items.push({row:r,text:t});});
+      }else{
+        const t=String(r.wonderingText||'').replace(/\s+/g,' ').trim();if(t)items.push({row:r,text:t});
+      }
+    });
+    return items;
+  }
+
+  function plcRecurringLanguage(items){
+    const pairCounts=new Map(),singleCounts=new Map();
+    items.forEach(item=>{
+      const tokens=(item.text.toLowerCase().match(/[a-z][a-z'-]{2,}/g)||[]);
+      const pairs=new Set(),singles=new Set();
+      for(let i=0;i<tokens.length;i++){
+        const a=tokens[i],b=tokens[i+1];
+        if(!PLC_COMMENT_STOP.has(a)&&a.length>3)singles.add(a);
+        if(b&&!PLC_COMMENT_STOP.has(a)&&!PLC_COMMENT_STOP.has(b)&&a.length>2&&b.length>2)pairs.add(a+' '+b);
+      }
+      pairs.forEach(x=>pairCounts.set(x,(pairCounts.get(x)||0)+1));
+      singles.forEach(x=>singleCounts.set(x,(singleCounts.get(x)||0)+1));
+    });
+    let out=[...pairCounts.entries()].filter(x=>x[1]>=2).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,6).map(([term,count])=>({term,count}));
+    if(out.length<4){
+      const used=new Set(out.flatMap(x=>x.term.split(' ')));
+      out=out.concat([...singleCounts.entries()].filter(x=>x[1]>=2&&!used.has(x[0])).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).slice(0,6-out.length).map(([term,count])=>({term,count})));
+    }
+    return out;
+  }
+
+  function plcRepresentativeExcerpt(items,language){
+    if(!items.length)return null;
+    if(language.length){
+      const term=language[0].term.toLowerCase();
+      const hit=items.find(x=>x.text.toLowerCase().includes(term));
+      if(hit)return hit;
+    }
+    return items.slice().sort((a,b)=>Math.abs(a.text.length-220)-Math.abs(b.text.length-220))[0];
+  }
+
+  function renderPlcCommentSignals(rows,plc){
+    const host=el('plcCommentSignals');if(!host)return;
+    const block=(type,label)=>{
+      const items=plcCommentItems(rows,type),language=plcRecurringLanguage(items),excerpt=plcRepresentativeExcerpt(items,language);
+      const chips=language.length?'<div class="language-chips">'+language.map(x=>'<span class="language-chip">'+esc(x.term)+' <b>'+x.count+'</b></span>').join('')+'</div>':'<div class="focus-note">Not enough repeated language yet to surface a recurring term.</div>';
+      const ex=excerpt?'<div class="plc-excerpt"><p>“'+esc(shorten(excerpt.text,260))+'”</p><button type="button" class="view-button" data-plc-excerpt="'+esc(String(excerpt.row.id))+'">View source observation</button></div>':'<div class="plc-empty">No written '+esc(label.toLowerCase())+' comments in this view.</div>';
+      return '<div class="plc-comment-column"><h3>'+esc(label)+'</h3>'+chips+ex+'</div>';
+    };
+    host.innerHTML=block('commendation','Commendation comments')+block('wondering','Wondering comments');
+    qsa('[data-plc-excerpt]',host).forEach(btn=>btn.addEventListener('click',()=>openObservation(btn.dataset.plcExcerpt)));
+  }
+
+  function rowMatchesExplorerPlc(r){return !state.explorerPlc||rowMatchesPlc(r,state.explorerPlc);}
 
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
