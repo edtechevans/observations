@@ -19,15 +19,15 @@ The production data file is `data/observations-full.csv`. The dashboard loads th
 
 ## Data verification
 
-The published CSV is the 23 September 2026 source supplied for this dashboard and validates to 741 observation rows. Windows-1252 punctuation was normalized to UTF-8 for browser display, and three quote-sensitive historical records were checked against the prior canonical rows and repaired without changing their field values. Dashboard totals reconcile to the source totals below.
+The published CSV is the latest source supplied for this dashboard, with observation data through **24 September 2026**. The uploaded source contained 743 rows; the published dashboard source contains **740 included observations** after applying the standing observation-population exclusions for **Silky Vyas** and **Santisha Sonilal** (three historical rows in total). The file is published as UTF-8 for browser display.
 
 Current totals:
 
-- **741** observations overall
-- **2025–26:** 538 observations, 108 faculty after name normalization, 487 responses
-- **2026–27:** 203 observations, 106 faculty observed, 188 responses
-- **2026–27 division:** 92 Elementary observations, 111 Secondary observations
-- **2026–27 time of class:** 61 Beginning, 107 Middle, 35 End
+- **740** included observations overall
+- **2025–26:** 535 observations, 106 faculty after name normalization, 484 responses
+- **2026–27:** 205 observations, 106 faculty observed, 194 responses
+- **2026–27 division:** 94 Elementary observations, 111 Secondary observations
+- **2026–27 time of class:** 61 Beginning, 108 Middle, 36 End
 
 Five source-name aliases sharing the same faculty email are normalized to a single display name in dashboard calculations: Cat/Cathryn Mund, Eric/Eric R. Little, Gaby Montejano/Gaby Montejano Gauna, Jackie/Jacqueline Cloete, and Michael/Mike Morrison.
 
@@ -46,7 +46,7 @@ A dashboard-wide **Observer group** control supports two views:
 
 The control filters every KPI, chart, coverage calculation, pattern view and Observation Explorer result. The individual Observer dropdown is also restricted to the selected observer group.
 
-With the 23 September 2026 data, the Principals + APs view contains **123 observations across 102 faculty**, compared with **203 observations across 106 faculty** for all leaders.
+With the current 2026–27 data, the Principals + APs view contains **124 observations across 102 faculty**, compared with **205 observations across 106 faculty** for all leaders.
 
 ## Views
 
