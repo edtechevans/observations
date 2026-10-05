@@ -1691,7 +1691,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"responses":487,"elementary":342,"secondary":196,"beginning":192,"middle":275,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":203,"faculty":106,"responses":188,"elementary":92,"secondary":111,"beginning":61,"middle":107,"end":35,"minDate":20260810,"maxDate":20260923}},"sourceRows":741};
+window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":205,"faculty":106,"responses":194,"elementary":94,"secondary":111,"beginning":61,"middle":108,"end":36,"minDate":20260810,"maxDate":20260924}},"sourceRows":740};
 </script>
   <script>
 (() => {
@@ -1713,6 +1713,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
     lightNavy:'#8db8d8', lightRed:'#e798a8', lightGrey:'#aab1b8', grid:'#e8edf2'
   };
   const COORDINATORS = new Set(['Ralph Emmerink','Katriona Hoskins','Flavia Di Luccio','Samantha Rogers']);
+  const EXCLUDED_FACULTY = new Set(['Silky Vyas','Santisha Sonilal']);
   const ROSTER_SEED_2026 = [];
   const PAGE_SIZE = 14;
   const DB_NAME = 'aisg-observations-dashboard';
@@ -2262,22 +2263,23 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
   }
 
   async function loadPublishedRows(){
-    const res=await fetch('./data/observations-full.csv?v=20260923-1',{cache:'no-store'});
+    const res=await fetch('./data/observations-full.csv?v=20261005-1',{cache:'no-store'});
     if(!res.ok) throw new Error(`Dataset request failed: ${res.status}`);
     const text=await res.text();
     const normalized=normalizeRawRows(parseCsvText(text));
-    if(normalized.length!==741) throw new Error(`Expected 741 observations, received ${normalized.length}`);
+    if(!normalized.length) throw new Error('Published observation dataset is empty');
     return normalized;
   }
 
   function normalizeRawRows(rawRows){
+    const includedRows=rawRows.filter(r=>!EXCLUDED_FACULTY.has(String(r.Observing||'').trim()));
     const latestByEmail={};
-    rawRows.forEach(r=>{
+    includedRows.forEach(r=>{
       const email=String(r.Email||'').trim().toLowerCase(), name=String(r.Observing||'').trim(), date=parseCsvDate(r.Date);
       if(!email||!name||!date)return;
       if(!latestByEmail[email]||date>latestByEmail[email].date) latestByEmail[email]={name,date};
     });
-    return rawRows.map((r,idx)=>{
+    return includedRows.map((r,idx)=>{
       const date=parseCsvDate(r.Date); if(!date)return null;
       const dateIso=isoDate(date), email=String(r.Email||'').trim().toLowerCase();
       return {
@@ -2334,7 +2336,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":538,"faculty":108,"re
       strip.classList.add('private'); strip.innerHTML='<div><strong>Local replacement dataset.</strong> This browser is using the CSV you loaded.</div><span class="data-notice-note">Clear local data to return to the complete published source dataset.</span>';
     }else if(dataMode==='public-full'){
       badge.textContent='Complete source data'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
-      strip.classList.remove('private'); strip.innerHTML='<div><strong>Complete observation dataset.</strong> Faculty and observer names, notes, written commendations, wonderings, guiding questions, emails and faculty responses are included.</div><span class="data-notice-note">741 source observations · full narrative evidence available.</span>';
+      strip.classList.remove('private'); strip.innerHTML='<div><strong>Complete observation dataset.</strong> Faculty and observer names, notes, written commendations, wonderings, guiding questions, emails and faculty responses are included.</div><span class="data-notice-note">'+fmt.format(allRows.length)+' included source observations · full narrative evidence available.</span>';
     }else{
       badge.textContent='Dataset unavailable'; badge.classList.remove('private'); el('clearPrivateBtn').hidden=true;
       strip.classList.remove('private'); strip.innerHTML='<div><strong>Complete dataset could not be loaded.</strong> No reduced or redacted fallback is shown.</div><span class="data-notice-note">Refresh to retry the complete source dataset.</span>';
