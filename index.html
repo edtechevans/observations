@@ -1816,7 +1816,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   };
   const COORDINATORS = new Set(['Ralph Emmerink','Katriona Hoskins','Flavia Di Luccio','Samantha Rogers']);
   const EXCLUDED_FACULTY = new Set(['Silky Vyas','Santisha Sonilal']);
-  const ROSTER_SEED_2026 = [];
+  // The 2026–27 roster is derived from the PLC mapping below; observed-but-unmapped faculty are added at runtime.
   const PAGE_SIZE = 14;
   const DB_NAME = 'aisg-observations-dashboard';
   const DB_STORE = 'datasets';
@@ -1919,11 +1919,19 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function refreshFacultyOptions(){
-    const names=unique(allRows.filter(r=>
-      (!state.year||r.schoolYear===state.year) &&
-      (state.division==='All'||r.division===state.division) &&
-      (state.observerScope!=='principals'||!COORDINATORS.has(r.observer))
-    ).map(r=>r.faculty).filter(Boolean)).sort((a,b)=>a.localeCompare(b));
+    let names;
+    if(state.year==='2026-27'){
+      names=currentRosterEntries()
+        .filter(x=>state.division==='All'||x.division===state.division)
+        .map(x=>x.name);
+    }else{
+      names=allRows.filter(r=>
+        (!state.year||r.schoolYear===state.year) &&
+        (state.division==='All'||r.division===state.division) &&
+        (state.observerScope!=='principals'||!COORDINATORS.has(r.observer))
+      ).map(r=>facultyKey(r.faculty,r.schoolYear)).filter(Boolean);
+    }
+    names=unique(names).sort((a,b)=>a.localeCompare(b));
     const list=el('facultyOptions'); if(list) list.innerHTML=names.map(n=>`<option value="${esc(n)}"></option>`).join('');
   }
 
@@ -2171,10 +2179,10 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function renderCoverageSummary(rows){
-    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');
+    const byFaculty=countBy(rows,r=>facultyKey(r.faculty,r.schoolYear)||'Unknown');delete byFaculty.Unknown;
     const vals=Object.values(byFaculty);
     const roster=rosterForView();
-    const observed=new Set(Object.keys(byFaculty).filter(x=>x&&x!=='Unknown'));
+    const observed=new Set(Object.keys(byFaculty));
     let stats;
     if(roster){
       const reached=roster.filter(x=>observed.has(x.name)).length;
@@ -2200,12 +2208,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 
   function rosterForView(){
     if(state.year!=='2026-27') return null;
-    const map=new Map();
-    allRows.filter(r=>r.schoolYear==='2026-27'&&r.faculty).forEach(r=>{
-      if(!map.has(r.faculty)) map.set(r.faculty,{name:r.faculty,division:r.division});
-    });
-    ROSTER_SEED_2026.forEach(x=>{if(!map.has(x.name))map.set(x.name,{...x});});
-    let roster=[...map.values()];
+    let roster=currentRosterEntries();
     if(state.division!=='All') roster=roster.filter(x=>x.division===state.division);
     const needle=state.faculty.toLowerCase();
     if(needle) roster=roster.filter(x=>x.name.toLowerCase().includes(needle));
@@ -2221,11 +2224,11 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
       return;
     }
     card.hidden=false;
-    const observed=new Set(rows.map(r=>r.faculty).filter(Boolean));
+    const observed=new Set(rows.map(r=>facultyKey(r.faculty,r.schoolYear)).filter(Boolean));
     const missing=roster.filter(x=>!observed.has(x.name));
     root.innerHTML=missing.length
-      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view. It currently reflects faculty represented in the 2026–27 observation population. Click a name to filter.</div>`
-      : `<div class="roster-gap-empty">Everyone in the working roster has been reached in this view.</div><div class="roster-source-note">Working 2026–27 roster: ${roster.length} faculty in this view.</div>`;
+      ? `<div class="roster-gap-list">${missing.map(x=>`<button type="button" class="roster-chip" data-roster-faculty="${esc(x.name)}">${esc(x.name)}</button>`).join('')}</div><div class="roster-source-note">Current 2026–27 roster: ${roster.length} faculty in this view, derived from the PLC mapping plus any observed-but-unmapped faculty. Click a name to filter.</div>`
+      : `<div class="roster-gap-empty">Everyone in the current roster has been reached in this view.</div><div class="roster-source-note">Current 2026–27 roster: ${roster.length} faculty in this view.</div>`;
     qsa('[data-roster-faculty]',root).forEach(btn=>btn.addEventListener('click',()=>{
       state.faculty=btn.dataset.rosterFaculty;
       el('facultySearch').value=state.faculty;
@@ -2235,10 +2238,13 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function renderCoverageChart(rows){
-    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');
-    const buckets={'1':0,'2':0,'3':0,'4+':0};
-    Object.values(byFaculty).forEach(n=>{ if(n>=4)buckets['4+']++; else buckets[String(n)]++; });
-    makeChart('coverageChart','bar',{labels:Object.keys(buckets),datasets:[{label:'Faculty',data:Object.values(buckets),backgroundColor:COLOR.navy,borderRadius:8}]},{maintainAspectRatio:false,scales:{x:{grid:{display:false},title:{display:true,text:'Observations per faculty'}},y:{beginAtZero:true,ticks:{precision:0},title:{display:true,text:'Faculty'}}},plugins:{legend:{display:false}}});
+    const byFaculty=countBy(rows,r=>facultyKey(r.faculty,r.schoolYear)||'Unknown');delete byFaculty.Unknown;
+    const roster=rosterForView();
+    const values=roster?roster.map(x=>byFaculty[x.name]||0):Object.values(byFaculty);
+    const buckets={'0':0,'1':0,'2':0,'3':0,'4+':0};
+    values.forEach(n=>{if(n>=4)buckets['4+']++;else buckets[String(n)]++;});
+    const labels=roster?Object.keys(buckets):Object.keys(buckets).filter(k=>k!=='0');
+    makeChart('coverageChart','bar',{labels,datasets:[{label:'Faculty',data:labels.map(k=>buckets[k]),backgroundColor:COLOR.navy,borderRadius:8}]},{maintainAspectRatio:false,scales:{x:{grid:{display:false},title:{display:true,text:'Observations per faculty'}},y:{beginAtZero:true,ticks:{precision:0},title:{display:true,text:'Faculty'}}},plugins:{legend:{display:false}}});
   }
 
   function renderObserverChart(rows){
@@ -2646,7 +2652,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
       if(state.observerScope==='principals'&&COORDINATORS.has(r.observer))return false;
       if(!ignoreObserver&&state.observer!=='All'&&r.observer!==state.observer)return false;
       if(state.time!=='All'&&r.timeOfClass!==state.time)return false;
-      if(needle&&!String(r.faculty||'').toLowerCase().includes(needle))return false;
+      if(needle&&!facultyKey(r.faculty,r.schoolYear).toLowerCase().includes(needle))return false;
       return true;
     });
   }
@@ -2688,10 +2694,11 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function renderKpis(rows){
-    const byFaculty=countBy(rows,r=>r.faculty||'Unknown');delete byFaculty.Unknown;const vals=Object.values(byFaculty);const faculty=Object.keys(byFaculty);
+    const byFaculty=countBy(rows,r=>facultyKey(r.faculty,r.schoolYear)||'Unknown');delete byFaculty.Unknown;
+    const vals=Object.values(byFaculty),faculty=Object.keys(byFaculty);
     const schoolYearRows=baseSelectedRows();const schoolYearTotal=schoolYearRows.length;
     const roster=rosterForView();const reached=roster?roster.filter(x=>faculty.includes(x.name)).length:faculty.length;const reachValue=roster?fmt.format(reached)+' / '+fmt.format(roster.length):fmt.format(reached);
-    const reachSub=roster?(roster.length?(reached/roster.length*100).toFixed(1)+'% of working roster':'Working roster'):'Distinct faculty represented';
+    const reachSub=roster?(roster.length?(reached/roster.length*100).toFixed(1)+'% of current roster':'Current roster'):'Distinct faculty represented';
     const dates=rows.map(r=>parseISODate(r.date)).filter(Boolean).sort((a,b)=>a-b);const end=dates.at(-1);const recentStart=end?addDays(end,-29):null;const recent=end?rows.filter(r=>{const d=parseISODate(r.date);return d>=recentStart&&d<=end;}).length:0;
     const cards=[['School year total',fmt.format(schoolYearTotal),(state.year||'Selected school year')+' observations'],['Faculty reached',reachValue,reachSub],['2+ observations',fmt.format(vals.filter(v=>v>=2).length),'Faculty with repeated evidence'],['3+ observations',fmt.format(vals.filter(v=>v>=3).length),'Faculty with three or more observations'],['Recent observations',fmt.format(recent),end?'Latest 30 days ending '+shortDate(end):'No matching observations']];
     el('kpiGrid').innerHTML=cards.map((c,i)=>'<article class="kpi-card '+(i===0?'accent-red':'')+'"><p class="card-kicker">'+esc(c[0])+'</p><div class="kpi-value">'+esc(c[1])+'</div><div class="kpi-sub">'+esc(c[2])+'</div></article>').join('');
@@ -3345,6 +3352,22 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 
   function plcDivision(plc){return plc&&plc.startsWith('Secondary')?'Secondary':'Elementary';}
   function canonicalPlcName(name){return PLC_ALIASES[name]||name;}
+  function facultyKey(name,schoolYear=state.year){const raw=String(name||'');return schoolYear==='2026-27'?canonicalPlcName(raw):raw;}
+  function currentRosterEntries(){
+    const map=new Map();
+    Object.entries(PLC_ROSTER).forEach(([plc,members])=>{
+      const division=plcDivision(plc);
+      members.forEach(raw=>{
+        const name=canonicalPlcName(raw);
+        if(name&&!EXCLUDED_FACULTY.has(name)&&!map.has(name))map.set(name,{name,division});
+      });
+    });
+    allRows.filter(r=>r.schoolYear==='2026-27'&&r.faculty).forEach(r=>{
+      const name=facultyKey(r.faculty,r.schoolYear);
+      if(name&&!EXCLUDED_FACULTY.has(name)&&!map.has(name))map.set(name,{name,division:r.division||'Other'});
+    });
+    return [...map.values()];
+  }
   function plcMembers(plc){
     let members=(PLC_ROSTER[plc]||[]).slice();
     const needle=String(state.faculty||'').toLowerCase();
@@ -4049,17 +4072,9 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   function facultyOverviewRoster(ytdRows){
     const globalNeedle=String(state.faculty||'').trim().toLowerCase();
     if(state.year==='2026-27'){
-      const mapped=unique(Object.values(PLC_ROSTER).flat());
-      const observedUnmapped=unique(ytdRows.map(r=>canonicalPlcName(r.faculty)).filter(Boolean).filter(n=>!mapped.includes(n)));
-      return unique(mapped.concat(observedUnmapped)).filter(name=>{
-        if(globalNeedle&&!name.toLowerCase().includes(globalNeedle))return false;
-        const plcs=plcsForFaculty(name);
-        const division=plcs.length?plcDivision(plcs[0]):(ytdRows.find(r=>canonicalPlcName(r.faculty)===name)?.division||'Other');
-        if(state.division!=='All'&&division!==state.division)return false;
-        return true;
-      }).sort((a,b)=>a.localeCompare(b));
+      return (rosterForView()||[]).map(x=>x.name);
     }
-    return unique(ytdRows.map(r=>canonicalPlcName(r.faculty)).filter(Boolean)).filter(name=>!globalNeedle||name.toLowerCase().includes(globalNeedle)).sort((a,b)=>a.localeCompare(b));
+    return unique(ytdRows.map(r=>facultyKey(r.faculty,r.schoolYear)).filter(Boolean)).filter(name=>!globalNeedle||name.toLowerCase().includes(globalNeedle)).sort((a,b)=>a.localeCompare(b));
   }
 
   function facultyTopFacet(rows,type){
@@ -4082,13 +4097,13 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     const byYtd=new Map(),byPeriod=new Map();
 
     ytdRows.forEach(r=>{
-      const key=canonicalPlcName(r.faculty||'');
+      const key=facultyKey(r.faculty,r.schoolYear);
       if(!key)return;
       if(!byYtd.has(key))byYtd.set(key,[]);
       byYtd.get(key).push(r);
     });
     periodRows.forEach(r=>{
-      const key=canonicalPlcName(r.faculty||'');
+      const key=facultyKey(r.faculty,r.schoolYear);
       if(!key)return;
       if(!byPeriod.has(key))byPeriod.set(key,[]);
       byPeriod.get(key).push(r);
