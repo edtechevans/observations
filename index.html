@@ -1031,6 +1031,52 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   #facets .evidence-context{grid-column:1 / 3}
 }
 
+
+/* Faculty Overview */
+.leadership-tabs{grid-template-columns:repeat(8,minmax(0,1fr))}
+.faculty-view-heading{align-items:flex-start}
+.faculty-view-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:12px}
+.faculty-view-kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:14px 15px;box-shadow:var(--shadow)}
+.faculty-view-kpi strong{display:block;color:var(--navy);font-size:1.75rem;line-height:1}
+.faculty-view-kpi span{display:block;color:#405268;font-size:var(--text-xs);font-weight:820;margin-top:6px}
+.faculty-view-kpi small{display:block;color:var(--muted);font-size:var(--text-2xs);line-height:1.4;margin-top:2px}
+.faculty-view-controls{display:grid;grid-template-columns:minmax(240px,1.4fr) minmax(230px,1.15fr) minmax(170px,.8fr) minmax(190px,.85fr);gap:12px;align-items:end;margin-bottom:9px}
+.faculty-view-controls .filter-field{min-width:0}
+.faculty-view-summary{display:flex;gap:7px;align-items:center;flex-wrap:wrap;min-height:30px;margin-bottom:8px}
+.faculty-view-summary .meeting-chip{background:#fff}
+.faculty-view-card{padding:0!important;overflow:hidden}
+.faculty-view-table-wrap{max-height:none;overflow:auto}
+.faculty-view-table{min-width:1460px}
+.faculty-view-table th{position:sticky;top:0;z-index:4;background:#f7f9fb}
+.faculty-view-table th:first-child,.faculty-view-table td:first-child{position:sticky;left:0;z-index:3;background:#fff;box-shadow:8px 0 12px -14px rgba(17,50,97,.45)}
+.faculty-view-table th:first-child{z-index:5;background:#f7f9fb}
+.faculty-name-button{border:0;background:transparent;padding:0;text-align:left;color:var(--navy);font-size:var(--text-xs);font-weight:840;line-height:1.35}
+.faculty-name-button:hover{text-decoration:underline}
+.faculty-plcs{display:flex;gap:4px;flex-wrap:wrap}
+.faculty-plc-chip{display:inline-flex;align-items:center;border:1px solid #dde4eb;background:#f8fafc;border-radius:999px;padding:4px 7px;font-size:var(--text-2xs);color:#536276;line-height:1.2}
+.faculty-count-main{display:block;color:var(--navy);font-size:var(--text-sm);font-weight:850;line-height:1.1}
+.faculty-count-sub{display:block;color:var(--muted);font-size:var(--text-2xs);line-height:1.35;margin-top:2px}
+.faculty-zero{color:#8b96a3;font-weight:740}
+.faculty-tlf-breadth{display:inline-flex;align-items:center;gap:6px}
+.faculty-tlf-dots{display:flex;gap:3px}.faculty-tlf-dots i{width:8px;height:8px;border-radius:50%;background:#d8dfe7}.faculty-tlf-dots i.on{background:var(--navy)}
+.faculty-pattern{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.faculty-pattern .facet-pill{margin:0}
+.faculty-pattern-count{font-size:var(--text-2xs);color:var(--muted)}
+.faculty-view-note{border:1px solid #d9e3ec;background:#f8fafc;border-radius:10px;padding:10px 12px;font-size:var(--text-xs);line-height:1.5;color:var(--muted);margin-bottom:10px}
+.faculty-view-note strong{color:var(--navy)}
+@media(max-width:1260px){
+  .leadership-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .faculty-view-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .faculty-view-controls{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .faculty-view-kpis{grid-template-columns:1fr 1fr}
+  .faculty-view-controls{grid-template-columns:1fr}
+}
+@media(max-width:460px){
+  .faculty-view-kpis{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -1148,6 +1194,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
       <button class="tab" data-tab="facets" type="button">TLF Patterns</button>
       <button class="tab" data-tab="mtss" type="button">MTSS in Practice</button>
       <button class="tab" data-tab="plcs" type="button">PLCs</button>
+      <button class="tab" data-tab="facultyview" type="button">Faculty Overview</button>
       <button class="tab" data-tab="coverage" type="button">Reach &amp; Evidence</button>
       <button class="tab" data-tab="explorer" type="button">Evidence Explorer</button>
       <button class="tab" data-tab="admin" type="button">Admin</button>
@@ -1505,6 +1552,61 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           </details>
         </div>
       </div>
+    </section>
+
+    <section id="facultyview" class="tab-panel">
+      <div class="section-heading faculty-view-heading">
+        <div>
+          <p class="eyebrow">Observation evidence by faculty</p>
+          <h2>Faculty Overview</h2>
+          <p>See how much observation evidence has been gathered for each faculty member, where that evidence sits within the PLC structure, and the broad TLF patterns represented. This is an evidence-coverage view, not a faculty performance ranking.</p>
+        </div>
+      </div>
+
+      <div id="facultyViewNotice"></div>
+
+      <div id="facultyViewKpis" class="faculty-view-kpis"></div>
+
+      <div class="faculty-view-controls card">
+        <div class="filter-field faculty-view-search">
+          <label for="facultyViewSearch">Search faculty</label>
+          <input id="facultyViewSearch" type="search" placeholder="Search name…" autocomplete="off" />
+        </div>
+        <div class="filter-field">
+          <label for="facultyViewPlc">PLC / department</label>
+          <select id="facultyViewPlc"><option value="All">All PLCs</option></select>
+        </div>
+        <div class="filter-field">
+          <label for="facultyViewVisits">Visits</label>
+          <select id="facultyViewVisits">
+            <option value="all">All visit counts</option>
+            <option value="0">No visits</option>
+            <option value="1">Exactly 1 visit</option>
+            <option value="2">2+ visits</option>
+            <option value="3">3+ visits</option>
+          </select>
+        </div>
+        <div class="filter-field">
+          <label for="facultyViewSort">Sort</label>
+          <select id="facultyViewSort">
+            <option value="name">Faculty name</option>
+            <option value="visits-desc">Most visits</option>
+            <option value="visits-asc">Fewest visits</option>
+            <option value="last-desc">Most recent visit</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="facultyViewSummary" class="faculty-view-summary"></div>
+
+      <article class="card table-card faculty-view-card">
+        <div class="table-wrap faculty-view-table-wrap">
+          <table class="faculty-view-table">
+            <thead id="facultyViewHead"></thead>
+            <tbody id="facultyViewBody"></tbody>
+          </table>
+        </div>
+      </article>
     </section>
 
     <section id="coverage" class="tab-panel">
@@ -3004,7 +3106,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     const eplc=q.get('eplc');if(eplc&&PLC_ORDER.includes(eplc))state.explorerPlc=eplc;
     state.explorerOnePerFaculty=q.get('one')==='1';
     const search=q.get('search');if(search){state.explorerSearch=search;if(el('observationSearch'))el('observationSearch').value=search;}
-    const tab=q.get('tab');if(['overview','facets','mtss','plcs','coverage','explorer','admin'].includes(tab)){
+    const tab=q.get('tab');if(['overview','facets','mtss','plcs','facultyview','coverage','explorer','admin'].includes(tab)){
       qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
       qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===tab));
     }
@@ -3917,6 +4019,209 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
       const categoryLabel=setName==='student'?'Student experience':'Tier 1 condition';
       return '<div class="mtss-movement-row"><div class="mtss-movement-label"><strong>'+esc(rule.label)+'</strong><span>'+esc(categoryLabel)+'</span></div><div><div class="mtss-slope"><span class="mtss-slope-line" style="--left:'+left+'%;--width:'+Math.max(1,right-left)+'%"></span><i class="mtss-slope-dot" style="left:'+p+'%" title="Previous '+p.toFixed(1)+'%"></i><i class="mtss-slope-dot current" style="left:'+c+'%" title="Current '+c.toFixed(1)+'%"></i></div></div><div class="mtss-movement-values"><strong>'+p.toFixed(0)+'% → '+c.toFixed(0)+'%</strong><br>'+(delta>=0?'+':'')+delta.toFixed(1)+' pp</div></div>';
     }).join('');
+  }
+
+
+  // Faculty Overview — evidence coverage, not evaluation.
+  Object.assign(state,{
+    facultyViewSearch:state.facultyViewSearch||'',
+    facultyViewPlc:state.facultyViewPlc||'All',
+    facultyViewVisits:state.facultyViewVisits||'all',
+    facultyViewSort:state.facultyViewSort||'name'
+  });
+
+  function renderAll(){
+    applyUrlStateOnce();
+    refreshObserverOptions();
+    refreshFacultyOptions();
+    renderActiveFilters();
+    renderOverview();
+    renderFacets();
+    renderMtss();
+    renderPlcs();
+    renderFacultyOverview();
+    renderCoverage();
+    renderExplorer();
+    renderAdminP2();
+    updateUrlState();
+  }
+
+  function facultyOverviewRoster(ytdRows){
+    const globalNeedle=String(state.faculty||'').trim().toLowerCase();
+    if(state.year==='2026-27'){
+      const mapped=unique(Object.values(PLC_ROSTER).flat());
+      const observedUnmapped=unique(ytdRows.map(r=>canonicalPlcName(r.faculty)).filter(Boolean).filter(n=>!mapped.includes(n)));
+      return unique(mapped.concat(observedUnmapped)).filter(name=>{
+        if(globalNeedle&&!name.toLowerCase().includes(globalNeedle))return false;
+        const plcs=plcsForFaculty(name);
+        const division=plcs.length?plcDivision(plcs[0]):(ytdRows.find(r=>canonicalPlcName(r.faculty)===name)?.division||'Other');
+        if(state.division!=='All'&&division!==state.division)return false;
+        return true;
+      }).sort((a,b)=>a.localeCompare(b));
+    }
+    return unique(ytdRows.map(r=>canonicalPlcName(r.faculty)).filter(Boolean)).filter(name=>!globalNeedle||name.toLowerCase().includes(globalNeedle)).sort((a,b)=>a.localeCompare(b));
+  }
+
+  function facultyTopFacet(rows,type){
+    const counts={};
+    rows.forEach(r=>{
+      if(type==='commendation'){
+        [...new Set((r.commendations||[]).filter(f=>FACETS.includes(f)))].forEach(f=>counts[f]=(counts[f]||0)+1);
+      }else if(FACETS.includes(r.wonderingFacet)){
+        counts[r.wonderingFacet]=(counts[r.wonderingFacet]||0)+1;
+      }
+    });
+    const entries=Object.entries(counts).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+    return entries.length?{facet:entries[0][0],count:entries[0][1]}:null;
+  }
+
+  function facultyOverviewData(){
+    const ytdRows=baseSelectedRows();
+    const periodRows=selectedRows();
+    const roster=facultyOverviewRoster(ytdRows);
+    const byYtd=new Map(),byPeriod=new Map();
+
+    ytdRows.forEach(r=>{
+      const key=canonicalPlcName(r.faculty||'');
+      if(!key)return;
+      if(!byYtd.has(key))byYtd.set(key,[]);
+      byYtd.get(key).push(r);
+    });
+    periodRows.forEach(r=>{
+      const key=canonicalPlcName(r.faculty||'');
+      if(!key)return;
+      if(!byPeriod.has(key))byPeriod.set(key,[]);
+      byPeriod.get(key).push(r);
+    });
+
+    return roster.map(name=>{
+      const ytd=(byYtd.get(name)||[]).slice().sort((a,b)=>a.date.localeCompare(b.date));
+      const period=(byPeriod.get(name)||[]);
+      const plcs=state.year==='2026-27'?plcsForFaculty(name):[];
+      const division=plcs.length?plcDivision(plcs[0]):(ytd[0]?.division||'Other');
+      const observers=unique(ytd.map(r=>r.observer).filter(Boolean));
+      const facetSet=new Set();
+      ytd.forEach(r=>{
+        (r.commendations||[]).forEach(f=>{if(FACETS.includes(f))facetSet.add(f);});
+        if(FACETS.includes(r.wonderingFacet))facetSet.add(r.wonderingFacet);
+      });
+      return {
+        name,division,plcs,
+        visits:ytd.length,
+        periodVisits:period.length,
+        lastVisit:ytd.length?ytd.at(-1).date:'',
+        observers:observers.length,
+        facets:facetSet.size,
+        commendation:facultyTopFacet(ytd,'commendation'),
+        wondering:facultyTopFacet(ytd,'wondering')
+      };
+    });
+  }
+
+  function bindFacultyOverviewControls(){
+    const search=el('facultyViewSearch'),plc=el('facultyViewPlc'),visits=el('facultyViewVisits'),sort=el('facultyViewSort');
+    if(search){
+      if(search.value!==state.facultyViewSearch)search.value=state.facultyViewSearch;
+      search.oninput=()=>{state.facultyViewSearch=search.value;renderFacultyOverview();};
+    }
+    if(plc){
+      const plcs=availablePlcs();
+      if(state.facultyViewPlc!=='All'&&!plcs.includes(state.facultyViewPlc))state.facultyViewPlc='All';
+      plc.innerHTML='<option value="All">All PLCs</option>'+plcs.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');
+      plc.value=state.facultyViewPlc;
+      plc.onchange=()=>{state.facultyViewPlc=plc.value;renderFacultyOverview();};
+    }
+    if(visits){
+      visits.value=state.facultyViewVisits;
+      visits.onchange=()=>{state.facultyViewVisits=visits.value;renderFacultyOverview();};
+    }
+    if(sort){
+      sort.value=state.facultyViewSort;
+      sort.onchange=()=>{state.facultyViewSort=sort.value;renderFacultyOverview();};
+    }
+  }
+
+  function facultyOverviewFilteredRows(rows){
+    const needle=state.facultyViewSearch.trim().toLowerCase();
+    let out=rows.filter(r=>{
+      if(needle&&!([r.name,r.division,...r.plcs].join(' ').toLowerCase().includes(needle)))return false;
+      if(state.facultyViewPlc!=='All'&&!r.plcs.includes(state.facultyViewPlc))return false;
+      if(state.facultyViewVisits==='0'&&r.visits!==0)return false;
+      if(state.facultyViewVisits==='1'&&r.visits!==1)return false;
+      if(state.facultyViewVisits==='2'&&r.visits<2)return false;
+      if(state.facultyViewVisits==='3'&&r.visits<3)return false;
+      return true;
+    });
+    if(state.facultyViewSort==='visits-desc')out.sort((a,b)=>b.visits-a.visits||a.name.localeCompare(b.name));
+    else if(state.facultyViewSort==='visits-asc')out.sort((a,b)=>a.visits-b.visits||a.name.localeCompare(b.name));
+    else if(state.facultyViewSort==='last-desc')out.sort((a,b)=>(b.lastVisit||'').localeCompare(a.lastVisit||'')||a.name.localeCompare(b.name));
+    else out.sort((a,b)=>a.name.localeCompare(b.name));
+    return out;
+  }
+
+  function facultyFacetDots(n){
+    return '<span class="faculty-tlf-dots" aria-hidden="true">'+FACETS.map((_,i)=>'<i class="'+(i<n?'on':'')+'"></i>').join('')+'</span>';
+  }
+
+  function facultyPatternHtml(pattern){
+    if(!pattern)return '<span class="faculty-zero">—</span>';
+    return '<span class="faculty-pattern">'+facetPill(pattern.facet)+'<span class="faculty-pattern-count">'+pattern.count+' obs</span></span>';
+  }
+
+  function renderFacultyOverview(){
+    const body=el('facultyViewBody'),head=el('facultyViewHead'),kpis=el('facultyViewKpis'),notice=el('facultyViewNotice'),summary=el('facultyViewSummary');
+    if(!body||!head||!kpis||!notice||!summary)return;
+    bindFacultyOverviewControls();
+
+    const all=facultyOverviewData();
+    const reached=all.filter(r=>r.visits>=1).length,two=all.filter(r=>r.visits>=2).length,three=all.filter(r=>r.visits>=3).length,zero=all.filter(r=>r.visits===0).length;
+
+    kpis.innerHTML=[
+      [all.length,'Faculty in roster',state.year==='2026-27'?'Current mapped faculty':'Observed faculty only'],
+      [reached,'1+ visit',all.length?(reached/all.length*100).toFixed(1)+'% represented':'No roster'],
+      [two,'2+ visits','Repeated evidence'],
+      [three,'3+ visits','Deeper repeated evidence'],
+      [zero,'No visits','No matching school-year evidence']
+    ].map(x=>'<div class="faculty-view-kpi"><strong>'+esc(x[0])+'</strong><span>'+esc(x[1])+'</span><small>'+esc(x[2])+'</small></div>').join('');
+
+    if(state.year==='2026-27'){
+      notice.innerHTML='<div class="faculty-view-note"><strong>Evidence coverage, not evaluation.</strong> The roster is derived from the current 2026–27 PLC mapping. Faculty with zero matching observations remain visible. Cross-appointed faculty may appear in more than one PLC.</div>';
+    }else{
+      notice.innerHTML='<div class="faculty-view-note"><strong>Roster limitation:</strong> the independent PLC/faculty roster is currently available only for 2026–27. For '+esc(state.year)+', this tab can show faculty who appear in the observation dataset, but it cannot reliably identify zero-visit faculty or historical PLC membership.</div>';
+    }
+
+    const rows=facultyOverviewFilteredRows(all);
+    const context=[
+      ['primary',fmt.format(rows.length)+' faculty shown'],
+      ['',state.division==='All'?'Whole school':state.division],
+      ['',state.facultyViewPlc==='All'?'All PLCs':state.facultyViewPlc],
+      ['',state.observerScope==='principals'?'Principals + APs':'All leaders']
+    ];
+    if(state.observer!=='All')context.push(['','Observer: '+state.observer]);
+    if(state.time!=='All')context.push(['','Lesson position: '+state.time]);
+    summary.innerHTML=context.map(x=>'<span class="meeting-chip '+x[0]+'">'+esc(x[1])+'</span>').join('');
+
+    const showPeriod=state.period!=='schoolyear';
+    head.innerHTML='<tr><th>Faculty</th><th>Division</th><th>PLC(s)</th><th>Visits YTD</th>'+(showPeriod?'<th>'+esc(periodName())+'</th>':'')+'<th>Last visit</th><th>Observers</th><th>TLF facets represented</th><th>Top commendation</th><th>Top wondering</th><th></th></tr>';
+
+    const cols=showPeriod?11:10;
+    body.innerHTML=rows.length?rows.map(r=>{
+      const plcHtml=r.plcs.length?'<div class="faculty-plcs">'+r.plcs.map(p=>'<span class="faculty-plc-chip">'+esc(p)+'</span>').join('')+'</div>':'<span class="faculty-zero">'+(state.year==='2026-27'?'Not mapped':'Historical mapping unavailable')+'</span>';
+      const visits=r.visits?'<span class="faculty-count-main">'+r.visits+'</span><span class="faculty-count-sub">'+(r.visits===1?'visit':'visits')+'</span>':'<span class="faculty-zero">0</span>';
+      const periodCell=showPeriod?'<td>'+(r.periodVisits?'<span class="faculty-count-main">'+r.periodVisits+'</span>':'<span class="faculty-zero">0</span>')+'</td>':'';
+      const open=r.visits?'<button type="button" class="view-button" data-faculty-evidence="'+esc(r.name)+'">Open evidence</button>':'<button type="button" class="view-button" disabled title="No matching school-year observations">No evidence</button>';
+      return '<tr><td><button type="button" class="faculty-name-button" data-faculty-evidence="'+esc(r.name)+'">'+esc(r.name)+'</button></td><td>'+esc(r.division)+'</td><td>'+plcHtml+'</td><td>'+visits+'</td>'+periodCell+'<td>'+(r.lastVisit?esc(displayDate(r.lastVisit)):'<span class="faculty-zero">—</span>')+'</td><td>'+r.observers+'</td><td><span class="faculty-tlf-breadth">'+facultyFacetDots(r.facets)+'<strong>'+r.facets+'/6</strong></span></td><td>'+facultyPatternHtml(r.commendation)+'</td><td>'+facultyPatternHtml(r.wondering)+'</td><td>'+open+'</td></tr>';
+    }).join(''):'<tr><td colspan="'+cols+'"><div class="empty-state">No faculty match the current Faculty Overview filters.</div></td></tr>';
+
+    qsa('[data-faculty-evidence]',body).forEach(btn=>btn.addEventListener('click',()=>{
+      const name=btn.dataset.facultyEvidence;
+      const row=all.find(x=>x.name===name);
+      if(!row||!row.visits)return;
+      state.faculty=name;
+      if(el('facultySearch'))el('facultySearch').value=name;
+      state.explorerSearch='';state.explorerPlc='';state.explorerMtss=null;explorerPage=1;
+      switchTab('explorer');renderAll();
+    }));
   }
 
   let toastTimer;
