@@ -2371,7 +2371,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   async function loadPublishedRows(){
-    const res=await fetch('./data/observations-full.csv?v=20261007-1',{cache:'no-store'});
+    const res=await fetch('./data/observations-full.csv?v=20261008-tania-aug-1',{cache:'no-store'});
     if(!res.ok) throw new Error(`Dataset request failed: ${res.status}`);
     const text=await res.text();
     const normalized=normalizeRawRows(parseCsvText(text));
