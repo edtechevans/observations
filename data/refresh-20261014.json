@@ -1,0 +1,47 @@
+{
+  "data_through": "2026-10-13",
+  "cutoff": "2026-10-12",
+  "rows": 811,
+  "replaced_oct12_plus": 11,
+  "added_oct12_plus": 18,
+  "andrew_reclassified": [
+    "260811145154",
+    "260811152649",
+    "260811154459",
+    "260812121753",
+    "260817145325",
+    "260821133955",
+    "260828115305",
+    "260828115556",
+    "260914154416",
+    "260915072451",
+    "261008091733"
+  ],
+  "audit": {
+    "2025-26": {
+      "observations": 535,
+      "faculty": 106,
+      "responses": 484,
+      "elementary": 342,
+      "secondary": 193,
+      "beginning": 192,
+      "middle": 272,
+      "end": 71,
+      "minDate": 20250811,
+      "maxDate": 20260513
+    },
+    "2026-27": {
+      "observations": 276,
+      "faculty": 109,
+      "responses": 231,
+      "elementary": 123,
+      "secondary": 153,
+      "beginning": 86,
+      "middle": 146,
+      "end": 44,
+      "minDate": 20260810,
+      "maxDate": 20261013
+    }
+  },
+  "data_sha256": "a0811aad225f2bbf89cbb054ca6d34e752e53bd0c888ea1e87b862ea7fcff662"
+}
