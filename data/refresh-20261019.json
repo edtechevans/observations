@@ -1,0 +1,66 @@
+{
+  "window_start_inclusive": "2026-10-13",
+  "window_end_inclusive": "2026-10-19",
+  "data_through": "2026-10-16",
+  "source_rows": 836,
+  "window_rows": 36,
+  "already_present_window_rows": 18,
+  "added_rows": 18,
+  "added_by_date": {
+    "2026-10-15": 14,
+    "2026-10-16": 4
+  },
+  "added_ids": [
+    "261015091037",
+    "261015084723",
+    "261015084559",
+    "261015135534",
+    "261015140832",
+    "261015141411",
+    "261015145910",
+    "261015103753",
+    "261015113359",
+    "261015103859",
+    "261016093253",
+    "261016090105",
+    "261016110550",
+    "261016104007",
+    "261016131552",
+    "261016133047",
+    "261016131233",
+    "261016131255"
+  ],
+  "updated_existing_rows": 0,
+  "removed_rows": 0,
+  "preserved_rows": 811,
+  "existing_csv_prefix_bytes": 2872080,
+  "existing_csv_prefix_byte_identical": true,
+  "baseline_data_sha256": "a0811aad225f2bbf89cbb054ca6d34e752e53bd0c888ea1e87b862ea7fcff662",
+  "data_sha256": "4ea66d8f96ce272e30bcdbbe8dee980782fb26a4295bc565f52b469bf3bf89e2",
+  "audit": {
+    "2025-26": {
+      "observations": 535,
+      "faculty": 106,
+      "responses": 484,
+      "elementary": 342,
+      "secondary": 193,
+      "beginning": 192,
+      "middle": 272,
+      "end": 71,
+      "minDate": 20250811,
+      "maxDate": 20260513
+    },
+    "2026-27": {
+      "observations": 294,
+      "faculty": 109,
+      "responses": 245,
+      "elementary": 135,
+      "secondary": 159,
+      "beginning": 95,
+      "middle": 153,
+      "end": 46,
+      "minDate": 20260810,
+      "maxDate": 20261016
+    }
+  }
+}
