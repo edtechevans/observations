@@ -77,10 +77,10 @@
 .ux-inquiry-card h3{font-size:18px;line-height:1.38;color:var(--ux-navy);margin:10px 0 12px;letter-spacing:-.015em}
 .ux-card-metric{font-size:34px;font-weight:860;color:var(--ux-navy);line-height:1.18;font-variant-numeric:tabular-nums}
 .ux-card-metric small{font-size:14px;font-weight:730;color:#61768a}
-.ux-card-description{font-size:13px;color:#4b6279;line-height:1.63;margin:9px 0 15px;flex:1}
+.ux-card-description{font-size:14px;color:#4b6279;line-height:1.63;margin:9px 0 15px;flex:1}
 .ux-card-cta{border:0;border-radius:8px;padding:11px 12px;background:#eef4f9;text-align:left;color:var(--ux-navy);font-weight:780;font-size:13px;min-height:43px}
 .ux-card-cta:hover{background:#dceaf5}
-.ux-overview-foot{display:flex;align-items:start;gap:9px;padding:13px 15px;background:#f4f8fb;border:1px solid #d7e5ef;border-radius:11px;color:#405971;font-size:13px;line-height:1.6}
+.ux-overview-foot{display:flex;align-items:start;gap:9px;padding:13px 15px;background:#f4f8fb;border:1px solid #d7e5ef;border-radius:11px;color:#405971;font-size:14px;line-height:1.65}
 .ux-full-analysis{background:white;border:1px solid var(--ux-line);border-radius:13px;margin:0 0 26px;overflow:clip}
 .ux-full-analysis>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:15px;align-items:center;padding:17px 19px;color:var(--ux-navy);font-weight:800;font-size:15px;background:#f7fafc}
 .ux-full-analysis>summary::-webkit-details-marker{display:none}
@@ -98,7 +98,7 @@
 .ux-pair{background:#fff;border:1px solid #d7e4ee;border-radius:11px;padding:15px 17px;min-width:0}
 .ux-pair .ux-card-eyebrow{display:block}
 .ux-pair strong{display:block;font-size:28px;line-height:1.3;color:var(--ux-navy);font-variant-numeric:tabular-nums;margin:8px 0 3px}
-.ux-pair p{font-size:13px;color:#4e657a;line-height:1.6;min-height:45px;margin:3px 0 12px}
+.ux-pair p{font-size:14px;color:#4e657a;line-height:1.6;min-height:45px;margin:3px 0 12px}
 .ux-pair button{font-size:12px;font-weight:780;background:#eef4fa;color:var(--ux-navy);padding:10px 12px;border-radius:9px;border:1px solid #cbdceb;min-height:40px}
 .ux-pair button:hover{background:#ddebf8}
 .ux-pair-explain{font-size:12px;color:#52697f;line-height:1.6;margin:0}
@@ -118,7 +118,7 @@
 /* Meaningful explanatory text: comfortable at 100% zoom. */
 .growth-pane-lead,.growth-inquiry p,.growth-footnote,.growth-domain-sub,
 .growth-lens small,.growth-overview-tile .sub,.growth-note,
-.growth-stat small,.growth-results{font-size:13px!important;line-height:1.6}
+.growth-stat small,.growth-results{font-size:14px!important;line-height:1.65}
 .growth-bar-name,.growth-domain-t,.growth-person,.growth-members-group h4,
 .growth-table td,.growth-table th,.growth-field input,.growth-field select,
 .growth-hover-card p,.growth-group-person,.growth-group-subtitle{font-size:13px!important}
