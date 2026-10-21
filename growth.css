@@ -66,3 +66,49 @@ button:focus-visible,.growth-dialog-close:focus-visible{outline:3px solid #8aadd
 .growth-empty strong{font-size:13px;color:var(--growth-navy)}
 .growth-empty p{font-size:11px;color:#668099;margin:0;max-width:600px}
 @media(max-width:740px){.growth-members-grid{grid-template-columns:1fr}.growth-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.growth-compact-intro{align-items:flex-start;flex-direction:column}.growth-compact-intro button{width:100%}}
+
+/* AISG PRIMARY NAV — SINGLE ROW
+   Nine dashboard destinations should never create an orphan second row. */
+@media (min-width: 1060px) {
+  .leadership-tabs {
+    display: grid !important;
+    grid-template-columns:
+      minmax(0,.82fr) minmax(0,1.15fr) minmax(0,1.12fr)
+      minmax(0,1.40fr) minmax(0,.65fr) minmax(0,1.32fr)
+      minmax(0,1.45fr) minmax(0,1.39fr) minmax(0,.70fr) !important;
+    gap: 0 !important;
+    overflow: hidden !important;
+  }
+  .leadership-tabs .tab {
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    padding: 11px 5px !important;
+    font-size: clamp(12px, .96vw, 14px) !important;
+    line-height: 1.25;
+    white-space: nowrap !important;
+    text-align: center;
+  }
+}
+@media (max-width: 1059px) {
+  .leadership-tabs {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  .leadership-tabs .tab {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: max-content;
+    min-height: 48px;
+    padding: 11px 16px !important;
+    white-space: nowrap !important;
+    border-right: 1px solid var(--line) !important;
+    scroll-snap-align: start;
+  }
+}
