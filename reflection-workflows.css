@@ -40,4 +40,6 @@
 .rf-coverage button:focus-visible,.rf-timeline-controls button:focus-visible,.rf-timeline-visit>summary:focus-visible,.rf-cohort input:focus-visible{outline:3px solid #6b9ccb;outline-offset:3px}
 .ux-context-bar .ux-evidence-scope{max-width:850px;line-height:1.6}
 @media(max-width:620px){.rf-coverage{grid-template-columns:1fr}.rf-coverage button{min-height:80px}.rf-timeline-controls{display:grid;grid-template-columns:1fr}.rf-cohort{display:grid}.rf-timeline-visit>summary{grid-template-columns:1fr}.rf-timeline-block p{font-size:16px}.rf-freshness{font-size:12px}.rf-timeline-scope{font-size:14px!important}}
+/* A desktop width flex-basis must not become 600px of height in the mobile column header. */
+@media(max-width:520px){.app-header{min-height:0;height:auto;justify-content:flex-start}.app-header .brand-wrap{flex:0 1 auto}.app-header .header-actions{flex:0 1 auto}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
