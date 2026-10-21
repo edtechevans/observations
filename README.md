@@ -2,17 +2,17 @@
 
 AISG Teacher Growth & Reflection dashboard combining classroom observation evidence with faculty-selected professional growth priorities.
 
-## Growth Focus update — October 21, 2026
+## Growth Focus — Public faculty-goals release (21 October 2026)
 
-- **Overview:** concise landing experience connecting faculty growth intentions and classroom evidence.
-- **Growth Focus:** TLF facet counts, Growth & Reflection domain / competency counts, and (when unlocked) searchable individual faculty goals with accessible hover previews and observation drill-downs.
-- **Eligible goals:** 54 faculty goals from the October 20 source workbook, matched by email to staff who have observation records in 2026–27. Leaders and staff without observations were excluded.
-- **Division filters:** 54 matched Secondary faculty goals; **0 matched Elementary faculty goals in the supplied workbook**. All charts, totals and goal results respect the division choice and show a proper empty state.
-- **Protected data:** individual goal statements, faculty names, emails, domains and facets are present only inside the encrypted `data/goals-secure.json` vault (AES-256-GCM, PBKDF2-SHA256 600,000 iterations). The passphrase is not in this repository. Only anonymized aggregates are published as readable JSON in `data/growth-summary.json`.
-- **Leader workflow:** open **Growth Focus → Unlock faculty goals**, enter the separately provided passphrase, then hover or focus a name to read the full selected facet, domain and goal statement. Click to see observation evidence. **Lock goals** clears the decrypted views and session records.
-- **Access limit:** a shared leader passphrase is *not* individual faculty authentication, granular authorization or AISG SSO. Do not give the passphrase to faculty. A teacher-only experience must wait for server-enforced per-user access.
+- **Overview:** A concise landing experience linking teachers' growth intentions, classroom evidence and reflection.
+- **Growth Focus:** Interactive views for selected **TLF Facets**, **Growth & Reflection Domains/competencies**, and **Goals**.
+- **Hover facet/domain/lens/competency:** Reveal the list of observed faculty who chose it; hover an individual in the list to preview their actual statement, or click to open their growth record.
+- **Hover faculty names anywhere in dashboard views:** Show their chosen facet, complete domain and unabridged goal statement. Includes Evidence Explorer and Faculty Overview names when the person has a matched current-year goal; supports focus/keyboard and touch.
+- **Goal records:** The readable `data/faculty-goals.json` contains **54 observed Secondary faculty**, matched on email to 2026–27 observations. The supplied file has no matched Elementary growth goals. Leaders and people without current-year observations are excluded.
+- **Filters:** Overall, Elementary and Secondary Growth Focus charts and lists are based on the eligible goals, and never reuse whole-school totals when a division has no matching goals.
+- **Access:** The requested deployment is **public**. There is no password, authentication or faculty-specific access control. The complete identifiable goals and observation narratives are therefore accessible to any visitor to the public site or repository.
 
-**Existing observation-data privacy:** `data/observations-full.csv` is still published in this public GitHub Pages repository and contains named classroom feedback. Protect this dataset behind a school-authenticated service before expanding the dashboard to faculty users. Encrypting the new goals file does not secure the existing observation CSV.
+**Privacy reminder:** Before using this dashboard for private individual faculty access, move both `data/faculty-goals.json` and `data/observations-full.csv` behind AISG-authenticated, server-enforced authorization. Browser-only filtering is not access control.
 
 ## Published dashboard data
 
@@ -62,7 +62,7 @@ Counts in each observer-group view are calculated from the current observation f
 
 ## Views
 
-- **Snapshot** — evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
+- **Overview** — growth intentions and evidence-strength KPIs, TLF profile, leadership inquiry prompts, and recent TLF movement.
 - **TLF Patterns** — frequency/breadth profiles, lens summaries, division context, and drill-through into the evidence behind each pattern.
 - **MTSS in Practice** — Tier 1 evidence signals for student experience, instructional conditions, common practices, Feedback → Action, the Notice → Identify → Connect → Respond → Monitor inquiry cycle, and comparable-period movement.
 - **PLCs** — grade-level and subject-area PLC evidence using the 2026–27 staff Position data, including roster reach, TLF frequency/breadth, 28-day lens trends, commendation/wondering question focus, recurring comment language, and representative excerpts.
