@@ -41,12 +41,14 @@ jobs:
           node --check growth-people.js
           node --check ux-refresh.js
           python3 tests/validate-data.py
-      - name: Install browser test dependencies
+      - name: Install full Chromium for browser tests
         run: |
-          python3 -m pip install playwright
-          python3 -m playwright install --with-deps chromium
+          python3 -m pip install playwright==1.64.0
+          python3 -m playwright install --with-deps --no-shell chromium
       - name: Run representative leader workflows
-        run: python3 tests/reflection-browser.py
+        run: |
+          export CHROMIUM_PATH="$(python3 -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          python3 tests/reflection-browser.py
       - name: Store browser verification
         if: always()
         uses: actions/upload-artifact@v4
