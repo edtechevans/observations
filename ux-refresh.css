@@ -1,0 +1,163 @@
+/* AISG Growth & Reflection • inquiry-led experience
+   Seven UX upgrades layered over the existing detailed observation tools.
+   Legacy view IDs and data functions are deliberately preserved. */
+:root{
+  --ux-navy:#113261;--ux-blue:#244e79;--ux-red:#ad2a26;
+  --ux-line:#dce5ef;--ux-muted:#516478;--ux-soft:#f4f7fb;
+}
+.leadership-tabs{display:none!important}
+.ux-visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.ux-primary-nav,.ux-context-bar,.ux-subnav,.ux-inquiry-card,.ux-full-analysis,.ux-facet-compare{font-family:"Noto Sans",Inter,ui-sans-serif,system-ui,sans-serif}
+.ux-primary-nav{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  background:white;border:1px solid var(--ux-line);border-radius:14px;
+  padding:6px 11px;margin:0 0 8px;box-shadow:0 5px 16px rgba(17,50,97,.045);
+}
+.ux-primary-links{display:flex;align-items:center;gap:3px;min-width:0}
+.ux-nav-button{
+  appearance:none;border:0;border-radius:9px;background:transparent;
+  color:#52677d;padding:13px 12px;min-height:46px;font-size:13px;
+  font-weight:760;line-height:1.3;white-space:nowrap;cursor:pointer;
+  transition:background .15s,color .15s;
+}
+.ux-nav-button:hover{background:#f0f5fa;color:var(--ux-navy)}
+.ux-nav-button[aria-current="page"]{background:#eaf1f8;color:var(--ux-navy);box-shadow:inset 0 -3px 0 var(--ux-red)}
+.ux-nav-tools{display:flex;align-items:center;gap:7px;min-width:0}
+.ux-nav-search{position:relative;min-width:0}
+.ux-nav-search input{
+  width:clamp(150px,16vw,242px);height:42px;background:#f9fbfd;
+  border:1px solid #d0dce8;border-radius:9px;color:var(--ux-navy);
+  font-size:13px;padding:0 12px 0 33px;outline:0
+}
+.ux-search-symbol{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#667c91;font-size:16px;pointer-events:none}
+.ux-nav-icon{min-width:44px;padding:10px 12px;font-size:18px}
+.ux-subnav{display:flex;gap:5px;align-items:center;flex-wrap:wrap;background:#f0f4f8;padding:6px 9px;margin:0 0 8px;border-radius:11px;border:1px solid #dce6ef}
+.ux-subnav[hidden]{display:none!important}
+.ux-subnav-label{font-size:11px;font-weight:820;letter-spacing:.07em;text-transform:uppercase;color:#697d90;padding:0 9px 0 5px}
+.ux-sub-button{border:1px solid transparent;background:transparent;padding:8px 13px;border-radius:8px;color:#50667f;font-size:13px;font-weight:730;min-height:39px}
+.ux-sub-button:hover{background:#fff}
+.ux-sub-button[aria-current="page"]{background:white;color:var(--ux-navy);border-color:#cfdae6;box-shadow:0 2px 4px rgba(17,50,97,.05)}
+.ux-context-bar{
+  background:white;border:1px solid var(--ux-line);border-radius:12px;
+  padding:11px 13px;display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;margin:0 0 13px;
+}
+.ux-context-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+.ux-context-title{font-size:11px;font-weight:820;text-transform:uppercase;letter-spacing:.07em;color:#566b80}
+.ux-division-choices{display:flex;align-items:center;gap:3px;background:#f0f4f8;border:1px solid #dde6ef;padding:3px;border-radius:9px}
+.ux-division-choice{border:0;background:transparent;border-radius:7px;padding:8px 10px;min-height:36px;font-size:12px;color:#52667b;font-weight:760}
+.ux-division-choice[aria-pressed="true"]{background:white;color:var(--ux-navy);box-shadow:0 1px 5px rgba(17,50,97,.12)}
+.ux-evidence-scope{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:#475f77}
+.ux-evidence-scope strong{font-weight:800;color:var(--ux-navy)}
+.ux-separator{width:1px;height:22px;background:var(--ux-line)}
+.ux-edit-filters{border:1px solid #cbd9e6;border-radius:9px;padding:9px 12px;min-height:40px;background:#f1f6fa;color:var(--ux-navy);font-size:12px;font-weight:780}
+.ux-edit-filters:hover{background:#e4eef7}
+.ux-filter-scope-note{flex:0 0 100%;font-size:12px;color:#53677b;line-height:1.5;padding:3px 2px 0}
+.leadership-filter-shell.ux-filters-closed{display:none!important}
+.leadership-filter-shell{margin:0 0 14px}
+.ux-primary-nav :is(button,input):focus-visible,.ux-subnav button:focus-visible,
+.ux-context-bar button:focus-visible,.ux-inquiry-card button:focus-visible,
+.ux-facet-compare button:focus-visible,.ux-facet-compare select:focus-visible,
+.ux-full-analysis summary:focus-visible{outline:3px solid #749dcb!important;outline-offset:3px}
+.ux-overview{display:grid;gap:19px;margin:7px 0 24px}
+.ux-overview-heading{display:flex;justify-content:space-between;gap:20px;align-items:end}
+.ux-overview-kicker{text-transform:uppercase;letter-spacing:.11em;font-size:12px;font-weight:820;color:var(--ux-red)}
+.ux-overview-heading h2{font-size:clamp(24px,2.4vw,32px);line-height:1.18;letter-spacing:-.035em;margin:5px 0 6px;color:var(--ux-navy)}
+.ux-overview-heading p{max-width:710px;color:#52677c;margin:0;font-size:14px;line-height:1.65}
+.ux-inquiry-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.ux-inquiry-card{
+  display:flex;flex-direction:column;align-items:stretch;background:#fff;
+  min-width:0;min-height:258px;text-align:left;padding:21px 21px 18px;
+  border:1px solid var(--ux-line);border-top:4px solid var(--ux-navy);
+  box-shadow:0 5px 18px rgba(17,50,97,.055);border-radius:13px;
+}
+.ux-inquiry-card:nth-child(2){border-top-color:var(--ux-red)}
+.ux-inquiry-card:nth-child(3){border-top-color:#617891}
+.ux-card-eyebrow{font-size:11px;font-weight:820;letter-spacing:.07em;text-transform:uppercase;color:#5c7186}
+.ux-inquiry-card h3{font-size:18px;line-height:1.38;color:var(--ux-navy);margin:10px 0 12px;letter-spacing:-.015em}
+.ux-card-metric{font-size:34px;font-weight:860;color:var(--ux-navy);line-height:1.18;font-variant-numeric:tabular-nums}
+.ux-card-metric small{font-size:14px;font-weight:730;color:#61768a}
+.ux-card-description{font-size:13px;color:#4b6279;line-height:1.63;margin:9px 0 15px;flex:1}
+.ux-card-cta{border:0;border-radius:8px;padding:11px 12px;background:#eef4f9;text-align:left;color:var(--ux-navy);font-weight:780;font-size:13px;min-height:43px}
+.ux-card-cta:hover{background:#dceaf5}
+.ux-overview-foot{display:flex;align-items:start;gap:9px;padding:13px 15px;background:#f4f8fb;border:1px solid #d7e5ef;border-radius:11px;color:#405971;font-size:13px;line-height:1.6}
+.ux-full-analysis{background:white;border:1px solid var(--ux-line);border-radius:13px;margin:0 0 26px;overflow:clip}
+.ux-full-analysis>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:15px;align-items:center;padding:17px 19px;color:var(--ux-navy);font-weight:800;font-size:15px;background:#f7fafc}
+.ux-full-analysis>summary::-webkit-details-marker{display:none}
+.ux-full-analysis>summary:after{content:"＋";font-size:22px;font-weight:600}
+.ux-full-analysis[open]>summary:after{content:"−"}
+.ux-full-analysis>summary:hover{background:#eaf2f8}
+.ux-analysis-body{padding:19px}
+#overview .growth-compact-intro,#overview #growthTopline,#overview #growthOverviewScope{display:none!important}
+.ux-facet-compare{border:1px solid #cdddea;background:#f7fafc;border-radius:14px;padding:18px 20px;margin:18px 0;display:grid;gap:12px}
+.ux-compare-head{display:flex;gap:13px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.ux-compare-head h4{margin:0;color:var(--ux-navy);font-size:16px;line-height:1.4}
+.ux-compare-head label{font-size:12px;font-weight:770;color:#586b7e;display:flex;align-items:center;gap:7px}
+.ux-compare-head select{font-size:13px;min-height:40px;border:1px solid #bbcddd;border-radius:8px;padding:8px 9px;background:#fff;color:var(--ux-navy);max-width:180px}
+.ux-pair-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ux-pair{background:#fff;border:1px solid #d7e4ee;border-radius:11px;padding:15px 17px;min-width:0}
+.ux-pair .ux-card-eyebrow{display:block}
+.ux-pair strong{display:block;font-size:28px;line-height:1.3;color:var(--ux-navy);font-variant-numeric:tabular-nums;margin:8px 0 3px}
+.ux-pair p{font-size:13px;color:#4e657a;line-height:1.6;min-height:45px;margin:3px 0 12px}
+.ux-pair button{font-size:12px;font-weight:780;background:#eef4fa;color:var(--ux-navy);padding:10px 12px;border-radius:9px;border:1px solid #cbdceb;min-height:40px}
+.ux-pair button:hover{background:#ddebf8}
+.ux-pair-explain{font-size:12px;color:#52697f;line-height:1.6;margin:0}
+#growthRecordDialog.growth-dialog{
+  position:fixed;inset:0 0 0 auto;margin:0 0 0 auto;
+  width:min(610px,96vw);height:100dvh;max-height:100dvh;
+  border-radius:17px 0 0 17px;border-left:1px solid #d9e4ef;
+  display:flex;flex-direction:column;overscroll-behavior:contain;
+}
+#growthRecordDialog.growth-dialog:not([open]){display:none}
+#growthRecordDialog .growth-dialog-header{flex:none;padding:25px 25px 18px;background:#fff}
+#growthRecordDialog .growth-dialog-body{flex:1;max-height:none!important;overflow-y:auto;padding:20px 25px 30px}
+#growthRecordDialog .growth-goal-text{font-size:15px;line-height:1.8;white-space:pre-wrap}
+#growthRecordDialog .growth-observation-excerpt{font-size:13px;line-height:1.65}
+#growthRecordDialog .growth-dialog-close{min-width:44px;min-height:44px}
+#growthRecordDialog::backdrop{background:rgba(10,27,51,.35)}
+/* Meaningful explanatory text: comfortable at 100% zoom. */
+.growth-pane-lead,.growth-inquiry p,.growth-footnote,.growth-domain-sub,
+.growth-lens small,.growth-overview-tile .sub,.growth-note,
+.growth-stat small,.growth-results{font-size:13px!important;line-height:1.6}
+.growth-bar-name,.growth-domain-t,.growth-person,.growth-members-group h4,
+.growth-table td,.growth-table th,.growth-field input,.growth-field select,
+.growth-hover-card p,.growth-group-person,.growth-group-subtitle{font-size:13px!important}
+.growth-hover-card .growth-hover-statement{font-size:14px!important;line-height:1.7}
+.growth-hover-card{max-height:min(74vh,570px)}
+.growth-view-nav button,.growth-group-target,.growth-facet-pill{min-height:40px}
+.site-footer,.data-freshness,.data-notice-note{font-size:12px!important}
+@media(max-width:1420px){
+  .ux-nav-button{font-size:12.5px;padding:12px 9px}
+  .ux-nav-search input{width:180px}
+}
+@media(max-width:1160px){
+  .ux-primary-nav{flex-wrap:wrap}
+  .ux-primary-links{width:100%;overflow-x:auto;scrollbar-width:thin;scroll-snap-type:x proximity}
+  .ux-nav-button{flex:0 0 auto;scroll-snap-align:start}
+  .ux-nav-tools{width:100%;justify-content:flex-end}
+  .ux-nav-search{flex:1}
+  .ux-nav-search input{width:100%}
+  .ux-context-group{flex:1 1 auto}
+}
+@media(max-width:900px){
+  .ux-inquiry-grid{grid-template-columns:1fr}
+  .ux-inquiry-card{min-height:0}
+  .ux-pair-grid{grid-template-columns:1fr}
+  .ux-overview-heading{align-items:start;flex-direction:column}
+}
+@media(max-width:580px){
+  .ux-primary-nav{padding:7px}
+  .ux-nav-button{font-size:13px;padding:12px 11px}
+  .ux-context-bar{padding:12px}
+  .ux-context-group{width:100%}
+  .ux-division-choices{width:100%}
+  .ux-division-choice{flex:1;padding-inline:5px}
+  .ux-evidence-scope{flex:1}
+  .ux-edit-filters{width:100%}
+  .ux-inquiry-card{padding:17px}
+  #growthRecordDialog.growth-dialog{width:100vw;border-radius:0}
+  #growthRecordDialog .growth-dialog-body{padding:17px}
+  .ux-compare-head{align-items:flex-start}
+  .ux-analysis-body{padding:11px}
+}
+@media(prefers-reduced-motion:reduce){.ux-primary-nav *,.ux-overview *,.ux-facet-compare *{transition:none!important}}
