@@ -3,20 +3,124 @@
   "asOf": "2026-10-20",
   "includedFaculty": 54,
   "observationRosterCount": 109,
+  "byDivision": {
+    "All": {
+      "includedFaculty": 54,
+      "facetCounts": {
+        "Personalization": 8,
+        "Agency": 25,
+        "Authenticity": 5,
+        "Creativity": 5,
+        "Collaboration": 7,
+        "Taking Action": 4
+      },
+      "domainCounts": {
+        "1": 14,
+        "2": 7,
+        "3": 14,
+        "4": 18,
+        "other": 1
+      },
+      "lensCounts": {
+        "Being": 33,
+        "Connecting": 10,
+        "Doing": 11
+      },
+      "competencyCounts": {
+        "1a. Learning Purpose & Outcomes": 7,
+        "1c. Inclusive Learning Engagements & Materials Design": 6,
+        "1d. Assessment Planning for Equity & Growth": 1,
+        "2a. Belonging, Respect & Psychological Safety": 1,
+        "2b. Student Voice, Representation & Advocacy": 2,
+        "2c. Routines that Support Equity & Autonomy": 2,
+        "2d. Purposeful Use of Space, Time & Tools": 2,
+        "3a. Cognitive Demand & Thinking": 2,
+        "3b. Inclusive Discourse & Collaboration": 1,
+        "3c. Choice, Inquiry & Creativity": 9,
+        "3d. Authentic Application & Social Impact": 2,
+        "4a. Feedback & Inclusive Growth Practices": 3,
+        "4b. Evidence, Data & Responsive Planning": 1,
+        "4c. Learner Reflection & Ownership of Growth": 11,
+        "4d. Professional Collaboration & Collective Capacity": 2,
+        "4e. Communication & Community Partnership": 1,
+        "Other": 1
+      }
+    },
+    "Elementary": {
+      "includedFaculty": 0,
+      "facetCounts": {
+        "Personalization": 0,
+        "Agency": 0,
+        "Authenticity": 0,
+        "Creativity": 0,
+        "Collaboration": 0,
+        "Taking Action": 0
+      },
+      "domainCounts": {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "other": 0
+      },
+      "lensCounts": {
+        "Being": 0,
+        "Connecting": 0,
+        "Doing": 0
+      },
+      "competencyCounts": {}
+    },
+    "Secondary": {
+      "includedFaculty": 54,
+      "facetCounts": {
+        "Personalization": 8,
+        "Agency": 25,
+        "Authenticity": 5,
+        "Creativity": 5,
+        "Collaboration": 7,
+        "Taking Action": 4
+      },
+      "domainCounts": {
+        "1": 14,
+        "2": 7,
+        "3": 14,
+        "4": 18,
+        "other": 1
+      },
+      "lensCounts": {
+        "Being": 33,
+        "Connecting": 10,
+        "Doing": 11
+      },
+      "competencyCounts": {
+        "1a. Learning Purpose & Outcomes": 7,
+        "1c. Inclusive Learning Engagements & Materials Design": 6,
+        "1d. Assessment Planning for Equity & Growth": 1,
+        "2a. Belonging, Respect & Psychological Safety": 1,
+        "2b. Student Voice, Representation & Advocacy": 2,
+        "2c. Routines that Support Equity & Autonomy": 2,
+        "2d. Purposeful Use of Space, Time & Tools": 2,
+        "3a. Cognitive Demand & Thinking": 2,
+        "3b. Inclusive Discourse & Collaboration": 1,
+        "3c. Choice, Inquiry & Creativity": 9,
+        "3d. Authentic Application & Social Impact": 2,
+        "4a. Feedback & Inclusive Growth Practices": 3,
+        "4b. Evidence, Data & Responsive Planning": 1,
+        "4c. Learner Reflection & Ownership of Growth": 11,
+        "4d. Professional Collaboration & Collective Capacity": 2,
+        "4e. Communication & Community Partnership": 1,
+        "Other": 1
+      }
+    }
+  },
+  "note": "Anonymized aggregates only. Faculty and their goals are encrypted using AES-256-GCM in a separate file; leadership records and staff without 2026-27 observations are excluded.",
   "facetCounts": {
     "Personalization": 8,
     "Agency": 25,
     "Authenticity": 5,
     "Creativity": 5,
     "Collaboration": 7,
-    "Taking Action": 4,
-    "Other": 0,
-    "Pending selection": 0
-  },
-  "lensCounts": {
-    "Being": 33,
-    "Connecting": 10,
-    "Doing": 11
+    "Taking Action": 4
   },
   "domainCounts": {
     "1": 14,
@@ -25,5 +129,10 @@
     "4": 18,
     "other": 1
   },
-  "note": "Aggregated, 2026-27 faculty only, matched by email to existing observations; leadership records and non-observed faculty excluded. No individual goals or identifiers are published."
+  "lensCounts": {
+    "Being": 33,
+    "Connecting": 10,
+    "Doing": 11
+  }
 }
+
