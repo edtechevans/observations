@@ -13,7 +13,7 @@
   const categories=[
     {id:'overview',label:'Overview',tabs:[['overview','Overview']]},
     {id:'growth',label:'Growth Focus',tabs:[['growth','Growth Focus']]},
-    {id:'classroom',label:'Classroom Evidence',tabs:[['facets','TLF Patterns'],['mtss','MTSS in Practice'],['coverage','Reach & Evidence']]},
+    {id:'classroom',label:'Classroom Observations',tabs:[['facets','TLF Patterns'],['mtss','MTSS in Practice'],['coverage','Reach & Evidence']]},
     {id:'faculty',label:'Faculty & PLCs',tabs:[['facultyview','Faculty Overview'],['plcs','PLCs']]},
     {id:'explore',label:'Explore Evidence',tabs:[['explorer','Evidence Explorer']]},
     {id:'admin',label:'Admin',tabs:[['admin','Admin']]}
@@ -112,6 +112,7 @@
     shell?.classList.toggle('ux-filters-closed',!filterOpen);
     if(button){button.setAttribute('aria-expanded',String(filterOpen));button.textContent=filterOpen?'Close filters ↑':'Edit filters ↓';}
     if(filterOpen)shell?.scrollIntoView({block:'nearest',behavior:'smooth'});
+    window.AISG_NAV?.schedule('replace');
   }
   function renderNavigation(){
     const tab=currentTab(),grp=groupOf(tab);
@@ -187,7 +188,7 @@
       return;
     }
     const input=byId('uxFacultyName');input.setCustomValidity('');
-    if(selected.goal&&goals()?.openRecord){
+    if(goals()?.openRecord){
       goals().openRecord(selected.email);
       return;
     }
@@ -199,33 +200,7 @@
     }
   }
   function dateNum(date){const t=Date.parse(String(date||'')+'T00:00:00Z');return Number.isFinite(t)?t:0;}
-  function filteredEvidence(){
-    const s=state(),year=s.year||'2026-27',division=s.division||'All';
-    const coordinators=new Set(['Ralph Emmerink','Katriona Hoskins','Flavia Di Luccio','Samantha Rogers']);
-    const needle=norm(s.faculty);
-    const base=(obs()?.getRows?.()||[]).filter(r=>
-      r.schoolYear===year && (division==='All'||r.division===division) &&
-      (s.observerScope!=='principals'||!coordinators.has(r.observer)) &&
-      (!s.observer||s.observer==='All'||r.observer===s.observer) &&
-      (!s.time||s.time==='All'||r.timeOfClass===s.time) &&
-      (!needle||norm(r.faculty).includes(needle))
-    );
-    if(!base.length)return [];
-    const dates=base.map(r=>dateNum(r.date)).filter(Boolean);
-    if(!dates.length)return [];
-    const latest=Math.max(...dates),first=Math.min(...dates),day=86400000;
-    let start=first,end=latest;
-    if(s.period==='30')start=latest-day*29;
-    else if(s.period==='60')start=latest-day*59;
-    else if(s.period==='semester'){
-      const last=new Date(latest);
-      start=Date.UTC(last.getUTCFullYear(),last.getUTCMonth()>=7?7:0,1);
-    }else if(s.period==='custom'){
-      if(s.customStart)start=dateNum(s.customStart)||start;
-      if(s.customEnd)end=dateNum(s.customEnd)||end;
-    }
-    return base.filter(r=>dateNum(r.date)>=start&&dateNum(r.date)<=end);
-  }
+  function filteredEvidence(){return obs()?.getSelectedRows?.()||[];}
   function yearGoals(){
     if((state().year||'2026-27')!=='2026-27')return [];
     return goals()?.getGoals?.()||[];
@@ -296,6 +271,7 @@
     });
   }
   function renderOverview(){
+    if(window.AISG_REFLECTION)return window.AISG_REFLECTION.renderOverview();
     const rows=filteredEvidence(),s=state(),faculties=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
     const scope=yearGoals(),fall=(s.year||'2026-27')==='2026-27' ? goals()?.getSummary?.() : null;
     const goalCount=scope.length||fall?.includedFaculty||0,top=chosenFocus(),signals=facetSignals(rows,top[0]);
@@ -362,6 +338,7 @@
     if(focus)byId('uxCompareFacet')?.focus({preventScroll:true});
   }
   function renderCompare(){
+    if(window.AISG_REFLECTION){ensureCompare();window.AISG_REFLECTION.renderCompare(selectedFacet||chosenFocus()[0]);return;}
     const compare=ensureCompare();if(!compare)return;
     const best=chosenFocus();
     if(!names.includes(selectedFacet))selectedFacet=best[0];
@@ -375,12 +352,14 @@
     setText('uxCompareEvidenceDesc',fmt(signals.commend)+' commendations and '+fmt(signals.wonder)+' wonderings mention '+selectedFacet+' in the selected evidence scope.');
   }
   function goFacetFaculty(){
+    if(window.AISG_REFLECTION)return window.AISG_REFLECTION.openFacultyList(selectedFacet);
     navigate('growth');
     $('#growthViewNav button[data-growth-pane="goals"]')?.click();
     const filter=byId('growthFacetFilter');
     if(filter){filter.value=selectedFacet;filter.dispatchEvent(new Event('change',{bubbles:true}));}
   }
   function goFacetEvidence(){
+    if(window.AISG_REFLECTION)return window.AISG_REFLECTION.openTagged(selectedFacet);
     navigate('explorer');
     const filter=byId('explorerFacetQuick');
     if(filter){filter.value=selectedFacet;filter.dispatchEvent(new Event('change',{bubbles:true}));}
@@ -388,6 +367,7 @@
   function renderEverything(){
     refreshQueued=false;
     renderNavigation();context();updatePersonList();renderOverview();
+    window.AISG_REFLECTION?.renderContext();
     const pane=byId('growthViewMount');
     if(pane?.querySelector('.growth-chart-split')){ensureCompare();renderCompare();}
   }
@@ -399,11 +379,12 @@
     const target=e.target.closest('[data-growth-hover]');
     if(!target||target.closest('#growthRecordDialog')||target.closest('#growthGroupHoverCard'))return;
     const email=target.dataset.growthHover;
-    if(!email || !goals()?.getAllGoals?.().some(g=>g.email===email))return;
+    if(!email || !personOptions().some(g=>g.email===email))return;
     if(e.type==='keydown'&&!['Enter',' '].includes(e.key))return;
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
     goals().openRecord(email);
   }
+  window.AISG_UX={navigate,refresh:()=>queue(),getView:()=>({selectedFacet,filterOpen,analysisOpen:!!byId('uxFullAnalysis')?.open}),setView:view=>{if(names.includes(view?.selectedFacet))selectedFacet=view.selectedFacet;filterOpen=!!view?.filterOpen;byId('uxOriginalFilters')?.classList.toggle('ux-filters-closed',!filterOpen);if(byId('uxFullAnalysis'))byId('uxFullAnalysis').open=!!view?.analysisOpen;queue();}};
   function boot(){
     if(!byId('main')||!$('.leadership-tabs')||byId('uxPrimaryNav'))return;
     buildNav();createOverview();

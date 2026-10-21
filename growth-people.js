@@ -34,6 +34,7 @@
         }
       }
     }
+    for(const [email,observedNames] of byEmail)for(const name of observedNames){if(name&&!m.has(norm(name)))m.set(norm(name),email);}
     lookup=m;
   }
   function matching(kind,key){
@@ -219,7 +220,7 @@
       dismiss(true);
     },true);
     window.addEventListener('resize',()=>dismiss(true));
-    window.addEventListener('aisg:dashboardRendered',schedule);
+    window.addEventListener('aisg:dashboardRendered',()=>{dismiss(true);schedule();});
     const main=el('main');
     if(main){
       const mutation=new MutationObserver(items=>{

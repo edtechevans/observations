@@ -1081,6 +1081,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
 <link rel="stylesheet" href="./growth.css?v=20261022-nav-nine" />
 <link rel="stylesheet" href="./growth-people.css?v=20261021-public1" />
 <link rel="stylesheet" href="./ux-refresh.css?v=20261022-ux2" />
+<link rel="stylesheet" href="./reflection-workflows.css?v=20261022-reflection1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to dashboard</a>
@@ -1955,7 +1956,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function resetFilters(){
-    state.division='All'; state.observerScope='all'; state.observer='All'; state.time='All'; state.faculty=''; state.explorerSearch=''; state.explorerFacet='';
+    state.division='All'; state.observerScope='all'; state.observer='All'; state.time='All'; state.faculty=''; state.explorerSearch=''; state.explorerFacet='';state.explorerCohortFacet='';
     setSegmented('#divisionFilter','All'); setSegmented('#observerScopeFilter','all');
     el('observerFilter').value='All'; el('timeFilter').value='All'; el('facultySearch').value=''; el('observationSearch').value='';
     explorerPage=1;
@@ -2290,7 +2291,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     const pages=Math.max(1,Math.ceil(rows.length/PAGE_SIZE)); explorerPage=Math.min(explorerPage,pages);
     const start=(explorerPage-1)*PAGE_SIZE, pageRows=rows.slice(start,start+PAGE_SIZE);
     el('explorerCount').innerHTML = `${fmt.format(rows.length)} matching observation${rows.length===1?'':'s'}${state.explorerFacet?` · facet filter: <strong>${esc(state.explorerFacet)}</strong> <button id="clearFacetFilter" class="view-button" type="button">Clear</button>`:''}`;
-    const clear=el('clearFacetFilter'); if(clear) clear.addEventListener('click',()=>{state.explorerFacet=''; explorerPage=1; renderExplorer();});
+    const clear=el('clearFacetFilter'); if(clear) clear.addEventListener('click',()=>{state.explorerFacet='';state.explorerCohortFacet=''; explorerPage=1; renderExplorer();});
     el('observationTableBody').innerHTML = pageRows.length ? pageRows.map(r=>`<tr>
       <td>${esc(displayDate(r.date))}</td><td><button type="button" class="table-link" data-faculty-link="${esc(r.faculty||'')}">${esc(r.faculty||'')}</button></td><td>${esc(r.division||'')}</td><td><button type="button" class="table-link" data-observer-link="${esc(r.observer||'')}">${esc(r.observer||'')}</button></td>
       <td>${(r.commendations||[]).map(f=>facetPill(f)).join('')}</td><td>${facetPill(r.wonderingFacet)}</td>
@@ -2320,10 +2321,14 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
       <div class="drawer-section"><h3>Wondering</h3><div class="commendation-block wondering-block"><div>${facetPill(r.wonderingFacet)}</div>${wq?`<div class="question">${esc(wq)}</div>`:''}<p>${esc(r.wonderingText||'No wondering text recorded.')}</p></div></div>
       <div class="drawer-section"><h3>Faculty response</h3><p>${esc(r.response||'No response recorded.')}</p></div>`;
     const drawer=el('observationDrawer'); drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+    window.AISG_OPEN_OBSERVATION=String(id);
+    window.AISG_NAV?.schedule();
   }
 
   function closeDrawer(){
     const drawer=el('observationDrawer'); drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow='';
+    window.AISG_OPEN_OBSERVATION='';
+    window.AISG_NAV?.schedule();
   }
 
   async function handleCsvUpload(e){
@@ -2573,6 +2578,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     if(state.time!=='All')chips.push(['time',state.time]);
     if(state.faculty)chips.push(['faculty',state.faculty]);
     if(state.explorerFacet)chips.push(['facet',state.explorerFacet]);
+    if(state.explorerCohortFacet)chips.push(['cohort','Faculty who chose '+state.explorerCohortFacet]);
     host.innerHTML=chips.map(([k,v])=>`<span class="filter-chip">${esc(v)}<button type="button" data-clear-filter="${k}" aria-label="Clear ${esc(k)} filter">×</button></span>`).join('');
     qsa('[data-clear-filter]',host).forEach(btn=>btn.addEventListener('click',()=>{
       const k=btn.dataset.clearFilter;
@@ -2581,7 +2587,8 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
       if(k==='observer'){state.observer='All';el('observerFilter').value='All';}
       if(k==='time'){state.time='All';el('timeFilter').value='All';}
       if(k==='faculty'){state.faculty='';el('facultySearch').value='';}
-      if(k==='facet'){state.explorerFacet='';}
+      if(k==='facet'){state.explorerFacet='';state.explorerCohortFacet='';}
+      if(k==='cohort'){state.explorerCohortFacet='';}
       explorerPage=1;renderAll();
     }));
   }
@@ -2644,7 +2651,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   function toggleCustomDates(){const host=el('customDateFields');if(host)host.hidden=state.period!=='custom';}
 
   function resetFilters(){
-    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.period='schoolyear';state.customStart='';state.customEnd='';
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerCohortFacet='';state.period='schoolyear';state.customStart='';state.customEnd='';
     setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
     el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
     toggleCustomDates();explorerPage=1;renderAll();
@@ -2785,7 +2792,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   function renderActiveFilters(){
     const host=el('activeFilters');if(!host)return;const chips=[];if(state.division!=='All')chips.push(['division',state.division]);if(state.observerScope==='principals')chips.push(['scope','Principals + APs']);if(state.period!=='schoolyear')chips.push(['period',periodName()]);if(state.observer!=='All')chips.push(['observer',state.observer]);if(state.time!=='All')chips.push(['time',state.time]);if(state.faculty)chips.push(['faculty',state.faculty]);if(state.explorerFacet)chips.push(['facet',state.explorerFacet]);
     host.innerHTML=chips.map(([k,v])=>'<span class="filter-chip">'+esc(v)+'<button type="button" data-clear-filter="'+k+'" aria-label="Clear '+esc(k)+' filter">×</button></span>').join('');
-    qsa('[data-clear-filter]',host).forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.clearFilter;if(k==='division'){state.division='All';setSegmented('#divisionFilter','All');}if(k==='scope'){state.observerScope='all';setSegmented('#observerScopeFilter','all');}if(k==='period'){state.period='schoolyear';state.customStart='';state.customEnd='';setSegmented('#periodFilter','schoolyear');el('customStart').value='';el('customEnd').value='';toggleCustomDates();}if(k==='observer'){state.observer='All';el('observerFilter').value='All';}if(k==='time'){state.time='All';el('timeFilter').value='All';}if(k==='faculty'){state.faculty='';el('facultySearch').value='';}if(k==='facet')state.explorerFacet='';explorerPage=1;renderAll();}));
+    qsa('[data-clear-filter]',host).forEach(btn=>btn.addEventListener('click',()=>{const k=btn.dataset.clearFilter;if(k==='division'){state.division='All';setSegmented('#divisionFilter','All');}if(k==='scope'){state.observerScope='all';setSegmented('#observerScopeFilter','all');}if(k==='period'){state.period='schoolyear';state.customStart='';state.customEnd='';setSegmented('#periodFilter','schoolyear');el('customStart').value='';el('customEnd').value='';toggleCustomDates();}if(k==='observer'){state.observer='All';el('observerFilter').value='All';}if(k==='time'){state.time='All';el('timeFilter').value='All';}if(k==='faculty'){state.faculty='';el('facultySearch').value='';}if(k==='facet')state.explorerFacet='';state.explorerCohortFacet='';explorerPage=1;renderAll();}));
   }
 
   // P1 analytical model: frequency, breadth and evidence context
@@ -3093,7 +3100,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     });
     if(one)one.addEventListener('change',()=>{state.explorerOnePerFaculty=one.checked;explorerPage=1;renderExplorer();updateUrlState();});
     if(clear)clear.addEventListener('click',()=>{
-      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.explorerSearch='';
+      state.explorerEvidenceType='all';state.explorerFacet='';state.explorerCohortFacet='';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.explorerSearch='';
       if(el('observationSearch'))el('observationSearch').value='';
       explorerPage=1;renderExplorer();renderActiveFilters();updateUrlState();
     });
@@ -3147,7 +3154,8 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     if(state.explorerOnePerFaculty)q.set('one','1');
     if(state.explorerSearch)q.set('search',state.explorerSearch);
     const query=q.toString();
-    history.replaceState(null,'',location.pathname+(query?'?'+query:'')+location.hash);
+    if(window.AISG_NAV)window.AISG_NAV.schedule();
+    else history.replaceState(null,'',location.pathname+(query?'?'+query:'')+location.hash);
   }
 
   function switchTab(name){
@@ -3289,6 +3297,11 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     if(needle)rows=rows.filter(r=>searchBlob(r).includes(needle));
     rows=rows.slice().sort((a,b)=>b.date.localeCompare(a.date)||String(b.id).localeCompare(String(a.id)));
 
+    if(state.explorerCohortFacet){
+      const goals=window.AISG_GROWTH_PEOPLE_BRIDGE?.getAllGoals?.()||[];
+      const emails=new Set(goals.filter(g=>g.facet===state.explorerCohortFacet&&(g.schoolYear||'2026-27')===state.year).map(g=>g.email.toLowerCase()));
+      rows=rows.filter(r=>emails.has(String(r.email||'').toLowerCase()));
+    }
     const beforeDedupe=rows.length;
     if(state.explorerOnePerFaculty){
       const seen=new Set();
@@ -3342,7 +3355,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   function resetFilters(){
-    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.plc='All';state.period='schoolyear';state.customStart='';state.customEnd='';
+    state.division='All';state.observerScope='all';state.observer='All';state.time='All';state.faculty='';state.explorerSearch='';state.explorerFacet='';state.explorerCohortFacet='';state.explorerEvidenceType='all';state.explorerOnePerFaculty=false;state.explorerPlc='';state.explorerMtss=null;state.plc='All';state.period='schoolyear';state.customStart='';state.customEnd='';
     setSegmented('#divisionFilter','All');setSegmented('#observerScopeFilter','all');setSegmented('#periodFilter','schoolyear');
     el('observerFilter').value='All';el('timeFilter').value='All';el('facultySearch').value='';el('observationSearch').value='';el('customStart').value='';el('customEnd').value='';
     toggleCustomDates();explorerPage=1;renderAll();
@@ -4246,7 +4259,29 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     }));
   }
 
-  window.AISG_GROWTH_BRIDGE={getRows:()=>allRows,getState:()=>state,goTo:(tab)=>switchTab(tab),openObservations:(email)=>{const row=allRows.find(r=>String(r.email||'').trim().toLowerCase()===String(email||'').trim().toLowerCase()&&r.schoolYear==='2026-27');if(!row)return;state.year='2026-27';state.faculty=row.faculty;if(el('facultySearch'))el('facultySearch').value=row.faculty;state.explorerSearch='';state.explorerFacet='';explorerPage=1;switchTab('explorer');renderAll();}};
+  const NAV_STATE_KEYS=new Set(Object.keys(state));
+  NAV_STATE_KEYS.add('explorerCohortFacet');
+  function restoreDashboard(snapshot,tab='overview'){
+    for(const [key,value] of Object.entries(snapshot||{})){
+      if(NAV_STATE_KEYS.has(key)&&['string','number','boolean'].includes(typeof value))state[key]=value;
+    }
+    state.explorerMtss=snapshot?.explorerMtss&&typeof snapshot.explorerMtss==='object'?snapshot.explorerMtss:null;
+    if(el('yearFilter'))el('yearFilter').value=state.year;
+    setSegmented('#divisionFilter',state.division);setSegmented('#observerScopeFilter',state.observerScope);setSegmented('#periodFilter',state.period);
+    refreshObserverOptions();
+    for(const [id,key] of [['observerFilter','observer'],['timeFilter','time'],['facultySearch','faculty'],['observationSearch','explorerSearch'],['customStart','customStart'],['customEnd','customEnd']])if(el(id))el(id).value=state[key]||'';
+    explorerPage=Math.max(1,Number(snapshot?.explorerPage)||1);
+    toggleCustomDates();switchTab(tab);renderAll();
+  }
+  window.AISG_GROWTH_BRIDGE={
+    getRows:()=>allRows,getState:()=>state,getSelectedRows:()=>selectedRows(),
+    getPeriodBounds:()=>periodBounds(baseSelectedRows()),
+    getStatus:()=>({state:dataMode==='public-error'?'error':allRows.length?'ready':'loading',mode:dataMode}),
+    getSnapshot:()=>({...state,explorerPage}),restore:restoreDashboard,
+    goTo:tab=>switchTab(tab),refresh:()=>renderAll(),openObservation,closeObservation:closeDrawer,
+    openTagged:(facet,cohort)=>{state.explorerFacet=facet;state.explorerCohortFacet=cohort?facet:'';state.explorerEvidenceType='all';state.explorerSearch='';state.explorerPlc='';state.explorerMtss=null;state.explorerOnePerFaculty=false;explorerPage=1;if(el('observationSearch'))el('observationSearch').value='';switchTab('explorer');renderAll();},
+    openObservations:email=>{const row=allRows.find(r=>String(r.email||'').trim().toLowerCase()===String(email||'').trim().toLowerCase()&&r.schoolYear===state.year);if(!row)return;state.faculty=row.faculty;state.explorerSearch='';state.explorerFacet='';state.explorerCohortFacet='';state.explorerCohortFacet='';state.explorerPlc='';state.explorerMtss=null;explorerPage=1;if(el('facultySearch'))el('facultySearch').value=row.faculty;if(el('observationSearch'))el('observationSearch').value='';switchTab('explorer');renderAll();}
+  };
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
 
@@ -4263,8 +4298,9 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 })();
 
 </script>
-<script src="./growth.js?v=20261022-ux2" defer></script>
-<script src="./growth-people.js?v=20261022-ux2" defer></script>
-<script src="./ux-refresh.js?v=20261022-ux2" defer></script>
+<script src="./growth.js?v=20261022-reflection1" defer></script>
+<script src="./growth-people.js?v=20261022-reflection1" defer></script>
+<script src="./ux-refresh.js?v=20261022-reflection1" defer></script>
+<script src="./reflection-workflows.js?v=20261022-reflection1" defer></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
   const LEADER_DOMAIN = /(?:^|\s)(instructional leadership|strategic & organizational leadership|personal, ethical & reflective leadership)\b/i;
   const SOURCE_NAME = 'Faculty growth goals · October 2026';
   const publicFallback = {schoolYear:YEAR,asOf:'2026-10-22',includedFaculty:108,observationRosterCount:109,facetCounts:{Personalization:32,Agency:48,Authenticity:7,Creativity:6,Collaboration:10,'Taking Action':5},lensCounts:{Being:80,Connecting:13,Doing:15},domainCounts:{},byDivision:{Elementary:{includedFaculty:54,facetCounts:{Personalization:24,Agency:23,Authenticity:2,Creativity:1,Collaboration:3,'Taking Action':1},lensCounts:{Being:47,Connecting:3,Doing:4},domainCounts:{}},Secondary:{includedFaculty:54,facetCounts:{Personalization:8,Agency:25,Authenticity:5,Creativity:5,Collaboration:7,'Taking Action':4},lensCounts:{Being:33,Connecting:10,Doing:11},domainCounts:{}}}};
-  const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false};
+  const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false,sourceMeta:null};
   const byId = id => document.getElementById(id);
   const esc = input => String(input == null ? '' : input).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const nfmt = number => Number(number||0).toLocaleString('en-US');
@@ -46,6 +46,7 @@
       lensCounts:{Being:(facetCounts.Agency||0)+(facetCounts.Personalization||0),Connecting:(facetCounts.Authenticity||0)+(facetCounts.Creativity||0),Doing:(facetCounts.Collaboration||0)+(facetCounts['Taking Action']||0)}};
   }
   function summary(){
+    if(!local.rows)return emptySummary();
     if(local.rows)return summaryFor(activeGoals());
     if(!currentYear())return emptySummary();
     const source=local.summary||publicFallback;
@@ -167,6 +168,7 @@
     const host=byId('growthViewMount');if(!host)return;
     byId('growthViewNav')?.querySelectorAll('button[data-growth-pane]').forEach(b=>{const active=b.dataset.growthPane===local.pane;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active));b.tabIndex=active?0:-1;});
     host.className='growth-pane';
+    if(!local.rows){host.innerHTML='<div class="growth-empty" role="status"><strong>'+(local.error?'Goal data unavailable':'Loading faculty goals')+'</strong><p>'+(local.error?'Results cannot be shown. Refresh to retry.':'Please let the source records finish loading.')+'</p></div>';return;}
     host.innerHTML=local.pane==='facets'?renderFacets():local.pane==='domains'?renderDomains():renderGoals();
     if(local.pane==='goals')renderGoalRows();
   }
@@ -187,6 +189,8 @@
     if(!byId('growthViewMount'))return;
     hideTooltip(true);
     renderWelcome();renderStats();renderGrowth();enhanceFacultyOverview();
+    if(!local.rows){byId('growthSummaryStats')?.querySelectorAll('strong').forEach(n=>n.textContent=local.error?'Unavailable':'Loading');}
+    window.dispatchEvent(new CustomEvent('aisg:growthRendered'));
   }
   function validateGoals(list,from){
     const observed=facultyMap();if(!observed.size)throw Error('Observation data must finish loading before unlocking goals.');
@@ -203,6 +207,7 @@
     local.status=from==='public'?'Loaded from public faculty goals dataset.':from==='encrypted'?'Verified encrypted dataset.':'Imported from local CSV.';
     local.error=false;local.query='';local.facet='All';local.domain='All';if(from!=='public')local.pane='goals';
     update();
+    window.dispatchEvent(new CustomEvent('aisg:goalsReady'));
     return local.rows.length;
   }
   const tooltip={hideTimer:null};
@@ -213,7 +218,7 @@
   }
   function showTooltip(anchor){
     const email=String(anchor?.dataset?.growthHover||'').trim().toLowerCase(),record=local.rows?.find(g=>g.email===email);
-    if(!record)return;
+    if(!record){window.AISG_REFLECTION?.missingPreview(anchor);return;}
     clearTimeout(tooltip.hideTimer);
     const tip=byId('growthHoverCard');if(!tip)return;
     tip.innerHTML='<div class="growth-hover-kicker">FACULTY GROWTH FOCUS</div><div class="growth-hover-head"><strong>'+esc(record.faculty)+'</strong>'+tag(record.facet)+'</div><div class="growth-hover-label">CHOSEN DOMAIN</div><p>'+esc(record.domain)+'</p><div class="growth-hover-label">IDENTIFIED GOAL</div><p class="growth-hover-statement">'+esc(record.goal.length>300?record.goal.slice(0,297).trimEnd()+'…':record.goal)+'</p><small>Click the faculty name to read the full goal and observation evidence.</small>';
@@ -225,6 +230,7 @@
     tip.style.left=left+'px';tip.style.top=top+'px';
   }
   function selectRecord(email){
+    if(window.AISG_REFLECTION)return window.AISG_REFLECTION.openRecord(email);
     const goal=local.rows?.find(g=>g.email===String(email||'').trim().toLowerCase());if(!goal)return;
     hideTooltip(true);const evidence=evidenceFor(goal),dialog=byId('growthRecordDialog');if(!dialog)return;
     const excerpts=[];
@@ -247,6 +253,7 @@
     if(!response.ok)throw Error('Published faculty goals could not be fetched (HTTP '+response.status+').');
     const payload=await response.json();
     if(payload.version!==1||payload.schoolYear!==YEAR||!Array.isArray(payload.rows))throw Error('Published goals file is invalid.');
+    local.sourceMeta={asOf:payload.asOf,schoolYear:payload.schoolYear};
     // The 2.9 MB observation dataset may load after this much smaller goals file.
     // Wait for the main dashboard to finish its fetch before matching by email.
     if(!facultyMap().size){
@@ -274,13 +281,17 @@
     getSummary:summary,
     getObservedRows:rowsYtd,
     openRecord:(email)=>selectRecord(email),
+    getLoadState:()=>({state:local.error?'error':local.rows?'ready':'loading',error:local.error?local.status:'',asOf:local.sourceMeta?.asOf||''}),
+    getView:()=>({pane:local.pane,facet:local.facet,domain:local.domain,query:local.query}),
+    setView:view=>{if(['facets','domains','goals'].includes(view?.pane))local.pane=view.pane;if(typeof view?.facet==='string')local.facet=view.facet;if(typeof view?.domain==='string')local.domain=view.domain;if(typeof view?.query==='string')local.query=view.query;renderGrowth();},
     refresh:()=>update()
   };
-  function setPane(name){if(!['facets','domains','goals'].includes(name))return;local.pane=name;renderGrowth();}
+  function setPane(name){if(!['facets','domains','goals'].includes(name))return;local.pane=name;renderGrowth();window.AISG_NAV?.schedule();}
   async function init(){
     const panel=byId('growthViewMount');if(!panel)return;
     byId('growthOpenFromWelcome')?.addEventListener('click',()=>roleBridge()?.goTo?.('growth'));
 
+    byId('growthViewNav')?.addEventListener('keydown',event=>{const buttons=[...byId('growthViewNav').querySelectorAll('button')],i=buttons.indexOf(event.target);if(i<0)return;let j=i;if(event.key==='ArrowRight')j=(i+1)%buttons.length;else if(event.key==='ArrowLeft')j=(i+buttons.length-1)%buttons.length;else if(event.key==='Home')j=0;else if(event.key==='End')j=buttons.length-1;else return;event.preventDefault();buttons[j].click();buttons[j].focus();});
     byId('growthViewNav')?.addEventListener('click',event=>{const btn=event.target.closest('[data-growth-pane]');if(btn)setPane(btn.dataset.growthPane);});
     panel.addEventListener('input',event=>{if(event.target.id==='growthGoalSearch'){local.query=event.target.value;renderGoalRows();hideTooltip(true);}});
     panel.addEventListener('change',event=>{if(event.target.id==='growthFacetFilter'){local.facet=event.target.value;renderGoalRows();}if(event.target.id==='growthDomainFilter'){local.domain=event.target.value;renderGoalRows();}hideTooltip(true);});
@@ -291,7 +302,8 @@
     document.addEventListener('focusout',event=>{if(event.target.closest('[data-growth-hover]'))hideTooltip();});
     byId('growthHoverCard')?.addEventListener('pointerenter',()=>clearTimeout(tooltip.hideTimer));
     byId('growthHoverCard')?.addEventListener('pointerleave',()=>hideTooltip());
-    window.addEventListener('scroll',()=>hideTooltip(true),true);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTooltip(true);});
+    window.addEventListener('scroll',e=>{if(!byId('growthHoverCard')?.contains(e.target))hideTooltip(true);},true);
     byId('growthCloseDialog')?.addEventListener('click',()=>byId('growthRecordDialog')?.close());
     byId('growthRecordDialog')?.addEventListener('click',event=>{if(event.target===byId('growthRecordDialog'))byId('growthRecordDialog').close();});
     window.addEventListener('aisg:dashboardRendered',update);
