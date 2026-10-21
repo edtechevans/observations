@@ -1,0 +1,63 @@
+name: Import missing observations - 22 October 2026
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-observations-20261022.yml'
+      - 'tools/import-observations-20261022.py'
+      - 'maintenance/observations-20261022-*.b64'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: observations-import-20261022
+  cancel-in-progress: false
+
+jobs:
+  import-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Append only verified missing observations
+        run: python3 tools/import-observations-20261022.py
+      - name: Verify original goals and application syntax
+        run: |
+          python3 tests/validate-data.py
+          node --check growth.js
+          node --check growth-people.js
+          node --check ux-refresh.js
+          node --check reflection-workflows.js
+          git diff --exit-code -- data/faculty-goals.json data/growth-summary.json growth.js growth-people.js ux-refresh.js reflection-workflows.js
+      - name: Install full Chromium for dashboard checks
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps --no-shell chromium
+          python3 -c "from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print('CHROMIUM_PATH='+p.chromium.executable_path); p.stop()" >> "$GITHUB_ENV"
+      - name: Verify teacher matching, timelines, navigation and mobile layout
+        run: |
+          python3 tests/reflection-browser.py
+          python3 tests/mobile-layout.py
+      - name: Store verification results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: observations-import-browser-results
+          path: test-results/
+          retention-days: 1
+          if-no-files-found: ignore
+      - name: Publish append-only data update
+        if: success()
+        run: |
+          if test -f maintenance/observations-20261022-1.b64; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data/observations-full.csv data/refresh-20261022.json index.html
+            git rm maintenance/observations-20261022-1.b64 maintenance/observations-20261022-2.b64 maintenance/observations-20261022-3.b64
+            git commit -m 'Add 12 missing observations from 19-21 October; preserve 829 existing records and 108 faculty goals'
+            git push origin HEAD:main
+          fi
+          echo 'Verified: 841 total observations, 306 in 2026-27, 138 Elementary and 168 Secondary. Latest observation: 21 October 2026.' >> "$GITHUB_STEP_SUMMARY"
