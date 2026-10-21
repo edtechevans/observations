@@ -231,6 +231,7 @@
     return goals()?.getGoals?.()||[];
   }
   function chosenFocus(){
+    if(state().year&&state().year!=='2026-27')return ['Agency',0];
     const scoped=yearGoals();
     let counts={};
     scoped.forEach(g=>{if(names.includes(g.facet))counts[g.facet]=(counts[g.facet]||0)+1;});
@@ -355,7 +356,7 @@
     const compare=ensureCompare();
     if(!compare)return;
     const best=chosenFocus();
-    if(!selectedFacet || (!yearGoals().some(g=>g.facet===selectedFacet)&&best[1]))selectedFacet=best[0];
+    if(!selectedFacet)selectedFacet=best[0];
     renderCompare();
     compare.scrollIntoView({block:'center',behavior:focus?'smooth':'instant'});
     if(focus)byId('uxCompareFacet')?.focus({preventScroll:true});
@@ -363,10 +364,10 @@
   function renderCompare(){
     const compare=ensureCompare();if(!compare)return;
     const best=chosenFocus();
-    if(!names.includes(selectedFacet) || (best[1]&&!yearGoals().some(g=>g.facet===selectedFacet)))selectedFacet=best[0];
+    if(!names.includes(selectedFacet))selectedFacet=best[0];
     const picker=byId('uxCompareFacet');if(picker&&picker.value!==selectedFacet)picker.value=selectedFacet;
     const goalRows=yearGoals(),total=goalRows.filter(g=>g.facet===selectedFacet).length,
-       fallback=goals()?.getSummary?.()?.facetCounts?.[selectedFacet]||0,intentions=goalRows.length?total:fallback;
+       fallback=(state().year&&state().year!=='2026-27')?0:(goals()?.getSummary?.()?.facetCounts?.[selectedFacet]||0),intentions=goalRows.length?total:fallback;
     const signals=facetSignals(filteredEvidence(),selectedFacet);
     setText('uxCompareIntent',fmt(intentions)+' faculty');
     setText('uxCompareIntentDesc','Chose '+selectedFacet+' as the focus of their 2026–27 professional growth goal.');
