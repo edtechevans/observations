@@ -1800,7 +1800,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":294,"faculty":109,"responses":245,"elementary":135,"secondary":159,"beginning":95,"middle":153,"end":46,"minDate":20260810,"maxDate":20261016}},"sourceRows":829};
+window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":306,"faculty":109,"responses":254,"elementary":138,"secondary":168,"beginning":98,"middle":158,"end":50,"minDate":20260810,"maxDate":20261021}},"sourceRows":841};
 </script>
   <script>
 (() => {
@@ -2382,7 +2382,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   async function loadPublishedRows(){
-    const res=await fetch('./data/observations-full.csv?v=20261019-append-missing',{cache:'no-store'});
+    const res=await fetch('./data/observations-full.csv?v=20261022-append-missing',{cache:'no-store'});
     if(!res.ok) throw new Error(`Dataset request failed: ${res.status}`);
     const text=await res.text();
     const normalized=normalizeRawRows(parseCsvText(text));

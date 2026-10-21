@@ -1,0 +1,71 @@
+{
+  "window_start_inclusive": "2026-10-16",
+  "window_end_inclusive": "2026-10-22",
+  "data_through": "2026-10-21",
+  "source_file": "Observation_final(Sheet1) (11).csv",
+  "source_rows": 848,
+  "window_rows": 16,
+  "already_present_window_rows": 4,
+  "added_rows": 12,
+  "added_by_date": {
+    "2026-10-19": 2,
+    "2026-10-20": 2,
+    "2026-10-21": 8
+  },
+  "added_by_division": {
+    "Secondary": 9,
+    "Elementary": 3
+  },
+  "added_ids": [
+    "261019135125",
+    "261019183357",
+    "261020084857",
+    "261020104602",
+    "261021094224",
+    "261021095139",
+    "261021104143",
+    "261021110251",
+    "261021110747",
+    "261021120815",
+    "261021125423",
+    "261021131909"
+  ],
+  "updated_existing_rows": 0,
+  "removed_rows": 0,
+  "preserved_rows": 829,
+  "existing_csv_prefix_bytes": 2962573,
+  "existing_csv_prefix_byte_identical": true,
+  "baseline_data_sha256": "4ea66d8f96ce272e30bcdbbe8dee980782fb26a4295bc565f52b469bf3bf89e2",
+  "data_sha256": "ee892516de8634296a7dc5a8232841729dbbb034be9793d1bea32ce6690fd0f8",
+  "source_sha256": "3d5141f01d89783852919b6ec11d3a512f0baac0ca11ff418ce6df333185fc74",
+  "skipped_before_window": 3,
+  "standing_exclusions_not_reintroduced": 4,
+  "preserved_existing_source_differences": 71,
+  "faculty_goals_unchanged": true,
+  "audit": {
+    "2025-26": {
+      "observations": 535,
+      "faculty": 106,
+      "responses": 484,
+      "elementary": 342,
+      "secondary": 193,
+      "beginning": 192,
+      "middle": 272,
+      "end": 71,
+      "minDate": 20250811,
+      "maxDate": 20260513
+    },
+    "2026-27": {
+      "observations": 306,
+      "faculty": 109,
+      "responses": 254,
+      "elementary": 138,
+      "secondary": 168,
+      "beginning": 98,
+      "middle": 158,
+      "end": 50,
+      "minDate": 20260810,
+      "maxDate": 20261021
+    }
+  }
+}
