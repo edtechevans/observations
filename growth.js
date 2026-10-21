@@ -1,6 +1,6 @@
-/* AISG Growth & Reflection. Faculty goals are hosted as AES-256-GCM ciphertext.
- * Viewing individual goals requires the leadership passphrase, entered only in memory.
- * The shared passphrase unlocks ALL faculty goals. This is NOT faculty SSO or per-user authorization.
+/* AISG Growth & Reflection: public schoolwide and 2026–27 observed-faculty professional goals.
+ * All goal records are readable from data/faculty-goals.json at the user's request.
+ * This public site is NOT authenticated and must not be presented as faculty-specific private access.
  */
 (() => {
   'use strict';
@@ -10,7 +10,7 @@
   const DOMAIN_NAMES = {'1':'Purposeful & Inclusive Learning Design','2':'Inclusive Learning Culture & Environment','3':'Transformative, Culturally Responsive Learning in Action','4':'Collaborative Planning, Reflection & Professional Impact','other':'Other / not specified'};
   const RESTRICTED_LEADERS = new Set(['ckydd@aisgz.org','srogers@aisgz.org','tevans@aisgz.org','kjohnson@aisgz.org','jkennett@aisgz.org','remmerink@aisgz.org']);
   const LEADER_DOMAIN = /(?:^|\s)(instructional leadership|strategic & organizational leadership|personal, ethical & reflective leadership)\b/i;
-  const SOURCE_NAME = 'Faculty goals selected 20 Oct 2026';
+  const SOURCE_NAME = 'Faculty growth goals · 20 October 2026';
   const publicFallback = {schoolYear:YEAR,asOf:'2026-10-20',includedFaculty:54,observationRosterCount:109,facetCounts:{Personalization:8,Agency:25,Authenticity:5,Creativity:5,Collaboration:7,'Taking Action':4,Other:0,'Pending selection':0},lensCounts:{Being:33,Connecting:10,Doing:11},domainCounts:{'1':14,'2':7,'3':14,'4':18,other:1}};
   const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false,unlocking:false,unlockOpen:false};
   const byId = id => document.getElementById(id);
@@ -64,7 +64,7 @@
       [nfmt(agency),'Agency focus','Faculty-selected TLF facet']
     ].map(([num,label,sub])=>'<article class="growth-overview-tile"><strong class="num">'+esc(num)+'</strong><span class="lbl">'+esc(label)+'</span><span class="sub">'+esc(sub)+'</span></article>').join('');
     const scope=byId('growthOverviewScope');
-    if(scope)scope.textContent=(division()==='All'?'Whole school':division())+' · '+(local.rows?'Verified encrypted faculty goals unlocked for this session':'Schoolwide aggregates; individual goal statements protected')+(currentYear()?'':' · Goals are available for 2026–27 only');
+    if(scope)scope.textContent=(division()==='All'?'Whole school':division())+' · '+(local.rows?'Public faculty goals available':'Loading published faculty goals')+(currentYear()?'':' · Goals are available for 2026–27 only');
   }
   function renderStats(){
     const s=summary(),f=s.facetCounts||{},lens=s.lensCounts||{},total=s.includedFaculty||0;
@@ -75,14 +75,18 @@
       [highest?.[1]||0,highest?.[0]||'TLF focus',total?'Most frequently selected facet':'No goals in this view']
     ];
     byId('growthSummaryStats').innerHTML=values.map(([num,label,sub])=>'<div class="growth-stat"><strong>'+nfmt(num)+'</strong><span>'+esc(label)+'</span><small>'+esc(sub)+'</small></div>').join('');
-    const notice=byId('growthNotice'),clear=byId('growthClearBtn'),unlock=byId('growthUnlockBtn'),vault=byId('growthUnlockPanel');
-    if(clear)clear.hidden=!local.rows;
-    if(unlock)unlock.hidden=!!local.rows;
-    if(vault)vault.hidden=!!local.rows||!local.unlockOpen;
+    const notice=byId('growthNotice');
     if(!notice)return;
-    if(local.rows){notice.className='growth-note is-private';notice.innerHTML='<strong>Faculty goals unlocked.</strong> '+nfmt(local.rows.length)+' faculty records, matched to 2026–27 observations, are available in this browser session. '+esc(local.status)+' <span class="growth-privacy-inline">A shared leadership passphrase is not personal faculty authentication.</span>';}
-    else if(local.error){notice.className='growth-note is-warning';notice.innerHTML='<strong>Unable to unlock goals.</strong> '+esc(local.status)+' Aggregate figures remain available.';}
-    else {notice.className='growth-note';notice.innerHTML='<strong>Protected faculty goals.</strong> Schoolwide and divisional facet/domain summaries are visible. Full faculty names, domains and goal statements are stored in an encrypted file; an authorized leader can unlock them using the passphrase. <strong>Elementary has no matched goals in the supplied October 20 file.</strong>';}
+    if(local.rows){
+      notice.className='growth-note is-public';
+      notice.innerHTML='<strong>Faculty goals available.</strong> '+nfmt(local.rows.length)+' observed faculty goals are published and visible across the dashboard. Hover or focus a faculty name for their complete domain, facet and goal. <strong>Only Secondary faculty are represented in the supplied goals file.</strong>';
+    }else if(local.error){
+      notice.className='growth-note is-warning';
+      notice.innerHTML='<strong>Unable to load faculty goals.</strong> '+esc(local.status)+' Try refreshing the page.';
+    }else{
+      notice.className='growth-note';
+      notice.innerHTML='<strong>Loading published faculty goals…</strong> Schoolwide and divisional summaries remain visible while the goal records load.';
+    }
   }
   function barRows(entries,max){
     return entries.map(([name,value])=>{
@@ -115,7 +119,7 @@
         html+='<section class="growth-members-group"><h4>'+tag(facet)+' <span>'+nfmt(count)+' faculty</span></h4><div class="growth-people">'+people.map(personButton).join('')+'</div></section>';
       }
       html+='</div></details>';
-    }else html+='<p class="growth-footnote">Unlock protected goals to see individual faculty and compare their selected facets with classroom observations.</p>';
+    }else html+='<p class="growth-footnote">Faculty detail records are loading…</p>';
     return html;
   }
   function renderDomains(){
@@ -133,7 +137,7 @@
     if(local.rows){html+=sorted.map(([name,count])=>'<details class="growth-competency"><summary><strong>'+esc(name)+'</strong><span>'+nfmt(count)+' faculty ▾</span></summary><div class="growth-people">'+activeGoals().filter(g=>g.domain===name).sort((a,b)=>a.faculty.localeCompare(b.faculty)).map(personButton).join('')+'</div></details>').join('');}
     else html+=sorted.map(([name,count])=>'<div class="growth-competency"><strong>'+esc(name)+'</strong><span>'+nfmt(count)+' faculty</span></div>').join('');
     html+='</div></section>';
-    if(!local.rows)html+='<p class="growth-footnote">Unlock faculty goals to explore who selected each competency and read their goal statements on hover.</p>';
+    if(!local.rows)html+='<p class="growth-footnote">Faculty detail records are loading…</p>';
     html+='<div class="growth-inquiry"><strong>Leadership inquiry</strong><p>How could these priorities inform collaborative planning, professional learning and the evidence collected during observations?</p></div>';
     return html;
   }
@@ -145,7 +149,7 @@
   function renderGoals(){
     const total=summary().includedFaculty||0;
     if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals from the supplied October 20 file match current-year observations in this division.</p></div>';
-    if(!local.rows)return '<h3>Individual faculty growth goals</h3><p class="growth-pane-lead">Faculty details are protected. To read the full goal statement alongside each teacher’s facet, domain and observation evidence, unlock the encrypted goals.</p><div class="growth-private-prompt"><div class="glyph" aria-hidden="true">⌁</div><div><h4>Protected faculty goals</h4><p>All '+nfmt(total)+' matched faculty goal statements are available after you enter the leadership passphrase. The passphrase is not saved, and individual goal text is not published as readable website data.</p><button class="button button-secondary" id="growthPromptUnlock" type="button">Unlock faculty goals →</button></div></div><p class="growth-footnote">A shared leadership key is an interim access safeguard, not individual faculty access or AISG single sign-on.</p>';
+    if(!local.rows)return '<h3>Individual faculty growth goals</h3><p class="growth-pane-lead">Loading publicly available faculty goals…</p>';
     let html='<h3>Faculty growth goals</h3><p class="growth-pane-lead">Hover or focus on a faculty name to read their <strong>chosen TLF facet, domain and complete goal statement</strong>. Click a name for the full growth record and related observation evidence.</p>';
     html+='<div class="growth-tools"><div class="growth-field grow"><label for="growthGoalSearch">Search faculty or goal statement</label><input id="growthGoalSearch" type="search" placeholder="Search names, keywords, or goal text" value="'+esc(local.query)+'" autocomplete="off" /></div><div class="growth-field"><label for="growthFacetFilter">TLF facet</label><select id="growthFacetFilter"><option value="All">All facets</option>'+FACETS.map(f=>'<option value="'+esc(f)+'"'+(local.facet===f?' selected':'')+'>'+esc(f)+'</option>').join('')+'</select></div><div class="growth-field"><label for="growthDomainFilter">Domain</label><select id="growthDomainFilter"><option value="All">All domains</option>'+['1','2','3','4','other'].map(k=>'<option value="'+k+'"'+(local.domain===k?' selected':'')+'>'+esc(k==='other'?'Other':k+' · '+DOMAIN_NAMES[k])+'</option>').join('')+'</select></div></div>';
     html+='<div id="growthResultArea"></div><p class="growth-footnote">Matches show where observation feedback mentions the teacher’s chosen TLF facet. They do not measure goal attainment.</p>';
@@ -197,8 +201,8 @@
     }
     if(!matched.size)throw Error('No observed faculty with eligible goals were found.');
     local.rows=[...matched.values()].sort((a,b)=>a.faculty.localeCompare(b.faculty));
-    local.status=from==='encrypted'?'Verified AES-256-GCM protected dataset.':'Privately imported from a local CSV.';
-    local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';local.pane='goals';
+    local.status=from==='public'?'Loaded from public faculty goals dataset.':from==='encrypted'?'Verified encrypted dataset.':'Imported from local CSV.';
+    local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';if(from!=='public')local.pane='goals';
     update();
     return local.rows.length;
   }
@@ -299,20 +303,35 @@
     }
     byId('growthRecordName').textContent=goal.faculty;
     const content=byId('growthRecordContent');
-    content.innerHTML='<div class="growth-meta">'+tag(goal.facet)+'<span>'+esc(goal.domain)+'</span><span>'+YEAR+'</span></div><h3>Identified professional goal</h3><p class="growth-goal-text">'+esc(goal.goal)+'</p><h3>Classroom evidence connected to the chosen facet</h3><div class="growth-evidence-grid"><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.rows.length)+'</strong><span>Observations YTD</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.commendations.length)+'</strong><span>Focus facet commendations</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.wonderings.length)+'</strong><span>Focus facet wonderings</span></div></div><h3>Evidence excerpts</h3>'+(excerpts.length?excerpts.slice(0,5).map(x=>'<div class="growth-observation-excerpt '+(x.type==='Wondering'?'is-wondering':'')+'"><strong>'+esc(x.date)+' · '+esc(x.type)+'</strong><div>'+esc(x.text||'Related facet was recorded. Open Evidence Explorer for the complete observation.')+'</div></div>').join(''):'<p class="growth-footnote">No observations tagged with this faculty-selected facet yet. This is a prompt for inquiry, not a measure of progress.</p>')+'<div class="growth-inquiry"><strong>A prompt for reflection</strong><p>How does this evidence relate to the instructional change being pursued? What further evidence would be useful before deciding the next step?</p></div><div class="growth-dialog-footer"><small>Private browser session · '+esc(SOURCE_NAME)+'</small><button id="growthOpenEvidence" type="button">Open Evidence Explorer →</button></div>';
+    content.innerHTML='<div class="growth-meta">'+tag(goal.facet)+'<span>'+esc(goal.domain)+'</span><span>'+YEAR+'</span></div><h3>Identified professional goal</h3><p class="growth-goal-text">'+esc(goal.goal)+'</p><h3>Classroom evidence connected to the chosen facet</h3><div class="growth-evidence-grid"><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.rows.length)+'</strong><span>Observations YTD</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.commendations.length)+'</strong><span>Focus facet commendations</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(evidence.wonderings.length)+'</strong><span>Focus facet wonderings</span></div></div><h3>Evidence excerpts</h3>'+(excerpts.length?excerpts.slice(0,5).map(x=>'<div class="growth-observation-excerpt '+(x.type==='Wondering'?'is-wondering':'')+'"><strong>'+esc(x.date)+' · '+esc(x.type)+'</strong><div>'+esc(x.text||'Related facet was recorded. Open Evidence Explorer for the complete observation.')+'</div></div>').join(''):'<p class="growth-footnote">No observations tagged with this faculty-selected facet yet. This is a prompt for inquiry, not a measure of progress.</p>')+'<div class="growth-inquiry"><strong>A prompt for reflection</strong><p>How does this evidence relate to the instructional change being pursued? What further evidence would be useful before deciding the next step?</p></div><div class="growth-dialog-footer"><small>Public faculty goal record · '+esc(SOURCE_NAME)+'</small><button id="growthOpenEvidence" type="button">Open Evidence Explorer →</button></div>';
     byId('growthOpenEvidence').onclick=()=>{dialog.close();roleBridge()?.openObservations?.(email);};
     if(!dialog.open)dialog.showModal();
   }
+  async function loadPublicGoals(){
+    const response=await fetch('./data/faculty-goals.json?v=20261021-public2',{cache:'no-store'});
+    if(!response.ok)throw Error('Published faculty goals could not be fetched (HTTP '+response.status+').');
+    const payload=await response.json();
+    if(payload.version!==1||payload.schoolYear!==YEAR||!Array.isArray(payload.rows))throw Error('Published goals file is invalid.');
+    const n=validateGoals(payload.rows,'public');
+    if(n!==54)console.warn('Public goals matched '+n+' faculty; 54 were expected for this source.');
+    return n;
+  }
+  window.AISG_GROWTH_PEOPLE_BRIDGE={
+    getGoals:()=>activeGoals()||[],
+    getAllGoals:()=>local.rows||[],
+    getDivision:division,
+    getYear:()=>roleBridge()?.getState()?.year||YEAR,
+    getSummary:summary,
+    getObservedRows:rowsYtd,
+    openRecord:(email)=>selectRecord(email),
+    refresh:()=>update()
+  };
   function setPane(name){if(!['facets','domains','goals'].includes(name))return;local.pane=name;renderGrowth();}
   async function init(){
     const panel=byId('growthViewMount');if(!panel)return;
     byId('growthOpenFromWelcome')?.addEventListener('click',()=>roleBridge()?.goTo?.('growth'));
-    byId('growthUnlockBtn')?.addEventListener('click',offerUnlock);
-    byId('growthUnlockForm')?.addEventListener('submit',handleUnlock);
-    byId('growthClearBtn')?.addEventListener('click',lockGoals);
-    byId('growthGoalsInput')?.addEventListener('change',async event=>{try{await loadGoals(event.target.files?.[0]);}catch(err){local.error=true;local.status=err.message;update();}finally{event.target.value='';}});
+
     byId('growthViewNav')?.addEventListener('click',event=>{const btn=event.target.closest('[data-growth-pane]');if(btn)setPane(btn.dataset.growthPane);});
-    panel.addEventListener('click',event=>{if(event.target.closest('#growthPromptUnlock'))offerUnlock();});
     panel.addEventListener('input',event=>{if(event.target.id==='growthGoalSearch'){local.query=event.target.value;renderGoalRows();hideTooltip(true);}});
     panel.addEventListener('change',event=>{if(event.target.id==='growthFacetFilter'){local.facet=event.target.value;renderGoalRows();}if(event.target.id==='growthDomainFilter'){local.domain=event.target.value;renderGoalRows();}hideTooltip(true);});
     document.addEventListener('click',event=>{const btn=event.target.closest('button[data-growth-open]');if(btn)selectRecord(btn.dataset.growthOpen);});
@@ -327,9 +346,10 @@
     byId('growthRecordDialog')?.addEventListener('click',event=>{if(event.target===byId('growthRecordDialog'))byId('growthRecordDialog').close();});
     window.addEventListener('aisg:dashboardRendered',update);
     update();
-    try{const response=await fetch('./data/growth-summary.json?v=20261021-v2',{cache:'no-store'});if(!response.ok)throw Error('Aggregate data unavailable');const data=await response.json();if(data.schoolYear===YEAR&&Number.isFinite(data.includedFaculty))local.summary=data;}
+    try{const response=await fetch('./data/growth-summary.json?v=20261021-public2',{cache:'no-store'});if(!response.ok)throw Error('Aggregate data unavailable');const data=await response.json();if(data.schoolYear===YEAR&&Number.isFinite(data.includedFaculty))local.summary=data;}
     catch(err){console.warn('Using October 20 schoolwide aggregates.',err);}
-    update();
+    try{await loadPublicGoals();}
+    catch(err){console.error('Published faculty goals failed to load.',err);local.error=true;local.status=err.message;update();}
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
