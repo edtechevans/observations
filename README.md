@@ -2,6 +2,22 @@
 
 AISG Teacher Growth & Reflection dashboard combining classroom observation evidence with faculty-selected professional growth priorities.
 
+## Inquiry-led UX refresh — 22 October 2026
+
+The interface groups nine legacy analysis tabs into **five primary routes**, while retaining all existing detailed evidence: **Overview**, **Growth Focus**, **Classroom Evidence** (TLF Patterns, MTSS in Practice, Reach & Evidence), **Faculty & PLCs** (Faculty Overview, PLCs), and **Explore Evidence**. Admin is an independent gear control. Existing bookmarked `?tab=` URLs and legacy route IDs remain valid.
+
+- **Compact, labelled context controls:** School year and division apply to goal cohorts; observer, period, lesson position and faculty controls apply to observation evidence. Elementary/Secondary can be changed directly from the context bar; **Edit filters** expands advanced settings when needed.
+- **Question-led Overview:** Three live cards ask what faculty intend to develop, what is being observed, and where these two datasets warrant closer inquiry. The original observation analysis is retained behind an expandable detailed view rather than deleted.
+- **Find faculty:** The primary navigation includes a searchable faculty roster. Selecting a matched teacher opens a consistent **Growth Record** side drawer; observed faculty without a matched goal open the Faculty Overview.
+- **Faculty interaction:** Clicking a matched name anywhere in dashboard evidence opens the same drawer with full domain, chosen TLF facet, complete goal, observation excerpts and a link to Evidence Explorer. Hover and keyboard focus show abbreviated previews; complete statements remain available on click.
+- **Intention ↔ evidence:** Growth Focus / TLF Facets now pairs **year-long facet selections** with separately calculated **filtered observation mentions**. Compare all six facets, including facets selected by no teachers; drill through to the chosen faculty or the underlying tagged observations. Do not interpret these figures as goal-attainment ratings.
+- **Scope honesty:** Older year-to-date observation coverage indicators are explicitly labelled unfiltered; the new paired comparison obeys evidence-period and observer filters. Goals do **not** change when only observer or period changes.
+- **Usability and accessibility:** Noto Sans fallback stack, improved contrast and body-text sizing, keyboard focus states, touch-friendly buttons, reduced-motion support and compact responsive navigation.
+
+The redesign is provided by `ux-refresh.css` and `ux-refresh.js`, layered onto the existing dashboard without rewriting the analytical functions or changing source observation/goal data.
+
+**Data protection:** This continues to be a **public** GitHub Pages deployment. Faculty goals and individual observation narratives are publicly readable as previously requested. AISG-authenticated, server-enforced authorization would be needed before any private faculty-facing launch.
+
 ## Growth Focus — Public faculty-goals release (updated 22 October 2026)
 
 - **Overview:** A concise landing experience linking teachers' growth intentions, classroom evidence and reflection.
