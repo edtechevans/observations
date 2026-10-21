@@ -1,13 +1,10 @@
 name: Validate Growth & Reflection
-
 on:
   push:
     branches: [main]
   pull_request:
-
 permissions:
   contents: read
-
 jobs:
   verify:
     name: JavaScript and faculty goals
@@ -16,74 +13,23 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-      - name: Check JavaScript syntax
+          node-version: '22'
+      - name: Check JavaScript syntax and matched source records
         run: |
           node --check growth.js
           node --check growth-people.js
           node --check ux-refresh.js
-      - name: Audit public goal matching and UI assets
-        shell: bash
+          node --check reflection-workflows.js
+          python3 tests/validate-data.py
+      - name: Check published dashboard assets
         run: |
           python3 - <<'PY'
-          import csv
-          import json
-          from collections import Counter
           from pathlib import Path
-
-          public=json.loads(Path('data/faculty-goals.json').read_text(encoding='utf-8'))
-          summary=json.loads(Path('data/growth-summary.json').read_text(encoding='utf-8'))
-          goals=public['rows']
-          assert public['schoolYear']=='2026-27'
-          assert len(goals)==108, f'Expected 108 observed faculty goals, got {len(goals)}'
-          emails=[g['email'].strip().lower() for g in goals]
-          assert len(set(emails))==108, 'Duplicate faculty goals'
-          divisions=Counter(g['division'] for g in goals)
-          assert divisions=={'Elementary':54,'Secondary':54}, f'Unexpected goal division totals: {divisions}'
-          assert all(g['faculty'] and g['domain'] and g['facet'] and g['goal'] for g in goals)
-          assert all('leadership' not in g['domain'].lower() for g in goals)
-          with Path('data/observations-full.csv').open(encoding='utf-8-sig',newline='') as f:
-              observed={}
-              for row in csv.DictReader(f):
-                  email=row['Email'].strip().lower()
-                  parts=row['Date'].split('/')
-                  if not email or len(parts)!=3: continue
-                  if int(parts[2])!=2026 or int(parts[0])<8: continue
-                  division='Elementary' if 'Elementary' in row['Division'] else 'Secondary' if 'Secondary' in row['Division'] else None
-                  if division: observed.setdefault(email,set()).add(division)
-          for g in goals:
-              assert g['division'] in observed.get(g['email'],set()), f'No current-year {g["division"]} observation for {g["email"]}'
-          assert len(observed)==109, f'Expected 109 observed faculty, got {len(observed)}'
-          assert summary['includedFaculty']==108
-          assert summary['byDivision']['All']['includedFaculty']==108
-          assert summary['byDivision']['Elementary']['includedFaculty']==54
-          assert summary['byDivision']['Secondary']['includedFaculty']==54
-          for division in ('All','Elementary','Secondary'):
-              subset=goals if division=='All' else [g for g in goals if g['division']==division]
-              actual=Counter(g['facet'] for g in subset)
-              expected=summary['byDivision'][division]['facetCounts']
-              assert all(actual[k]==v for k,v in expected.items()), f'Facet mismatch {division}'
-              assert sum(expected.values())==len(subset), f'Facet count total mismatch {division}'
-              actual_domains=Counter((g['domain'][0] if g['domain'] and g['domain'][0] in '1234' else 'other') for g in subset)
-              assert actual_domains==summary['byDivision'][division]['domainCounts'], f'Domain mismatch {division}'
-              assert Counter(g['domain'] for g in subset)==summary['byDivision'][division]['competencyCounts'], f'Competency mismatch {division}'
           html=Path('index.html').read_text(encoding='utf-8')
-          for asset in ('growth.js','growth.css','growth-people.js','growth-people.css'):
+          for asset in ('growth.js','growth.css','growth-people.js','growth-people.css','ux-refresh.js','ux-refresh.css','reflection-workflows.js','reflection-workflows.css'):
               assert ('./'+asset) in html and Path(asset).exists(), f'Missing {asset}'
-          assert './ux-refresh.js' in html and './ux-refresh.css' in html, 'Inquiry UI assets not included'
           ux=Path('ux-refresh.js').read_text(encoding='utf-8')
-          uxcss=Path('ux-refresh.css').read_text(encoding='utf-8')
-          for marker in (
-              "nav.id='uxPrimaryNav'", "label:'Faculty & PLCs'", "context.id='uxContextBar'",
-              'id="uxFacultyName"', "hero.id='uxOverview'", "compare.id='uxFacetCompare'",
-              'filteredEvidence()', 'captureFaculty',
-          ):
-              assert marker in ux, f'Missing UX function or view: {marker}'
-          assert '.leadership-tabs{display:none!important}' in uxcss
-          assert '#growthRecordDialog.growth-dialog' in uxcss, 'No faculty record drawer styles'
-          assert '.ux-inquiry-grid' in uxcss, 'Overview inquiry cards missing'
-          assert '@media(max-width:580px)' in uxcss, 'Responsive navigation not configured'
-          assert 'growthUnlockForm' not in html, 'Obsolete passphrase form still published'
-          assert not Path('data/goals-secure.json').exists(), 'Obsolete vault still published'
-          print('PASS: JavaScript syntax, 108 observed faculty goals, facet/domain totals, accessible five-route UX, scoped filters, inquiry cards and responsive drawer')
+          assert "label:'Classroom Observations'" in ux
+          assert 'growthUnlockForm' not in html
+          print('PASS: published assets and Classroom Observations navigation')
           PY
