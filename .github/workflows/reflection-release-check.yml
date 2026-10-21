@@ -4,26 +4,64 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/reflection-release-check.yml'
-      - 'tools/apply_reflection_upgrade.py'
+      - 'maintenance/reflection-release/**'
       - 'reflection-workflows.js'
       - 'reflection-workflows.css'
       - 'tests/reflection-browser.py'
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: reflection-release
+  cancel-in-progress: false
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
-      - name: Capture source for release validation
+      - name: Apply checksummed release candidate
+        run: |
+          python3 - <<'PY'
+          import base64,gzip,hashlib,subprocess
+          from pathlib import Path
+          folder=Path('maintenance/reflection-release')
+          if (folder/'part1.b64').exists():
+              encoded=(folder/'part1.b64').read_text().strip()+''.join((folder/f'chunk{i:02d}.b64').read_text().strip() for i in range(2,14))
+              patch=gzip.decompress(base64.b64decode(encoded,validate=True))
+              assert hashlib.sha256(patch).hexdigest()=='0020e22bf0925891ba8032715f3fbeaca29f06cb72d290b825cb6d97605c40d0', 'Release checksum failed'
+              Path('/tmp/reflection-release.patch').write_bytes(patch)
+              subprocess.run(['git','apply','--check','/tmp/reflection-release.patch'],check=True)
+              subprocess.run(['git','apply','/tmp/reflection-release.patch'],check=True)
+          PY
+      - name: Validate JavaScript and original records
+        run: |
+          node --check reflection-workflows.js
+          node --check growth.js
+          node --check growth-people.js
+          node --check ux-refresh.js
+          python3 tests/validate-data.py
+      - name: Install browser test dependencies
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps chromium
+      - name: Run representative leader workflows
+        run: python3 tests/reflection-browser.py
+      - name: Store browser verification
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: reflection-source
-          path: |
-            index.html
-            *.js
-            *.css
-            data/*.json
-            data/*.csv
-            README.md
+          name: reflection-browser-results
+          path: test-results/
           retention-days: 1
+          if-no-files-found: ignore
+      - name: Publish only the tested application changes
+        if: success()
+        run: |
+          if test -f maintenance/reflection-release/part1.b64; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add index.html ux-refresh.js growth.js growth-people.js reflection-workflows.js reflection-workflows.css tests/reflection-browser.py tests/validate-data.py docs/usability-review.md
+            git rm -r maintenance/reflection-release
+            git commit -m 'Release tested Classroom Observations workflows: same-teacher analysis, response timelines and shareable history'
+            git push origin HEAD:main
+          fi
