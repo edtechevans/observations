@@ -2,14 +2,14 @@
 
 AISG Teacher Growth & Reflection dashboard combining classroom observation evidence with faculty-selected professional growth priorities.
 
-## Growth Focus — Public faculty-goals release (21 October 2026)
+## Growth Focus — Public faculty-goals release (updated 22 October 2026)
 
 - **Overview:** A concise landing experience linking teachers' growth intentions, classroom evidence and reflection.
 - **Growth Focus:** Interactive views for selected **TLF Facets**, **Growth & Reflection Domains/competencies**, and **Goals**.
 - **Hover facet/domain/lens/competency:** Reveal the list of observed faculty who chose it; hover an individual in the list to preview their actual statement, or click to open their growth record.
 - **Hover faculty names anywhere in dashboard views:** Show their chosen facet, complete domain and unabridged goal statement. Includes Evidence Explorer and Faculty Overview names when the person has a matched current-year goal; supports focus/keyboard and touch.
-- **Goal records:** The readable `data/faculty-goals.json` contains **54 observed Secondary faculty**, matched on email to 2026–27 observations. The supplied file has no matched Elementary growth goals. Leaders and people without current-year observations are excluded.
-- **Filters:** Overall, Elementary and Secondary Growth Focus charts and lists are based on the eligible goals, and never reuse whole-school totals when a division has no matching goals.
+- **Goal records:** The readable `data/faculty-goals.json` now contains **108 observed faculty (54 Elementary and 54 Secondary)**. Elementary goals were cross-referenced by AISG email address against the 2026–27 classroom observations using the October 22 individual goals workbook. All 54 observed Elementary faculty matched. The original 54 Secondary goals were preserved. Leadership and non-observed records are excluded.
+- **Filters:** Whole-school, Elementary and Secondary Growth Focus views calculate goals, facets, domains, competencies, and lens summaries from their matching division. Selecting Elementary now displays 54 eligible faculty goals, not an empty state.
 - **Access:** The requested deployment is **public**. There is no password, authentication or faculty-specific access control. The complete identifiable goals and observation narratives are therefore accessible to any visitor to the public site or repository.
 
 **Privacy reminder:** Before using this dashboard for private individual faculty access, move both `data/faculty-goals.json` and `data/observations-full.csv` behind AISG-authenticated, server-enforced authorization. Browser-only filtering is not access control.
