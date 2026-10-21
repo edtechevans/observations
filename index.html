@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="AISG Teacher Growth & Reflection observation dashboard" />
   <meta name="theme-color" content="#113261" />
-  <title>AISG Growth & Reflection Dashboard</title>
+  <title>AISG Growth &amp; Reflection | AISG</title>
   <style>
 :root{
   --navy:#113261;
@@ -1078,6 +1078,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
 }
 
 </style>
+<link rel="stylesheet" href="./growth.css?v=20261021" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to dashboard</a>
@@ -1089,8 +1090,8 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
       <div class="title-divider" aria-hidden="true"></div>
       <div class="dashboard-title">
         <p class="eyebrow">Teacher Growth &amp; Reflection</p>
-        <h1>Observation Insights</h1>
-        <p class="subtitle">Leadership evidence for Engagement for All · Transformative Learning Framework</p>
+        <h1>Growth &amp; Reflection</h1>
+        <p class="subtitle">Professional intentions · Classroom evidence · Reflective practice</p>
       </div>
     </div>
     <div class="header-actions">
@@ -1190,7 +1191,8 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
     </section>
 
     <nav class="tabs leadership-tabs" aria-label="Dashboard sections">
-      <button class="tab active" data-tab="overview" type="button">Snapshot</button>
+      <button class="tab active" data-tab="overview" type="button">Overview</button>
+      <button class="tab" data-tab="growth" type="button">Growth Focus</button>
       <button class="tab" data-tab="facets" type="button">TLF Patterns</button>
       <button class="tab" data-tab="mtss" type="button">MTSS in Practice</button>
       <button class="tab" data-tab="plcs" type="button">PLCs</button>
@@ -1201,6 +1203,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
     </nav>
 
     <section id="overview" class="tab-panel active">
+      <div class="growth-hero"><div class="growth-hero__content"><span class="growth-kicker">AISG · TEACHER GROWTH &amp; REFLECTION</span><h2>From <em>intention</em> to evidence to action.</h2><p>Connect the professional priorities teachers have chosen with what we notice in classrooms, and use both to inform reflective practice.</p><div class="growth-hero__actions"><button id="growthOpenFromWelcome" type="button">Explore Growth Focus →</button><a href="https://pd.aisgz.org/growth/tasks" target="_blank" rel="noopener noreferrer">My Growth &amp; Reflection ↗</a></div><span class="growth-year-tag">2026–27 · Faculty goals and observation evidence</span></div><div class="growth-flow"><div class="growth-flow-stage"><span class="growth-flow-num">1</span><div><strong>Intention</strong><small>Chosen facets, domains and goals</small></div></div><span class="growth-flow-arrow">↓</span><div class="growth-flow-stage"><span class="growth-flow-num">2</span><div><strong>Evidence</strong><small>What we see and wonder</small></div></div><span class="growth-flow-arrow">↓</span><div class="growth-flow-stage"><span class="growth-flow-num">3</span><div><strong>Reflection &amp; action</strong><small>What we learn and do next</small></div></div></div></div><div id="growthTopline" class="growth-topline"></div><p id="growthOverviewScope" class="growth-footnote"></p><div class="growth-observation-heading"><h2>Observation evidence</h2><span>Patterns emerging across learning environments</span></div>
       <div id="contextRibbon" class="context-ribbon"></div>
       <div class="kpi-grid leadership-kpis" id="kpiGrid"></div>
 
@@ -1253,6 +1256,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
       </div>
     </section>
 
+<section id="growth" class="tab-panel" aria-labelledby="growthTitle"><div class="section-heading"><div><p class="eyebrow">Professional learning priorities · 2026–27</p><h2 id="growthTitle">Growth Focus</h2><p>Explore faculty-selected TLF facets and Growth &amp; Reflection domains, then connect individual goals with classroom evidence.</p></div><div class="growth-heading-actions"><button type="button" id="growthUploadBtn" class="button button-secondary">Load private faculty goals</button><button type="button" id="growthClearBtn" class="button button-ghost" hidden>Clear private goals</button></div></div><input id="growthGoalsInput" type="file" accept=".csv,text/csv" hidden/><div id="growthNotice" class="growth-note" role="status" aria-live="polite"></div><div id="growthSummaryStats" class="growth-stats"></div><div id="growthViewNav" class="growth-view-nav" role="tablist" aria-label="Explore growth focus"><button type="button" role="tab" aria-selected="true" class="active" data-growth-pane="facets">TLF Facets</button><button type="button" role="tab" aria-selected="false" data-growth-pane="domains">Domains</button><button type="button" role="tab" aria-selected="false" data-growth-pane="goals">Goals</button></div><div id="growthViewMount" aria-live="polite"></div></section><dialog id="growthRecordDialog" class="growth-dialog" aria-labelledby="growthRecordName"><div class="growth-dialog-header"><div><span class="growth-kicker" style="color:#71879a">FACULTY GROWTH &amp; OBSERVATION EVIDENCE</span><h2 id="growthRecordName"></h2></div><button id="growthCloseDialog" class="growth-dialog-close" type="button" aria-label="Close faculty growth record">×</button></div><div id="growthRecordContent" class="growth-dialog-body"></div></dialog>
     <section id="facets" class="tab-panel">
       <div class="section-heading">
         <div>
@@ -3113,7 +3117,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     const eplc=q.get('eplc');if(eplc&&PLC_ORDER.includes(eplc))state.explorerPlc=eplc;
     state.explorerOnePerFaculty=q.get('one')==='1';
     const search=q.get('search');if(search){state.explorerSearch=search;if(el('observationSearch'))el('observationSearch').value=search;}
-    const tab=q.get('tab');if(['overview','facets','mtss','plcs','facultyview','coverage','explorer','admin'].includes(tab)){
+    const tab=q.get('tab');if(['overview','growth','facets','mtss','plcs','facultyview','coverage','explorer','admin'].includes(tab)){
       qsa('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
       qsa('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===tab));
     }
@@ -4067,6 +4071,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     renderExplorer();
     renderAdminP2();
     updateUrlState();
+    window.dispatchEvent(new CustomEvent('aisg:dashboardRendered'));
   }
 
   function facultyOverviewRoster(ytdRows){
@@ -4239,6 +4244,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     }));
   }
 
+  window.AISG_GROWTH_BRIDGE={getRows:()=>allRows,getState:()=>state,goTo:(tab)=>switchTab(tab),openObservations:(email)=>{const row=allRows.find(r=>String(r.email||'').trim().toLowerCase()===String(email||'').trim().toLowerCase()&&r.schoolYear==='2026-27');if(!row)return;state.year='2026-27';state.faculty=row.faculty;if(el('facultySearch'))el('facultySearch').value=row.faculty;state.explorerSearch='';state.explorerFacet='';explorerPage=1;switchTab('explorer');renderAll();}};
   let toastTimer;
   function toast(msg){ const t=el('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),3600); }
 
@@ -4255,5 +4261,6 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 })();
 
 </script>
+<script src="./growth.js?v=20261021" defer></script>
 </body>
 </html>
