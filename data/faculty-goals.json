@@ -1,9 +1,9 @@
 {
   "version": 1,
   "schoolYear": "2026-27",
-  "asOf": "2026-10-20",
+  "asOf": "2026-10-22",
   "visibility": "public",
-  "notes": "54 Secondary faculty goals matched by faculty email to current-year classroom observations; leaders and non-observed staff excluded.",
+  "notes": "108 observed 2026–27 faculty growth goals: 54 Elementary and 54 Secondary. Leadership and staff lacking current-year observations excluded. Public as directed.",
   "rows": [
     {
       "email": "aabbas@aisgz.org",
@@ -11,14 +11,6 @@
       "domain": "1a. Learning Purpose & Outcomes",
       "facet": "Agency",
       "goal": "Learn different methods to explicitly teach ATLs that develop student agency and become better self directed learners.",
-      "division": "Secondary"
-    },
-    {
-      "email": "tackers@aisgz.org",
-      "faculty": "Ackers, Tim",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Creativity",
-      "goal": "My professional learning goal is to further develop my skills in the area of creativity to improve student outcomes this year, for gr.7 especially. My work will be guided by the question: how can I make gr.7 more engaging for students? I hypothesize that if I modify units, lessons and activities with engagement in mind, then my students’ outcomes will be improved because they will be more involved, interested, and excited about the subject/unit/lesson/activity.",
       "division": "Secondary"
     },
     {
@@ -30,91 +22,11 @@
       "division": "Secondary"
     },
     {
-      "email": "jboettcher@aisgz.org",
-      "faculty": "Boettcher, Joe",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Agency",
-      "goal": "I will increase student agency in my science classrooms by intentionally designing learning experiences that provide students with meaningful opportunities to make decisions about their learning, including what they investigate, how they approach a problem, and how they demonstrate their understanding. I will gradually shift responsibility for learning decisions from teacher-directed choices toward student ownership while maintaining appropriate structure and support.",
-      "division": "Secondary"
-    },
-    {
-      "email": "sbose@aisgz.org",
-      "faculty": "Bose, Siddhartha",
-      "domain": "1a. Learning Purpose & Outcomes",
-      "facet": "Agency",
-      "goal": "My professional learning goal is to further develop my skills under \"Creativity\" to encourage students to express learning through diverse creative mediums to deepen engagement and growth. , ensuring choice and voice in how they demonstrate understanding, thereby boosting engagement and supporting both academic and personal growth. My work will be guided by the question: How might creative expression enhance students' emotional well-being by providing outlets for self-expression? This will encourage students to express themselves through various mediums. I hypothesise that if I provide opportunities for students to share their thinking inside and outside of the school, then my students’ risk-taking ability will be. improved.",
-      "division": "Secondary"
-    },
-    {
-      "email": "jboyd@aisgz.org",
-      "faculty": "Boyd, Jason",
-      "domain": "3b. Inclusive Discourse & Collaboration",
-      "facet": "Collaboration",
-      "goal": "I want to professionally explore the Collaboration facet to impact engagement for all my learners. My work will be guided by the question: To what extent are the collaborative learning experiences meeting students educational needs? I hypothesize that if I structure collaborative assignments explicitly teach ATL skills for Interpersonal aspect of the Social ATL (respecting others, supporting others, resolving conflict), then my students will be more productive and engaged in the assignment.",
-      "division": "Secondary"
-    },
-    {
-      "email": "dbrain@aisgz.org",
-      "faculty": "Brain, Duncan",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
-      "facet": "Agency",
-      "goal": "How can self assessment and peer assessment be used formatively in an authentic way that leads to reflection upon the task and familiarity with the assessment criteria?",
-      "division": "Secondary"
-    },
-    {
       "email": "abukenya@aisgz.org",
       "faculty": "Bukenya, Alex",
       "domain": "4a. Feedback & Inclusive Growth Practices",
       "facet": "Personalization",
       "goal": "My goal is to strengthen my Feedback & Inclusive Growth Practices (4a) to improve student outcomes. My guiding question is: How can timely, specific, and visually clear feedback help students identify their next steps and take ownership of their improvement? I plan to implement structured, component-based feedback tools — including feedback checklists, peer feedback protocols, and written next-step comments — to improve students' self-assessment accuracy, rubric score progression, and ability to act on their own areas for growth.",
-      "division": "Secondary"
-    },
-    {
-      "email": "nbunnell@aisgz.org",
-      "faculty": "Bunnell, Nikki",
-      "domain": "1c. Inclusive Learning Engagements & Materials Design",
-      "facet": "Collaboration",
-      "goal": "I want to build capacity around Tier 1 strategies around the classroom independence through access with a special focus on grade 6 experience of onboarding, transition, giving the team the tools to provide support",
-      "division": "Secondary"
-    },
-    {
-      "email": "eisasi@aisgz.org",
-      "faculty": "Catala, Esteban Isasi",
-      "domain": "2c. Routines that Support Equity & Autonomy",
-      "facet": "Agency",
-      "goal": "Establish a consistent, paper-based homework routine for Grades 8 and 11 that fosters student agency and self-management (organization, preparation, and reflection). By shifting the responsibility of accessing, completing, and submitting assignments directly to the students, the goal is to build autonomy and self-advocacy.",
-      "division": "Secondary"
-    },
-    {
-      "email": "mcharlton@aisgz.org",
-      "faculty": "Charlton, Marlee",
-      "domain": "1c. Inclusive Learning Engagements & Materials Design",
-      "facet": "Personalization",
-      "goal": "By the end of the 2026–27 academic year, I will strengthen inclusive Tier 1 instruction through the intentional use of UDL-aligned scaffolds, supports, and accessible learning materials that reduce barriers while maintaining rigorous learning expectations. Through collaboration with Learning Support and analysis of student feedback and learning evidence, I will refine these practices to help students increasingly identify and use the supports they need independently. I will document effective strategies and begin sharing practical approaches with colleagues to support inclusive practice beyond my classroom. 3 Levels of growth throughout the year: Marlee's Classroom --> Collaboration --> Teacher Leadership (eg: TTT)",
-      "division": "Secondary"
-    },
-    {
-      "email": "pchen@aisgz.org",
-      "faculty": "Chen, Pearl",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Creativity",
-      "goal": "My professional learning goal is to further develop my skills in the area of Creativity in order to improve student outcomes this year. My work will be guided by the question: To what extent do students have the opportunity to design, create, make, or otherwise add value that is unique to them? I hypothesize that if I consistently given students the opportunity to design, create, and make meaning in ways that reflect their own voice, then my students will grow in originality, ownership, and engagement by the end of the school year.",
-      "division": "Secondary"
-    },
-    {
-      "email": "bclarke@aisgz.org",
-      "faculty": "Clarke, Briana",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
-      "facet": "Agency",
-      "goal": "I want to strengthen student agency by giving regular opportunities for students to reflect on their learning, identify areas of strength they have, and determine next steps for them to grow.",
-      "division": "Secondary"
-    },
-    {
-      "email": "kcrosby@aisgz.org",
-      "faculty": "Crosby, Kennedi",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Personalization",
-      "goal": "My goal this year is to foster an environment where every student is seen, valued, and heard, but also has the ability to make some decisions in their learning. While students do not have the ability to choose all of the content we cover in class, I would like to make more intentional moments for them to make a choice about how they feel they learn best.",
       "division": "Secondary"
     },
     {
@@ -126,36 +38,20 @@
       "division": "Secondary"
     },
     {
-      "email": "ceagan@aisgz.org",
-      "faculty": "Eagan, Cassandra",
-      "domain": "4e. Communication & Community Partnership",
-      "facet": "Taking Action",
-      "goal": "I will strengthen the use of community-based inquiry, student voice, and storytelling, so that community engagement becomes an integrated part of the learning process in my Grade 8 curriculum rather than an isolated experience. I will also modify current projects and experiences based on the level of engagement and success from the previous school year.",
-      "division": "Secondary"
-    },
-    {
-      "email": "jearwood@aisgz.org",
-      "faculty": "Earwood, James",
-      "domain": "1a. Learning Purpose & Outcomes",
-      "facet": "Taking Action",
-      "goal": "By the end of the school year, I will improve students’ ability to take effective notes by explicitly teaching and modeling note-taking strategies and gradually reducing the amount of teacher-provided notes. Across each unit, students will have regular opportunities to practice identifying key ideas, organizing information, and distinguishing essential content from supporting detail. I will monitor progress through periodic review of student notes and student reflection on which strategies help them learn most effectively.",
-      "division": "Secondary"
-    },
-    {
-      "email": "lelmurr@aisgz.org",
-      "faculty": "El-Murr, Leila",
+      "email": "adeibert@aisgz.org",
+      "faculty": "Amanda Deibert",
       "domain": "4c. Learner Reflection & Ownership of Growth",
       "facet": "Agency",
-      "goal": "I want to learn more about the use of AI and technology tools to supplement my teaching. I want to look specifically at how this can help students take ownership of their growth by giving them more autonomy to practice some of their weaker skills in listening and speaking - such as pronunciation, cadence and intonation, as well as vocabulary and grammar usage in a specific context. I want to develop my skills in writing a prompt that will be comprehensive and more efficient for creating the activities that I want for students. I want to learn more about the use of Flint AI and Reading Progress (in Teams) in to practice specific skills. I want students to work on developing a goal for their speaking skills and then have multiple reflection checkins through the year.",
-      "division": "Secondary"
+      "goal": "If I explicitly teach and consistently embed age-appropriate metacognitive reflection routines within the creative process, then my students will become increasingly independent in recognizing and articulating their intentions, artistic choices, strategies, challenges, changes in thinking, and next steps, demonstrating greater agency and ownership of their growth as artists.",
+      "division": "Elementary"
     },
     {
-      "email": "sfrancisco@aisgz.org",
-      "faculty": "Francisco, Shryl",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Personalization",
-      "goal": "To what extent are the learning experiences personalized to meet students’ individual needs and interests? I hypothesize that if use multiple means of representation, action, expression and engagement, then my students' outcomes will be improved in persistence, attention, interest, enjoyment and autonomy.",
-      "division": "Secondary"
+      "email": "afaulkenberry@aisgz.org",
+      "faculty": "Ashley Faulkenberry",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Agency",
+      "goal": "If I intentionally design and model opportunities for choice in language, mode, and format for Grade 5 multilingual learners, then they will develop greater agency in independently selecting forms of expression that best support and demonstrate their learning.",
+      "division": "Elementary"
     },
     {
       "email": "afuang@aisgz.org",
@@ -166,100 +62,36 @@
       "division": "Secondary"
     },
     {
-      "email": "mfuang@aisgz.org",
-      "faculty": "Fuang, Mario",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "email": "ajohnson@aisgz.org",
+      "faculty": "Adrienne Johnson",
+      "domain": "2c. Routines that Support Equity & Autonomy",
       "facet": "Agency",
-      "goal": "This is a continuation of my professional learning goal last year. The goal is to further develop my skills in the area of Agency to improve student outcomes this year. My work will be guided by the question: How might we ensure students have opportunities to reflect on their planning, thinking, work, and/or progress? I will build in time for self-reflection and peer feedback to assist students in developing goals and introduce a reflective process pre- and post-assessment, then my students’ outcomes will be improved in their ability to set and achieve personal learning goals, engagement in the learning process, and overall academic performance, as they will demonstrate a greater understanding of and increased ownership of their learning. Specific timeline here -> https://aisgzorg-my.sharepoint.com/:x:/g/personal/mfuang_aisgz_org/IQDxLGjHwxp1R6WwdeXL4MBwAVKdS5v3wr7G-Bs7T-w3l0A?e=frkh1C",
-      "division": "Secondary"
+      "goal": "If I explicitly teach and consistently use UDL-aligned routines that provide students with meaningful choices in how they engage, collaborate, and demonstrate their learning during library experiences, then students will show increased agency by making purposeful choices, initiating and sustaining learning with greater independence, and reflecting on the choices and strategies that support their success.",
+      "division": "Elementary"
     },
     {
-      "email": "gmontejano@aisgz.org",
-      "faculty": "Gauna, Gaby Montejano",
-      "domain": "1a. Learning Purpose & Outcomes",
+      "email": "alawler@aisgz.org",
+      "faculty": "Audrey Lawler",
+      "domain": "2c. Routines that Support Equity & Autonomy",
       "facet": "Personalization",
-      "goal": "My goal is to build English language learners' awareness of how they learn English and which strategies work best for them, by embedding a consistent, low-stakes metacognitive reflection routine into existing classes — helping students set small language goals, self-monitor their progress, and take increasing ownership of their growth over time.",
-      "division": "Secondary"
+      "goal": "I will strengthen my knowledge and implementation of structured literacy practices to provide explicit, systematic foundational reading instruction for Grade 5 students who demonstrate significant gaps in reading. Using diagnostic assessment, I will identify individual needs and provide targeted instruction in phonemic awareness, phonics, decoding, encoding, and morphology.",
+      "division": "Elementary"
     },
     {
-      "email": "mhartmann@aisgz.org",
-      "faculty": "Hartmann, Michael",
+      "email": "aliu@aisgz.org",
+      "faculty": "Angelina Liu",
       "domain": "4c. Learner Reflection & Ownership of Growth",
       "facet": "Agency",
-      "goal": "My professional learning goal is to further develop my skills in the area of Agency to improve student outcomes this year. My work will be guided by the question: “How might we ensure students have opportunities to reflect on their planning, thinking, work, and/or progress?” I hypothesize that if I build in time for structured student reflection before and after major Criterion A assessments, then my students’ outcomes will be improved through greater awareness of their learning gaps, more accurate predictions of their achievement, and more specific goals and preparation strategies for future assessments.",
-      "division": "Secondary"
+      "goal": "If I provide consistent opportunities for students to self-assess and reflect on their comprehension strategies using mentor texts, then students will take increased ownership of their reading practices and independently apply effective reading skills.",
+      "division": "Elementary"
     },
     {
-      "email": "fhasanagic@aisgz.org",
-      "faculty": "Hasanagic, Fuad",
-      "domain": "4d. Professional Collaboration & Collective Capacity",
-      "facet": "Collaboration",
-      "goal": "My goal is to strengthen collective capacity by facilitating peer learning that helps colleagues embrace technology with confidence and purpose. In parallel, I will design classroom experiences where students use digital tools to amplify their agency and creativity while human relationships remain central. Every initiative—whether with adults or students—will keep equity, belonging, and evidence-informed practice at the core.",
-      "division": "Secondary"
-    },
-    {
-      "email": "vhuang@aisgz.org",
-      "faculty": "Huang, Vincent",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "email": "amc@aisgz.org",
+      "faculty": "Angela Mc Closkey",
+      "domain": "2c. Routines that Support Equity & Autonomy",
       "facet": "Agency",
-      "goal": "To help students develop metacognitive strategies for mathematical problem solving by learning to identify key information, distinguish knowns and unknowns, break complex problems into manageable steps, determine an appropriate order of operations, and reflect on their own understanding and areas for improvement. Meanwhile, this is a great professional development for me to move from traditional teacher-directed teaching and learning to student-centred engagement and reflection.",
-      "division": "Secondary"
-    },
-    {
-      "email": "skemirembe@aisgz.org",
-      "faculty": "Kemirembe, Sharon",
-      "domain": "1c. Inclusive Learning Engagements & Materials Design",
-      "facet": "Personalization",
-      "goal": "My professional learning goal is to further develop my skills in personalization to improve student outcomes this year. My work will be guided by the question: How might personalized learning experiences foster a sense of community? I hypothesize that if I intentionally create opportunities for students to collaborate and support each other, then my students’ outcomes will improve in the following ways:",
-      "division": "Secondary"
-    },
-    {
-      "email": "blei@aisgz.org",
-      "faculty": "Lei, Bei",
-      "domain": "1d. Assessment Planning for Equity & Growth",
-      "facet": "Authenticity",
-      "goal": "This year, the World Language Department's goal is to strengthen the alignment between MYP and DP so that we can better prepare students for the transition into the DP program. Within this goal, I would like to focus on curriculum progression and authenticity, particularly in Phase 3. 1. Curriculum Progression and Differentiation When we moved into the MYP framework, we adapted the previous Level 3 curriculum into Phase 3 Year A and the Level 4 curriculum into Phase 3 Year B. However, the Year B curriculum is significantly more challenging than Year A. As a result, students who enter Phase 3 Year B directly from Phase 2 can sometimes find the transition too challenging. This is my second time teaching the Phase 3 Year A curriculum, so this year I would like to reorganize and refine the units to create a smoother progression from Phase 2 into Phase 3 Year A and then into Year B. At the same time, I would like to ensure that students who are in their second or third year of Phase 3 continue to have opportunities to learn new content rather than simply repeating material they have already encountered. Through reorganizing the units and reviewing the progression of language skills, I hope to create a more coherent learning pathway that gradually increases in complexity and better prepares students for the expectations of DP. 2. Authenticity and Authentic Listening Authenticity is another area I would like to continue working on this year. Last year, authenticity was our PLC goal, and I was able to design several popular projects with my Phase 4 students. For example, students took on different roles during discussions and podcasts, and they interviewed staff members to gain insights into topics such as migrant workers. These projects gave students opportunities to use Chinese in more meaningful and authentic contexts. This year, I would like to continue developing authenticity, with a particular focus on authentic listening. Students in my Phase 3 classes have found it challenging to understand Chinese in real-life situations. I would like to explore how to better connect what students learn in class with authentic listening resources, and how to use these resources systematically to help students train their ears and become more confident in understanding naturally spoken Chinese.",
-      "division": "Secondary"
-    },
-    {
-      "email": "elittle@aisgz.org",
-      "faculty": "Little, Eric",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
-      "facet": "Agency",
-      "goal": "To investigate and implement strategies that help my language students develop “metacognitive awareness” of their own learning processes — specifically, how they study, practice, and engage with the target language independently at home — so that they can take meaningful ownership of their language acquisition journey and arrive at DP as self-regulated learners.",
-      "division": "Secondary"
-    },
-    {
-      "email": "jloo@aisgz.org",
-      "faculty": "Loo, Jonetta",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Creativity",
-      "goal": "My goal is to help students become more specific in explaining the artistic choices they make and how those choices reflect their own ideas. I want students to move from identifying what they created, to explaining why they made those choices and what they wanted to communicate to an audience.",
-      "division": "Secondary"
-    },
-    {
-      "email": "dbuchheim@aisgz.org",
-      "faculty": "Lopez, Diego Buchheim",
-      "domain": "Other",
-      "facet": "Collaboration",
-      "goal": "During the 2026–2027 school year, I will grow as a strategic and collaborative teacher leader by facilitating a small PHE inquiry into three or four shared practices for safe and effective learning. Through team feedback, evidence, and reflection, I will strengthen my ability to lead through influence and build shared ownership.",
-      "division": "Secondary"
-    },
-    {
-      "email": "cmunce@aisgz.org",
-      "faculty": "Munce, Cameron",
-      "domain": "4d. Professional Collaboration & Collective Capacity",
-      "facet": "Collaboration",
-      "goal": "Using my international teaching experience and time spent working within the MYP framework, I am wanting to contribute to the ongoing development of Individuals and Societies at AISG through collaborative inquiry, professional dialogue and my own reflective practice. During my first year at the school, I will be aiming to deepen my understanding of the existing curriculum, assessment practices and school context. I am wanting to also use this knowledge to identify opportunities to strengthen curriculum coherence, opportunities for student learning and to help identify possible gaps in the implementation of the MYP.",
-      "division": "Secondary"
-    },
-    {
-      "email": "znavarro@aisgz.org",
-      "faculty": "Navarro, Zachary",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Creativity",
-      "goal": "To increase student engagement by providing monthly out-of-classroom math activities that encourage students to create, problem-solve, and apply what they learned in math in meaningful, realistic and engaging ways.",
-      "division": "Secondary"
+      "goal": "By implementing the Illustrative Math resouce and Building Thinking Classroom instructional approach, students will engage in meaningful problem solving, use multiple strategies, and communicate their mathematical thinking. High-ceiling, low-floor tasks and collaborative routines will foster equity, autonomy, and deep understanding for all learners.",
+      "division": "Elementary"
     },
     {
       "email": "anguyen@aisgz.org",
@@ -267,46 +99,6 @@
       "domain": "4a. Feedback & Inclusive Growth Practices",
       "facet": "Collaboration",
       "goal": "Strengthen Tier 1 instructional practices by providing department-specific professional learning opportunities that help teachers identify barriers to learning and apply practical strategies to make their classrooms more accessible for all students.",
-      "division": "Secondary"
-    },
-    {
-      "email": "nokwuosa@aisgz.org",
-      "faculty": "Okwuosa, Nneka",
-      "domain": "1a. Learning Purpose & Outcomes",
-      "facet": "Agency",
-      "goal": "My professional goal for this academic year is to continue with the exploration of the AGENCY facet, as I want to strengthen agency and independence within the MYP Design Cycle by developing students’ ability to make and justify informed design decisions in Criterion B (Developing Ideas) and independently evaluate the effectiveness of their solutions and design process in Criterion D (Evaluating). As mentioned in my 2025-26 end-of-year reflection, I plan to implement Omar Odobasic's \"Protecting Student Thinking\" to help with this.",
-      "division": "Secondary"
-    },
-    {
-      "email": "romadat@aisgz.org",
-      "faculty": "Omadat, Roneil",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Agency",
-      "goal": "I want to increase student agency in my Business Management classes by creating more opportunities for students to take ownership of their learning. Students will develop greater independence by making meaningful choices, reflecting on their progress, using feedback effectively, and applying Business Management concepts to authentic business situations.",
-      "division": "Secondary"
-    },
-    {
-      "email": "ppagett@aisgz.org",
-      "faculty": "Pagett, Peter",
-      "domain": "2d. Purposeful Use of Space, Time & Tools",
-      "facet": "Authenticity",
-      "goal": "Based on previous student feedback, they would like to be given clear, intentional directions as to what to do with their individual/small group practice time they will feel more prepared to play in the whole group, leading to a stronger sense of belonging, better performances and improved results in playing summatives. As such, I will intentionally plan lesson focused on specific challenges and sections of repertoire to guide their learning. Similarly, I will scaffold small group learning time to be shared between self-selected and teacher-selected groups.",
-      "division": "Secondary"
-    },
-    {
-      "email": "sparedes@aisgz.org",
-      "faculty": "Paredes, Sebastian",
-      "domain": "2c. Routines that Support Equity & Autonomy",
-      "facet": "Agency",
-      "goal": "My professional learning goal is to further develop my practice in the area of Agency by helping students identify and independently select the learning supports that work best for them. I will provide a range of supports, such as sentence starters, guiding questions, translated instructions, checklists and selected examples where useful and help students reflect on which strategies are most effective for them. I hypothesize that as students become more aware of how they learn and which supports help them, they will become more independent and purposeful in managing their learning.",
-      "division": "Secondary"
-    },
-    {
-      "email": "npark@aisgz.org",
-      "faculty": "Park, Nam Hee",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
-      "facet": "Agency",
-      "goal": "I will strengthen student agency by intentionally embedding opportunities for students to plan, monitor, reflect on, and communicate their learning through self-assessment, peer feedback, journaling, and metacognitive routines. This goal will primarily support my MYP classes, with relevant applications in DP.",
       "division": "Secondary"
     },
     {
@@ -318,12 +110,36 @@
       "division": "Secondary"
     },
     {
-      "email": "ipeter@aisgz.org",
-      "faculty": "Peter, Irene",
+      "email": "asun@aisgz.org",
+      "faculty": "Amelie Sun",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "If I use student needs identified through previous years’ counselling data, developmental research, teacher feedback, and ongoing student observations to revise the guidance curriculum’s yearly overview from PK3 to Grade 1, then guidance lessons will become more developmentally appropriate, accessible, and relevant to students across all four grade levels. By continuing to use a play-based approach and intentionally designing skills and concepts to progress in a spiral across grade levels, students will have repeated opportunities to revisit, practise, and deepen essential social-emotional skills in ways that respond to their developmental stages and emerging needs.",
+      "division": "Elementary"
+    },
+    {
+      "email": "bclarke@aisgz.org",
+      "faculty": "Clarke, Briana",
       "domain": "4c. Learner Reflection & Ownership of Growth",
       "facet": "Agency",
-      "goal": "My professional learning goal is to further develop my skills in fostering student agency through student self-reflection to improve student outcomes this year. My work will be guided by the question: How can I ensure students have meaningful opportunities to reflect on their planning, thinking, work, and progress in order to take greater ownership of their learning? I hypothesize that if I intentionally build in regular and meaningful opportunities for student self-reflection, then my students will develop greater awareness of themselves as learners. As a result, students will become better able to reflect on their learning, recognize what they are doing well, and identify areas where they can improve. Over time, I anticipate that this increased self-awareness will support students in taking greater ownership of their learning.",
+      "goal": "I want to strengthen student agency by giving regular opportunities for students to reflect on their learning, identify areas of strength they have, and determine next steps for them to grow.",
       "division": "Secondary"
+    },
+    {
+      "email": "blei@aisgz.org",
+      "faculty": "Lei, Bei",
+      "domain": "1d. Assessment Planning for Equity & Growth",
+      "facet": "Authenticity",
+      "goal": "This year, the World Language Department's goal is to strengthen the alignment between MYP and DP so that we can better prepare students for the transition into the DP program. Within this goal, I would like to focus on curriculum progression and authenticity, particularly in Phase 3. 1. Curriculum Progression and Differentiation When we moved into the MYP framework, we adapted the previous Level 3 curriculum into Phase 3 Year A and the Level 4 curriculum into Phase 3 Year B. However, the Year B curriculum is significantly more challenging than Year A. As a result, students who enter Phase 3 Year B directly from Phase 2 can sometimes find the transition too challenging. This is my second time teaching the Phase 3 Year A curriculum, so this year I would like to reorganize and refine the units to create a smoother progression from Phase 2 into Phase 3 Year A and then into Year B. At the same time, I would like to ensure that students who are in their second or third year of Phase 3 continue to have opportunities to learn new content rather than simply repeating material they have already encountered. Through reorganizing the units and reviewing the progression of language skills, I hope to create a more coherent learning pathway that gradually increases in complexity and better prepares students for the expectations of DP. 2. Authenticity and Authentic Listening Authenticity is another area I would like to continue working on this year. Last year, authenticity was our PLC goal, and I was able to design several popular projects with my Phase 4 students. For example, students took on different roles during discussions and podcasts, and they interviewed staff members to gain insights into topics such as migrant workers. These projects gave students opportunities to use Chinese in more meaningful and authentic contexts. This year, I would like to continue developing authenticity, with a particular focus on authentic listening. Students in my Phase 3 classes have found it challenging to understand Chinese in real-life situations. I would like to explore how to better connect what students learn in class with authentic listening resources, and how to use these resources systematically to help students train their ears and become more confident in understanding naturally spoken Chinese.",
+      "division": "Secondary"
+    },
+    {
+      "email": "boneal@aisgz.org",
+      "faculty": "Brittany O'Neal",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Agency",
+      "goal": "If I implement a consistent, 4-day independent morning word work routine (focusing on high quality morphemes and Tier 2 vocabulary) with embedded scaffolds and anchor charts, then students will show measurable growth in their ability to decode, define, and apply targeted word parts and academic vocabulary, as evidenced by weekly quick-check data and written application in written output throughout the day.",
+      "division": "Elementary"
     },
     {
       "email": "breed@aisgz.org",
@@ -334,11 +150,99 @@
       "division": "Secondary"
     },
     {
-      "email": "jridolfo@aisgz.org",
-      "faculty": "Ridolfo, Jesse",
+      "email": "bsteinburg@aisgz.org",
+      "faculty": "Steinburg, Bruce",
+      "domain": "3d. Authentic Application & Social Impact",
+      "facet": "Authenticity",
+      "goal": "Develop the ESS programme to provide students with authentic opportunities to apply course concepts to real-world environmental issues through case studies, inquiry, fieldwork and student choice.",
+      "division": "Secondary"
+    },
+    {
+      "email": "bzhuang@aisgz.org",
+      "faculty": "Brittany Zhuang",
+      "domain": "4b. Evidence, Data & Responsive Planning",
+      "facet": "Agency",
+      "goal": "If I create consistent opportunities for students to revisit and apply SEL learning beyond guidance lessons through classroom reinforcement, shared strategies, and caregiver connections, then students will demonstrate greater ability to recognize and use SEL strategies across different settings.",
+      "division": "Elementary"
+    },
+    {
+      "email": "ceagan@aisgz.org",
+      "faculty": "Eagan, Cassandra",
+      "domain": "4e. Communication & Community Partnership",
+      "facet": "Taking Action",
+      "goal": "I will strengthen the use of community-based inquiry, student voice, and storytelling, so that community engagement becomes an integrated part of the learning process in my Grade 8 curriculum rather than an isolated experience. I will also modify current projects and experiences based on the level of engagement and success from the previous school year.",
+      "division": "Secondary"
+    },
+    {
+      "email": "cmunce@aisgz.org",
+      "faculty": "Munce, Cameron",
+      "domain": "4d. Professional Collaboration & Collective Capacity",
+      "facet": "Collaboration",
+      "goal": "Using my international teaching experience and time spent working within the MYP framework, I am wanting to contribute to the ongoing development of Individuals and Societies at AISG through collaborative inquiry, professional dialogue and my own reflective practice. During my first year at the school, I will be aiming to deepen my understanding of the existing curriculum, assessment practices and school context. I am wanting to also use this knowledge to identify opportunities to strengthen curriculum coherence, opportunities for student learning and to help identify possible gaps in the implementation of the MYP.",
+      "division": "Secondary"
+    },
+    {
+      "email": "cmund@aisgz.org",
+      "faculty": "Cat Mund",
+      "domain": "3d. Authentic Application & Social Impact",
+      "facet": "Authenticity",
+      "goal": "If I plan and implement daily oral language activities that connect to our units and real-world contexts, then students will increase their oral language production.",
+      "division": "Elementary"
+    },
+    {
+      "email": "crhodes@aisgz.org",
+      "faculty": "Charles Rhodes",
       "domain": "3a. Cognitive Demand & Thinking",
       "facet": "Agency",
-      "goal": "My professional learning goal is to build on last year’s work with System 1 and System 2 thinking. Grade 6 students learned to recognize quick, automatic thinking and slower, deliberate thinking, but did not always apply that awareness when work became challenging or frustrating. This year, I will reinforce this language and introduce a few practical tools and reflection opportunities to help students pause, choose an appropriate strategy, and persist when their first response is insufficient.",
+      "goal": "If I establish a recurring, class reflection routine in PE—where students co-analyze simple patterns in their own growth data, and collaboratively choose next steps—then students will develop greater metacognitive awareness, ownership of their learning, and a shared sense of purpose, and I will deepen my practice in building collective student voice across units.",
+      "division": "Elementary"
+    },
+    {
+      "email": "cudall@aisgz.org",
+      "faculty": "Udall, Cyril",
+      "domain": "4a. Feedback & Inclusive Growth Practices",
+      "facet": "Agency",
+      "goal": "If I partner with students to evaluate their own performance and that of other choirs in order to identify areas for their own skill and knowledge development, and empower students to set their own learning goals and strategies to achieve their goals, then students at every level of knowledge and skills will experiment, reflect and design learning practices where their own identity as a musician is affirmed and celebrated as they are empowered to make an impact on our community and beyond.",
+      "division": "Secondary"
+    },
+    {
+      "email": "dbrain@aisgz.org",
+      "faculty": "Brain, Duncan",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "How can self assessment and peer assessment be used formatively in an authentic way that leads to reflection upon the task and familiarity with the assessment criteria?",
+      "division": "Secondary"
+    },
+    {
+      "email": "dbuchheim@aisgz.org",
+      "faculty": "Lopez, Diego Buchheim",
+      "domain": "Other",
+      "facet": "Collaboration",
+      "goal": "During the 2026–2027 school year, I will grow as a strategic and collaborative teacher leader by facilitating a small PHE inquiry into three or four shared practices for safe and effective learning. Through team feedback, evidence, and reflection, I will strengthen my ability to lead through influence and build shared ownership.",
+      "division": "Secondary"
+    },
+    {
+      "email": "djob@aisgz.org",
+      "faculty": "Delissa Job",
+      "domain": "4d. Professional Collaboration & Collective Capacity",
+      "facet": "Collaboration",
+      "goal": "If I strengthen collaborative problem-solving with classroom teachers by using student evidence to identify barriers, co-plan responsive Tier 1 and Tier 2 strategies, and follow up on their impact, then teachers will become increasingly able to respond to learner variability within the classroom, resulting in more students successfully accessing and progressing in grade-level learning before more intensive support is considered.",
+      "division": "Elementary"
+    },
+    {
+      "email": "eisasi@aisgz.org",
+      "faculty": "Catala, Esteban Isasi",
+      "domain": "2c. Routines that Support Equity & Autonomy",
+      "facet": "Agency",
+      "goal": "Establish a consistent, paper-based homework routine for Grades 8 and 11 that fosters student agency and self-management (organization, preparation, and reflection). By shifting the responsibility of accessing, completing, and submitting assignments directly to the students, the goal is to build autonomy and self-advocacy.",
+      "division": "Secondary"
+    },
+    {
+      "email": "elittle@aisgz.org",
+      "faculty": "Little, Eric",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "To investigate and implement strategies that help my language students develop “metacognitive awareness” of their own learning processes — specifically, how they study, practice, and engage with the target language independently at home — so that they can take meaningful ownership of their language acquisition journey and arrive at DP as self-regulated learners.",
       "division": "Secondary"
     },
     {
@@ -358,38 +262,6 @@
       "division": "Secondary"
     },
     {
-      "email": "sschwab@aisgz.org",
-      "faculty": "Schwab, Steven",
-      "domain": "1c. Inclusive Learning Engagements & Materials Design",
-      "facet": "Authenticity",
-      "goal": "LS MYP English Language Acquisition students (Phases 3–4) will demonstrate a deeper understanding of the scientific lab report as a genre (its structure, language features, and purpose) developed through explicit instruction using the authentic text type from their MYP Science course. Students will show growth in writing the analysis section, constructing clear statements of limitations and evidence-based predictions, and will develop their command of the academic vocabulary needed to express scientific thinking precisely. Students will transfer these skills from the language classroom into their science work, evidenced by increased self-reported understanding and comfort with the lab report structure, improved performance on analysis-related criteria in their science lab reports, and and teacher observations of student progress and work quality across both classrooms.",
-      "division": "Secondary"
-    },
-    {
-      "email": "bsteinburg@aisgz.org",
-      "faculty": "Steinburg, Bruce",
-      "domain": "3d. Authentic Application & Social Impact",
-      "facet": "Authenticity",
-      "goal": "Develop the ESS programme to provide students with authentic opportunities to apply course concepts to real-world environmental issues through case studies, inquiry, fieldwork and student choice.",
-      "division": "Secondary"
-    },
-    {
-      "email": "mplaza@aisgz.org",
-      "faculty": "Stuve, Maria Plaza",
-      "domain": "3c. Choice, Inquiry & Creativity",
-      "facet": "Agency",
-      "goal": "My goal is to strengthen student agency in MYP Grade 8 Design by establishing routines that enable students to make, justify, test, and revise their own design decisions. Through research, feedback, reflection, and design criteria, students will take greater ownership of the design process and create purposeful solutions for authentic users or audiences.",
-      "division": "Secondary"
-    },
-    {
-      "email": "sthimonier@aisgz.org",
-      "faculty": "Thimonier, Sylvie",
-      "domain": "4c. Learner Reflection & Ownership of Growth",
-      "facet": "Agency",
-      "goal": "My professional learning goal is to further develop my skills in the area of agency to improve student outcomes this year. My work will be guided by the question: \"to what extent to students take ownership of their learning process?\" I hypothesize that if I provide structured opportunities for students to set personalized academic goals related to French language development then my students’ outcomes will be improved in the quality of their writing as demonstrated through grammar accuracy. A success from last year is that students were able to understand their strengths and weaknesses. They also understood and knew what they needed to work on. However, they needed to be provided with more time and exercises in order to improve more efficiently. They also needed guidance with their goal-setting timeline and the strategies to use to check their progress. I intend to implement the following strategies (in comparison with last year's): Especially at the beginning of the year, I will help students with the steps and the goal setting timeline : For example : a - Make sure they understand the grammar rule of the grammar point they are working on. Students can make their own summary sheet about the grammar point they need to improve. b - Help the students find some exercises - Students can work with Flint - Flint can create exercises for the students. c - Students write a small paragraph on the topic of the last writing with that specific grammar point in mind and challenge themselves with writing as many sentences as they can with the grammar point in mind. d - Students get feedback from the teacher - They can get consolidation exercises. e - Students are ready for a writing in another context.",
-      "division": "Secondary"
-    },
-    {
       "email": "etrobridge@aisgz.org",
       "faculty": "Trobridge, Erica",
       "domain": "2a. Belonging, Respect & Psychological Safety",
@@ -398,27 +270,163 @@
       "division": "Secondary"
     },
     {
-      "email": "cudall@aisgz.org",
-      "faculty": "Udall, Cyril",
-      "domain": "4a. Feedback & Inclusive Growth Practices",
-      "facet": "Agency",
-      "goal": "If I partner with students to evaluate their own performance and that of other choirs in order to identify areas for their own skill and knowledge development, and empower students to set their own learning goals and strategies to achieve their goals, then students at every level of knowledge and skills will experiment, reflect and design learning practices where their own identity as a musician is affirmed and celebrated as they are empowered to make an impact on our community and beyond.",
+      "email": "fhasanagic@aisgz.org",
+      "faculty": "Hasanagic, Fuad",
+      "domain": "4d. Professional Collaboration & Collective Capacity",
+      "facet": "Collaboration",
+      "goal": "My goal is to strengthen collective capacity by facilitating peer learning that helps colleagues embrace technology with confidence and purpose. In parallel, I will design classroom experiences where students use digital tools to amplify their agency and creativity while human relationships remain central. Every initiative—whether with adults or students—will keep equity, belonging, and evidence-informed practice at the core.",
       "division": "Secondary"
     },
     {
-      "email": "pwang@aisgz.org",
-      "faculty": "Wang, Ping",
+      "email": "gmontejano@aisgz.org",
+      "faculty": "Gauna, Gaby Montejano",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "My goal is to build English language learners' awareness of how they learn English and which strategies work best for them, by embedding a consistent, low-stakes metacognitive reflection routine into existing classes — helping students set small language goals, self-monitor their progress, and take increasing ownership of their growth over time.",
+      "division": "Secondary"
+    },
+    {
+      "email": "hosbourne@aisgz.org",
+      "faculty": "Haley Osbourne",
+      "domain": "2b. Student Voice, Representation & Advocacy",
+      "facet": "Authenticity",
+      "goal": "I will integrate authentic service-learning into Grade 3 by developing and implementing at least one meaningful, grade-level service-learning practice each semester. I will connect these experiences to student learning and the needs and assets of our school community, while creating opportunities for students to use their voice, make choices, and take meaningful action. Through my participation in the CBK cohort, I will continue to develop my understanding of student-centered, asset-based service learning and apply this learning within my classroom and grade level. Students will participate in at least two authentic service-learning experiences connected to Grade 3 learning and/or community needs, using their voice and choice to help shape the action, contribute purposefully, and reflect on what they learned, the impact of their actions, and how they might strengthen future efforts.",
+      "division": "Elementary"
+    },
+    {
+      "email": "ipeter@aisgz.org",
+      "faculty": "Peter, Irene",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to further develop my skills in fostering student agency through student self-reflection to improve student outcomes this year. My work will be guided by the question: How can I ensure students have meaningful opportunities to reflect on their planning, thinking, work, and progress in order to take greater ownership of their learning? I hypothesize that if I intentionally build in regular and meaningful opportunities for student self-reflection, then my students will develop greater awareness of themselves as learners. As a result, students will become better able to reflect on their learning, recognize what they are doing well, and identify areas where they can improve. Over time, I anticipate that this increased self-awareness will support students in taking greater ownership of their learning.",
+      "division": "Secondary"
+    },
+    {
+      "email": "jbai@aisgz.org",
+      "faculty": "Jenny Bai",
       "domain": "1c. Inclusive Learning Engagements & Materials Design",
       "facet": "Agency",
-      "goal": "This year, I teach 2 Chinese Phase 1 classes and 2 Phase 2 classes (2 of them are Lower Secondary + a small number of Upper Secondary/US students). All of these classes present consistent, recurring class behavior and discipline issues that disrupt teaching order, reduce learning efficiency and increase teaching burden. The key problematic behaviors to target in this academic year are categorized as follows: - Verbal disruption: Calling out random unrelated comments in class, chatting and laughing with peers during lessons, making strange noises, excessive talking. - Off-task & distracting social behavior: Teasing or disturbing other students during learning activities. - Digital device misuse: Using classroom computers for non-learning purposes. - Learning routine negligence: Failing to complete assigned homework, forgetting to bring essential learning materials (workbook, notebook, stationery etc.), refusing to take notes as required. - Selective inattention & non-compliance: Ignoring teacher instructions, focusing on workbook exercises instead of in-class teaching, poor sustained focus. - Special emotional & behavioral instability: extreme emotional fluctuations (overactive/complete shutdown) triggered by minor incidents. These repetitive discipline problems, combined with diverse student needs, lead to heavy classroom management pressure. I aim to set my yearly goal to establish a structured, consistent, and inclusive classroom behavior management system in Phase 1 and Phase 2 Chinese classes. In collaboration with principals and the Learning Support team, I will implement targeted, student-specific interventions to reduce disruptive verbal behaviors, off-task distractions, routine learning negligence and device misuse. This goal focuses on standardizing student classroom learning routines, improving whole-class on-task engagement, minimizing lesson disruptions, and reducing teacher’s repetitive discipline workload, while supporting students with ADHD, learning support and emotional behavioral needs to build positive classroom learning habits.",
+      "goal": "If I explicitly teach and model effective reading strategies, systematically develop students’ decoding and fluency skills, and provide varied, scaffolded opportunities for students to apply these strategies independently, then my Chinese A students will improve their ability to read appropriately challenging Chinese texts accurately, fluently, and with improved comprehension.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jboettcher@aisgz.org",
+      "faculty": "Boettcher, Joe",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Agency",
+      "goal": "I will increase student agency in my science classrooms by intentionally designing learning experiences that provide students with meaningful opportunities to make decisions about their learning, including what they investigate, how they approach a problem, and how they demonstrate their understanding. I will gradually shift responsibility for learning decisions from teacher-directed choices toward student ownership while maintaining appropriate structure and support.",
       "division": "Secondary"
     },
     {
-      "email": "lguiliany@aisgz.org",
-      "faculty": "Zambrano, Lisamary Guiliany",
-      "domain": "3a. Cognitive Demand & Thinking",
+      "email": "jboyd@aisgz.org",
+      "faculty": "Boyd, Jason",
+      "domain": "3b. Inclusive Discourse & Collaboration",
+      "facet": "Collaboration",
+      "goal": "I want to professionally explore the Collaboration facet to impact engagement for all my learners. My work will be guided by the question: To what extent are the collaborative learning experiences meeting students educational needs? I hypothesize that if I structure collaborative assignments explicitly teach ATL skills for Interpersonal aspect of the Social ATL (respecting others, supporting others, resolving conflict), then my students will be more productive and engaged in the assignment.",
+      "division": "Secondary"
+    },
+    {
+      "email": "jcharles@aisgz.org",
+      "faculty": "Jake Charles",
+      "domain": "4b. Evidence, Data & Responsive Planning",
+      "facet": "Personalization",
+      "goal": "If Grade 3 students engage in weekly Cold and Hot Reads using grade-level texts intentionally aligned with PYP content and designed to reinforce morphology, academic vocabulary, and grade-level syntax, then their reading fluency will improve over the course of the year, as demonstrated through Reading Progress data and growth on the end-of-year DIBELS Oral Reading Fluency assessment.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jcloete@aisgz.org",
+      "faculty": "Jackie Cloete",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Personalization",
+      "goal": "If I intentionally create ongoing book-making experiences that are connected to the story ecosystem throughout the school year, then children will demonstrate growth in communication and early literacy by creating, retelling, and sharing their own stories through drawings, marks, dictated words, props, and play. They will show increased engagement with books and print, use drawings and marks to communicate meaning, build expressive language, and share their stories with teachers, peers, and families.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jdavis@aisgz.org",
+      "faculty": "Jessica Davis",
+      "domain": "2a. Belonging, Respect & Psychological Safety",
+      "facet": "Personalization",
+      "goal": "If I intentionally collaborate with Grade 4 teachers to plan and facilitate translanguaging opportunities across the curriculum, then multilingual learners will increasingly recognize and strategically use their full linguistic repertoires as resources for learning, strengthening their engagement, language awareness, and agency.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jdzogazovic@aisgz.org",
+      "faculty": "Joe Dzogazovic",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Agency",
+      "goal": "To strengthen student agency in PE by making learning goals and success criteria clear and accessible to students in Grades 1-3. I will provide regular opportunities for students to understand their learning, reflect on their progress, make choices, and identify their own next steps in developing fundamental movement skills.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jearwood@aisgz.org",
+      "faculty": "Earwood, James",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Taking Action",
+      "goal": "By the end of the school year, I will improve students’ ability to take effective notes by explicitly teaching and modeling note-taking strategies and gradually reducing the amount of teacher-provided notes. Across each unit, students will have regular opportunities to practice identifying key ideas, organizing information, and distinguishing essential content from supporting detail. I will monitor progress through periodic review of student notes and student reflection on which strategies help them learn most effectively.",
+      "division": "Secondary"
+    },
+    {
+      "email": "jli@aisgz.org",
+      "faculty": "Jean Li",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "If I implement an oral-language-first approach that integrates topic-related picture books and illustrated, patterned texts with responsive oral, visual, and Pinyin supports, Grade 1 Chinese B students will demonstrate growth in accessing and understanding level-appropriate Chinese texts and communicating their understanding through familiar vocabulary and sentence patterns with decreasing reliance on teacher modelling and prompts.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jloo@aisgz.org",
+      "faculty": "Loo, Jonetta",
+      "domain": "3c. Choice, Inquiry & Creativity",
       "facet": "Creativity",
-      "goal": "My professional learning goal is to further develop my skills in the area of Agency. Agency empowers students to take ownership of their learning, encouraging initiative, self-direction, and a proactive approach to setting goals and making choices in their educational journey. This facet will impact engagement for all my learners to improve student outcomes this year. My work will be guided by the question: How might this task shift students’ beliefs about their potential or their ability to influence outcomes in their lives? I hypothesize that if I provide structured choices in scale practice—such as designing their own phrasing and dynamics, creating short melodies from scale notes, and making intentional decisions about bowing and vibrato—then students will take more ownership of their learning, demonstrate increased motivation in practice, and my students’ outcomes will be improved in developing deeper musical understanding through self-expression.",
+      "goal": "My goal is to help students become more specific in explaining the artistic choices they make and how those choices reflect their own ideas. I want students to move from identifying what they created, to explaining why they made those choices and what they wanted to communicate to an audience.",
+      "division": "Secondary"
+    },
+    {
+      "email": "jlyu@aisgz.org",
+      "faculty": "Jessie Lyu",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Agency",
+      "goal": "If I develop and model a flexible Chinese reading strategy toolkit for diverse learners for Chinese A classes, students will choose and apply appropriate reading strategies to understand texts, build fluency, and approach reading with greater confidence. Students will use the toolkit to support their reading process, reflect on which strategies help them, and adjust their next-step reading goals. This practice will strengthen students’ reading comprehension and support their development as more confident, engaged, and independent readers.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jneufeld@aisgz.org",
+      "faculty": "Joshua Neufeld",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Agency",
+      "goal": "If I intentionally blend inquiry-based learning into Illustrative Mathematics, then students will develop deeper conceptual understanding, greater mathematical agency, increased confidence in explaining their thinking, and a stronger ability to apply mathematics to authentic problems.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jridolfo@aisgz.org",
+      "faculty": "Ridolfo, Jesse",
+      "domain": "3a. Cognitive Demand & Thinking",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to build on last year’s work with System 1 and System 2 thinking. Grade 6 students learned to recognize quick, automatic thinking and slower, deliberate thinking, but did not always apply that awareness when work became challenging or frustrating. This year, I will reinforce this language and introduce a few practical tools and reflection opportunities to help students pause, choose an appropriate strategy, and persist when their first response is insufficient.",
+      "division": "Secondary"
+    },
+    {
+      "email": "jryan@aisgz.org",
+      "faculty": "James Ryan",
+      "domain": "4d. Professional Collaboration & Collective Capacity",
+      "facet": "Collaboration",
+      "goal": "Actively participate in collaborative planning that strengthens connections between PSPE and the PYP transdisciplinary themes, while also enhancing standalone Aquatics units, to support greater alignment across curriculum, instruction and assessment and create meaningful, coherent learning experiences for students.",
+      "division": "Elementary"
+    },
+    {
+      "email": "jtragash@aisgz.org",
+      "faculty": "Jonathan Tragash",
+      "domain": "4b. Evidence, Data & Responsive Planning",
+      "facet": "Personalization",
+      "goal": "Emergent multilingual learners will receive explicit multilingual and multimodal entry points into grade-level content through interactive read-alouds, designed from data collected and reflected on in co-planning.",
+      "division": "Elementary"
+    },
+    {
+      "email": "juzhu@aisgz.org",
+      "faculty": "Zhu, Juliana",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Collaboration",
+      "goal": "My professional learning goal is to further develop my skills in the area of Collaboration in order to improve student outcomes this year. My work will be guided by the question: To what extent are students encouraged to use technology responsibly and ethically? I hypothesize that if I intentionally teach, model, and scaffold responsible and ethical technology use—including digital citizenship, AI literacy, source citation, evaluation of AI-generated information, and reflective practice, then my students will use technology more responsibly and ethically, demonstrating greater ability to evaluate AI-generated information, appropriately acknowledge sources, avoid plagiarism, and reflect on their digital and collaborative choices, as measured by student work, research journals, annotations or comparative analyses, self-reflections, peer feedback, and surveys by the end of the school year.",
       "division": "Secondary"
     },
     {
@@ -430,11 +438,435 @@
       "division": "Secondary"
     },
     {
-      "email": "juzhu@aisgz.org",
-      "faculty": "Zhu, Juliana",
+      "email": "kchamberlain@aisgz.org",
+      "faculty": "Kyle Chamberlain",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "I believe that intentionally providing explicit vocabulary instruction, accessible sentence stems, and opportunities for students to strategically use their home languages to support learning will increase Grade 1 EAL students' confidence and independence in expressing their ideas, resulting in stronger speaking and writing.",
+      "division": "Elementary"
+    },
+    {
+      "email": "kcolebrooke@aisgz.org",
+      "faculty": "Kenya Colebrooke",
+      "domain": "2a. Belonging, Respect & Psychological Safety",
+      "facet": "Personalization",
+      "goal": "If I intentionally supplement my morning meetings and daily routines with explicit SEL instruction including modeling emotional vocabulary, teaching calming strategies, and practicing conflict resolution steps using visual supports like feeling charts and calm down tools, then my Kindergarten students will demonstrate stronger self-regulation skills, increased use of emotional language, and more positive peer interactions during both structured and unstructured learning time.",
+      "division": "Elementary"
+    },
+    {
+      "email": "kcrosby@aisgz.org",
+      "faculty": "Crosby, Kennedi",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Personalization",
+      "goal": "My goal this year is to foster an environment where every student is seen, valued, and heard, but also has the ability to make some decisions in their learning. While students do not have the ability to choose all of the content we cover in class, I would like to make more intentional moments for them to make a choice about how they feel they learn best.",
+      "division": "Secondary"
+    },
+    {
+      "email": "kmunce@aisgz.org",
+      "faculty": "Kylie Munce",
       "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "If I deepen my understanding of the mathematical purpose and learning progressions within Illustrative Mathematics and consistently use evidence of student thinking to provide responsive support and challenge while maintaining grade-level rigor, then students will increasingly access and engage successfully with grade-level mathematics, communicate and justify their thinking, and demonstrate growth in mathematical understanding and independence.",
+      "division": "Elementary"
+    },
+    {
+      "email": "krobb@aisgz.org",
+      "faculty": "Karen Robb",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "If I strategically and intentionally choose books for multiple uses in Tiger Class, then students will demonstrate increased engagement in books, show deeper personal connections to the literature, and exhibit greater confidence and ownership over their learning as they apply concepts they have learned in authentic, meaningful contexts.",
+      "division": "Elementary"
+    },
+    {
+      "email": "ktang@aisgz.org",
+      "faculty": "Kitty Tang",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Agency",
+      "goal": "If I explicitly model a range of purposeful Chinese reading strategies, provide targeted scaffolds and meaningful opportunities for choice, and establish regular reflection routines, Grade 3 students will increasingly independently select, apply, adjust, and transfer appropriate reading strategies to construct meaning and improve their understanding of different texts.",
+      "division": "Elementary"
+    },
+    {
+      "email": "kwatkins@aisgz.org",
+      "faculty": "Kent Watkins",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "By the end of May 2027, If I provide targeted fluency practice with appropriate scaffolds (coral reading, echo reading, repeated reading, vocabulary previews), students will improve their reading fluency and in turn be able to access and comprehend grade level texts.",
+      "division": "Elementary"
+    },
+    {
+      "email": "lelmurr@aisgz.org",
+      "faculty": "El-Murr, Leila",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "I want to learn more about the use of AI and technology tools to supplement my teaching. I want to look specifically at how this can help students take ownership of their growth by giving them more autonomy to practice some of their weaker skills in listening and speaking - such as pronunciation, cadence and intonation, as well as vocabulary and grammar usage in a specific context. I want to develop my skills in writing a prompt that will be comprehensive and more efficient for creating the activities that I want for students. I want to learn more about the use of Flint AI and Reading Progress (in Teams) in to practice specific skills. I want students to work on developing a goal for their speaking skills and then have multiple reflection checkins through the year.",
+      "division": "Secondary"
+    },
+    {
+      "email": "lguiliany@aisgz.org",
+      "faculty": "Zambrano, Lisamary Guiliany",
+      "domain": "3a. Cognitive Demand & Thinking",
+      "facet": "Creativity",
+      "goal": "My professional learning goal is to further develop my skills in the area of Agency. Agency empowers students to take ownership of their learning, encouraging initiative, self-direction, and a proactive approach to setting goals and making choices in their educational journey. This facet will impact engagement for all my learners to improve student outcomes this year. My work will be guided by the question: How might this task shift students’ beliefs about their potential or their ability to influence outcomes in their lives? I hypothesize that if I provide structured choices in scale practice—such as designing their own phrasing and dynamics, creating short melodies from scale notes, and making intentional decisions about bowing and vibrato—then students will take more ownership of their learning, demonstrate increased motivation in practice, and my students’ outcomes will be improved in developing deeper musical understanding through self-expression.",
+      "division": "Secondary"
+    },
+    {
+      "email": "lmacnaughton@aisgz.org",
+      "faculty": "Laurie MacNaughton",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "To develop students’ independence as writers by explicitly teaching and modeling how writers make purposeful decisions about craft and process, and gradually transferring responsibility for those decisions to students.",
+      "division": "Elementary"
+    },
+    {
+      "email": "lpinto@aisgz.org",
+      "faculty": "Lovina Hommes-Pinto",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Personalization",
+      "goal": "If students are taught strategies that they can independently use to regulate emotions and impulses, then we will have a more collaborative classroom learning community. Question from TLF: Do students have access to strategies for self care and emotional well-being? (SEL)",
+      "division": "Elementary"
+    },
+    {
+      "email": "lstewart@aisgz.org",
+      "faculty": "Leighanna Stewart",
+      "domain": "4b. Evidence, Data & Responsive Planning",
+      "facet": "Personalization",
+      "goal": "If I use literacy data (class observations, conferences, and weekly UFLI data) to collaborate with our EAL teacher and plan skills-based intervention groups, then students will receive targeted support that helps them access and succeed with grade-level content.",
+      "division": "Elementary"
+    },
+    {
+      "email": "lxiong@aisgz.org",
+      "faculty": "Lisa Xiong",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Personalization",
+      "goal": "Students will be able to design and manage a personalized learning plan, monitor their progress, and reflect on their strategies, empowering them to achieve their language goals at their own individual pace and level.",
+      "division": "Elementary"
+    },
+    {
+      "email": "lzhou@aisgz.org",
+      "faculty": "Lotus Zhou",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Agency",
+      "goal": "During the 2025–2026 academic year, I will design and implement differentiated Chinese language tasks for six targeted Chinese B students (two low-, two middle-, and two high-proficiency). Students will apply newly learned vocabulary and grammar to create at least one picture book, idiom poster, artwork, or cultural artifact. Building on last year’s focus on reading fluency and comprehension, this year’s goal shifts toward language production and application, with tiered scaffolds that allow each learner to use vocabulary and sentence patterns at an appropriate level of challenge.",
+      "division": "Elementary"
+    },
+    {
+      "email": "mcharlton@aisgz.org",
+      "faculty": "Charlton, Marlee",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "By the end of the 2026–27 academic year, I will strengthen inclusive Tier 1 instruction through the intentional use of UDL-aligned scaffolds, supports, and accessible learning materials that reduce barriers while maintaining rigorous learning expectations. Through collaboration with Learning Support and analysis of student feedback and learning evidence, I will refine these practices to help students increasingly identify and use the supports they need independently. I will document effective strategies and begin sharing practical approaches with colleagues to support inclusive practice beyond my classroom. 3 Levels of growth throughout the year: Marlee's Classroom --> Collaboration --> Teacher Leadership (eg: TTT)",
+      "division": "Secondary"
+    },
+    {
+      "email": "melderkin@aisgz.org",
+      "faculty": "Meagan Elderkin",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "If I intentionally plan my guided reading sessions around the strands of Scarborough's Reading Rope, combining repeated reading with word recognition and language comprehension strategies, then my Grade 2 students' reading outcomes will improve, because instruction will be more balanced, evidence-based, and aligned to our team's shared grammar, phonics, and comprehension targets.",
+      "division": "Elementary"
+    },
+    {
+      "email": "mevans@aisgz.org",
+      "faculty": "Maria Evans",
+      "domain": "3b. Inclusive Discourse & Collaboration",
+      "facet": "Agency",
+      "goal": "If I consistently use daily oral language routines, such as saying ideas aloud, naming the who/what and the action, rehearsing with a partner, and adding details orally before drawing, labeling, or writing, then Kindergarten students will strengthen their oral sentence structure and become more independent in communicating meaningful ideas across writing units.",
+      "division": "Elementary"
+    },
+    {
+      "email": "mfuang@aisgz.org",
+      "faculty": "Fuang, Mario",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "This is a continuation of my professional learning goal last year. The goal is to further develop my skills in the area of Agency to improve student outcomes this year. My work will be guided by the question: How might we ensure students have opportunities to reflect on their planning, thinking, work, and/or progress? I will build in time for self-reflection and peer feedback to assist students in developing goals and introduce a reflective process pre- and post-assessment, then my students’ outcomes will be improved in their ability to set and achieve personal learning goals, engagement in the learning process, and overall academic performance, as they will demonstrate a greater understanding of and increased ownership of their learning. Specific timeline here -> https://aisgzorg-my.sharepoint.com/:x:/g/personal/mfuang_aisgz_org/IQDxLGjHwxp1R6WwdeXL4MBwAVKdS5v3wr7G-Bs7T-w3l0A?e=frkh1C",
+      "division": "Secondary"
+    },
+    {
+      "email": "mhartmann@aisgz.org",
+      "faculty": "Hartmann, Michael",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to further develop my skills in the area of Agency to improve student outcomes this year. My work will be guided by the question: “How might we ensure students have opportunities to reflect on their planning, thinking, work, and/or progress?” I hypothesize that if I build in time for structured student reflection before and after major Criterion A assessments, then my students’ outcomes will be improved through greater awareness of their learning gaps, more accurate predictions of their achievement, and more specific goals and preparation strategies for future assessments.",
+      "division": "Secondary"
+    },
+    {
+      "email": "mmadigan@aisgz.org",
+      "faculty": "Mitch Madigan",
+      "domain": "2b. Student Voice, Representation & Advocacy",
+      "facet": "Agency",
+      "goal": "By June 2027, I will strengthen student agency in my Grade 5 classroom by creating structures that empower students to take increasing ownership of their learning through goal setting, reflection, leadership opportunities, and informed learning choices. Through these experiences, students will develop the knowledge, skills, and dispositions needed to become self-directed learners who actively contribute to our classroom community, supporting the AISG Transformative Learning Framework's vision of Engagement for All.",
+      "division": "Elementary"
+    },
+    {
+      "email": "mmorrison@aisgz.org",
+      "faculty": "Michael Morrison",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "I hypothesize if I co-create individual reading goals with students then they will show increased reading engagement and measurable growth in reading comprehension, word recognition and fluency.",
+      "division": "Elementary"
+    },
+    {
+      "email": "mplaza@aisgz.org",
+      "faculty": "Stuve, Maria Plaza",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Agency",
+      "goal": "My goal is to strengthen student agency in MYP Grade 8 Design by establishing routines that enable students to make, justify, test, and revise their own design decisions. Through research, feedback, reflection, and design criteria, students will take greater ownership of the design process and create purposeful solutions for authentic users or audiences.",
+      "division": "Secondary"
+    },
+    {
+      "email": "nbunnell@aisgz.org",
+      "faculty": "Bunnell, Nikki",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
       "facet": "Collaboration",
-      "goal": "My professional learning goal is to further develop my skills in the area of Collaboration in order to improve student outcomes this year. My work will be guided by the question: To what extent are students encouraged to use technology responsibly and ethically? I hypothesize that if I intentionally teach, model, and scaffold responsible and ethical technology use—including digital citizenship, AI literacy, source citation, evaluation of AI-generated information, and reflective practice, then my students will use technology more responsibly and ethically, demonstrating greater ability to evaluate AI-generated information, appropriately acknowledge sources, avoid plagiarism, and reflect on their digital and collaborative choices, as measured by student work, research journals, annotations or comparative analyses, self-reflections, peer feedback, and surveys by the end of the school year.",
+      "goal": "I want to build capacity around Tier 1 strategies around the classroom independence through access with a special focus on grade 6 experience of onboarding, transition, giving the team the tools to provide support",
+      "division": "Secondary"
+    },
+    {
+      "email": "nngai@aisgz.org",
+      "faculty": "Naomi Ngai",
+      "domain": "2a. Belonging, Respect & Psychological Safety",
+      "facet": "Agency",
+      "goal": "My professional learning goal this year is to develop strategies and routines that help KC students recognize their emotional states, identify what they need to be ready to learn, and independently choose strategies to support their learning. Through explicit modeling, guided practice, and regular check-ins, students will strengthen their reflection skills so they can explain what helped them learn, how it impacted their learning, and what a next step would be.",
+      "division": "Elementary"
+    },
+    {
+      "email": "nokwuosa@aisgz.org",
+      "faculty": "Okwuosa, Nneka",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Agency",
+      "goal": "My professional goal for this academic year is to continue with the exploration of the AGENCY facet, as I want to strengthen agency and independence within the MYP Design Cycle by developing students’ ability to make and justify informed design decisions in Criterion B (Developing Ideas) and independently evaluate the effectiveness of their solutions and design process in Criterion D (Evaluating). As mentioned in my 2025-26 end-of-year reflection, I plan to implement Omar Odobasic's \"Protecting Student Thinking\" to help with this.",
+      "division": "Secondary"
+    },
+    {
+      "email": "npark@aisgz.org",
+      "faculty": "Park, Nam Hee",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "I will strengthen student agency by intentionally embedding opportunities for students to plan, monitor, reflect on, and communicate their learning through self-assessment, peer feedback, journaling, and metacognitive routines. This goal will primarily support my MYP classes, with relevant applications in DP.",
+      "division": "Secondary"
+    },
+    {
+      "email": "nyakas@aisgz.org",
+      "faculty": "Narelle Yakas",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "By May 2027, I will bridge the gap between my 4th graders' current reading levels and the demands of grade-level complex texts by designing and implementing personalized, tiered scaffolds (including leveled graphic organizers, vocabulary previews, and digital text-to-speech options) into 100% of my whole-group and small-group literacy lessons. This will ensure that all students, regardless of their entering reading level, can actively engage with and demonstrate understanding of grade-level standards.",
+      "division": "Elementary"
+    },
+    {
+      "email": "pchen@aisgz.org",
+      "faculty": "Chen, Pearl",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Creativity",
+      "goal": "My professional learning goal is to further develop my skills in the area of Creativity in order to improve student outcomes this year. My work will be guided by the question: To what extent do students have the opportunity to design, create, make, or otherwise add value that is unique to them? I hypothesize that if I consistently given students the opportunity to design, create, and make meaning in ways that reflect their own voice, then my students will grow in originality, ownership, and engagement by the end of the school year.",
+      "division": "Secondary"
+    },
+    {
+      "email": "phommes@aisgz.org",
+      "faculty": "Phillip Hommes-Pinto",
+      "domain": "2c. Routines that Support Equity & Autonomy",
+      "facet": "Agency",
+      "goal": "If I use Responsive Classroom practices to explicitly teach, model, and consistently revisit expectations in the music classroom, particularly the regular rituals, then students will develop stronger self-management and collaboration skills and participate more confidently and respectfully.",
+      "division": "Elementary"
+    },
+    {
+      "email": "pinayaty@aisgz.org",
+      "faculty": "Patricia Inayaty",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "If I implement a UDL approach in 4th-grade reading lessons throughout the year by providing multiple means of engagement, representation, and expression, then students' reading comprehension skills will improve, and multilingual learners will demonstrate increased participation in comprehension activities.",
+      "division": "Elementary"
+    },
+    {
+      "email": "ppagett@aisgz.org",
+      "faculty": "Pagett, Peter",
+      "domain": "2d. Purposeful Use of Space, Time & Tools",
+      "facet": "Authenticity",
+      "goal": "Based on previous student feedback, they would like to be given clear, intentional directions as to what to do with their individual/small group practice time they will feel more prepared to play in the whole group, leading to a stronger sense of belonging, better performances and improved results in playing summatives. As such, I will intentionally plan lesson focused on specific challenges and sections of repertoire to guide their learning. Similarly, I will scaffold small group learning time to be shared between self-selected and teacher-selected groups.",
+      "division": "Secondary"
+    },
+    {
+      "email": "pwang@aisgz.org",
+      "faculty": "Wang, Ping",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Agency",
+      "goal": "This year, I teach 2 Chinese Phase 1 classes and 2 Phase 2 classes (2 of them are Lower Secondary + a small number of Upper Secondary/US students). All of these classes present consistent, recurring class behavior and discipline issues that disrupt teaching order, reduce learning efficiency and increase teaching burden. The key problematic behaviors to target in this academic year are categorized as follows: - Verbal disruption: Calling out random unrelated comments in class, chatting and laughing with peers during lessons, making strange noises, excessive talking. - Off-task & distracting social behavior: Teasing or disturbing other students during learning activities. - Digital device misuse: Using classroom computers for non-learning purposes. - Learning routine negligence: Failing to complete assigned homework, forgetting to bring essential learning materials (workbook, notebook, stationery etc.), refusing to take notes as required. - Selective inattention & non-compliance: Ignoring teacher instructions, focusing on workbook exercises instead of in-class teaching, poor sustained focus. - Special emotional & behavioral instability: extreme emotional fluctuations (overactive/complete shutdown) triggered by minor incidents. These repetitive discipline problems, combined with diverse student needs, lead to heavy classroom management pressure. I aim to set my yearly goal to establish a structured, consistent, and inclusive classroom behavior management system in Phase 1 and Phase 2 Chinese classes. In collaboration with principals and the Learning Support team, I will implement targeted, student-specific interventions to reduce disruptive verbal behaviors, off-task distractions, routine learning negligence and device misuse. This goal focuses on standardizing student classroom learning routines, improving whole-class on-task engagement, minimizing lesson disruptions, and reducing teacher’s repetitive discipline workload, while supporting students with ADHD, learning support and emotional behavioral needs to build positive classroom learning habits.",
+      "division": "Secondary"
+    },
+    {
+      "email": "rcarter@aisgz.org",
+      "faculty": "Ryan Carter",
+      "domain": "3a. Cognitive Demand & Thinking",
+      "facet": "Personalization",
+      "goal": "If I use daily interactive read alouds, intentionally scaffold language during dramatic play, and provide a literacy rich environment, then students will demonstrate improved language comprehension, a larger expressive vocabulary, and emergent writing skills.",
+      "division": "Elementary"
+    },
+    {
+      "email": "rcheatwood@aisgz.org",
+      "faculty": "Rana Cheatwood",
+      "domain": "2b. Student Voice, Representation & Advocacy",
+      "facet": "Agency",
+      "goal": "Strengthen student agency in weekly guidance classes by intentionally incorporating student voice, choice, reflection, and opportunities for students to apply SEL learning to their own lives.",
+      "division": "Elementary"
+    },
+    {
+      "email": "rcloete@aisgz.org",
+      "faculty": "Ruan Cloete",
+      "domain": "3d. Authentic Application & Social Impact",
+      "facet": "Taking Action",
+      "goal": "If I explicitly teach social-emotional strategies and coach-the-moment support, including positive social skill instruction and belonging-focused routines, then students will improve self-regulation, social interactions, and feelings of safety, inclusion, and belonging.",
+      "division": "Elementary"
+    },
+    {
+      "email": "romadat@aisgz.org",
+      "faculty": "Omadat, Roneil",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Agency",
+      "goal": "I want to increase student agency in my Business Management classes by creating more opportunities for students to take ownership of their learning. Students will develop greater independence by making meaningful choices, reflecting on their progress, using feedback effectively, and applying Business Management concepts to authentic business situations.",
+      "division": "Secondary"
+    },
+    {
+      "email": "rthompson@aisgz.org",
+      "faculty": "Renea Thompson",
+      "domain": "4b. Evidence, Data & Responsive Planning",
+      "facet": "Collaboration",
+      "goal": "I will strengthen my collaborative practice by partnering with one 4th grade homeroom teacher and one 5th grade homeroom teacher to use student learning data and classroom evidence to inform Tier 1 instructional practices. Through at least three collaborative data cycles with each focus classroom, I will work with teachers to analyze evidence, identify student needs, co-plan responsive instructional strategies, monitor student learning and engagement, and reflect on the impact of instructional adjustments.",
+      "division": "Elementary"
+    },
+    {
+      "email": "sbose@aisgz.org",
+      "faculty": "Bose, Siddhartha",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to further develop my skills under \"Creativity\" to encourage students to express learning through diverse creative mediums to deepen engagement and growth. , ensuring choice and voice in how they demonstrate understanding, thereby boosting engagement and supporting both academic and personal growth. My work will be guided by the question: How might creative expression enhance students' emotional well-being by providing outlets for self-expression? This will encourage students to express themselves through various mediums. I hypothesise that if I provide opportunities for students to share their thinking inside and outside of the school, then my students’ risk-taking ability will be. improved.",
+      "division": "Secondary"
+    },
+    {
+      "email": "sendara@aisgz.org",
+      "faculty": "Sonia Endara",
+      "domain": "1d. Assessment Planning for Equity & Growth",
+      "facet": "Personalization",
+      "goal": "If I use formative and summative assessment data to plan and differentiate reading instruction, offering diverse texts, explicit instruction in multiple reading strategies (such as predicting, visualizing, retelling, and decoding), and student-driven choices, then my first graders will demonstrate engagement, independently select and apply effective reading strategies, and achieve measurable growth in comprehension.",
+      "division": "Elementary"
+    },
+    {
+      "email": "sfrancisco@aisgz.org",
+      "faculty": "Francisco, Shryl",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Personalization",
+      "goal": "To what extent are the learning experiences personalized to meet students’ individual needs and interests? I hypothesize that if use multiple means of representation, action, expression and engagement, then my students' outcomes will be improved in persistence, attention, interest, enjoyment and autonomy.",
+      "division": "Secondary"
+    },
+    {
+      "email": "skemirembe@aisgz.org",
+      "faculty": "Kemirembe, Sharon",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "My professional learning goal is to further develop my skills in personalization to improve student outcomes this year. My work will be guided by the question: How might personalized learning experiences foster a sense of community? I hypothesize that if I intentionally create opportunities for students to collaborate and support each other, then my students’ outcomes will improve in the following ways:",
+      "division": "Secondary"
+    },
+    {
+      "email": "sparedes@aisgz.org",
+      "faculty": "Paredes, Sebastian",
+      "domain": "2c. Routines that Support Equity & Autonomy",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to further develop my practice in the area of Agency by helping students identify and independently select the learning supports that work best for them. I will provide a range of supports, such as sentence starters, guiding questions, translated instructions, checklists and selected examples where useful and help students reflect on which strategies are most effective for them. I hypothesize that as students become more aware of how they learn and which supports help them, they will become more independent and purposeful in managing their learning.",
+      "division": "Secondary"
+    },
+    {
+      "email": "sschwab@aisgz.org",
+      "faculty": "Schwab, Steven",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Authenticity",
+      "goal": "LS MYP English Language Acquisition students (Phases 3–4) will demonstrate a deeper understanding of the scientific lab report as a genre (its structure, language features, and purpose) developed through explicit instruction using the authentic text type from their MYP Science course. Students will show growth in writing the analysis section, constructing clear statements of limitations and evidence-based predictions, and will develop their command of the academic vocabulary needed to express scientific thinking precisely. Students will transfer these skills from the language classroom into their science work, evidenced by increased self-reported understanding and comfort with the lab report structure, improved performance on analysis-related criteria in their science lab reports, and and teacher observations of student progress and work quality across both classrooms.",
+      "division": "Secondary"
+    },
+    {
+      "email": "sthimonier@aisgz.org",
+      "faculty": "Thimonier, Sylvie",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "My professional learning goal is to further develop my skills in the area of agency to improve student outcomes this year. My work will be guided by the question: \"to what extent to students take ownership of their learning process?\" I hypothesize that if I provide structured opportunities for students to set personalized academic goals related to French language development then my students’ outcomes will be improved in the quality of their writing as demonstrated through grammar accuracy. A success from last year is that students were able to understand their strengths and weaknesses. They also understood and knew what they needed to work on. However, they needed to be provided with more time and exercises in order to improve more efficiently. They also needed guidance with their goal-setting timeline and the strategies to use to check their progress. I intend to implement the following strategies (in comparison with last year's): Especially at the beginning of the year, I will help students with the steps and the goal setting timeline : For example : a - Make sure they understand the grammar rule of the grammar point they are working on. Students can make their own summary sheet about the grammar point they need to improve. b - Help the students find some exercises - Students can work with Flint - Flint can create exercises for the students. c - Students write a small paragraph on the topic of the last writing with that specific grammar point in mind and challenge themselves with writing as many sentences as they can with the grammar point in mind. d - Students get feedback from the teacher - They can get consolidation exercises. e - Students are ready for a writing in another context.",
+      "division": "Secondary"
+    },
+    {
+      "email": "swatkins@aisgz.org",
+      "faculty": "Steph Watkins",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "My goal this school year is to help all third-grade students comprehend on-grade-level texts by closing the gap between current reading levels and grade-level expectations. I will do this through pre-teaching Tier 2 and 3 vocabulary, applying MTSS supports such as sentence stems, integrating comprehension strategies, and having students reread texts multiple times in whole-class and small-group settings to build understanding.",
+      "division": "Elementary"
+    },
+    {
+      "email": "tackers@aisgz.org",
+      "faculty": "Ackers, Tim",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Creativity",
+      "goal": "My professional learning goal is to further develop my skills in the area of creativity to improve student outcomes this year, for gr.7 especially. My work will be guided by the question: how can I make gr.7 more engaging for students? I hypothesize that if I modify units, lessons and activities with engagement in mind, then my students’ outcomes will be improved because they will be more involved, interested, and excited about the subject/unit/lesson/activity.",
+      "division": "Secondary"
+    },
+    {
+      "email": "tbuissereth@aisgz.org",
+      "faculty": "Tchafikah Buissereth",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Personalization",
+      "goal": "Building on your strong foundation, there are rich opportunities to further deepen student ownership and transfer by extending how assessment for growth is embedded—not just as formative checks, but as learner-driven processes where students co-design criteria, interpret evidence, and articulate their own growth narratives. You might also explore ways to amplify student-led inquiry beyond individual engagements—inviting learners to identify authentic problems, design investigations across disciplines, and steward collective action with real-world resonance. Additionally, nurturing even more visible connections between classroom practice and broader community partnerships could strengthen students’ sense of purpose and social responsibility. These next steps invite thoughtful experimentation, reflective documentation, and collaborative sense-making—honoring your current impact while opening new pathways for students to lead, apply, and advocate with increasing confidence and coherence across contexts. If I can create alternative assignments (when needed) to help student on the SST rooster as well as students who needed other assistance, than all students will be able to complete daily activities.",
+      "division": "Elementary"
+    },
+    {
+      "email": "tlefebvre@aisgz.org",
+      "faculty": "Taralyn Lefebvre",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "If I develop consistent routines that support students in interpreting feedback, setting meaningful goals, selecting strategies, and monitoring their progress, then students will become more independent in making decisions about their learning and transferring these skills across contexts",
+      "division": "Elementary"
+    },
+    {
+      "email": "twilson@aisgz.org",
+      "faculty": "Tammy Wilson",
+      "domain": "1a. Learning Purpose & Outcomes",
+      "facet": "Personalization",
+      "goal": "If I adapt the IM resource to add more explicit review and mastery then my students individual needs will be honored in the data and independence shown.",
+      "division": "Elementary"
+    },
+    {
+      "email": "vchen@aisgz.org",
+      "faculty": "Vicki Chen",
+      "domain": "2a. Belonging, Respect & Psychological Safety",
+      "facet": "Agency",
+      "goal": "If I create music learning experiences where PK 4 students can make meaningful choices to express their ideas, then students will demonstrate greater agency by initiating ideas, making purposeful creative decisions, reflecting on their choices, and taking ownership of their learning.",
+      "division": "Elementary"
+    },
+    {
+      "email": "vhuang@aisgz.org",
+      "faculty": "Huang, Vincent",
+      "domain": "4c. Learner Reflection & Ownership of Growth",
+      "facet": "Agency",
+      "goal": "To help students develop metacognitive strategies for mathematical problem solving by learning to identify key information, distinguish knowns and unknowns, break complex problems into manageable steps, determine an appropriate order of operations, and reflect on their own understanding and areas for improvement. Meanwhile, this is a great professional development for me to move from traditional teacher-directed teaching and learning to student-centred engagement and reflection.",
+      "division": "Secondary"
+    },
+    {
+      "email": "whenry@aisgz.org",
+      "faculty": "Will Henry",
+      "domain": "1c. Inclusive Learning Engagements & Materials Design",
+      "facet": "Creativity",
+      "goal": "If I design and facilitate word inquiry mini-lessons and activities that invite students to notice patterns, ask questions, explore possibilities, and test and refine their ideas, then students will construct their own understanding of how words work, explain their thinking using evidence, and apply their discoveries with increasing independence.",
+      "division": "Elementary"
+    },
+    {
+      "email": "ysheng@aisgz.org",
+      "faculty": "Yilan Sheng",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Personalization",
+      "goal": "If I intentionally develop and expand a book-making experience throughout the school year, then children will demonstrate growth in early literacy by showing increased engagement with books and print, using drawings and marks to communicate meaning, building expressive language, and sharing their stories with teachers, peers, and families.",
+      "division": "Elementary"
+    },
+    {
+      "email": "znavarro@aisgz.org",
+      "faculty": "Navarro, Zachary",
+      "domain": "3c. Choice, Inquiry & Creativity",
+      "facet": "Creativity",
+      "goal": "To increase student engagement by providing monthly out-of-classroom math activities that encourage students to create, problem-solve, and apply what they learned in math in meaningful, realistic and engaging ways.",
       "division": "Secondary"
     }
   ]
