@@ -1,0 +1,29 @@
+{
+  "schoolYear": "2026-27",
+  "asOf": "2026-10-20",
+  "includedFaculty": 54,
+  "observationRosterCount": 109,
+  "facetCounts": {
+    "Personalization": 8,
+    "Agency": 25,
+    "Authenticity": 5,
+    "Creativity": 5,
+    "Collaboration": 7,
+    "Taking Action": 4,
+    "Other": 0,
+    "Pending selection": 0
+  },
+  "lensCounts": {
+    "Being": 33,
+    "Connecting": 10,
+    "Doing": 11
+  },
+  "domainCounts": {
+    "1": 14,
+    "2": 7,
+    "3": 14,
+    "4": 18,
+    "other": 1
+  },
+  "note": "Aggregated, 2026-27 faculty only, matched by email to existing observations; leadership records and non-observed faculty excluded. No individual goals or identifiers are published."
+}
