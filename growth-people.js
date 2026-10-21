@@ -40,7 +40,7 @@
     let goals=scoped();
     if(kind==='facet')goals=goals.filter(g=>g.facet===key);
     else if(kind==='lens')goals=goals.filter(g=>(LENSES[key]||[]).includes(g.facet));
-    else if(kind==='domain')goals=goals.filter(g=>(String(g.domain||'').match(/^\s*([1-4])\s*[a-e]?\s*\./)||[])[1]===(key==='other'?'N/A':key));
+    else if(kind==='domain')goals=goals.filter(g=>{const m=String(g.domain||'').match(/^\s*([1-4])\s*[a-e]?\s*\./);return key==='other'?!m:m?.[1]===key;});
     else if(kind==='competency')goals=goals.filter(g=>g.domain===key);
     else return [];
     return goals.sort((a,b)=>a.faculty.localeCompare(b.faculty));
@@ -147,6 +147,7 @@
     holder.innerHTML='<span class="growth-group-preview-label">GOAL PREVIEW · '+esc(goal.facet)+'</span>'+
       '<strong>'+esc(goal.faculty)+'</strong><span>'+esc(goal.domain)+'</span><p>'+esc(goal.goal)+'</p>'+
       '<small>Click this name to open their complete growth record and observation evidence.</small>';
+    if(active)position(active);
   }
   function show(anchor){
     const value=anchor?.dataset?.growthGroup||'',split=value.indexOf('|');
