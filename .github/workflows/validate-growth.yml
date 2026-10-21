@@ -34,30 +34,42 @@ jobs:
           summary=json.loads(Path('data/growth-summary.json').read_text(encoding='utf-8'))
           goals=public['rows']
           assert public['schoolYear']=='2026-27'
-          assert len(goals)==54, f'Expected 54 eligible faculty, got {len(goals)}'
+          assert len(goals)==108, f'Expected 108 observed faculty goals, got {len(goals)}'
           emails=[g['email'].strip().lower() for g in goals]
-          assert len(set(emails))==54, 'Duplicate faculty goals'
-          assert all(g['division']=='Secondary' for g in goals)
+          assert len(set(emails))==108, 'Duplicate faculty goals'
+          divisions=Counter(g['division'] for g in goals)
+          assert divisions=={'Elementary':54,'Secondary':54}, f'Unexpected goal division totals: {divisions}'
           assert all(g['faculty'] and g['domain'] and g['facet'] and g['goal'] for g in goals)
           assert all('leadership' not in g['domain'].lower() for g in goals)
           with Path('data/observations-full.csv').open(encoding='utf-8-sig',newline='') as f:
-              observed={
-                  row['Email'].strip().lower()
-                  for row in csv.DictReader(f)
-                  if row['Email'].strip()
-                  and len(parts:=row['Date'].split('/'))==3
-                  and int(parts[2])==2026 and int(parts[0])>=8
-              }
-          assert set(emails)<=observed, 'Some goal records have no 2026-27 observation'
-          byfacet=Counter(g['facet'] for g in goals)
-          expected=summary['byDivision']['Secondary']['facetCounts']
-          assert all(byfacet[k]==v for k,v in expected.items() if k in byfacet)
-          assert summary['byDivision']['Elementary']['includedFaculty']==0
+              observed={}
+              for row in csv.DictReader(f):
+                  email=row['Email'].strip().lower()
+                  parts=row['Date'].split('/')
+                  if not email or len(parts)!=3: continue
+                  if int(parts[2])!=2026 or int(parts[0])<8: continue
+                  division='Elementary' if 'Elementary' in row['Division'] else 'Secondary' if 'Secondary' in row['Division'] else None
+                  if division: observed.setdefault(email,set()).add(division)
+          for g in goals:
+              assert g['division'] in observed.get(g['email'],set()), f'No current-year {g["division"]} observation for {g["email"]}'
+          assert len(observed)==109, f'Expected 109 observed faculty, got {len(observed)}'
+          assert summary['includedFaculty']==108
+          assert summary['byDivision']['All']['includedFaculty']==108
+          assert summary['byDivision']['Elementary']['includedFaculty']==54
           assert summary['byDivision']['Secondary']['includedFaculty']==54
+          for division in ('All','Elementary','Secondary'):
+              subset=goals if division=='All' else [g for g in goals if g['division']==division]
+              actual=Counter(g['facet'] for g in subset)
+              expected=summary['byDivision'][division]['facetCounts']
+              assert all(actual[k]==v for k,v in expected.items()), f'Facet mismatch {division}'
+              assert sum(expected.values())==len(subset), f'Facet count total mismatch {division}'
+              actual_domains=Counter((g['domain'][0] if g['domain'] and g['domain'][0] in '1234' else 'other') for g in subset)
+              assert actual_domains==summary['byDivision'][division]['domainCounts'], f'Domain mismatch {division}'
+              assert Counter(g['domain'] for g in subset)==summary['byDivision'][division]['competencyCounts'], f'Competency mismatch {division}'
           html=Path('index.html').read_text(encoding='utf-8')
           for asset in ('growth.js','growth.css','growth-people.js','growth-people.css'):
               assert ('./'+asset) in html and Path(asset).exists(), f'Missing {asset}'
-          assert 'growthUnlockForm' not in html, 'Old passphrase form still published'
-          assert not Path('data/goals-secure.json').exists(), 'Obsolete encrypted vault still published'
-          print('PASS: JavaScript syntax, 54 unique observed Secondary goals, facet totals and public dashboard assets')
+          assert 'growthUnlockForm' not in html, 'Obsolete passphrase form still published'
+          assert not Path('data/goals-secure.json').exists(), 'Obsolete vault still published'
+          print('PASS: JavaScript syntax, 108 unique observed goals (54 Elementary / 54 Secondary), facet & domain summaries and all Growth Focus assets')
           PY
