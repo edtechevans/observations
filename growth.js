@@ -10,8 +10,8 @@
   const DOMAIN_NAMES = {'1':'Purposeful & Inclusive Learning Design','2':'Inclusive Learning Culture & Environment','3':'Transformative, Culturally Responsive Learning in Action','4':'Collaborative Planning, Reflection & Professional Impact','other':'Other / not specified'};
   const RESTRICTED_LEADERS = new Set(['ckydd@aisgz.org','srogers@aisgz.org','tevans@aisgz.org','kjohnson@aisgz.org','jkennett@aisgz.org','remmerink@aisgz.org']);
   const LEADER_DOMAIN = /(?:^|\s)(instructional leadership|strategic & organizational leadership|personal, ethical & reflective leadership)\b/i;
-  const SOURCE_NAME = 'Faculty growth goals · 20 October 2026';
-  const publicFallback = {schoolYear:YEAR,asOf:'2026-10-20',includedFaculty:54,observationRosterCount:109,facetCounts:{Personalization:8,Agency:25,Authenticity:5,Creativity:5,Collaboration:7,'Taking Action':4,Other:0,'Pending selection':0},lensCounts:{Being:33,Connecting:10,Doing:11},domainCounts:{'1':14,'2':7,'3':14,'4':18,other:1}};
+  const SOURCE_NAME = 'Faculty growth goals · October 2026';
+  const publicFallback = {schoolYear:YEAR,asOf:'2026-10-22',includedFaculty:108,observationRosterCount:109,facetCounts:{Personalization:32,Agency:48,Authenticity:7,Creativity:6,Collaboration:10,'Taking Action':5},lensCounts:{Being:80,Connecting:13,Doing:15},domainCounts:{},byDivision:{Elementary:{includedFaculty:54,facetCounts:{Personalization:24,Agency:23,Authenticity:2,Creativity:1,Collaboration:3,'Taking Action':1},lensCounts:{Being:47,Connecting:3,Doing:4},domainCounts:{}},Secondary:{includedFaculty:54,facetCounts:{Personalization:8,Agency:25,Authenticity:5,Creativity:5,Collaboration:7,'Taking Action':4},lensCounts:{Being:33,Connecting:10,Doing:11},domainCounts:{}}}};
   const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false};
   const byId = id => document.getElementById(id);
   const esc = input => String(input == null ? '' : input).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -78,7 +78,7 @@
     if(!notice)return;
     if(local.rows){
       notice.className='growth-note is-public';
-      notice.innerHTML='<strong>Faculty goals available.</strong> '+nfmt(local.rows.length)+' observed faculty goals are published and visible across the dashboard. Hover or focus a faculty name for their complete domain, facet and goal. <strong>Only Secondary faculty are represented in the supplied goals file.</strong>';
+      notice.innerHTML='<strong>Faculty goals available.</strong> '+nfmt(local.rows.length)+' observed faculty goals are published and visible across the dashboard. Hover or focus a faculty name for their complete domain, facet and goal. <strong>Elementary and Secondary goals are included (54 matched faculty in each division).</strong>';
     }else if(local.error){
       notice.className='growth-note is-warning';
       notice.innerHTML='<strong>Unable to load faculty goals.</strong> '+esc(local.status)+' Try refreshing the page.';
@@ -101,7 +101,7 @@
   }
   function renderFacets(){
     const s=summary(),f=s.facetCounts||{},lens=s.lensCounts||{},total=s.includedFaculty||0;
-    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>The supplied October 20 goals file includes no eligible goals for this division. No schoolwide totals have been carried over.</p></div>';
+    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals currently match the selected division or school year. Schoolwide totals have not been carried over.</p></div>';
     const sorted=FACETS.map(name=>[name,f[name]||0]).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
     const biggest=Math.max(1,...sorted.map(x=>x[1]));
     let html='<h3>What are faculty choosing to develop?</h3><p class="growth-pane-lead">'+nfmt(total)+' faculty with goals · '+esc(division()==='All'?'whole school':division())+'. These choices describe professional intentions, not observed performance.</p>';
@@ -123,7 +123,7 @@
   }
   function renderDomains(){
     const s=summary(),d=s.domainCounts||{},total=s.includedFaculty||0;
-    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>The supplied October 20 goals file includes no eligible goals for this division. No schoolwide totals have been carried over.</p></div>';
+    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals currently match the selected division or school year. Schoolwide totals have not been carried over.</p></div>';
     const max=Math.max(1,...Object.values(d).map(Number));
     let html='<h3>Which areas of professional practice are the focus?</h3><p class="growth-pane-lead">Teacher Growth &amp; Reflection domains across '+nfmt(total)+' faculty goals · '+esc(division()==='All'?'whole school':division())+'.</p><div class="growth-domain-list">';
     for(const key of ['1','2','3','4','other']){
@@ -147,7 +147,7 @@
   }
   function renderGoals(){
     const total=summary().includedFaculty||0;
-    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals from the supplied October 20 file match current-year observations in this division.</p></div>';
+    if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals currently match 2026–27 observations in this division.</p></div>';
     if(!local.rows)return '<h3>Individual faculty growth goals</h3><p class="growth-pane-lead">Loading publicly available faculty goals…</p>';
     let html='<h3>Faculty growth goals</h3><p class="growth-pane-lead">Hover or focus on a faculty name to read their <strong>chosen TLF facet, domain and complete goal statement</strong>. Click a name for the full growth record and related observation evidence.</p>';
     html+='<div class="growth-tools"><div class="growth-field grow"><label for="growthGoalSearch">Search faculty or goal statement</label><input id="growthGoalSearch" type="search" placeholder="Search names, keywords, or goal text" value="'+esc(local.query)+'" autocomplete="off" /></div><div class="growth-field"><label for="growthFacetFilter">TLF facet</label><select id="growthFacetFilter"><option value="All">All facets</option>'+FACETS.map(f=>'<option value="'+esc(f)+'"'+(local.facet===f?' selected':'')+'>'+esc(f)+'</option>').join('')+'</select></div><div class="growth-field"><label for="growthDomainFilter">Domain</label><select id="growthDomainFilter"><option value="All">All domains</option>'+['1','2','3','4','other'].map(k=>'<option value="'+k+'"'+(local.domain===k?' selected':'')+'>'+esc(k==='other'?'Other':k+' · '+DOMAIN_NAMES[k])+'</option>').join('')+'</select></div></div>';
@@ -243,7 +243,7 @@
     if(!dialog.open)dialog.showModal();
   }
   async function loadPublicGoals(){
-    const response=await fetch('./data/faculty-goals.json?v=20261021-public2',{cache:'no-store'});
+    const response=await fetch('./data/faculty-goals.json?v=20261022-both-divisions',{cache:'no-store'});
     if(!response.ok)throw Error('Published faculty goals could not be fetched (HTTP '+response.status+').');
     const payload=await response.json();
     if(payload.version!==1||payload.schoolYear!==YEAR||!Array.isArray(payload.rows))throw Error('Published goals file is invalid.');
@@ -263,7 +263,7 @@
       });
     }
     const n=validateGoals(payload.rows,'public');
-    if(n!==54)console.warn('Public goals matched '+n+' faculty; 54 were expected for this source.');
+    if(n!==108)console.warn('Public goals matched '+n+' faculty; 108 were expected for the combined Elementary and Secondary source.');
     return n;
   }
   window.AISG_GROWTH_PEOPLE_BRIDGE={
@@ -296,8 +296,8 @@
     byId('growthRecordDialog')?.addEventListener('click',event=>{if(event.target===byId('growthRecordDialog'))byId('growthRecordDialog').close();});
     window.addEventListener('aisg:dashboardRendered',update);
     update();
-    try{const response=await fetch('./data/growth-summary.json?v=20261021-public2',{cache:'no-store'});if(!response.ok)throw Error('Aggregate data unavailable');const data=await response.json();if(data.schoolYear===YEAR&&Number.isFinite(data.includedFaculty))local.summary=data;}
-    catch(err){console.warn('Using October 20 schoolwide aggregates.',err);}
+    try{const response=await fetch('./data/growth-summary.json?v=20261022-both-divisions',{cache:'no-store'});if(!response.ok)throw Error('Aggregate data unavailable');const data=await response.json();if(data.schoolYear===YEAR&&Number.isFinite(data.includedFaculty))local.summary=data;}
+    catch(err){console.warn('Using 2026–27 fallback growth aggregates.',err);}
     try{await loadPublicGoals();}
     catch(err){console.error('Published faculty goals failed to load.',err);local.error=true;local.status=err.message;update();}
   }
