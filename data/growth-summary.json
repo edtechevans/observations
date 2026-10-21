@@ -1,74 +1,88 @@
 {
   "schoolYear": "2026-27",
-  "asOf": "2026-10-20",
-  "includedFaculty": 54,
+  "asOf": "2026-10-22",
+  "includedFaculty": 108,
   "observationRosterCount": 109,
   "byDivision": {
     "All": {
-      "includedFaculty": 54,
+      "includedFaculty": 108,
       "facetCounts": {
-        "Personalization": 8,
-        "Agency": 25,
-        "Authenticity": 5,
-        "Creativity": 5,
-        "Collaboration": 7,
-        "Taking Action": 4
+        "Personalization": 32,
+        "Agency": 48,
+        "Authenticity": 7,
+        "Creativity": 6,
+        "Collaboration": 10,
+        "Taking Action": 5
       },
       "domainCounts": {
-        "1": 14,
-        "2": 7,
-        "3": 14,
-        "4": 18,
+        "1": 35,
+        "2": 18,
+        "3": 22,
+        "4": 32,
         "other": 1
       },
       "lensCounts": {
-        "Being": 33,
-        "Connecting": 10,
-        "Doing": 11
+        "Being": 80,
+        "Connecting": 13,
+        "Doing": 15
       },
       "competencyCounts": {
-        "1a. Learning Purpose & Outcomes": 7,
-        "1c. Inclusive Learning Engagements & Materials Design": 6,
-        "1d. Assessment Planning for Equity & Growth": 1,
-        "2a. Belonging, Respect & Psychological Safety": 1,
-        "2b. Student Voice, Representation & Advocacy": 2,
-        "2c. Routines that Support Equity & Autonomy": 2,
+        "1a. Learning Purpose & Outcomes": 14,
+        "1c. Inclusive Learning Engagements & Materials Design": 19,
+        "1d. Assessment Planning for Equity & Growth": 2,
+        "2a. Belonging, Respect & Psychological Safety": 5,
+        "2b. Student Voice, Representation & Advocacy": 5,
+        "2c. Routines that Support Equity & Autonomy": 6,
         "2d. Purposeful Use of Space, Time & Tools": 2,
-        "3a. Cognitive Demand & Thinking": 2,
-        "3b. Inclusive Discourse & Collaboration": 1,
-        "3c. Choice, Inquiry & Creativity": 9,
-        "3d. Authentic Application & Social Impact": 2,
+        "3a. Cognitive Demand & Thinking": 4,
+        "3b. Inclusive Discourse & Collaboration": 2,
+        "3c. Choice, Inquiry & Creativity": 12,
+        "3d. Authentic Application & Social Impact": 4,
         "4a. Feedback & Inclusive Growth Practices": 3,
-        "4b. Evidence, Data & Responsive Planning": 1,
-        "4c. Learner Reflection & Ownership of Growth": 11,
-        "4d. Professional Collaboration & Collective Capacity": 2,
+        "4b. Evidence, Data & Responsive Planning": 6,
+        "4c. Learner Reflection & Ownership of Growth": 18,
+        "4d. Professional Collaboration & Collective Capacity": 4,
         "4e. Communication & Community Partnership": 1,
         "Other": 1
       }
     },
     "Elementary": {
-      "includedFaculty": 0,
+      "includedFaculty": 54,
       "facetCounts": {
-        "Personalization": 0,
-        "Agency": 0,
-        "Authenticity": 0,
-        "Creativity": 0,
-        "Collaboration": 0,
-        "Taking Action": 0
+        "Personalization": 24,
+        "Agency": 23,
+        "Authenticity": 2,
+        "Creativity": 1,
+        "Collaboration": 3,
+        "Taking Action": 1
       },
       "domainCounts": {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
+        "1": 21,
+        "2": 11,
+        "3": 8,
+        "4": 14,
         "other": 0
       },
       "lensCounts": {
-        "Being": 0,
-        "Connecting": 0,
-        "Doing": 0
+        "Being": 47,
+        "Connecting": 3,
+        "Doing": 4
       },
-      "competencyCounts": {}
+      "competencyCounts": {
+        "1a. Learning Purpose & Outcomes": 7,
+        "1c. Inclusive Learning Engagements & Materials Design": 13,
+        "1d. Assessment Planning for Equity & Growth": 1,
+        "2a. Belonging, Respect & Psychological Safety": 4,
+        "2b. Student Voice, Representation & Advocacy": 3,
+        "2c. Routines that Support Equity & Autonomy": 4,
+        "3a. Cognitive Demand & Thinking": 2,
+        "3b. Inclusive Discourse & Collaboration": 1,
+        "3c. Choice, Inquiry & Creativity": 3,
+        "3d. Authentic Application & Social Impact": 2,
+        "4b. Evidence, Data & Responsive Planning": 5,
+        "4c. Learner Reflection & Ownership of Growth": 7,
+        "4d. Professional Collaboration & Collective Capacity": 2
+      }
     },
     "Secondary": {
       "includedFaculty": 54,
@@ -113,26 +127,25 @@
       }
     }
   },
-  "note": "Anonymized aggregates only. Faculty and their goals are encrypted using AES-256-GCM in a separate file; leadership records and staff without 2026-27 observations are excluded.",
+  "note": "Public aggregate of 108 observed faculty goals (54 Elementary and 54 Secondary), excluding leadership and anyone without 2026-27 observations.",
   "facetCounts": {
-    "Personalization": 8,
-    "Agency": 25,
-    "Authenticity": 5,
-    "Creativity": 5,
-    "Collaboration": 7,
-    "Taking Action": 4
+    "Personalization": 32,
+    "Agency": 48,
+    "Authenticity": 7,
+    "Creativity": 6,
+    "Collaboration": 10,
+    "Taking Action": 5
   },
   "domainCounts": {
-    "1": 14,
-    "2": 7,
-    "3": 14,
-    "4": 18,
+    "1": 35,
+    "2": 18,
+    "3": 22,
+    "4": 32,
     "other": 1
   },
   "lensCounts": {
-    "Being": 33,
-    "Connecting": 10,
-    "Doing": 11
+    "Being": 80,
+    "Connecting": 13,
+    "Doing": 15
   }
 }
-
