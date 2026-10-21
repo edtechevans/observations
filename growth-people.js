@@ -145,7 +145,7 @@
     const goal=scoped().find(g=>g.email===String(email||'').toLowerCase());
     const holder=el('growthMemberPreview');if(!holder||!goal)return;
     holder.innerHTML='<span class="growth-group-preview-label">GOAL PREVIEW · '+esc(goal.facet)+'</span>'+
-      '<strong>'+esc(goal.faculty)+'</strong><span>'+esc(goal.domain)+'</span><p>'+esc(goal.goal)+'</p>'+
+      '<strong>'+esc(goal.faculty)+'</strong><span>'+esc(goal.domain)+'</span><p>'+esc(goal.goal.length>300?goal.goal.slice(0,297).trimEnd()+'…':goal.goal)+'</p>'+
       '<small>Click this name to open their complete growth record and observation evidence.</small>';
     if(active)position(active);
   }
@@ -164,7 +164,7 @@
       '<p class="growth-group-subtitle">These faculty selected this '+(kind==='competency'?'competency':kind)+'. Hover a name to preview the full goal; click to open its observation evidence.</p>'+
       '<div class="growth-group-list" role="list" aria-label="Faculty who selected '+esc(key)+'">'+
       people.map(g=>'<button role="listitem" type="button" class="growth-group-person" data-growth-member="'+esc(g.email)+'" data-growth-open="'+esc(g.email)+'">'+esc(g.faculty)+'</button>').join('')+
-      '</div><section id="growthMemberPreview" class="growth-group-preview" aria-live="polite"><p>Hover or focus on a faculty name above to preview the actual goal statement.</p></section>';
+      '</div><section id="growthMemberPreview" class="growth-group-preview" aria-live="polite"><p>Hover or focus on a name to preview the goal; click to read it in full.</p></section>';
     popup.innerHTML=html;popup.hidden=false;
     position(anchor);
   }
