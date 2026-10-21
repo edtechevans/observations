@@ -1,0 +1,29 @@
+name: Reflection release checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reflection-release-check.yml'
+      - 'tools/apply_reflection_upgrade.py'
+      - 'reflection-workflows.js'
+      - 'reflection-workflows.css'
+      - 'tests/reflection-browser.py'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capture source for release validation
+        uses: actions/upload-artifact@v4
+        with:
+          name: reflection-source
+          path: |
+            index.html
+            *.js
+            *.css
+            data/*.json
+            data/*.csv
+            README.md
+          retention-days: 1
