@@ -182,6 +182,7 @@
   }
   function update(){
     if(!byId('growthViewMount'))return;
+    hideTooltip(true);
     renderWelcome();renderStats();renderGrowth();enhanceFacultyOverview();
   }
   function validateGoals(list,from){
@@ -250,6 +251,17 @@
     tip.style.left=left+'px';tip.style.top=top+'px';
   }
   function offerUnlock(){local.unlockOpen=true;update();byId('growthPassphrase')?.focus();}
+  function lockGoals(){
+    local.rows=null;local.status='';local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';
+    hideTooltip(true);
+    if(byId('growthHoverCard'))byId('growthHoverCard').textContent='';
+    const dialog=byId('growthRecordDialog');if(dialog?.open)dialog.close();
+    if(byId('growthRecordContent'))byId('growthRecordContent').textContent='';
+    if(byId('growthRecordName'))byId('growthRecordName').textContent='';
+    document.querySelectorAll('.growth-faculty-quick').forEach(btn=>btn.remove());
+    document.querySelectorAll('[data-faculty-evidence][data-growth-hover]').forEach(btn=>btn.removeAttribute('data-growth-hover'));
+    update();
+  }
   function parseCsv(text){
     const parsed=[];let row=[],field='',quoted=false;
     text=String(text||'').replace(/^\uFEFF/,'');
@@ -297,7 +309,7 @@
     byId('growthOpenFromWelcome')?.addEventListener('click',()=>roleBridge()?.goTo?.('growth'));
     byId('growthUnlockBtn')?.addEventListener('click',offerUnlock);
     byId('growthUnlockForm')?.addEventListener('submit',handleUnlock);
-    byId('growthClearBtn')?.addEventListener('click',()=>{local.rows=null;local.status='';local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';hideTooltip(true);update();});
+    byId('growthClearBtn')?.addEventListener('click',lockGoals);
     byId('growthGoalsInput')?.addEventListener('change',async event=>{try{await loadGoals(event.target.files?.[0]);}catch(err){local.error=true;local.status=err.message;update();}finally{event.target.value='';}});
     byId('growthViewNav')?.addEventListener('click',event=>{const btn=event.target.closest('[data-growth-pane]');if(btn)setPane(btn.dataset.growthPane);});
     panel.addEventListener('click',event=>{if(event.target.closest('#growthPromptUnlock'))offerUnlock();});
