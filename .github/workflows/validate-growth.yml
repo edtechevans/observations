@@ -21,6 +21,7 @@ jobs:
         run: |
           node --check growth.js
           node --check growth-people.js
+          node --check ux-refresh.js
       - name: Audit public goal matching and UI assets
         shell: bash
         run: |
@@ -69,7 +70,20 @@ jobs:
           html=Path('index.html').read_text(encoding='utf-8')
           for asset in ('growth.js','growth.css','growth-people.js','growth-people.css'):
               assert ('./'+asset) in html and Path(asset).exists(), f'Missing {asset}'
+          assert './ux-refresh.js' in html and './ux-refresh.css' in html, 'Inquiry UI assets not included'
+          ux=Path('ux-refresh.js').read_text(encoding='utf-8')
+          uxcss=Path('ux-refresh.css').read_text(encoding='utf-8')
+          for marker in (
+              'id=\'uxPrimaryNav\'', 'Faculty & PLCs', 'id=\'uxContextBar\'',
+              'id=\'uxFacultyName\'', 'id=\'uxOverview\'',
+              'id=\'uxFacetCompare\'', 'filteredEvidence()', 'captureFaculty',
+          ):
+              assert marker in ux, f'Missing UX function or view: {marker}'
+          assert '.leadership-tabs{display:none!important}' in uxcss
+          assert '#growthRecordDialog.growth-dialog' in uxcss, 'No faculty record drawer styles'
+          assert '.ux-inquiry-grid' in uxcss, 'Overview inquiry cards missing'
+          assert '@media(max-width:580px)' in uxcss, 'Responsive navigation not configured'
           assert 'growthUnlockForm' not in html, 'Obsolete passphrase form still published'
           assert not Path('data/goals-secure.json').exists(), 'Obsolete vault still published'
-          print('PASS: JavaScript syntax, 108 unique observed goals (54 Elementary / 54 Secondary), facet & domain summaries and all Growth Focus assets')
+          print('PASS: JavaScript syntax, 108 observed faculty goals, facet/domain totals, accessible five-route UX, scoped filters, inquiry cards and responsive drawer')
           PY
