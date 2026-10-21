@@ -216,7 +216,7 @@
     if(!record)return;
     clearTimeout(tooltip.hideTimer);
     const tip=byId('growthHoverCard');if(!tip)return;
-    tip.innerHTML='<div class="growth-hover-kicker">FACULTY GROWTH FOCUS</div><div class="growth-hover-head"><strong>'+esc(record.faculty)+'</strong>'+tag(record.facet)+'</div><div class="growth-hover-label">CHOSEN DOMAIN</div><p>'+esc(record.domain)+'</p><div class="growth-hover-label">IDENTIFIED GOAL</div><p class="growth-hover-statement">'+esc(record.goal)+'</p><small>Click the faculty name to open the full growth record.</small>';
+    tip.innerHTML='<div class="growth-hover-kicker">FACULTY GROWTH FOCUS</div><div class="growth-hover-head"><strong>'+esc(record.faculty)+'</strong>'+tag(record.facet)+'</div><div class="growth-hover-label">CHOSEN DOMAIN</div><p>'+esc(record.domain)+'</p><div class="growth-hover-label">IDENTIFIED GOAL</div><p class="growth-hover-statement">'+esc(record.goal.length>300?record.goal.slice(0,297).trimEnd()+'…':record.goal)+'</p><small>Click the faculty name to read the full goal and observation evidence.</small>';
     tip.hidden=false;
     const rect=anchor.getBoundingClientRect(),t=tip.getBoundingClientRect();
     const left=Math.max(12,Math.min(window.innerWidth-t.width-12,rect.left));
