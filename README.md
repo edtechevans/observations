@@ -1,6 +1,18 @@
 # AISG Growth & Reflection Dashboard
 
-Responsive observation dashboard for AISG classroom observation data.
+AISG Teacher Growth & Reflection dashboard combining classroom observation evidence with faculty-selected professional growth priorities.
+
+## Growth Focus update — October 21, 2026
+
+- **Overview:** concise landing experience connecting faculty growth intentions and classroom evidence.
+- **Growth Focus:** TLF facet counts, Growth & Reflection domain / competency counts, and (when unlocked) searchable individual faculty goals with accessible hover previews and observation drill-downs.
+- **Eligible goals:** 54 faculty goals from the October 20 source workbook, matched by email to staff who have observation records in 2026–27. Leaders and staff without observations were excluded.
+- **Division filters:** 54 matched Secondary faculty goals; **0 matched Elementary faculty goals in the supplied workbook**. All charts, totals and goal results respect the division choice and show a proper empty state.
+- **Protected data:** individual goal statements, faculty names, emails, domains and facets are present only inside the encrypted `data/goals-secure.json` vault (AES-256-GCM, PBKDF2-SHA256 600,000 iterations). The passphrase is not in this repository. Only anonymized aggregates are published as readable JSON in `data/growth-summary.json`.
+- **Leader workflow:** open **Growth Focus → Unlock faculty goals**, enter the separately provided passphrase, then hover or focus a name to read the full selected facet, domain and goal statement. Click to see observation evidence. **Lock goals** clears the decrypted views and session records.
+- **Access limit:** a shared leader passphrase is *not* individual faculty authentication, granular authorization or AISG SSO. Do not give the passphrase to faculty. A teacher-only experience must wait for server-enforced per-user access.
+
+**Existing observation-data privacy:** `data/observations-full.csv` is still published in this public GitHub Pages repository and contains named classroom feedback. Protect this dataset behind a school-authenticated service before expanding the dashboard to faculty users. Encrypting the new goals file does not secure the existing observation CSV.
 
 ## Published dashboard data
 
@@ -19,23 +31,23 @@ The production data file is `data/observations-full.csv`. The dashboard loads th
 
 ## Data verification
 
-The published CSV is the latest source supplied for this dashboard, with observation data through **24 September 2026**. The uploaded source contained 743 rows; the published dashboard source contains **740 included observations** after applying the standing observation-population exclusions for **Silky Vyas** and **Santisha Sonilal** (three historical rows in total). The file is published as UTF-8 for browser display.
+The published complete CSV includes observations through **16 October 2026**. Its current source contains **829 observations** across the two school years. Data is served as UTF-8. The snapshot statistics below reflect this current file.
 
 Current totals:
 
-- **740** included observations overall
+- **829** observations overall
 - **2025–26:** 535 observations, 106 faculty after name normalization, 484 responses
-- **2026–27:** 205 observations, 106 faculty observed, 194 responses
-- **2026–27 division:** 94 Elementary observations, 111 Secondary observations
-- **2026–27 time of class:** 61 Beginning, 108 Middle, 36 End
+- **2026–27:** 294 observations, 109 faculty observed
+- **2026–27 division:** 135 Elementary observations, 159 Secondary observations
+- **2026–27 time of class:** see the live dashboard for the latest sampling distribution
 
 Five source-name aliases sharing the same faculty email are normalized to a single display name in dashboard calculations: Cat/Cathryn Mund, Eric/Eric R. Little, Gaby Montejano/Gaby Montejano Gauna, Jackie/Jacqueline Cloete, and Michael/Mike Morrison.
 
 ## 2026–27 coverage
 
-The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working roster of **106 faculty**, all currently represented in the observation data.
+The dashboard now includes a **working faculty-roster coverage view**. It starts with all faculty appearing in the current 2026–27 observation data and adds unmatched teachers from the latest accessible AISG teacher-upload roster. This produces a working faculty roster for evidence and coverage analysis; it should not be treated as the authoritative HR roster.
 
-No additional unmatched faculty are currently included in the 2026–27 working roster. This roster is intentionally labelled as a working source and should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
+The working roster should be replaced with the authoritative 2026–27 HR/faculty roster when one is available.
 
 ## Observer group filter
 
@@ -46,7 +58,7 @@ A dashboard-wide **Observer group** control supports two views:
 
 The control filters every KPI, chart, coverage calculation, pattern view and Observation Explorer result. The individual Observer dropdown is also restricted to the selected observer group.
 
-With the current 2026–27 data, the Principals + APs view contains **124 observations across 102 faculty**, compared with **205 observations across 106 faculty** for all leaders.
+Counts in each observer-group view are calculated from the current observation file; use the live dashboard for current totals.
 
 ## Views
 
