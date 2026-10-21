@@ -31,10 +31,11 @@ jobs:
         run: |
           python3 -m pip install playwright==1.64.0
           python3 -m playwright install --with-deps --no-shell chromium
-      - name: Run representative leader workflows
+      - name: Run representative leader workflows and mobile layout
         run: |
           export CHROMIUM_PATH="$(python3 -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           python3 tests/reflection-browser.py
+          python3 tests/mobile-layout.py
       - name: Store browser verification
         if: always()
         uses: actions/upload-artifact@v4
