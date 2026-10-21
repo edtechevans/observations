@@ -74,9 +74,9 @@ jobs:
           ux=Path('ux-refresh.js').read_text(encoding='utf-8')
           uxcss=Path('ux-refresh.css').read_text(encoding='utf-8')
           for marker in (
-              'id=\'uxPrimaryNav\'', 'Faculty & PLCs', 'id=\'uxContextBar\'',
-              'id=\'uxFacultyName\'', 'id=\'uxOverview\'',
-              'id=\'uxFacetCompare\'', 'filteredEvidence()', 'captureFaculty',
+              "nav.id='uxPrimaryNav'", "label:'Faculty & PLCs'", "context.id='uxContextBar'",
+              'id="uxFacultyName"', "hero.id='uxOverview'", "compare.id='uxFacetCompare'",
+              'filteredEvidence()', 'captureFaculty',
           ):
               assert marker in ux, f'Missing UX function or view: {marker}'
           assert '.leadership-tabs{display:none!important}' in uxcss
