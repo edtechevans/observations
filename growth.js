@@ -12,7 +12,7 @@
   const LEADER_DOMAIN = /(?:^|\s)(instructional leadership|strategic & organizational leadership|personal, ethical & reflective leadership)\b/i;
   const SOURCE_NAME = 'Faculty growth goals · 20 October 2026';
   const publicFallback = {schoolYear:YEAR,asOf:'2026-10-20',includedFaculty:54,observationRosterCount:109,facetCounts:{Personalization:8,Agency:25,Authenticity:5,Creativity:5,Collaboration:7,'Taking Action':4,Other:0,'Pending selection':0},lensCounts:{Being:33,Connecting:10,Doing:11},domainCounts:{'1':14,'2':7,'3':14,'4':18,other:1}};
-  const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false,unlocking:false,unlockOpen:false};
+  const local = {rows:null,summary:null,pane:'facets',query:'',facet:'All',domain:'All',status:'',error:false};
   const byId = id => document.getElementById(id);
   const esc = input => String(input == null ? '' : input).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const nfmt = number => Number(number||0).toLocaleString('en-US');
@@ -53,7 +53,6 @@
     return source.byDivision?.[d]||(d==='Elementary'?emptySummary():source);
   }
   const tag = (facet) => '<span class="growth-facet-pill is-'+esc((LENS_OF[facet]||'other').toLowerCase())+'">'+esc(facet||'Not selected')+'</span>';
-  const openSession = () => byId('growthGoalsInput')?.click();
 
   function renderWelcome(){
     const s=summary(),total=s.includedFaculty||0,being=s.lensCounts?.Being||0,agency=s.facetCounts?.Agency||0;
@@ -202,38 +201,9 @@
     if(!matched.size)throw Error('No observed faculty with eligible goals were found.');
     local.rows=[...matched.values()].sort((a,b)=>a.faculty.localeCompare(b.faculty));
     local.status=from==='public'?'Loaded from public faculty goals dataset.':from==='encrypted'?'Verified encrypted dataset.':'Imported from local CSV.';
-    local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';if(from!=='public')local.pane='goals';
+    local.error=false;local.query='';local.facet='All';local.domain='All';if(from!=='public')local.pane='goals';
     update();
     return local.rows.length;
-  }
-  function b64bytes(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
-  async function unlockEncryptedGoals(passphrase){
-    if(!passphrase)throw Error('Enter the leadership passphrase to unlock goals.');
-    if(!globalThis.crypto?.subtle||typeof DecompressionStream!=='function')throw Error('This browser requires Web Crypto and DecompressionStream support. Please update your browser.');
-    const response=await fetch('./data/goals-secure.json?v=20261021-v2',{cache:'no-store'});
-    if(!response.ok)throw Error('Encrypted goal file is unavailable (HTTP '+response.status+').');
-    const payload=await response.json();
-    if(payload.version!==1||payload.cipher!=='AES-256-GCM'||payload.kdf!=='PBKDF2-SHA256'||payload.compression!=='deflate')throw Error('Unexpected encrypted goals format.');
-    const encoder=new TextEncoder();
-    const material=await crypto.subtle.importKey('raw',encoder.encode(passphrase),{name:'PBKDF2'},false,['deriveKey']);
-    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:b64bytes(payload.salt),iterations:payload.iterations,hash:'SHA-256'},material,{name:'AES-GCM',length:256},false,['decrypt']);
-    let bytes;try{bytes=await crypto.subtle.decrypt({name:'AES-GCM',iv:b64bytes(payload.iv),additionalData:encoder.encode(payload.aad),tagLength:128},key,b64bytes(payload.payload));}
-    catch{throw Error('Incorrect passphrase, or the encrypted file has been changed.');}
-    const decompressed=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate'));
-    const plain=await new Response(decompressed).text();
-    const record=JSON.parse(plain);
-    if(record.version!==1||record.schoolYear!==YEAR||!Array.isArray(record.rows))throw Error('The decrypted data did not pass validation.');
-    const amount=validateGoals(record.rows,'encrypted');
-    if(amount!==54)console.warn('Encrypted goals matched a different observed faculty population:',amount);
-    return amount;
-  }
-  async function handleUnlock(e){
-    e.preventDefault();const form=byId('growthUnlockForm'),field=byId('growthPassphrase');
-    if(!field||!form||local.unlocking)return;
-    const password=field.value;field.value='';local.unlocking=true;const btn=form.querySelector('button[type=submit]');if(btn){btn.disabled=true;btn.textContent='Unlocking…';}
-    try{await unlockEncryptedGoals(password);}
-    catch(err){local.error=true;local.status=err.message;local.unlockOpen=true;update();byId('growthPassphrase')?.focus();}
-    finally{local.unlocking=false;if(btn){btn.disabled=false;btn.textContent='Unlock goals';}}
   }
   const tooltip={hideTimer:null};
   function hideTooltip(immediate=false){
@@ -253,41 +223,6 @@
     const idealY=rect.bottom+10;
     const top=idealY+t.height<window.innerHeight-12?idealY:Math.max(12,rect.top-t.height-10);
     tip.style.left=left+'px';tip.style.top=top+'px';
-  }
-  function offerUnlock(){local.unlockOpen=true;update();byId('growthPassphrase')?.focus();}
-  function lockGoals(){
-    local.rows=null;local.status='';local.error=false;local.unlockOpen=false;local.query='';local.facet='All';local.domain='All';
-    hideTooltip(true);
-    if(byId('growthHoverCard'))byId('growthHoverCard').textContent='';
-    const dialog=byId('growthRecordDialog');if(dialog?.open)dialog.close();
-    if(byId('growthRecordContent'))byId('growthRecordContent').textContent='';
-    if(byId('growthRecordName'))byId('growthRecordName').textContent='';
-    document.querySelectorAll('.growth-faculty-quick').forEach(btn=>btn.remove());
-    document.querySelectorAll('[data-faculty-evidence][data-growth-hover]').forEach(btn=>btn.removeAttribute('data-growth-hover'));
-    update();
-  }
-  function parseCsv(text){
-    const parsed=[];let row=[],field='',quoted=false;
-    text=String(text||'').replace(/^\uFEFF/,'');
-    for(let i=0;i<text.length;i++){
-      const c=text[i];
-      if(c==='"'){if(quoted&&text[i+1]==='"'){field+='"';i++;}else quoted=!quoted;}
-      else if(!quoted&&c===','){row.push(field);field='';}
-      else if(!quoted&&(c==='\n'||c==='\r')){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field);if(row.some(x=>String(x).trim()))parsed.push(row);row=[];field='';}
-      else field+=c;
-    }
-    if(field||row.length){row.push(field);if(row.some(x=>String(x).trim()))parsed.push(row);}
-    if(quoted)throw Error('The CSV contains an unfinished quoted field.');
-    return parsed;
-  }
-  async function loadGoals(file){
-    if(!file)return;
-    if(file.size>6000000||!String(file.name).toLowerCase().endsWith('.csv'))throw Error('Choose a faculty goals CSV smaller than 6 MB.');
-    const raw=parseCsv(await file.text());if(raw.length<2)throw Error('The goals CSV has no data rows.');
-    const headers=raw.shift().map(h=>h.trim().toLowerCase().replace(/[^a-z0-9]+/g,''));
-    const at=(row,key)=>String(row[headers.indexOf(key)]||'').trim();
-    if(!['email','tlffacet','domain','goal'].every(x=>headers.includes(x)))throw Error('CSV columns required: Email, Domain, TLF Facet, Goal.');
-    validateGoals(raw.map(row=>({email:at(row,'email'),faculty:at(row,'faculty')||at(row,'lastfirstname'),domain:at(row,'domain'),facet:at(row,'tlffacet'),goal:at(row,'goal')})),'imported');
   }
   function selectRecord(email){
     const goal=local.rows?.find(g=>g.email===String(email||'').trim().toLowerCase());if(!goal)return;
