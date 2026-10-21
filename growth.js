@@ -312,6 +312,21 @@
     if(!response.ok)throw Error('Published faculty goals could not be fetched (HTTP '+response.status+').');
     const payload=await response.json();
     if(payload.version!==1||payload.schoolYear!==YEAR||!Array.isArray(payload.rows))throw Error('Published goals file is invalid.');
+    // The 2.9 MB observation dataset may load after this much smaller goals file.
+    // Wait for the main dashboard to finish its fetch before matching by email.
+    if(!facultyMap().size){
+      await new Promise(resolve=>{
+        let timeout;
+        const ready=()=>{
+          if(!facultyMap().size)return;
+          window.removeEventListener('aisg:dashboardRendered',ready);
+          clearTimeout(timeout);resolve();
+        };
+        window.addEventListener('aisg:dashboardRendered',ready);
+        timeout=setTimeout(()=>{window.removeEventListener('aisg:dashboardRendered',ready);resolve();},20000);
+        ready();
+      });
+    }
     const n=validateGoals(payload.rows,'public');
     if(n!==54)console.warn('Public goals matched '+n+' faculty; 54 were expected for this source.');
     return n;
