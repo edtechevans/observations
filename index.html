@@ -1082,6 +1082,9 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
 <link rel="stylesheet" href="./growth-people.css?v=20261021-public1" />
 <link rel="stylesheet" href="./ux-refresh.css?v=20261022-ux2" />
 <link rel="stylesheet" href="./reflection-workflows.css?v=20261022-reflection1" />
+<link rel="stylesheet" href="./chart-standards.css?v=20261022-charts1" />
+<script src="./chart-math.js?v=20261022-charts1"></script>
+<script src="./chart-views.js?v=20261022-charts1"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to dashboard</a>
@@ -1216,7 +1219,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
             <div>
               <p class="card-kicker">Learning picture</p>
               <h2>What are we seeing and wondering about?</h2>
-              <p class="card-copy">Frequency shows how often a facet appears across observations. Breadth shows how widely it appears across faculty. Commendations and wonderings remain separate evidence signals, not scores.</p>
+              <p class="card-copy">Start with the proportion of observations containing a facet; switch to observed faculty when investigating reach. Values describe recorded mentions, not scores.</p>
             </div>
           </div>
           <div id="tlfProfile"></div>
@@ -1269,8 +1272,8 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
         </div>
         <div class="toolbar">
           <div class="segmented compact" id="facetMetricToggle" role="group" aria-label="Facet metric">
-            <button type="button" class="active" data-value="rate">Frequency %</button>
-            <button type="button" data-value="count">Observation count</button>
+            <button type="button" class="active" data-value="rate">Percentage scale</button>
+            <button type="button" data-value="count">Count scale</button>
           </div>
           <div class="segmented compact" id="facetTypeToggle" role="group" aria-label="Facet type">
             <button type="button" class="active" data-value="both">Both</button>
@@ -1300,7 +1303,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div class="card-head">
             <div>
               <p class="card-kicker">Selected evidence</p>
-              <h2>Detailed facet profile</h2>
+              <h2>Which facets are recorded?</h2>
               <p class="card-copy">Click any facet to open the observations behind the pattern.</p>
             </div>
           </div>
@@ -1340,7 +1343,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div class="card-head">
             <div>
               <p class="card-kicker">Student experience</p>
-              <h2>What are students experiencing?</h2>
+              <h2>Student-experience indicators in observation comments</h2>
               <p class="card-copy">Rule-based signals from written observation evidence across Access, Participation, Thinking, Engagement and Learning. Frequency and breadth describe the evidence collected, not a performance score.</p>
             </div>
           </div>
@@ -1362,7 +1365,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div class="card-head">
             <div>
               <p class="card-kicker">Tier 1 interpretation</p>
-              <h2>What instructional conditions are visible?</h2>
+              <h2>Instructional conditions mentioned in comments</h2>
               <p class="card-copy">Accessibility · Responsiveness · Differentiation · Clarity · Cognitive Demand.</p>
             </div>
           </div>
@@ -1384,8 +1387,8 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div class="card-head">
             <div>
               <p class="card-kicker">Schoolwide goal connection</p>
-              <h2>Feedback → Action</h2>
-              <p class="card-copy">A classroom-level view of whether feedback is being given, understood, acted upon and revisited. These are text signals, not a claim that every stage occurred in sequence.</p>
+              <h2>Independent feedback indicators</h2>
+              <p class="card-copy">Keyword indicators drawn from the full narrative. The four indicators are independent, may overlap and are not a measured sequence.</p>
             </div>
           </div>
           <div id="mtssFeedbackAction"></div>
@@ -1461,8 +1464,8 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
               <button type="button" data-value="wondering">Wonderings</button>
             </div>
             <div class="segmented compact" id="plcMatrixMetric" role="group" aria-label="PLC evidence measure">
-              <button type="button" class="active" data-value="frequency">Frequency</button>
-              <button type="button" data-value="breadth">Breadth</button>
+              <button type="button" class="active" data-value="frequency">Among observations</button>
+              <button type="button" data-value="breadth">Across PLC roster</button>
             </div>
           </div>
         </div>
@@ -1632,12 +1635,12 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
           <div class="card-head">
             <div>
               <p class="card-kicker">Cadence</p>
-              <h2>Weekly evidence pace</h2>
+              <h2>Weekly classroom observations</h2>
               <p class="card-copy" id="monthlyDescription"></p>
             </div>
-            <label class="toggle-control"><input id="comparePrevious" type="checkbox" /> <span>Compare equivalent period last year</span></label>
+            <label class="toggle-control"><input id="comparePrevious" type="checkbox" /> <span>Compare matched school-year weeks</span></label>
           </div>
-          <div class="chart-box chart-tall"><div id="monthlyChart" aria-label="Monthly observations chart"></div></div>
+          <div class="chart-box chart-tall"><div id="monthlyChart" aria-label="Weekly classroom observations"></div></div>
         </article>
 
         <article class="card span-5 distribution-card">
@@ -4259,6 +4262,37 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     }));
   }
 
+
+  // One chart layer uses the same data filters as the rest of the application.
+  Object.assign(state,{chartProfileDenominator:state.chartProfileDenominator||'observations'});
+  if(window.AISG_CHARTS){
+    const cv=window.AISG_CHARTS.install({
+      el,state,charts,FACETS,LENS,LENS_FACETS,COLOR,getRows:()=>allRows,
+      getStatus:()=>dataMode==='public-error'?'error':allRows.length?'ready':'loading',
+      selectedRows,baseSelectedRows,periodBounds,facetEvidence,lensEvidence,lensColor,
+      plcMembers,plcFacetEvidence,plcDivision,rowsForPlc,canonicalPlcName,
+      mtssRuleSet,mtssSignalEvidence,openMtssEvidence,plcComparablePeriods,
+      rosterForView,facultyKey,refresh:()=>renderAll(),
+      setPlc:plc=>{state.plc=plc;if(el('plcSelect'))el('plcSelect').value=plc;renderPlcs();updateUrlState();},
+      setObserver:name=>{state.observer=name;refreshObserverOptions();if(el('observerFilter'))el('observerFilter').value=name;renderAll();},
+      openPerson:name=>{const r=allRows.find(r=>facultyKey(r.faculty,r.schoolYear)===name&&r.schoolYear===state.year);if(r&&window.AISG_REFLECTION){window.AISG_REFLECTION.openRecord(r.email);return;}state.facultyViewSearch=name;switchTab('facultyview');renderAll();},
+      openFacet:(facet,type,extra={})=>{
+        state.explorerFacet=facet;state.explorerEvidenceType=type==='both'?'all':type;
+        state.explorerCohortFacet='';state.explorerSearch='';state.explorerMtss=null;
+        state.explorerPlc=extra.plc||'';state.explorerOnePerFaculty=false;
+        if(extra.division){state.division=extra.division;setSegmented('#divisionFilter',state.division);}
+        if(extra.observer)state.observer=extra.observer;
+        if(extra.start&&extra.end){state.period='custom';state.customStart=extra.start;state.customEnd=extra.end;setSegmented('#periodFilter',state.period);if(el('customStart'))el('customStart').value=extra.start;if(el('customEnd'))el('customEnd').value=extra.end;toggleCustomDates();}
+        explorerPage=1;if(el('observationSearch'))el('observationSearch').value='';
+        switchTab('explorer');renderAll();
+      }
+    });
+    ({makeChart,weeklyBuckets,renderMonthly,renderTlfTrends,renderTlfProfileInto,
+      renderDivisionFacet,renderPlcMatrix,renderObserverCalibration,renderPlcFacetProfile,
+      renderPlcMovement,renderMtssProfile,renderMtssPractices,renderMtssFeedback,
+      renderMtssMovement,renderTimeChart,renderCoverageChart,renderObserverChart}=cv);
+  }
+
   const NAV_STATE_KEYS=new Set(Object.keys(state));
   NAV_STATE_KEYS.add('explorerCohortFacet');
   function restoreDashboard(snapshot,tab='overview'){
@@ -4268,6 +4302,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     state.explorerMtss=snapshot?.explorerMtss&&typeof snapshot.explorerMtss==='object'?snapshot.explorerMtss:null;
     if(el('yearFilter'))el('yearFilter').value=state.year;
     setSegmented('#divisionFilter',state.division);setSegmented('#observerScopeFilter',state.observerScope);setSegmented('#periodFilter',state.period);
+    setSegmented('#facetMetricToggle',state.facetMetric);setSegmented('#facetTypeToggle',state.facetType);
     refreshObserverOptions();
     for(const [id,key] of [['observerFilter','observer'],['timeFilter','time'],['facultySearch','faculty'],['observationSearch','explorerSearch'],['customStart','customStart'],['customEnd','customEnd']])if(el(id))el(id).value=state[key]||'';
     explorerPage=Math.max(1,Number(snapshot?.explorerPage)||1);
@@ -4298,9 +4333,9 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 })();
 
 </script>
-<script src="./growth.js?v=20261022-reflection1" defer></script>
+<script src="./growth.js?v=20261022-charts1" defer></script>
 <script src="./growth-people.js?v=20261022-reflection1" defer></script>
 <script src="./ux-refresh.js?v=20261022-reflection1" defer></script>
-<script src="./reflection-workflows.js?v=20261022-reflection1" defer></script>
+<script src="./reflection-workflows.js?v=20261022-charts1" defer></script>
 </body>
 </html>

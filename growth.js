@@ -88,11 +88,22 @@
       notice.innerHTML='<strong>Loading published faculty goals…</strong> Schoolwide and divisional summaries remain visible while the goal records load.';
     }
   }
-  function barRows(entries,max){
-    return entries.map(([name,value])=>{
-      const lens=LENS_OF[name]||'other';const width=max?Math.max(0,Math.min(100,100*value/max)):0;
-      return '<div class="growth-bar-row"><span class="growth-bar-name">'+esc(name)+'</span><div class="growth-track" role="img" aria-label="'+esc(name)+': '+nfmt(value)+' faculty"><div class="growth-bar-fill is-'+esc(lens.toLowerCase())+'" style="width:'+width.toFixed(1)+'%"></div></div><span class="growth-bar-val">'+nfmt(value)+'</span></div>';
+  function barRows(entries,total){
+    return '<div class="cv-goal-axis" aria-hidden="true"><span>Faculty with an imported goal</span><span>0%<i>100%</i></span><span></span></div>'+entries.map(([name,value])=>{
+      const lens=LENS_OF[name]||'other',width=total?100*value/total:0;
+      return '<div class="growth-bar-row cv-goal-bar"><span class="growth-bar-name">'+esc(name)+'</span><div class="growth-track" role="img" aria-label="'+esc(name)+': '+value+' of '+total+' faculty, '+Math.round(width)+' percent"><div class="growth-bar-fill is-'+esc(lens.toLowerCase())+'" style="width:'+width.toFixed(3)+'%"></div></div><span class="growth-bar-val">'+Math.round(width)+'%<small>'+nfmt(value)+' of '+nfmt(total)+' faculty</small></span></div>';
     }).join('');
+  }
+  function goalTable(entries,total,title){return window.AISG_CHARTS.dataTable(['Category','Faculty choosing this focus','Faculty with imported goals','Share'],entries.map(([n,v])=>[n,v,total,total?Math.round(v/total*100)+'%':'Not available']),title);}
+  function compareDivisions(mode){
+    if(!local.rows||!currentYear())return '';
+    const keys=mode==='facets'?FACETS:['1','2','3','4','other'];
+    let html='<details class="cv-data cv-goal-compare"><summary>Compare Elementary and Secondary on the same scale</summary><p class="cv-note">Identical category order and 0-100% scales. Each denominator is the number of imported goals in that division, not the full staffing roster. The comparison intentionally shows both divisions.</p><div class="cv-two-panels">';
+    for(const div of ['Elementary','Secondary']){
+      const rows=local.rows.filter(g=>(g.division||primaryDivision(g.email))===div),c=counts(rows,g=>mode==='facets'?g.facet:domainKey(g.domain));
+      const entries=keys.map(k=>({label:mode==='facets'?k:(k==='other'?'Other':'Domain '+k),value:rows.length?(c[k]||0)/rows.length*100:null,n:c[k]||0,d:rows.length}));
+      html+='<section><h4>'+div+' - '+rows.length+' faculty goals</h4>'+window.AISG_CHARTS.bars(entries,{denominatorLabel:'faculty'})+goalTable(entries.map(e=>[e.label,e.n]),rows.length,div+' growth priorities')+'</section>';
+    }return html+'</div></details>';
   }
   function evidenceFor(goal){
     const mine=facultyMap().get(goal.email)||[];
@@ -106,9 +117,9 @@
     const sorted=FACETS.map(name=>[name,f[name]||0]).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
     const biggest=Math.max(1,...sorted.map(x=>x[1]));
     let html='<h3>What are faculty choosing to develop?</h3><p class="growth-pane-lead">'+nfmt(total)+' faculty with goals · '+esc(division()==='All'?'whole school':division())+'. These choices describe professional intentions, not observed performance.</p>';
-    html+='<div class="growth-chart-split"><div class="growth-bar-list">'+barRows(sorted,biggest)+'</div><aside>';
+    html+='<div class="growth-chart-split"><div class="growth-bar-list">'+barRows(sorted,total)+'</div><aside>';
     for(const l of ['Being','Connecting','Doing'])html+='<div class="growth-lens is-'+l.toLowerCase()+'"><span class="growth-lens-title">'+l+' lens</span><strong>'+nfmt(lens[l]||0)+'</strong><small>'+({Being:'Personalization · Agency',Connecting:'Authenticity · Creativity',Doing:'Collaboration · Taking Action'}[l])+'</small></div>';
-    html+='</aside></div>';
+    html+='</aside></div>'+goalTable(sorted,total,'Faculty-selected TLF facets')+compareDivisions('facets');
     const top=sorted[0];html+='<div class="growth-inquiry"><strong>Leadership inquiry</strong><p>'+esc(top[0])+' is the most frequently chosen facet ('+nfmt(top[1])+' faculty). How might observation conversations illuminate this intentional area of growth?</p></div>';
     if(local.rows){
       const rows=activeGoals().filter(g=>FACETS.includes(g.facet));
@@ -125,13 +136,13 @@
   function renderDomains(){
     const s=summary(),d=s.domainCounts||{},total=s.includedFaculty||0;
     if(!total)return '<div class="growth-empty"><strong>No matching faculty goals for '+esc(division())+'</strong><p>No eligible faculty goals currently match the selected division or school year. Schoolwide totals have not been carried over.</p></div>';
-    const max=Math.max(1,...Object.values(d).map(Number));
+    const max=Math.max(1,total);
     let html='<h3>Which areas of professional practice are the focus?</h3><p class="growth-pane-lead">Teacher Growth &amp; Reflection domains across '+nfmt(total)+' faculty goals · '+esc(division()==='All'?'whole school':division())+'.</p><div class="growth-domain-list">';
     for(const key of ['1','2','3','4','other']){
       const count=d[key]||0;if(key==='other'&&!count)continue;
-      html+='<div class="growth-domain-item"><span class="growth-domain-n">'+(key==='other'?'–':key)+'</span><div><div class="growth-domain-t">'+esc(DOMAIN_NAMES[key])+'</div><div class="growth-domain-sub">'+nfmt(count)+' faculty selected this domain</div></div><div class="growth-track"><div class="growth-bar-fill" style="width:'+(100*count/max).toFixed(1)+'%"></div></div><span class="growth-bar-val">'+nfmt(count)+'</span></div>';
+      html+='<div class="growth-domain-item"><span class="growth-domain-n">'+(key==='other'?'–':key)+'</span><div><div class="growth-domain-t">'+esc(DOMAIN_NAMES[key])+'</div><div class="growth-domain-sub">'+nfmt(count)+' faculty selected this domain</div></div><div class="growth-track"><div class="growth-bar-fill" style="width:'+(100*count/max).toFixed(1)+'%"></div></div><span class="growth-bar-val">'+Math.round(count/total*100)+'%<small>'+count+' of '+total+' faculty</small></span></div>';
     }
-    html+='</div><section class="growth-competencies"><h4>Chosen competencies</h4><div class="growth-competency-grid">';
+    html+='</div>'+goalTable(Object.entries(d).map(([k,v])=>[DOMAIN_NAMES[k]||k,v]),total,'Faculty-selected domains')+compareDivisions('domains')+'<section class="growth-competencies"><h4>Chosen competencies</h4><div class="growth-competency-grid">';
     const domainCounts=local.rows?counts(activeGoals(),g=>g.domain):(s.competencyCounts||{});
     const sorted=Object.entries(domainCounts).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
     if(local.rows){html+=sorted.map(([name,count])=>'<details class="growth-competency"><summary><strong>'+esc(name)+'</strong><span>'+nfmt(count)+' faculty ▾</span></summary><div class="growth-people">'+activeGoals().filter(g=>g.domain===name).sort((a,b)=>a.faculty.localeCompare(b.faculty)).map(personButton).join('')+'</div></details>').join('');}
