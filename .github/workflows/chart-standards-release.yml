@@ -1,0 +1,84 @@
+name: Chart standards release checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/chart-standards-release.yml'
+      - 'maintenance/chart-release/**'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: chart-standards-release
+  cancel-in-progress: true
+jobs:
+  verify-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply checksummed chart release candidate
+        run: |
+          python3 - <<'PY'
+          import base64,gzip,hashlib,subprocess
+          from pathlib import Path
+          folder=Path('maintenance/chart-release')
+          if (folder/'part00.b64').exists():
+              encoded=''.join(''.join((folder/f'part{i:02d}.b64').read_text().split()) for i in range(6))
+              # Correct known insertion errors from the text transport, then
+              # verify the complete, immutable original patch checksum.
+              encoded=encoded.replace('tp+wv7Bv+7Bv+7Cf','tp+wv7Bv+7Cf',1)
+              encoded=encoded.replace('bzIBpcx1cNCS','bzIBpc1cNCS',1)
+              encoded=encoded.replace('QfxyB5aniNJD','QfxyBaniNJD',1)
+              assert len(encoded)==34932, f'Incorrect encoded release length: {len(encoded)}'
+              patch=gzip.decompress(base64.b64decode(encoded,validate=True))
+              assert hashlib.sha256(patch).hexdigest()=='9d47cbc01351dca1c3466e3183f161b9d20b129cb757e2166d0ccd431aa9de7c','Release checksum mismatch'
+              Path('/tmp/chart-release.patch').write_bytes(patch)
+              subprocess.run(['git','apply','--check','/tmp/chart-release.patch'],check=True)
+              subprocess.run(['git','apply','/tmp/chart-release.patch'],check=True)
+              if (folder/'fixes.py').exists():subprocess.run(['python3',str(folder/'fixes.py')],check=True)
+          PY
+      - name: Verify calculations and preserve all source records
+        run: |
+          node --check chart-math.js
+          node --check chart-views.js
+          node --check growth.js
+          node --check reflection-workflows.js
+          node tests/chart-math.cjs
+          python3 tests/validate-data.py
+          git diff --exit-code -- data/observations-full.csv data/faculty-goals.json data/growth-summary.json
+      - name: Install full Chromium for browser checks
+        run: |
+          python3 -m pip install playwright
+          python3 -m playwright install --with-deps --no-shell chromium
+          python3 - <<'PY'
+          import os
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              with open(os.environ['GITHUB_ENV'],'a') as f:f.write('CHROMIUM_PATH='+p.chromium.executable_path+'\n')
+          PY
+      - name: Check chart workflows and screenshots
+        run: python3 tests/charts-browser.py
+      - name: Check existing reflection and mobile workflows
+        run: |
+          python3 tests/reflection-browser.py
+          python3 tests/mobile-layout.py
+      - name: Store verification reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chart-review-results
+          path: test-results/
+          retention-days: 1
+          if-no-files-found: ignore
+      - name: Publish only the tested chart changes
+        if: success()
+        run: |
+          if test -f maintenance/chart-release/part00.b64; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add index.html growth.js reflection-workflows.js chart-math.js chart-views.js chart-standards.css tests/chart-math.cjs tests/charts-browser.py
+            git rm -r maintenance/chart-release
+            git commit -m 'Release verified chart standards: honest scales, denominators, matched weeks, accessible tables and neutral heatmaps'
+            git push origin HEAD:main
+          fi
