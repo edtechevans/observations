@@ -106,3 +106,7 @@ button.cv-segment{cursor:pointer;min-height:38px}
 @media(prefers-reduced-motion:reduce){.cv-chart *,.cv-profile *{transition:none!important}}
 
 .cv-bar-track>i[style^="width:0%;"]{border-width:0}
+
+/* Keep categorical lens labels distinct from the numerical totals. */
+.growth-lens .growth-lens-title{display:block;margin-bottom:4px}
+.growth-lens strong{display:block;font-size:26px;line-height:1.2;margin-bottom:5px;font-variant-numeric:tabular-nums}
