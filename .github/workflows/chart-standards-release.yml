@@ -1,26 +1,33 @@
-name: Chart standards release checks
+name: Chart standards checks
 on:
   push:
     branches: [main]
     paths:
-      - '.github/workflows/chart-standards-release.yml'
-      - 'maintenance/chart-polish.py'
+      - 'chart-math.js'
+      - 'chart-views.js'
+      - 'chart-standards.css'
+      - 'tests/chart-math.cjs'
+      - 'tests/charts-browser.py'
+  pull_request:
+    paths:
+      - 'chart-math.js'
+      - 'chart-views.js'
+      - 'chart-standards.css'
+      - 'tests/chart-math.cjs'
+      - 'tests/charts-browser.py'
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
-  group: chart-standards-release
+  group: chart-checks-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  verify-and-release:
+  verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Apply final screenshot-review corrections
-        run: |
-          if test -f maintenance/chart-polish.py; then python3 maintenance/chart-polish.py; fi
-      - name: Verify calculations and preserve all source records
+      - name: Check chart calculations and source integrity
         run: |
           node --check chart-math.js
           node --check chart-views.js
@@ -28,8 +35,7 @@ jobs:
           node --check reflection-workflows.js
           node tests/chart-math.cjs
           python3 tests/validate-data.py
-          git diff --exit-code -- data/observations-full.csv data/faculty-goals.json data/growth-summary.json
-      - name: Install full Chromium for browser checks
+      - name: Install full Chromium
         run: |
           python3 -m pip install playwright
           python3 -m playwright install --with-deps --no-shell chromium
@@ -39,13 +45,12 @@ jobs:
           with sync_playwright() as p:
               with open(os.environ['GITHUB_ENV'],'a') as f:f.write('CHROMIUM_PATH='+p.chromium.executable_path+'\n')
           PY
-      - name: Check chart workflows and screenshots
-        run: python3 tests/charts-browser.py
-      - name: Check existing reflection and mobile workflows
+      - name: Check charts, reflection workflows and mobile layout
         run: |
+          python3 tests/charts-browser.py
           python3 tests/reflection-browser.py
           python3 tests/mobile-layout.py
-      - name: Store verification reports and screenshots
+      - name: Store reports and screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -53,14 +58,3 @@ jobs:
           path: test-results/
           retention-days: 1
           if-no-files-found: ignore
-      - name: Publish only the tested visual corrections
-        if: success()
-        run: |
-          if test -f maintenance/chart-polish.py; then
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add index.html chart-views.js chart-standards.css tests/charts-browser.py
-            git rm maintenance/chart-polish.py
-            git commit -m 'Polish verified chart labels and lens-card typography after screenshot review'
-            git push origin HEAD:main
-          fi
