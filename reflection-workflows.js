@@ -47,7 +47,7 @@
   function renderContext(){
     mountContext();
     const latest=all().map(r=>r.date).filter(Boolean).sort().at(-1),gs=goalState();
-    text('rfFreshness','Latest observation: '+(obsState().state==='ready'?date(latest):obsState().state==='error'?'Data unavailable':'Loading')+' | Goals imported: '+(gs.state==='ready'?date(gs.asOf):gs.state==='error'?'Data unavailable':'Loading'));
+    text('rfFreshness','Latest observation: '+(obsState().state==='ready'?date(latest):obsState().state==='error'?'Data unavailable':'Loading')+' | Professional goals as of: '+(gs.state==='ready'?date(gs.asOf):gs.state==='error'?'Data unavailable':'Loading'));
     const s=state(),observer=s.observer&&s.observer!=='All'?s.observer:s.observerScope==='principals'?'Principals + APs':'All observers';
     text('uxEvidenceScope',range()+' | '+observer+(s.time&&s.time!=='All'?' | Lesson: '+s.time:'')+(s.faculty?' | Faculty: '+s.faculty:''));
     // Import and last observation dates are different facts, not a single "updated" date.
@@ -97,7 +97,7 @@
     text('uxGoalCount',g.state==='ready'?scopeGoals.length:g.state==='error'?'Unavailable':'Loading');
     text('uxObservationCount',o.state==='ready'?rows.length:o.state==='error'?'Unavailable':'Loading');
     text('uxConnectionCount',g.state==='ready'?same.chosen.length:'-');
-    text('uxGoalDescription',g.state==='error'?'Goal data unavailable. Results cannot be shown.':g.state!=='ready'?'Loading imported faculty goals.':year()!=='2026-27'?'No goal available for this school year. Current imported goals are for 2026-27.':same.chosen.length+' faculty chose '+focus+'. These are year-long intentions, not ratings.');
+    text('uxGoalDescription',g.state==='error'?'Goal data unavailable. Results cannot be shown.':g.state!=='ready'?'Loading faculty goals.':year()!=='2026-27'?'Professional goals are available for 2026-27 only.':same.chosen.length+' faculty chose '+focus+'. These are year-long intentions, not ratings.');
     text('uxEvidenceDescription',o.state==='error'?'Observation data unavailable. Results cannot be shown.':o.state!=='ready'?'Loading observations.':rows.length?new Set(rows.map(r=>email(r.email))).size+' faculty represented. '+range()+'.':'No observations in this period and evidence scope.');
     text('uxConnectionDescription',g.state==='ready'&&o.state==='ready'?same.withFacet.length+' of the '+same.chosen.length+' teachers who chose '+focus+' have that facet recorded in this observation view. Inspect their feedback and recorded responses.':'Both sources must be available for a same-teacher comparison.');
   }
@@ -107,7 +107,7 @@
   function openFacultyList(){ux()?.navigate('growth');growth()?.setView({pane:'goals',facet:live.facet,domain:'All',query:''});schedule();}
   function missingPreview(anchor){
     const r=all().find(r=>email(r.email)===email(anchor?.dataset.growthHover));if(!r)return;
-    const tip=$('growthHoverCard');if(!tip)return;tip.innerHTML='<strong>'+esc(r.faculty)+'</strong><p>No goal available in the current import.</p><small>Click to read the observation and response timeline.</small>';tip.hidden=false;
+    const tip=$('growthHoverCard');if(!tip)return;tip.innerHTML='<strong>'+esc(r.faculty)+'</strong><p>No professional goal recorded for this faculty member.</p><small>Click to read the observation and response timeline.</small>';tip.hidden=false;
     const b=anchor.getBoundingClientRect();tip.style.left=Math.max(12,Math.min(b.left,innerWidth-492))+'px';tip.style.top=Math.max(12,Math.min(b.bottom+8,innerHeight-tip.offsetHeight-12))+'px';
   }
   function openRecord(value){
@@ -128,11 +128,11 @@
     const d=$('growthRecordDialog'),host=$('growthRecordContent');if(!d||!host)return;
     const {goal,rows,name}=recordData(),subset=live.timeline==='focus'?(goal?rows.filter(r=>matches(r,goal.facet)):[]):rows;
     text('growthRecordName',name);
-    const empty=goalState().state==='error'?'Goal data unavailable. Results cannot be shown.':goalState().state!=='ready'?'Loading goal record.':year()!=='2026-27'?'No goal available for this school year.':'No goal available in the current import.';
-    const goalHtml=goal?'<div class="growth-meta"><span>'+esc(goal.facet)+'</span><span>'+esc(goal.domain)+'</span></div><h3>Current imported professional goal</h3><p class="growth-goal-text">'+esc(goal.goal)+'</p>':'<div class="rf-note" role="status">'+esc(empty)+'</div>';
+    const empty=goalState().state==='error'?'Goal data unavailable. Results cannot be shown.':goalState().state!=='ready'?'Loading goal record.':year()!=='2026-27'?'No goal available for this school year.':'No professional goal recorded for this faculty member.';
+    const goalHtml=goal?'<div class="growth-meta"><span>'+esc(goal.facet)+'</span><span>'+esc(goal.domain)+'</span></div><h3>Professional growth goal</h3><p class="growth-goal-text">'+esc(goal.goal)+'</p>':'<div class="rf-note" role="status">'+esc(empty)+'</div>';
     host.innerHTML='<p class="rf-timeline-scope">Full '+esc(year())+' timeline. This record does not inherit the dashboard\'s observer or period filters.</p>'+goalHtml+
       '<h3>Observations and teacher reflections</h3><div class="rf-timeline-controls" role="group" aria-label="Timeline observations"><button type="button" data-rf-timeline="all" aria-pressed="'+(live.timeline==='all')+'">All observations ('+rows.length+')</button><button type="button" data-rf-timeline="focus" aria-pressed="'+(live.timeline==='focus')+'" '+(!goal?'disabled':'')+'>Linked to chosen facet ('+(goal?rows.filter(r=>matches(r,goal.facet)).length:0)+')</button></div>'+
-      (goal?'<p class="rf-timeline-scope">Facet links use the current imported goal, not a judgement of goal attainment. The source does not give the date this goal was originally set.</p>':'')+
+      (goal?'<p class="rf-timeline-scope">Facet links use the recorded professional goal, not a judgement of goal attainment. The source does not give the date this goal was originally set.</p>':'')+
       '<div class="rf-timeline">'+(subset.length?subset.map((r,i)=>{
         const shouldOpen=live.open.includes(String(r.id))||(!live.open.length&&i===subset.length-1);
         const stars=(r.commendationText||[]).map((t,j)=>t?block('Commendation'+((r.commendations||[])[j]?' - '+r.commendations[j]:''),t):'').join('');
@@ -141,7 +141,7 @@
           block('Teacher response / reflection',r.response||'No teacher response recorded in the source.','rf-response')+
           '<button type="button" class="ux-edit-filters" data-rf-open-observation="'+esc(r.id)+'">Open complete observation</button></div></details>';
       }).join(''):'<div class="rf-note" role="status">'+(obsState().state==='error'?'Observation data unavailable. Results cannot be shown.':live.timeline==='focus'?'Chosen facet not recorded in this evidence. Other observations may still be relevant.':'No observations in this school year.')+'</div>')+'</div>'+
-      '<p class="rf-timeline-scope">Goal import: '+esc(date(goalState().asOf))+'. Responses are shown exactly as recorded; a missing response does not imply a lack of reflection.</p>';
+      '<p class="rf-timeline-scope">Professional goals as of: '+esc(date(goalState().asOf))+'. Responses are shown exactly as recorded; a missing response does not imply a lack of reflection.</p>';
     host.querySelectorAll('[data-rf-timeline]').forEach(b=>b.onclick=()=>{live.timeline=b.dataset.rfTimeline;live.open=[];renderRecord();schedule();});
     host.querySelectorAll('[data-rf-open-observation]').forEach(b=>b.onclick=()=>{live.originRecord=live.record;closeRecordSilently();core().openObservation(b.dataset.rfOpenObservation);addObservationBack();schedule();});
     host.querySelectorAll('[data-rf-observation]').forEach(n=>n.addEventListener('toggle',()=>{live.open=[...host.querySelectorAll('[data-rf-observation][open]')].map(x=>x.dataset.rfObservation);schedule('replace');}));
