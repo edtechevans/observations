@@ -57,7 +57,7 @@ with sync_playwright() as pw:
         page.locator('#uxEditFilters').click();pause(page)
         expect(page.locator('#uxEvidenceScope')).to_contain_text('Latest 30 days of available evidence:')
         expect(page.locator('#rfFreshness')).to_contain_text('Latest observation:')
-        expect(page.locator('#rfFreshness')).to_contain_text('Goals imported: 22 Oct 2026')
+        expect(page.locator('#rfFreshness')).to_contain_text('Professional goals as of: 22 Oct 2026')
         check('Goal cohort unchanged by observation period',len(page.evaluate('window.AISG_REFLECTION.comparison().chosen'))==25)
         page.locator('#uxFacetCompare').screenshot(path=str(OUT/'comparison-desktop.png'))
         candidate=page.evaluate("""()=>{
@@ -101,8 +101,8 @@ with sync_playwright() as pw:
         check('Shared view restores division and period',other.evaluate("window.AISG_GROWTH_BRIDGE.getState().division==='Secondary'&&window.AISG_GROWTH_BRIDGE.getState().period==='30'"))
         check('Shared view restores same-teacher mode',other.locator('[name="rfScope"][value="focus"]').is_checked());other.close()
         page.locator('#uxFacultyName').fill('Jane McGennisken');page.locator('#uxFacultyName').press('Enter');pause(page)
-        expect(page.locator('#growthRecordContent')).to_contain_text('No goal available in the current import.')
-        check('Observed faculty without imported goals still have a timeline',page.locator('.rf-timeline-visit').count()>0)
+        expect(page.locator('#growthRecordContent')).to_contain_text('No professional goal recorded for this faculty member.')
+        check('Observed faculty without recorded goals still have a timeline',page.locator('.rf-timeline-visit').count()>0)
         page.locator('#growthCloseDialog').click();pause(page)
         # An empty future period must not be confused with missing source data.
         page.locator('#uxEditFilters').click();page.locator('#periodFilter [data-value="custom"]').click();pause(page)
