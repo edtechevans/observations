@@ -489,14 +489,20 @@
   }
   function renderGuidedInquiry(){
     const host=byId('uxLensContent'),data=INQUIRY_LENSES[inquiryLens];if(!host)return;
-    $$('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
-    const rows=filteredEvidence(),people=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
+    const s=state(),rows=filteredEvidence();
+    // Preserve live buttons and focused controls. The app redraws frequently as
+    // observation data, URL state and Goal views update. Do not detach unchanged UI.
+    const signature=[inquiryLens,s.year,s.division,s.observerScope,s.observer,s.period,s.time,s.faculty,
+      rows.length,rows[0]?.id||'',rows.at(-1)?.id||'',obs()?.getRows?.().length||0].join('|');
+    if(host.dataset.renderSignature===signature)return;
+    host.dataset.renderSignature=signature;
+    $('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
+    const people=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
     const observers=new Set(rows.map(r=>String(r.observer||'').trim()).filter(Boolean));
     const sampling=fmt(rows.length)+' observations · '+fmt(people.size)+' faculty · '+fmt(observers.size)+' observers';
     const caution=rows.length<15?'Small selected sample: inspect original records before interpreting a pattern.':
       'Counts describe the selected observation evidence, not teaching quality or goal attainment.';
     let lensScope='';
-    const s=state();
     if(inquiryLens==='personal'){
       const options=[...byId('observerFilter')?.options||[]].filter(opt=>opt.value!=='All');
       lensScope='<div class="ux-lens-scope"><label for="uxInquiryObserver">Choose the observer whose evidence you want to examine</label>'+
