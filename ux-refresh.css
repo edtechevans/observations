@@ -161,3 +161,28 @@
   .ux-analysis-body{padding:11px}
 }
 @media(prefers-reduced-motion:reduce){.ux-primary-nav *,.ux-overview *,.ux-facet-compare *{transition:none!important}}
+
+/* Stateless guided inquiry: clear prompts, evidence scope, and direct source-analysis routes */
+.ux-guided-inquiry{background:#fff;border:1px solid var(--ux-line);border-radius:15px;padding:19px 20px;display:grid;gap:15px;box-shadow:0 5px 16px rgba(17,50,97,.045)}
+.ux-guided-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.ux-guided-head h3{margin:5px 0 6px;font-size:21px;color:var(--ux-navy)}
+.ux-guided-head p{margin:0;color:var(--ux-muted);font-size:13px;line-height:1.6;max-width:690px}
+.ux-guided-time{color:var(--ux-muted);border:1px solid var(--ux-line);border-radius:99px;padding:7px 10px;white-space:nowrap;font-size:11px}
+.ux-lens-switch{display:flex;flex-wrap:wrap;gap:7px}
+.ux-lens-switch button{border:1px solid #d4dfe9;background:#f8fafc;color:#31506d;border-radius:9px;font:inherit;font-size:13px;font-weight:750;padding:11px 16px;cursor:pointer}
+.ux-lens-switch button[aria-pressed=true]{color:#fff;background:#113261;border-color:#113261}
+.ux-lens-switch button:focus-visible,.ux-guided-actions button:focus-visible{outline:3px solid #99bbdf;outline-offset:2px}
+.ux-guided-title>span{color:#ad2a26;text-transform:uppercase;font-weight:800;letter-spacing:.055em;font-size:10px}
+.ux-guided-title h4{font-size:19px;color:#113261;margin:6px 0}
+.ux-guided-title p{font-size:13px;line-height:1.65;color:#52677c;max-width:900px;margin:0}
+.ux-guided-body{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ux-guided-body>div{border:1px solid #e1e8f0;border-radius:11px;padding:15px;background:#fafcfe;min-width:0}
+.ux-guided-body h5{font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin:0 0 10px;color:#435a73}
+.ux-guided-body ol{padding-left:19px;margin:0;display:grid;gap:8px;color:#344a60;font-size:13px;line-height:1.55}
+.ux-guided-actions{display:grid;gap:7px}
+.ux-guided-actions button{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fff;border:1px solid #dce5ef;color:#113261;border-radius:8px;padding:10px 12px;font:inherit;font-size:12px;font-weight:760;cursor:pointer;text-align:left}
+.ux-guided-actions button:hover{background:#eef3f8}
+.ux-guided-scope{border-top:1px solid #e6edf3;padding-top:11px;font-size:11.5px;line-height:1.65;color:#52677c;margin:0}
+.ux-guided-scope strong{color:#113261}
+.ux-guided-scope span{display:block}
+@media(max-width:760px){.ux-guided-body{grid-template-columns:1fr}.ux-guided-head{flex-direction:column}.ux-guided-time{white-space:normal}.ux-guided-inquiry{padding:14px}.ux-lens-switch button{flex:1}}
