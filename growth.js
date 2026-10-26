@@ -125,9 +125,16 @@
       const rows=activeGoals().filter(g=>FACETS.includes(g.facet));
       const comm=rows.filter(g=>evidenceFor(g).commendations.length).length,wond=rows.filter(g=>evidenceFor(g).wonderings.length).length;
       html+='<section class="growth-competencies"><h4>Year-to-date observation connections</h4><div class="growth-evidence-grid"><div class="growth-evidence-kpi"><strong>'+nfmt(rows.length)+'</strong><span>Faculty with selected facets</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(comm)+'</strong><span>Focus facet in a commendation</span></div><div class="growth-evidence-kpi"><strong>'+nfmt(wond)+'</strong><span>Focus facet in a wondering</span></div></div><p class="growth-footnote">These coverage indicators use all 2026–27 observations, independent of the selected observer or period. The paired comparison above applies your evidence filters. Neither is a goal-attainment score.</p></section>';
-      html+='<details class="growth-facet-members" open><summary>Explore faculty by chosen facet</summary><div class="growth-members-grid">';
+      html+='<details class="growth-facet-members"><summary>Explore faculty by chosen facet <span class="growth-member-total">('+nfmt(rows.length)+' faculty)</span></summary>'+
+        '<p class="growth-footnote">Browse a short preview for each facet or open a group to see the full list. You can also search for an individual goal.</p>'+
+        '<button class="growth-jump-goals" type="button" data-growth-jump="goals">Search faculty goals →</button>'+
+        '<div class="growth-members-grid">';
       for(const [facet,count] of sorted){if(!count)continue;const people=rows.filter(g=>g.facet===facet).sort((a,b)=>a.faculty.localeCompare(b.faculty));
-        html+='<section class="growth-members-group"><h4>'+tag(facet)+' <span>'+nfmt(count)+' faculty</span></h4><div class="growth-people">'+people.map(personButton).join('')+'</div></section>';
+        html+='<section class="growth-members-group"><h4>'+tag(facet)+' <span>'+nfmt(count)+' faculty</span></h4>'+
+          '<div class="growth-people">'+people.slice(0,4).map(personButton).join('')+'</div>';
+        if(people.length>4)html+='<details class="growth-more-people"><summary>Show all '+nfmt(count)+' faculty</summary>'+
+          '<div class="growth-people">'+people.slice(4).map(personButton).join('')+'</div></details>';
+        html+='</section>';
       }
       html+='</div></details>';
     }else html+='<p class="growth-footnote">Faculty detail records are loading…</p>';
@@ -304,6 +311,7 @@
 
     byId('growthViewNav')?.addEventListener('keydown',event=>{const buttons=[...byId('growthViewNav').querySelectorAll('button')],i=buttons.indexOf(event.target);if(i<0)return;let j=i;if(event.key==='ArrowRight')j=(i+1)%buttons.length;else if(event.key==='ArrowLeft')j=(i+buttons.length-1)%buttons.length;else if(event.key==='Home')j=0;else if(event.key==='End')j=buttons.length-1;else return;event.preventDefault();buttons[j].click();buttons[j].focus();});
     byId('growthViewNav')?.addEventListener('click',event=>{const btn=event.target.closest('[data-growth-pane]');if(btn)setPane(btn.dataset.growthPane);});
+    panel.addEventListener('click',event=>{const jump=event.target.closest('[data-growth-jump]');if(jump)setPane(jump.dataset.growthJump);});
     panel.addEventListener('input',event=>{if(event.target.id==='growthGoalSearch'){local.query=event.target.value;renderGoalRows();hideTooltip(true);}});
     panel.addEventListener('change',event=>{if(event.target.id==='growthFacetFilter'){local.facet=event.target.value;renderGoalRows();}if(event.target.id==='growthDomainFilter'){local.domain=event.target.value;renderGoalRows();}hideTooltip(true);});
     document.addEventListener('click',event=>{const btn=event.target.closest('button[data-growth-open]');if(btn)selectRecord(btn.dataset.growthOpen);});
