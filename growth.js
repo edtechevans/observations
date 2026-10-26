@@ -89,16 +89,16 @@
     }
   }
   function barRows(entries,total){
-    return '<div class="cv-goal-axis" aria-hidden="true"><span>Faculty with an imported goal</span><span>0%<i>100%</i></span><span></span></div>'+entries.map(([name,value])=>{
+    return '<div class="cv-goal-axis" aria-hidden="true"><span>Faculty with a recorded goal</span><span>0%<i>100%</i></span><span></span></div>'+entries.map(([name,value])=>{
       const lens=LENS_OF[name]||'other',width=total?100*value/total:0;
       return '<div class="growth-bar-row cv-goal-bar"><span class="growth-bar-name">'+esc(name)+'</span><div class="growth-track" role="img" aria-label="'+esc(name)+': '+value+' of '+total+' faculty, '+Math.round(width)+' percent"><div class="growth-bar-fill is-'+esc(lens.toLowerCase())+'" style="width:'+width.toFixed(3)+'%"></div></div><span class="growth-bar-val">'+Math.round(width)+'%<small>'+nfmt(value)+' of '+nfmt(total)+' faculty</small></span></div>';
     }).join('');
   }
-  function goalTable(entries,total,title){return window.AISG_CHARTS.dataTable(['Category','Faculty choosing this focus','Faculty with imported goals','Share'],entries.map(([n,v])=>[n,v,total,total?Math.round(v/total*100)+'%':'Not available']),title);}
+  function goalTable(entries,total,title){return window.AISG_CHARTS.dataTable(['Category','Faculty choosing this focus','Faculty with recorded goals','Share'],entries.map(([n,v])=>[n,v,total,total?Math.round(v/total*100)+'%':'Not available']),title);}
   function compareDivisions(mode){
     if(!local.rows||!currentYear())return '';
     const keys=mode==='facets'?FACETS:['1','2','3','4','other'];
-    let html='<details class="cv-data cv-goal-compare"><summary>Compare Elementary and Secondary on the same scale</summary><p class="cv-note">Identical category order and 0-100% scales. Each denominator is the number of imported goals in that division, not the full staffing roster. The comparison intentionally shows both divisions.</p><div class="cv-two-panels">';
+    let html='<details class="cv-data cv-goal-compare"><summary>Compare Elementary and Secondary on the same scale</summary><p class="cv-note">Identical category order and 0-100% scales. Each denominator is the number of faculty goals in that division, not the full staffing roster. The comparison intentionally shows both divisions.</p><div class="cv-two-panels">';
     for(const div of ['Elementary','Secondary']){
       const rows=local.rows.filter(g=>(g.division||primaryDivision(g.email))===div),c=counts(rows,g=>mode==='facets'?g.facet:domainKey(g.domain));
       const entries=keys.map(k=>({label:mode==='facets'?k:(k==='other'?'Other':'Domain '+k),value:rows.length?(c[k]||0)/rows.length*100:null,n:c[k]||0,d:rows.length}));
@@ -215,7 +215,7 @@
     }
     if(!matched.size)throw Error('No observed faculty with eligible goals were found.');
     local.rows=[...matched.values()].sort((a,b)=>a.faculty.localeCompare(b.faculty));
-    local.status=from==='public'?'Loaded from public faculty goals dataset.':from==='encrypted'?'Verified encrypted dataset.':'Imported from local CSV.';
+    local.status=from==='public'?'Loaded from public faculty goals dataset.':from==='encrypted'?'Verified encrypted dataset.':'Local goal data available.';
     local.error=false;local.query='';local.facet='All';local.domain='All';if(from!=='public')local.pane='goals';
     update();
     window.dispatchEvent(new CustomEvent('aisg:goalsReady'));
