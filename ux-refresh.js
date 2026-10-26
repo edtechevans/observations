@@ -401,7 +401,7 @@
   }
   function renderGuidedInquiry(){
     const host=byId('uxLensContent'),data=INQUIRY_LENSES[inquiryLens];if(!host)return;
-    $('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
+    $$('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
     const rows=filteredEvidence(),people=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
     const observers=new Set(rows.map(r=>String(r.observer||'').trim()).filter(Boolean));
     const sampling=fmt(rows.length)+' observations · '+fmt(people.size)+' faculty · '+fmt(observers.size)+' observers';
