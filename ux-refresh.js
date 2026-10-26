@@ -496,7 +496,7 @@
       rows.length,rows[0]?.id||'',rows.at(-1)?.id||'',obs()?.getRows?.().length||0].join('|');
     if(host.dataset.renderSignature===signature)return;
     host.dataset.renderSignature=signature;
-    $('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
+    $$('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
     const people=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
     const observers=new Set(rows.map(r=>String(r.observer||'').trim()).filter(Boolean));
     const sampling=fmt(rows.length)+' observations · '+fmt(people.size)+' faculty · '+fmt(observers.size)+' observers';
