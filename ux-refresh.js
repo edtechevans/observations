@@ -66,7 +66,7 @@
     sub.id='uxSubnav';sub.className='ux-subnav';sub.hidden=true;sub.setAttribute('aria-label','Analysis section navigation');
     const context=document.createElement('section');
     context.id='uxContextBar';context.className='ux-context-bar';context.setAttribute('aria-label','Analysis scope and filters');
-    context.innerHTML='<div class="ux-mobile-scope"><span id="uxMobileScopeSummary" aria-live="polite">Loading evidence scope…</span><button type="button" id="uxMobileScopeFilters" aria-expanded="false" aria-controls="uxOriginalFilters">Filters <span aria-hidden="true">⌄</span></button></div>'+
+    context.innerHTML='<div class="ux-mobile-scope"><span id="uxMobileScopeSummary" aria-live="polite">Loading evidence scope…</span><button type="button" id="uxMobileScopeFilters" aria-expanded="false" aria-controls="uxOriginalFilters">Filters <span aria-hidden="true">⌄</span></button><button type="button" id="uxMobileCopyView" title="Copy this view" aria-label="Copy this view">⧉</button></div>'+
       '<div class="ux-context-group"><span class="ux-context-title">Faculty growth goals</span>'+
       '<span id="uxContextYear" class="ux-evidence-scope"></span>'+
       '<div class="ux-division-choices" role="group" aria-label="Choose division">'+
@@ -100,6 +100,7 @@
       if(btn){const target=$('#divisionFilter button[data-value="'+btn.dataset.uxDivision+'"]');target?.click();}
       const edit=e.target.closest('#uxEditFilters, #uxMobileScopeFilters');
       if(edit)toggleFilters(!filterOpen);
+      if(e.target.closest('#uxMobileCopyView'))byId('rfCopyView')?.click();
     });
     byId('uxFacultySearch').addEventListener('submit',e=>{e.preventDefault();openSearchPerson();});
     byId('uxFacultyName').addEventListener('change',()=>{
@@ -187,6 +188,8 @@
       else if(s.observerScope==='principals')detail.push('Principals + APs');
       if(s.faculty)detail.push('Faculty filtered');
       if(s.time&&s.time!=='All')detail.push(s.time+' of lesson');
+      const latest=filteredEvidence().reduce((max,r)=>r.date&&r.date>max?r.date:max,'');
+      if(latest)detail.push('through '+new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}).format(new Date(latest+'T00:00:00Z')));
       small.textContent=detail.join(' · ');
     }
     if(note){
