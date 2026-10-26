@@ -364,9 +364,58 @@
     const filter=byId('explorerFacetQuick');
     if(filter){filter.value=selectedFacet;filter.dispatchEvent(new Event('change',{bubbles:true}));}
   }
+
+  // Guided inquiry is deliberately stateless: no leader notes, personal records or storage.
+  const INQUIRY_LENSES={
+    personal:{title:'Personal · Where am I looking?',tag:'Observation focus, not observer evaluation',
+      lead:'Compare the facets and guiding questions you tend to record with the wider evidence. Ask what your sampling choices might be obscuring.',
+      prompts:['Which facets and questions recur in my visits?','Which lessons, faculty or moments am I sampling less often?','What might I deliberately look for next?'],
+      steps:[['Admin · Observer × TLF','admin'],['Admin · Guiding-question audit','admin'],['Underlying observations','explorer']]},
+    divisional:{title:'Divisional · What does our evidence suggest?',tag:'Start with SSS1, Tier 1 and student experience',
+      lead:'Connect divisional priorities to observable Tier 1 conditions, faculty growth intentions and examples from classrooms. Treat textual indicators as pointers to evidence, not student-outcome measures.',
+      prompts:['Which recorded examples speak to access, participation and thinking?','Where might our observation focus be missing the divisional priority?','What will we ask faculty about this pattern?'],
+      steps:[['MTSS in Practice','mtss'],['TLF patterns','facets'],['Growth intentions','growth']]},
+    collective:{title:'Collective · What should we investigate together?',tag:'Schoolwide patterns, PLCs and evidence gaps',
+      lead:'Compare breadth of evidence across PLCs, divisions and TLF facets. Look for gaps in who or what is represented rather than ranking teachers or teams.',
+      prompts:['Where are similar signals appearing across PLCs or divisions?','Where do sampling gaps limit our conclusions?','What shared inquiry is worth bringing back to faculty?'],
+      steps:[['PLCs','plcs'],['Reach & Evidence','coverage'],['Schoolwide TLF patterns','facets']]}
+  };
+  let inquiryLens='personal';
+  function createGuidedInquiry(){
+    const hero=byId('uxOverview');if(!hero||byId('uxGuidedInquiry'))return;
+    const section=document.createElement('section');
+    section.id='uxGuidedInquiry';section.className='ux-guided-inquiry';
+    section.setAttribute('aria-label','Guided leadership inquiry');
+    section.innerHTML='<div class="ux-guided-head"><div><span class="ux-card-eyebrow">Optional · Guided inquiry</span><h3>Three lenses for looking at our evidence</h3><p>Choose a lens to open the existing analysis tools with a clear purpose. No notes or individual inquiry records are saved.</p></div><span class="ux-guided-time">10 minutes per lens</span></div>'+
+      '<div class="ux-lens-switch" role="group" aria-label="Choose inquiry lens">'+
+      [['personal','1 · Personal'],['divisional','2 · Divisional'],['collective','3 · Collective']].map(([key,label])=>'<button type="button" data-ux-lens="'+key+'" aria-pressed="false">'+label+'</button>').join('')+'</div>'+
+      '<div id="uxLensContent" aria-live="polite"></div>';
+    const cards=hero.querySelector('.ux-inquiry-grid');(cards||hero).before(section);
+    section.addEventListener('click',event=>{
+      const lensButton=event.target.closest('[data-ux-lens]');
+      if(lensButton){inquiryLens=lensButton.dataset.uxLens;renderGuidedInquiry();return;}
+      const route=event.target.closest('[data-ux-inquiry-route]');
+      if(route)navigate(route.dataset.uxInquiryRoute);
+    });
+    renderGuidedInquiry();
+  }
+  function renderGuidedInquiry(){
+    const host=byId('uxLensContent'),data=INQUIRY_LENSES[inquiryLens];if(!host)return;
+    $('#uxGuidedInquiry [data-ux-lens]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.uxLens===inquiryLens)));
+    const rows=filteredEvidence(),people=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
+    const observers=new Set(rows.map(r=>String(r.observer||'').trim()).filter(Boolean));
+    const sampling=fmt(rows.length)+' observations · '+fmt(people.size)+' faculty · '+fmt(observers.size)+' observers';
+    const caution=rows.length<15?'Small selected sample: inspect original records before interpreting a pattern.':
+      'Counts describe the selected observation evidence, not teaching quality or goal attainment.';
+    host.innerHTML='<div class="ux-guided-title"><span>'+esc(data.tag)+'</span><h4>'+esc(data.title)+'</h4><p>'+esc(data.lead)+'</p></div>'+
+      '<div class="ux-guided-body"><div><h5>Questions to explore</h5><ol>'+data.prompts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol></div>'+
+      '<div><h5>Open related evidence</h5><div class="ux-guided-actions">'+data.steps.map(([label,route])=>'<button type="button" data-ux-inquiry-route="'+route+'">'+esc(label)+' <span aria-hidden="true">→</span></button>').join('')+'</div></div></div>'+
+      '<p class="ux-guided-scope"><strong>Current evidence scope:</strong> '+esc(sampling)+'. '+esc(caution)+' <span>Observation notes are a record of what observers chose to notice; MTSS terms are text matches, not measures of student experience.</span></p>';
+  }
+
   function renderEverything(){
     refreshQueued=false;
-    renderNavigation();context();updatePersonList();renderOverview();
+    renderNavigation();context();updatePersonList();renderOverview();renderGuidedInquiry();
     window.AISG_REFLECTION?.renderContext();
     const pane=byId('growthViewMount');
     if(pane?.querySelector('.growth-chart-split')){ensureCompare();renderCompare();}
@@ -387,7 +436,7 @@
   window.AISG_UX={navigate,refresh:()=>queue(),getView:()=>({selectedFacet,filterOpen,analysisOpen:!!byId('uxFullAnalysis')?.open}),setView:view=>{if(names.includes(view?.selectedFacet))selectedFacet=view.selectedFacet;filterOpen=!!view?.filterOpen;byId('uxOriginalFilters')?.classList.toggle('ux-filters-closed',!filterOpen);if(byId('uxFullAnalysis'))byId('uxFullAnalysis').open=!!view?.analysisOpen;queue();}};
   function boot(){
     if(!byId('main')||!$('.leadership-tabs')||byId('uxPrimaryNav'))return;
-    buildNav();createOverview();
+    buildNav();createOverview();createGuidedInquiry();
     // Route every faculty name to a single consistent growth/evidence drawer;
     // preserve its explicit "Open Evidence Explorer" action.
     document.addEventListener('click',captureFaculty,true);
