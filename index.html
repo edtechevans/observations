@@ -1803,7 +1803,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":306,"faculty":109,"responses":254,"elementary":138,"secondary":168,"beginning":98,"middle":158,"end":50,"minDate":20260810,"maxDate":20261021}},"sourceRows":841};
+window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":312,"faculty":109,"responses":259,"elementary":139,"secondary":173,"beginning":98,"middle":162,"end":52,"minDate":20260810,"maxDate":20261023}},"sourceRows":847};
 </script>
   <script>
 (() => {
@@ -2385,10 +2385,16 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
   }
 
   async function loadPublishedRows(){
-    const res=await fetch('./data/observations-full.csv?v=20261022-append-missing',{cache:'no-store'});
+    const res=await fetch('./data/observations-full.csv?v=20261026-append-missing',{cache:'no-store'});
     if(!res.ok) throw new Error(`Dataset request failed: ${res.status}`);
     const text=await res.text();
-    const normalized=normalizeRawRows(parseCsvText(text));
+    const added=await fetch('./data/observations-20261026-additions.csv?v=20261026',{cache:'no-store'});
+    if(!added.ok) throw new Error(`Recent observations request failed: ${added.status}`);
+    const extra=parseCsvText(await added.text());
+    const original=parseCsvText(text);
+    const known=new Set(original.map(r=>String(r.ID||'').trim()));
+    const appended=extra.filter(r=>{const id=String(r.ID||'').trim();if(!id||known.has(id))return false;known.add(id);return true;});
+    const normalized=normalizeRawRows(original.concat(appended));
     if(!normalized.length) throw new Error('Published observation dataset is empty');
     return normalized;
   }
@@ -4333,9 +4339,9 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
 })();
 
 </script>
-<script src="./growth.js?v=20261022-charts1" defer></script>
+<script src="./growth.js?v=20261026-goal-labels" defer></script>
 <script src="./growth-people.js?v=20261022-reflection1" defer></script>
 <script src="./ux-refresh.js?v=20261022-reflection1" defer></script>
-<script src="./reflection-workflows.js?v=20261022-charts1" defer></script>
+<script src="./reflection-workflows.js?v=20261026-goal-labels" defer></script>
 </body>
 </html>
