@@ -45,7 +45,12 @@
     if(!shell||!main)return;
     const nav=document.createElement('nav');
     nav.id='uxPrimaryNav';nav.className='ux-primary-nav';nav.setAttribute('aria-label','Primary dashboard navigation');
-    nav.innerHTML='<div class="ux-primary-links">'+
+    nav.innerHTML='<div class="ux-mobile-navigation">'+
+      '<label class="ux-visually-hidden" for="uxMobilePage">Dashboard section</label>'+
+      '<select id="uxMobilePage" aria-label="Dashboard section">'+categories.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.id==='admin'?'Admin & calibration':c.label)+'</option>').join('')+'</select>'+
+      '<button type="button" id="uxMobileSearchToggle" aria-label="Find faculty" aria-expanded="false" aria-controls="uxFacultySearch" title="Find faculty">⌕</button>'+
+      '<button type="button" id="uxMobileAdmin" aria-label="Admin and calibration" title="Admin and calibration">⚙</button>'+
+      '</div><div class="ux-primary-links">'+
       categories.filter(c=>c.id!=='admin').map(c=>
         '<button type="button" class="ux-nav-button" data-ux-category="'+c.id+'">'+esc(c.label)+'</button>'
       ).join('')+
@@ -61,7 +66,8 @@
     sub.id='uxSubnav';sub.className='ux-subnav';sub.hidden=true;sub.setAttribute('aria-label','Analysis section navigation');
     const context=document.createElement('section');
     context.id='uxContextBar';context.className='ux-context-bar';context.setAttribute('aria-label','Analysis scope and filters');
-    context.innerHTML='<div class="ux-context-group"><span class="ux-context-title">Faculty growth goals</span>'+
+    context.innerHTML='<div class="ux-mobile-scope"><span id="uxMobileScopeSummary" aria-live="polite">Loading evidence scope…</span><button type="button" id="uxMobileScopeFilters" aria-expanded="false" aria-controls="uxOriginalFilters">Filters <span aria-hidden="true">⌄</span></button></div>'+
+      '<div class="ux-context-group"><span class="ux-context-title">Faculty growth goals</span>'+
       '<span id="uxContextYear" class="ux-evidence-scope"></span>'+
       '<div class="ux-division-choices" role="group" aria-label="Choose division">'+
       [['All','Whole school'],['Elementary','Elementary'],['Secondary','Secondary']].map(([value,label])=>
@@ -76,7 +82,15 @@
     nav.addEventListener('click',e=>{
       const btn=e.target.closest('[data-ux-category]');
       if(btn)goCategory(btn.dataset.uxCategory);
+      if(e.target.closest('#uxMobileAdmin'))navigate('admin');
+      if(e.target.closest('#uxMobileSearchToggle')){
+        const open=!nav.classList.contains('ux-search-open');
+        nav.classList.toggle('ux-search-open',open);
+        byId('uxMobileSearchToggle').setAttribute('aria-expanded',String(open));
+        if(open)byId('uxFacultyName')?.focus();
+      }
     });
+    byId('uxMobilePage')?.addEventListener('change',e=>goCategory(e.target.value));
     sub.addEventListener('click',e=>{
       const btn=e.target.closest('[data-ux-page]');
       if(btn)navigate(btn.dataset.uxPage);
@@ -84,7 +98,7 @@
     context.addEventListener('click',e=>{
       const btn=e.target.closest('[data-ux-division]');
       if(btn){const target=$('#divisionFilter button[data-value="'+btn.dataset.uxDivision+'"]');target?.click();}
-      const edit=e.target.closest('#uxEditFilters');
+      const edit=e.target.closest('#uxEditFilters, #uxMobileScopeFilters');
       if(edit)toggleFilters(!filterOpen);
     });
     byId('uxFacultySearch').addEventListener('submit',e=>{e.preventDefault();openSearchPerson();});
@@ -105,12 +119,26 @@
       mainObserver.observe(byId('growthViewMount'),{subtree:true,childList:true});
     }
     if(byId('growthNotice'))mainObserver.observe(byId('growthNotice'),{subtree:true,childList:true,characterData:true});
+    // Local CSV replacement is an administration tool, not the primary user action.
+    const dataGrid=byId('admin')?.querySelector('.grid-12');
+    const uploader=byId('loadCsvBtn');
+    if(dataGrid&&uploader&&!byId('uxAdminDataTools')){
+      const card=document.createElement('article');
+      card.id='uxAdminDataTools';card.className='card span-12 ux-admin-data-tools';
+      card.innerHTML='<div><p class="card-kicker">Data administration</p><h2>Preview a local CSV</h2>'+
+        '<p class="card-copy">Previewing another observation file replaces the data in this browser only. It does not upload records to GitHub or alter the public dashboard.</p></div>'+
+        '<div class="ux-admin-data-actions"></div>';
+      dataGrid.append(card);
+      ['loadCsvBtn','csvFileInput','clearPrivateBtn'].forEach(id=>{const element=byId(id);if(element)card.querySelector('.ux-admin-data-actions').append(element);});
+      uploader.textContent='Preview CSV in this browser';
+    }
   }
   function toggleFilters(open){
     filterOpen=!!open;
     const shell=byId('uxOriginalFilters'),button=byId('uxEditFilters');
     shell?.classList.toggle('ux-filters-closed',!filterOpen);
     if(button){button.setAttribute('aria-expanded',String(filterOpen));button.textContent=filterOpen?'Close filters ↑':'Edit filters ↓';}
+    const mobile=byId('uxMobileScopeFilters');if(mobile){mobile.setAttribute('aria-expanded',String(filterOpen));mobile.innerHTML=filterOpen?'Close <span aria-hidden="true">⌃</span>':'Filters <span aria-hidden="true">⌄</span>';}
     if(filterOpen)shell?.scrollIntoView({block:'nearest',behavior:'smooth'});
     window.AISG_NAV?.schedule('replace');
   }
@@ -124,6 +152,7 @@
         else button.removeAttribute('aria-current');
       }
     });
+    const mobilePage=byId('uxMobilePage');if(mobilePage&&mobilePage.value!==grp)mobilePage.value=grp;
     const sub=byId('uxSubnav'),category=categories.find(x=>x.id===grp);
     if(!sub)return;
     const show=category?.tabs.length>1;
@@ -149,6 +178,17 @@
     if(s.time&&s.time!=='All')detail.push('Time: '+s.time);
     if(s.faculty)detail.push('Faculty: '+s.faculty);
     if(evidence)evidence.textContent=detail.join(' · ');
+    const small=byId('uxMobileScopeSummary');
+    if(small){
+      const chosen=(division==='All'?'Whole school':division);
+      const periodSummary=s.period==='30'?'30 days':s.period==='60'?'60 days':s.period==='semester'?'Semester':s.period==='custom'?'Custom dates':'School year';
+      const detail=[selectedYear,chosen,periodSummary];
+      if(s.observer&&s.observer!=='All')detail.push(s.observer);
+      else if(s.observerScope==='principals')detail.push('Principals + APs');
+      if(s.faculty)detail.push('Faculty filtered');
+      if(s.time&&s.time!=='All')detail.push(s.time+' of lesson');
+      small.textContent=detail.join(' · ');
+    }
     if(note){
       const message=(selectedYear==='2026-27'
         ?'Goals = year-long faculty choices (division filter). Observation evidence = selected period, observer group and classroom filters.'
@@ -370,7 +410,7 @@
     personal:{title:'Personal · Where am I looking?',tag:'Observation focus, not observer evaluation',
       lead:'Compare the facets and guiding questions you tend to record with the wider evidence. Ask what your sampling choices might be obscuring.',
       prompts:['Which facets and questions recur in my visits?','Which lessons, faculty or moments am I sampling less often?','What might I deliberately look for next?'],
-      steps:[['Admin · Observer × TLF','admin'],['Admin · Guiding-question audit','admin'],['Underlying observations','explorer']]},
+      steps:[['Observer × TLF comparison','calibration'],['Guiding-question audit','focus'],['Open original observations','explorer']]},
     divisional:{title:'Divisional · What does our evidence suggest?',tag:'Start with SSS1, Tier 1 and student experience',
       lead:'Connect divisional priorities to observable Tier 1 conditions, faculty growth intentions and examples from classrooms. Treat textual indicators as pointers to evidence, not student-outcome measures.',
       prompts:['Which recorded examples speak to access, participation and thinking?','Where might our observation focus be missing the divisional priority?','What will we ask faculty about this pattern?'],
@@ -381,21 +421,69 @@
       steps:[['PLCs','plcs'],['Reach & Evidence','coverage'],['Schoolwide TLF patterns','facets']]}
   };
   let inquiryLens='personal';
+  function setInquiryDivision(division){
+    const target=$('#divisionFilter button[data-value="'+division+'"]');
+    if(target&&state().division!==division)target.click();
+  }
+  function setInquiryObserver(observer){
+    // Use existing filter controls to retain all dashboard, URL and Back logic.
+    if(observer!=='All'&&state().observerScope==='principals'){
+      const allScope=$('#observerScopeFilter button[data-value="all"]');
+      allScope?.click();
+    }
+    const filter=byId('observerFilter');if(!filter)return;
+    if(![...filter.options].some(option=>option.value===observer))return;
+    if(filter.value===observer)return;
+    filter.value=observer;filter.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+  function openInquiryRoute(route){
+    const destination={calibration:'observerCalibration',focus:'focusAudit'}[route];
+    if(!destination){navigate(route);return;}
+    navigate('admin');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const card=byId(destination)?.closest('article');
+      if(!card)return;
+      card.scrollIntoView({block:'start',behavior:'smooth'});
+      const heading=card.querySelector('h2');
+      if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}
+    }));
+  }
+  function selectInquiryLens(next){
+    if(!INQUIRY_LENSES[next])return;
+    inquiryLens=next;
+    if(next==='collective'){
+      // A collective comparison must not silently inherit an individual's filter.
+      if(state().observerScope!=='all')$('#observerScopeFilter button[data-value="all"]')?.click();
+      setInquiryDivision('All');
+      setInquiryObserver('All');
+      const faculty=byId('facultySearch');
+      if(faculty&&faculty.value){faculty.value='';faculty.dispatchEvent(new Event('input',{bubbles:true}));}
+    }
+    renderGuidedInquiry();
+  }
   function createGuidedInquiry(){
     const hero=byId('uxOverview');if(!hero||byId('uxGuidedInquiry'))return;
     const section=document.createElement('section');
     section.id='uxGuidedInquiry';section.className='ux-guided-inquiry';
     section.setAttribute('aria-label','Guided leadership inquiry');
-    section.innerHTML='<div class="ux-guided-head"><div><span class="ux-card-eyebrow">Optional · Guided inquiry</span><h3>Three lenses for looking at our evidence</h3><p>Choose a lens to open the existing analysis tools with a clear purpose. No notes or individual inquiry records are saved.</p></div><span class="ux-guided-time">10 minutes per lens</span></div>'+
+    section.innerHTML='<div class="ux-guided-head"><div><span class="ux-card-eyebrow">Guided inquiry</span><h3>Three lenses for looking at our evidence</h3><p>Choose a lens, establish a useful evidence scope, then explore the original records. This works for different protocols; no personal inquiry records are stored.</p></div></div>'+
       '<div class="ux-lens-switch" role="group" aria-label="Choose inquiry lens">'+
       [['personal','1 · Personal'],['divisional','2 · Divisional'],['collective','3 · Collective']].map(([key,label])=>'<button type="button" data-ux-lens="'+key+'" aria-pressed="false">'+label+'</button>').join('')+'</div>'+
       '<div id="uxLensContent" aria-live="polite"></div>';
     const cards=hero.querySelector('.ux-inquiry-grid');(cards||hero).before(section);
     section.addEventListener('click',event=>{
       const lensButton=event.target.closest('[data-ux-lens]');
-      if(lensButton){inquiryLens=lensButton.dataset.uxLens;renderGuidedInquiry();return;}
+      if(lensButton){selectInquiryLens(lensButton.dataset.uxLens);return;}
+      const division=event.target.closest('[data-ux-inquiry-division]');
+      if(division){setInquiryDivision(division.dataset.uxInquiryDivision);renderGuidedInquiry();return;}
       const route=event.target.closest('[data-ux-inquiry-route]');
-      if(route)navigate(route.dataset.uxInquiryRoute);
+      if(route)openInquiryRoute(route.dataset.uxInquiryRoute);
+    });
+    section.addEventListener('change',event=>{
+      if(event.target.id==='uxInquiryObserver'){
+        setInquiryObserver(event.target.value);
+        renderGuidedInquiry();
+      }
     });
     renderGuidedInquiry();
   }
@@ -407,7 +495,22 @@
     const sampling=fmt(rows.length)+' observations · '+fmt(people.size)+' faculty · '+fmt(observers.size)+' observers';
     const caution=rows.length<15?'Small selected sample: inspect original records before interpreting a pattern.':
       'Counts describe the selected observation evidence, not teaching quality or goal attainment.';
+    let lensScope='';
+    const s=state();
+    if(inquiryLens==='personal'){
+      const options=[...byId('observerFilter')?.options||[]].filter(opt=>opt.value!=='All');
+      lensScope='<div class="ux-lens-scope"><label for="uxInquiryObserver">Choose the observer whose evidence you want to examine</label>'+
+        '<select id="uxInquiryObserver"><option value="All">Select an observer…</option>'+options.map(o=>'<option value="'+esc(o.value)+'"'+(s.observer===o.value?' selected':'')+'>'+esc(o.textContent)+'</option>').join('')+'</select>'+
+        '<p>'+(s.observer&&s.observer!=='All'?'Showing observations recorded by '+esc(s.observer)+'. The calibration heatmap compares all eligible observers.':'Select an observer first. All-observer totals cannot describe your personal observation focus.')+'</p></div>';
+    }else if(inquiryLens==='divisional'){
+      lensScope='<div class="ux-lens-scope"><span class="ux-lens-field-label">Choose your division</span><div class="ux-lens-division-buttons" role="group" aria-label="Divisional evidence scope">'+
+        ['Elementary','Secondary'].map(d=>'<button type="button" data-ux-inquiry-division="'+d+'" aria-pressed="'+String(s.division===d)+'">'+d+'</button>').join('')+'</div>'+
+        '<p>'+(s.division==='All'?'Select Elementary or Secondary to examine a divisional priority.':'Evidence currently scoped to '+esc(s.division)+'.')+'</p></div>';
+    }else{
+      lensScope='<div class="ux-lens-scope ux-lens-scope-all"><strong>Whole-school evidence</strong><p>Division, observer and faculty filters are reset for a shared comparison. The selected evidence period is retained.</p></div>';
+    }
     host.innerHTML='<div class="ux-guided-title"><span>'+esc(data.tag)+'</span><h4>'+esc(data.title)+'</h4><p>'+esc(data.lead)+'</p></div>'+
+      lensScope+
       '<div class="ux-guided-body"><div><h5>Questions to explore</h5><ol>'+data.prompts.map(p=>'<li>'+esc(p)+'</li>').join('')+'</ol></div>'+
       '<div><h5>Open related evidence</h5><div class="ux-guided-actions">'+data.steps.map(([label,route])=>'<button type="button" data-ux-inquiry-route="'+route+'">'+esc(label)+' <span aria-hidden="true">→</span></button>').join('')+'</div></div></div>'+
       '<p class="ux-guided-scope"><strong>Current evidence scope:</strong> '+esc(sampling)+'. '+esc(caution)+' <span>Observation notes are a record of what observers chose to notice; MTSS terms are text matches, not measures of student experience.</span></p>';
