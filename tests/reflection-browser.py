@@ -34,6 +34,17 @@ with sync_playwright() as pw:
     try:
         page.goto(BASE);ready(page)
         expect(page.locator('#uxPrimaryNav')).to_be_visible()
+        # Guided inquiry must render content and react to all three lenses (regression).
+        expect(page.locator('#uxLensContent .ux-guided-title h4')).to_have_text('Personal · Where am I looking?')
+        check('Guided inquiry shows evidence scope', 'observations' in page.locator('#uxLensContent .ux-guided-scope').inner_text())
+        page.locator('[data-ux-lens="divisional"]').click()
+        expect(page.locator('#uxLensContent .ux-guided-title h4')).to_have_text('Divisional · What does our evidence suggest?')
+        check('Divisional lens links to MTSS',page.locator('[data-ux-inquiry-route="mtss"]').count()==1)
+        page.locator('[data-ux-lens="collective"]').click()
+        expect(page.locator('#uxLensContent .ux-guided-title h4')).to_have_text('Collective · What should we investigate together?')
+        check('Collective lens links to PLC evidence',page.locator('[data-ux-inquiry-route="plcs"]').count()==1)
+        page.locator('[data-ux-lens="personal"]').click()
+        expect(page.locator('#uxLensContent .ux-guided-title h4')).to_have_text('Personal · Where am I looking?')
         check('Classroom Observations tab label',page.locator('[data-ux-category="classroom"]').inner_text()=='Classroom Observations')
         page.locator('[data-ux-category="growth"]').click();pause(page)
         page.locator('#uxCompareFacet').select_option('Agency');pause(page)
