@@ -44,6 +44,7 @@ with sync_playwright() as pw:
         ))
         expect(page.locator('#uxPulseEsShare')).to_have_text('45% of observations')
         expect(page.locator('#uxPulseSecShare')).to_have_text('55% of observations')
+        page.locator('#uxObservationPulse').screenshot(path=str(OUT/'observation-snapshot-desktop.png'))
         page.locator('#uxContextBar [data-ux-division="Elementary"]').click();pause(page)
         expect(page.locator('#uxPulseTotal')).to_have_text('142')
         expect(page.locator('#uxPulseEs')).to_have_text('142')
@@ -195,13 +196,14 @@ with sync_playwright() as pw:
         expect(mp.locator('#uxPulseTotal')).to_have_text('318')
         expect(mp.locator('#uxPulseEs')).to_have_text('142')
         expect(mp.locator('#uxPulseSec')).to_have_text('176')
+        mp.locator('#uxObservationPulse').screenshot(path=str(OUT/'observation-snapshot-mobile.png'))
         check('Mobile observation counts appear before the inquiry lenses',mp.evaluate(
             "document.querySelector('#uxObservationPulse').getBoundingClientRect().top < document.querySelector('#uxGuidedInquiry').getBoundingClientRect().top"
         ))
         check('Mobile header is compact',mp.locator('.app-header').bounding_box()['height']<125)
         expect(mp.locator('#uxMobilePage')).to_be_visible()
         expect(mp.locator('#uxMobileScopeFilters')).to_be_visible()
-        check('Mobile shows content early',mp.locator('#uxGuidedInquiry').bounding_box()['y']<600)
+        check('Mobile shows the observation snapshot early',mp.locator('#uxObservationPulse').bounding_box()['y']<600)
         mp.locator('#uxMobileSearchToggle').click();pause(mp)
         expect(mp.locator('#uxFacultyName')).to_be_visible()
         mp.locator('#uxMobileSearchToggle').click();pause(mp)
