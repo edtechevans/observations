@@ -278,6 +278,19 @@
       '<h2 id="uxOverviewTitle">What are we learning about our practice?</h2>'+
       '<p>Choose a starting question, examine the evidence, and use what you find to guide professional conversations and instructional decisions.</p>'+
       '</div></div>'+
+      '<section class="ux-observation-pulse" id="uxObservationPulse" aria-labelledby="uxPulseTitle">'+
+        '<div class="ux-pulse-header"><div><span class="ux-pulse-eyebrow">CLASSROOM OBSERVATIONS</span><h3 id="uxPulseTitle">Observation snapshot</h3></div>'+
+        '<span id="uxPulseScope" class="ux-pulse-scope">2026–27 · Whole school</span></div>'+
+        '<div class="ux-pulse-metrics">'+
+          '<div class="ux-pulse-total"><span class="ux-pulse-label">Total observations</span><strong id="uxPulseTotal" class="ux-pulse-number" aria-live="polite">—</strong><span class="ux-pulse-total-note">Recorded visits in this view</span></div>'+
+          '<div class="ux-pulse-division ux-pulse-es" id="uxPulseEsCard"><div class="ux-pulse-division-head"><span class="ux-pulse-dot" aria-hidden="true"></span><span>Elementary <small>ES</small></span></div>'+
+            '<strong id="uxPulseEs" class="ux-pulse-division-number">—</strong><span id="uxPulseEsShare" class="ux-pulse-division-share">—</span></div>'+
+          '<div class="ux-pulse-division ux-pulse-sec" id="uxPulseSecCard"><div class="ux-pulse-division-head"><span class="ux-pulse-dot" aria-hidden="true"></span><span>Secondary <small>SEC</small></span></div>'+
+            '<strong id="uxPulseSec" class="ux-pulse-division-number">—</strong><span id="uxPulseSecShare" class="ux-pulse-division-share">—</span></div>'+
+        '</div>'+
+        '<div id="uxPulseDistribution" class="ux-pulse-distribution" role="img" aria-label="Observation distribution loading"><span id="uxPulseEsBar" class="ux-pulse-es-bar"></span><span id="uxPulseSecBar" class="ux-pulse-sec-bar"></span></div>'+
+        '<p class="ux-pulse-caption" id="uxPulseCaption">Counts reflect the selected school year and observation filters; observations are not performance ratings.</p>'+
+      '</section>'+
       '<div class="ux-inquiry-grid">'+
       '<article class="ux-inquiry-card"><span class="ux-card-eyebrow">01 · Intention</span><h3>What are faculty choosing to develop?</h3>'+
       '<div class="ux-card-metric"><span id="uxGoalCount">—</span><small> faculty goals</small></div>'+
@@ -313,6 +326,47 @@
       if(btn.dataset.uxTask==='compare'){navigate('growth');openCompare(true);}
     });
   }
+  function renderObservationPulse(){
+    const totalEl=byId('uxPulseTotal');if(!totalEl)return;
+    const bridge=obs(),status=bridge?.getStatus?.().state;
+    const scope=state(),rows=filteredEvidence();
+    const ready=status==='ready';
+    const total=rows.length;
+    const es=rows.filter(r=>r.division==='Elementary').length;
+    const sec=rows.filter(r=>r.division==='Secondary').length;
+    const other=Math.max(0,total-es-sec);
+    const division=scope.division||'All';
+    const excludedEs=division==='Secondary',excludedSec=division==='Elementary';
+    const selectedYear=scope.year||'2026-27';
+    const period={schoolyear:'School year',30:'Last 30 days',60:'Last 60 days',semester:'Semester',custom:'Custom dates'}[scope.period||'schoolyear']||'School year';
+    const observer=scope.observer&&scope.observer!=='All'?scope.observer:scope.observerScope==='principals'?'Principals + APs':'All observers';
+    setText('uxPulseScope',[selectedYear,division==='All'?'Whole school':division,period].join(' · '));
+    setText('uxPulseTotal',ready?fmt(total):'—');
+    setText('uxPulseEs',ready&&!excludedEs?fmt(es):'—');
+    setText('uxPulseSec',ready&&!excludedSec?fmt(sec):'—');
+    const share=n=>total?Math.round(n/total*100)+'% of observations':'0% of observations';
+    setText('uxPulseEsShare',ready?(excludedEs?'Excluded by division filter':share(es)):'Data unavailable');
+    setText('uxPulseSecShare',ready?(excludedSec?'Excluded by division filter':share(sec)):'Data unavailable');
+    byId('uxPulseEsCard')?.classList.toggle('ux-pulse-excluded',excludedEs);
+    byId('uxPulseSecCard')?.classList.toggle('ux-pulse-excluded',excludedSec);
+    const percent=n=>total?Math.min(100,100*n/total):0;
+    if(byId('uxPulseEsBar'))byId('uxPulseEsBar').style.width=percent(es)+'%';
+    if(byId('uxPulseSecBar'))byId('uxPulseSecBar').style.width=percent(sec)+'%';
+    const distribution=byId('uxPulseDistribution');
+    if(distribution)distribution.setAttribute('aria-label',ready?
+      'Of '+fmt(total)+' observations: Elementary '+fmt(es)+', Secondary '+fmt(sec)+(other?', other divisions '+fmt(other):'')+
+      (division!=='All'?'. Division filter: '+division:'')
+      :'Observation distribution unavailable');
+    const limitations=division!=='All'
+      ?'Division filter active: only '+division+' observations are counted; the other division is excluded.'
+      :other?'Other or uncategorized divisions: '+fmt(other)+' observations.'
+      :'The split reflects the current observation filters.';
+    const dataNote=status==='error'?'Published observation dataset unavailable.':
+      !ready?'Loading published observations.':
+      [observer,limitations,'Visits are snapshots, not teaching-performance ratings.'].join(' · ');
+    setText('uxPulseCaption',dataNote);
+  }
+
   function renderOverview(){
     if(window.AISG_REFLECTION)return window.AISG_REFLECTION.renderOverview();
     const rows=filteredEvidence(),s=state(),faculties=new Set(rows.map(r=>String(r.email||r.faculty).toLowerCase()));
@@ -527,7 +581,7 @@
 
   function renderEverything(){
     refreshQueued=false;
-    renderNavigation();context();updatePersonList();renderOverview();renderGuidedInquiry();
+    renderNavigation();context();updatePersonList();renderOverview();renderObservationPulse();renderGuidedInquiry();
     window.AISG_REFLECTION?.renderContext();
     const pane=byId('growthViewMount');
     if(pane?.querySelector('.growth-chart-split')){ensureCompare();renderCompare();}
