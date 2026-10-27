@@ -34,6 +34,28 @@ with sync_playwright() as pw:
     try:
         page.goto(BASE);ready(page)
         expect(page.locator('#uxPrimaryNav')).to_be_visible()
+        # Homepage observation pulse must use published records and the selected evidence scope.
+        expect(page.locator('#uxObservationPulse')).to_be_visible()
+        expect(page.locator('#uxPulseTotal')).to_have_text('318')
+        expect(page.locator('#uxPulseEs')).to_have_text('142')
+        expect(page.locator('#uxPulseSec')).to_have_text('176')
+        check('Homepage totals reconcile with ES/SEC split',page.evaluate(
+            "Number(document.querySelector('#uxPulseTotal').textContent) === Number(document.querySelector('#uxPulseEs').textContent) + Number(document.querySelector('#uxPulseSec').textContent)"
+        ))
+        expect(page.locator('#uxPulseEsShare')).to_have_text('45% of observations')
+        expect(page.locator('#uxPulseSecShare')).to_have_text('55% of observations')
+        page.locator('#uxContextBar [data-ux-division="Elementary"]').click();pause(page)
+        expect(page.locator('#uxPulseTotal')).to_have_text('142')
+        expect(page.locator('#uxPulseEs')).to_have_text('142')
+        expect(page.locator('#uxPulseSecShare')).to_have_text('Excluded by division filter')
+        check('Elementary filter updates homepage observation total',True)
+        page.locator('#uxContextBar [data-ux-division="Secondary"]').click();pause(page)
+        expect(page.locator('#uxPulseTotal')).to_have_text('176')
+        expect(page.locator('#uxPulseSec')).to_have_text('176')
+        check('Secondary filter updates homepage observation total',True)
+        page.locator('#uxContextBar [data-ux-division="All"]').click();pause(page)
+        expect(page.locator('#uxPulseTotal')).to_have_text('318')
+        check('Whole-school filter restores both observation divisions',True)
         # Guided inquiry must render content and react to all three lenses (regression).
         expect(page.locator('#uxLensContent .ux-guided-title h4')).to_have_text('Personal · Where am I looking?')
         check('Guided inquiry shows evidence scope', 'observations' in page.locator('#uxLensContent .ux-guided-scope').inner_text())
@@ -169,6 +191,13 @@ with sync_playwright() as pw:
         check('Goal-source failure never becomes a zero or stale count',True);failed.close()
         mobile=b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True);mp=mobile.new_page();mp.goto(BASE);ready(mp)
         check('Mobile page does not overflow viewport',mp.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+        expect(mp.locator('#uxObservationPulse')).to_be_visible()
+        expect(mp.locator('#uxPulseTotal')).to_have_text('318')
+        expect(mp.locator('#uxPulseEs')).to_have_text('142')
+        expect(mp.locator('#uxPulseSec')).to_have_text('176')
+        check('Mobile observation counts appear before the inquiry lenses',mp.evaluate(
+            "document.querySelector('#uxObservationPulse').getBoundingClientRect().top < document.querySelector('#uxGuidedInquiry').getBoundingClientRect().top"
+        ))
         check('Mobile header is compact',mp.locator('.app-header').bounding_box()['height']<125)
         expect(mp.locator('#uxMobilePage')).to_be_visible()
         expect(mp.locator('#uxMobileScopeFilters')).to_be_visible()
