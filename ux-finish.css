@@ -170,3 +170,99 @@
 @media (prefers-reduced-motion:reduce){
   .ux-guided-inquiry *{transition:none!important;scroll-behavior:auto}
 }
+
+
+/* Homepage observation pulse: immediate visibility of totals and ES/SEC distribution.
+   Counts are computed from the same selected observation rows as the dashboard. */
+.ux-observation-pulse{
+  display:grid;gap:13px;
+  background:#fff;border:1px solid #d9e5f0;border-radius:16px;
+  padding:20px 21px 17px;
+  box-shadow:0 7px 23px rgba(17,50,97,.052);
+}
+.ux-pulse-header{display:flex;align-items:end;justify-content:space-between;gap:14px}
+.ux-pulse-eyebrow{
+  display:block;font-size:10.5px;font-weight:850;line-height:1.4;
+  text-transform:uppercase;letter-spacing:.105em;color:#ad2a26;
+}
+.ux-pulse-header h3{
+  margin:4px 0 0;font-size:clamp(18px,1.65vw,22px);
+  font-weight:840;letter-spacing:-.025em;line-height:1.25;color:#113261;
+}
+.ux-pulse-scope{
+  flex:0 1 auto;text-align:right;line-height:1.5;
+  font-size:11.5px;color:#526981;font-weight:720;
+  background:#f0f5fa;border:1px solid #e1e9f1;
+  border-radius:999px;padding:6px 11px;
+}
+.ux-pulse-metrics{display:grid;grid-template-columns:1.18fr 1fr 1fr;gap:11px}
+.ux-pulse-total,.ux-pulse-division{
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:17px 20px;min-width:0;border-radius:12px;
+  min-height:154px;
+}
+.ux-pulse-total{
+  background:linear-gradient(135deg,#113261 0%,#244e79 100%);
+  color:white;border:1px solid #234c76;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.075);
+}
+.ux-pulse-label{
+  font-size:11px;text-transform:uppercase;letter-spacing:.075em;font-weight:800;
+  color:rgba(255,255,255,.85);line-height:1.35;
+}
+.ux-pulse-number{
+  font-variant-numeric:tabular-nums;
+  font-size:clamp(43px,3.45vw,56px);line-height:1.12;font-weight:850;
+  letter-spacing:-.035em;margin:3px 0;
+}
+.ux-pulse-total-note{font-size:11px;font-weight:650;line-height:1.4;color:rgba(255,255,255,.78)}
+.ux-pulse-division{border:1px solid #dbe5ef;border-left:3px solid #3177a7;background:#f7fafc;color:#113261}
+.ux-pulse-sec{border-color:#efdfdd;border-left-color:#ad2a26;background:#fdf9f8}
+.ux-pulse-division-head{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:780;color:#24425d}
+.ux-pulse-division-head small{
+  margin-left:3px;font-size:10px;font-weight:800;letter-spacing:.025em;
+  text-transform:uppercase;color:#60748b;
+}
+.ux-pulse-dot{display:inline-block;width:8px;height:8px;border-radius:2px;background:#3177a7;flex:none}
+.ux-pulse-sec .ux-pulse-dot{background:#ad2a26}
+.ux-pulse-division-number{
+  font-variant-numeric:tabular-nums;font-size:clamp(35px,2.85vw,44px);
+  line-height:1.12;letter-spacing:-.035em;font-weight:850;
+}
+.ux-pulse-division-share{font-size:12px;font-weight:720;color:#55718a}
+.ux-pulse-excluded{opacity:.58;background:#f9fafb;border-color:#e2e6eb}
+.ux-pulse-excluded .ux-pulse-division-share{font-size:11px}
+.ux-pulse-distribution{
+  display:flex;width:100%;height:8px;overflow:hidden;border-radius:999px;
+  background:#e9eef4;gap:0;
+}
+.ux-pulse-distribution span{display:block;height:100%;flex:0 0 auto;transition:width .22s ease}
+.ux-pulse-es-bar{background:#3177a7}
+.ux-pulse-sec-bar{background:#ad2a26}
+.ux-pulse-caption{
+  margin:0;color:#5b6f81;font-size:11.5px;line-height:1.55;
+}
+@media(max-width:900px){
+  .ux-pulse-total,.ux-pulse-division{padding:15px 16px;min-height:138px}
+}
+@media(max-width:760px){
+  .ux-observation-pulse{padding:13px 13px 12px;border-radius:13px;gap:10px}
+  .ux-pulse-header{align-items:flex-start;flex-wrap:wrap;gap:6px}
+  .ux-pulse-eyebrow{font-size:10px}
+  .ux-pulse-header h3{font-size:18px}
+  .ux-pulse-scope{font-size:10.5px;padding:4px 8px;text-align:left}
+  .ux-pulse-metrics{grid-template-columns:1fr 1fr;gap:8px}
+  .ux-pulse-total{grid-column:1/-1;min-height:100px;padding:13px 15px;gap:3px}
+  .ux-pulse-number{font-size:45px}
+  .ux-pulse-total-note{font-size:11px}
+  .ux-pulse-division{min-height:115px;padding:11px 12px}
+  .ux-pulse-division-head{font-size:12px;gap:5px}
+  .ux-pulse-division-head small{font-size:9px}
+  .ux-pulse-dot{width:7px;height:7px}
+  .ux-pulse-division-number{font-size:34px}
+  .ux-pulse-division-share{font-size:10.5px}
+  .ux-pulse-caption{font-size:10.5px}
+}
+@media(prefers-reduced-motion:reduce){
+  .ux-pulse-distribution span{transition:none}
+}
