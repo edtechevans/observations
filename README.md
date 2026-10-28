@@ -1,5 +1,15 @@
 # AISG Growth & Reflection Dashboard
 
+## Observation Excel export — 28 October 2026
+
+A new **Export to Excel** control is available in **Evidence Explorer** and **Admin**. It opens a searchable multi-select filter panel with independent controls for school years, divisions, observers, teachers, observed TLF facets, faculty-chosen growth facets, faculty-chosen Growth & Reflection domains, and lesson timing. Also available: inclusive custom date bounds, commendation vs wondering facet context, faculty response status, and full-text matching.
+
+- **Filtering:** Multiple checked values within each field use OR; the different fields combine with AND. Empty lists mean 'All'. **Use Dashboard Filters** imports the current year, division, observer, faculty, lesson timing and period. **Clear All Filters** enables a whole-data export.
+- **Workbook:** Generated entirely in the browser as a genuine Excel `.xlsx` with **Observations** and **Export Details** sheets. The former contains one row per matching observation, with full original narrative feedback, guiding questions, observation notes and response, observer/teacher, PowerApps and observation IDs, plus matching 2026–27 goals/domains. The latter includes selected filters, counts by division and observer, and a confidentiality notice.
+- **Accuracy:** The export uses the dashboard's combined, deduplicated full observation data including the most recent additions, rather than a visible table page, screenshot, summary, or reduced fallback. Goal metadata is joined by email for 2026–27 only. A user can export without goals if that separately loaded file fails; unmatched goal cells remain blank. No external conversion service receives observation content.
+- **Access:** This **public GitHub Pages site is not authenticated**. The 'Observer' filter is a data selection tool, not authorization, so it is **not safe to promise private observer-only exports**. Export requires an explicit acknowledgement that identifiable teacher narratives should be handled confidentially. AISG-authenticated, server-side permission enforcement and migration away from public raw CSVs is required to implement a genuinely private 'My Observations' capability.
+
+
 AISG Teacher Growth & Reflection dashboard combining classroom observation evidence with faculty-selected professional growth priorities.
 
 ## Inquiry-led UX refresh — 22 October 2026
