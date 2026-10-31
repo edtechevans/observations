@@ -1811,7 +1811,7 @@ th{font-size:var(--text-2xs)!important;letter-spacing:.055em}
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
   <script>
-window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":318,"faculty":109,"responses":260,"elementary":142,"secondary":176,"beginning":101,"middle":165,"end":52,"minDate":20260810,"maxDate":20261026}},"sourceRows":853};
+window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"responses":484,"elementary":342,"secondary":193,"beginning":192,"middle":272,"end":71,"minDate":20250811,"maxDate":20260513},"2026-27":{"observations":321,"faculty":109,"responses":262,"elementary":145,"secondary":176,"beginning":102,"middle":167,"end":52,"minDate":20260810,"maxDate":20261027}},"sourceRows":856};
 </script>
   <script>
 (() => {
@@ -2396,7 +2396,7 @@ window.OBS_PUBLIC_DATA={"audit":{"2025-26":{"observations":535,"faculty":106,"re
     const res=await fetch('./data/observations-full.csv?v=20261026-append-missing',{cache:'no-store'});
     if(!res.ok) throw new Error(`Dataset request failed: ${res.status}`);
     const text=await res.text();
-    const added=await fetch('./data/observations-20261026-additions.csv?v=20261027-last24h',{cache:'no-store'});
+    const added=await fetch('./data/observations-20261026-additions.csv?v=20261031-oct27-additions',{cache:'no-store'});
     if(!added.ok) throw new Error(`Recent observations request failed: ${added.status}`);
     const extra=parseCsvText(await added.text());
     const original=parseCsvText(text);
